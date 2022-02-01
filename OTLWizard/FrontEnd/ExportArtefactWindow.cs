@@ -24,7 +24,7 @@ namespace OTLWizard
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void terug(object sender, EventArgs e)
         {
             app.showHome(this);
         }

@@ -105,6 +105,7 @@
     <Compile Include="FrontEnd\ExportXLSWindow.Designer.cs">
       <DependentUpon>ExportXLSWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="OTLObjecten\OTL_ArtefactType.cs" />
     <Compile Include="OTLObjecten\OTL_ObjectType.cs" />
     <Compile Include="OTLObjecten\OTL_Parameter.cs" />
     <Compile Include="OTLObjecten\OTL_RelationshipType.cs" />

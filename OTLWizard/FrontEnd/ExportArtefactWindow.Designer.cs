@@ -30,7 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportArtefactWindow));
             this.button1 = new System.Windows.Forms.Button();
+            this.textBoxSubset = new System.Windows.Forms.TextBox();
+            this.buttonSubset = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonExportArtefact = new System.Windows.Forms.Button();
+            this.checkAllClasses = new System.Windows.Forms.CheckBox();
+            this.ListAllClasses = new System.Windows.Forms.ListBox();
+            this.buttonImportClasses = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -41,16 +49,92 @@
             this.button1.Size = new System.Drawing.Size(52, 54);
             this.button1.TabIndex = 20;
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.terug);
+            // 
+            // textBoxSubset
+            // 
+            this.textBoxSubset.Enabled = false;
+            this.textBoxSubset.Location = new System.Drawing.Point(174, 70);
+            this.textBoxSubset.Name = "textBoxSubset";
+            this.textBoxSubset.Size = new System.Drawing.Size(614, 20);
+            this.textBoxSubset.TabIndex = 22;
+            // 
+            // buttonSubset
+            // 
+            this.buttonSubset.Location = new System.Drawing.Point(15, 70);
+            this.buttonSubset.Name = "buttonSubset";
+            this.buttonSubset.Size = new System.Drawing.Size(153, 23);
+            this.buttonSubset.TabIndex = 21;
+            this.buttonSubset.Text = "Selecteer een subset...";
+            this.buttonSubset.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(174, 96);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(614, 20);
+            this.textBox1.TabIndex = 24;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(15, 96);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(153, 23);
+            this.button2.TabIndex = 23;
+            this.button2.Text = "Selecteer het artefact";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 13);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "In development";
+            this.label1.Size = new System.Drawing.Size(450, 13);
+            this.label1.TabIndex = 25;
+            this.label1.Text = "OTL Template generator maakt templates in Excel van een geimporteerde Object Type" +
+    " Library";
+            // 
+            // buttonExportArtefact
+            // 
+            this.buttonExportArtefact.Enabled = false;
+            this.buttonExportArtefact.Location = new System.Drawing.Point(641, 415);
+            this.buttonExportArtefact.Name = "buttonExportArtefact";
+            this.buttonExportArtefact.Size = new System.Drawing.Size(147, 23);
+            this.buttonExportArtefact.TabIndex = 26;
+            this.buttonExportArtefact.Text = "Exporteer artefactinformatie";
+            this.buttonExportArtefact.UseVisualStyleBackColor = true;
+            // 
+            // checkAllClasses
+            // 
+            this.checkAllClasses.AutoSize = true;
+            this.checkAllClasses.Enabled = false;
+            this.checkAllClasses.Location = new System.Drawing.Point(396, 187);
+            this.checkAllClasses.Name = "checkAllClasses";
+            this.checkAllClasses.Size = new System.Drawing.Size(129, 17);
+            this.checkAllClasses.TabIndex = 29;
+            this.checkAllClasses.Text = "Selecteer alle klassen";
+            this.checkAllClasses.UseVisualStyleBackColor = true;
+            // 
+            // ListAllClasses
+            // 
+            this.ListAllClasses.Enabled = false;
+            this.ListAllClasses.FormattingEnabled = true;
+            this.ListAllClasses.Location = new System.Drawing.Point(15, 187);
+            this.ListAllClasses.Name = "ListAllClasses";
+            this.ListAllClasses.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.ListAllClasses.Size = new System.Drawing.Size(374, 251);
+            this.ListAllClasses.TabIndex = 28;
+            // 
+            // buttonImportClasses
+            // 
+            this.buttonImportClasses.Enabled = false;
+            this.buttonImportClasses.Location = new System.Drawing.Point(15, 158);
+            this.buttonImportClasses.Name = "buttonImportClasses";
+            this.buttonImportClasses.Size = new System.Drawing.Size(153, 23);
+            this.buttonImportClasses.TabIndex = 27;
+            this.buttonImportClasses.Text = "Importeer klassen";
+            this.buttonImportClasses.UseVisualStyleBackColor = true;
             // 
             // ExportArtefactWindow
             // 
@@ -58,7 +142,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.checkAllClasses);
+            this.Controls.Add(this.ListAllClasses);
+            this.Controls.Add(this.buttonImportClasses);
+            this.Controls.Add(this.buttonExportArtefact);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.textBoxSubset);
+            this.Controls.Add(this.buttonSubset);
             this.Controls.Add(this.button1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExportArtefactWindow";
@@ -73,6 +165,14 @@
         #endregion
 
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxSubset;
+        private System.Windows.Forms.Button buttonSubset;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonExportArtefact;
+        private System.Windows.Forms.CheckBox checkAllClasses;
+        private System.Windows.Forms.ListBox ListAllClasses;
+        private System.Windows.Forms.Button buttonImportClasses;
     }
 }
