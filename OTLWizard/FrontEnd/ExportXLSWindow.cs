@@ -30,6 +30,8 @@ namespace OTLWizard
 
         private void selecteerSubsetButton(object sender, EventArgs e)
         {
+            ListAllClasses.Items.Clear();
+            buttonExportXLS.Enabled = false;
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.Title = "Selecteer een subset";
             fdlg.InitialDirectory = @"c:\";
@@ -44,7 +46,6 @@ namespace OTLWizard
                 checkAttributes.Enabled = true;
                 ListAllClasses.Enabled = true;
                 buttonImportClasses.Enabled = true;
-
             }
         }
 
@@ -85,6 +86,8 @@ namespace OTLWizard
 
         private void selecteerKeuzelijstenButton(object sender, EventArgs e)
         {
+            ListAllClasses.Items.Clear();
+            buttonExportXLS.Enabled = false;
             FolderBrowserDialog fdlg = new FolderBrowserDialog();           
             fdlg.Description = "Selecteer de map waar de keuzelijsten zich bevinden";
             fdlg.ShowNewFolderButton = false;
@@ -121,13 +124,7 @@ namespace OTLWizard
                 ListAllClasses.Items.Add(klasse);
                 
             }
-            buttonSubset.Enabled = false;
-            buttonKeuzelijsten.Enabled = false;
             buttonExportXLS.Enabled = true;
-
-
-            app.showMessage("Import voltooid. Selecteer de klassen die je wenst te exporteren, of kies voor 'Alle Klassen'", "Import subset");
-
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

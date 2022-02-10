@@ -11,6 +11,7 @@ namespace OTLWizard
     [Serializable]
     public class OTL_Parameter
     {
+        // parameters are public for eventual serialization
         public string dotNotatie; // complete dot notation name
         public string friendlyName; // friendly name of the parameter
         public string description; // description of the parameter

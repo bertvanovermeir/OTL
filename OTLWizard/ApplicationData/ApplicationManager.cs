@@ -23,40 +23,8 @@ namespace OTLWizard
             loadingWindow = new LoadingWindow(this);
             homeWindow = new HomeWindow(this);
             artefactWindow = new ExportArtefactWindow(this);
-            // de interface wordt opgestart via Main Window
-            
+            // de interface wordt opgestart via Main Window            
             Application.Run(homeWindow);
-        }
-
-        public void showExportXLS(Form form)
-        {
-            form.Enabled = false;
-            exportXLSWindow.Show();
-        }
-
-        public void showExportArtefact(Form form)
-        {
-            form.Enabled = false;
-            artefactWindow.Show();
-        }
-
-        public void showHome(Form form)
-        {
-            form.Hide();
-            homeWindow.Enabled = true;
-            homeWindow.Show();
-            homeWindow.Select();
-        }
-
-        public void showProgressBar(string text)
-        {
-            loadingWindow.SetProgressLabelText(text);
-            loadingWindow.Show();
-        }
-
-        public void hideProgressBar()
-        {
-            loadingWindow.Hide();
         }
 
         /// <summary>
@@ -70,11 +38,30 @@ namespace OTLWizard
             subsetConn = new SubsetImporter(dbPath, klPath, this);
             await Task.Run(() => { subsetConn.ImportSubset(); });
             hideProgressBar();
-        }
-
-        public void showMessage(string message, string header)
-        {
-            MessageBox.Show(message, header, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // now check if any of these classes are deprecated
+            string deprecatedclasses = "";
+            string deprecatedparameters = "";
+            bool showWarning = false;
+            foreach(OTL_ObjectType o in subsetConn.GetOTL_ObjectTypes())
+            {
+                if(o.deprecated)
+                {
+                    deprecatedclasses = deprecatedclasses + o.friendlyName + ", ";
+                    showWarning = true;
+                }
+                foreach(OTL_Parameter p in o.GetParameters())
+                {
+                    if(p.deprecated && !o.deprecated)
+                    {
+                        deprecatedparameters = deprecatedparameters + p.friendlyName + " in " + o.friendlyName + ", ";
+                        showWarning=true;
+                    }                   
+                }
+            }
+            if (showWarning)
+            {
+                showMessage("De volgende parameters en klasses uit de OTL worden niet meer gebruikt. Bij voorkeur kijkt u de subset eerst na.\nIndien u dit niet doet, zullen de ongeldige parameters ook worden geëxporteerd.\n\nKlassen (inclusief alle parameters):\n" + deprecatedclasses + "\n\nParameters (in een bestaande klasse):\n" +deprecatedparameters, "Kijk de subset na voor u verder gaat");
+            }
         }
 
         /// <summary>
@@ -107,6 +94,43 @@ namespace OTLWizard
             return temp;
         }
 
-        
+        public void showExportXLS(Form form)
+        {
+            form.Enabled = false;
+            exportXLSWindow.Show();
+        }
+
+        public void showExportArtefact(Form form)
+        {
+            form.Enabled = false;
+            artefactWindow.Show();
+        }
+
+        public void showHome(Form form)
+        {
+            // first reset all forms and databases upon refresh
+            
+
+            form.Hide();
+            homeWindow.Enabled = true;
+            homeWindow.Show();
+            homeWindow.Select();
+        }
+
+        public void showProgressBar(string text)
+        {
+            loadingWindow.SetProgressLabelText(text);
+            loadingWindow.Show();
+        }
+
+        public void hideProgressBar()
+        {
+            loadingWindow.Hide();
+        }
+
+        public void showMessage(string message, string header)
+        {
+            MessageBox.Show(message, header, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

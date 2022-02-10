@@ -83,7 +83,7 @@ namespace OTLWizard
             while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
             {
                 // check columns in query to know what to transfer, 
-                OTL_ObjectType temp = new OTL_ObjectType((string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3));
+                OTL_ObjectType temp = new OTL_ObjectType((string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3),bool.Parse((string)sqlite_datareader.GetValue(4)));
                 OTL_ObjectTypes.Add(temp);
             }
             sqlite_conn_OTL.Close();

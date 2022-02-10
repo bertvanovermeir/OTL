@@ -11,10 +11,12 @@ namespace OTLWizard
     [Serializable]
     public class OTL_ObjectType
     {
+        // parameters are public for eventual serialization
         public string otlName;
         public string friendlyName;
         public string description;
         public string uri;
+        public bool deprecated;
 
         private List<OTL_Parameter> parameters; // a dictionary with parameters
         private List<OTL_RelationshipType> relationTypes; // a dictionary with possible relationships for this object, according to SQL relationships
@@ -24,14 +26,21 @@ namespace OTLWizard
             // for serialization
         }
 
-        // contains name of object, parameters in correct notation, defaultvalues
-        // everything to create a pset element
-        public OTL_ObjectType(string otlName, string friendlyName, string description, string uri)
+        /// <summary>
+        /// creates a new type OTL object
+        /// </summary>
+        /// <param name="otlName"></param>
+        /// <param name="friendlyName"></param>
+        /// <param name="description"></param>
+        /// <param name="uri"></param>
+        /// <param name="deprecated"></param>
+        public OTL_ObjectType(string otlName, string friendlyName, string description, string uri,bool deprecated)
         {
             this.otlName = otlName;
             this.friendlyName = friendlyName;
             this.description = description;
             this.uri = uri;
+            this.deprecated = deprecated;
             parameters = new List<OTL_Parameter>();
             relationTypes = new List<OTL_RelationshipType>();
         }
