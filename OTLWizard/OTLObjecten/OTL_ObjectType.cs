@@ -15,8 +15,9 @@ namespace OTLWizard
         public string friendlyName;
         public string description;
         public string uri;
-        public List<OTL_Parameter> parameters; // a dictionary with parameters
-        public List<OTL_RelationshipType> relationTypes; // a dictionary with possible relationships for this object, according to SQL relationships
+
+        private List<OTL_Parameter> parameters; // a dictionary with parameters
+        private List<OTL_RelationshipType> relationTypes; // a dictionary with possible relationships for this object, according to SQL relationships
 
         public OTL_ObjectType()
         {
@@ -43,6 +44,11 @@ namespace OTLWizard
         public List<OTL_Parameter> GetParameters()
         {
             return parameters;
+        }
+
+        public List<OTL_RelationshipType> GetOTL_RelationshipTypes()
+        {
+            return relationTypes;
         }
 
         public void AddRelationshipType(OTL_RelationshipType type)

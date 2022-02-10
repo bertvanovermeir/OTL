@@ -11,7 +11,7 @@ namespace OTLWizard
     /// </summary>
     public class ApplicationManager
     {
-        private SubsetImporter conn;
+        private SubsetImporter subsetConn;
         private ExportXLSWindow exportXLSWindow;
         private LoadingWindow loadingWindow;
         private HomeWindow homeWindow;
@@ -67,8 +67,8 @@ namespace OTLWizard
         public async Task ImportSubset(string dbPath, string klPath)
         {
             showProgressBar("De OTL Subset wordt geimporteerd.");
-            conn = new SubsetImporter(dbPath, klPath, this);
-            await Task.Run(() => { conn.ParseDatabase(); });
+            subsetConn = new SubsetImporter(dbPath, klPath, this);
+            await Task.Run(() => { subsetConn.ImportSubset(); });
             hideProgressBar();
         }
 
@@ -87,7 +87,7 @@ namespace OTLWizard
         public async Task exportXls(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
             showProgressBar("De template wordt aangemaakt.");
-            TemplateExporter exp = new TemplateExporter(conn.OTL_ObjectTypes);
+            TemplateExporter exp = new TemplateExporter(subsetConn.GetOTL_ObjectTypes());
             exp.SetClasses(classes);
             await Task.Run(() => { exp.ExportXls(exportPath, withDescriptions, withChecklistOptions); });
             hideProgressBar();
@@ -100,7 +100,7 @@ namespace OTLWizard
         public List<string> GetOTLClassNames()
         {
             List<string> temp = new List<string>();
-            foreach(OTL_ObjectType otl in conn.OTL_ObjectTypes)
+            foreach(OTL_ObjectType otl in subsetConn.GetOTL_ObjectTypes())
             {
                 temp.Add(otl.otlName);
             }
