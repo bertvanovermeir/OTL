@@ -31,25 +31,82 @@ namespace OTLWizard
 
         private void buttonSubset_Click(object sender, EventArgs e)
         {
-
+            ListAllClasses.Items.Clear();
+            buttonExportArtefact.Enabled = false;
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Selecteer een subset";
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
+            fdlg.FilterIndex = 2;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                textBoxSubset.Text = fdlg.FileName;
+                checkAllClasses.Enabled = true;
+                ListAllClasses.Enabled = true;
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonArtefact_Click(object sender, EventArgs e)
         {
-
+            ListAllClasses.Items.Clear();
+            buttonExportArtefact.Enabled = false;
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = "Selecteer een artefactdatabase";
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
+            fdlg.FilterIndex = 2;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                textBoxArtefact.Text = fdlg.FileName;
+                buttonImportClasses.Enabled = true;
+                checkAllClasses.Enabled = true;
+                ListAllClasses.Enabled = true;
+            }
         }
 
-        private void buttonImportClasses_Click(object sender, EventArgs e)
+        private async void buttonImportClasses_Click(object sender, EventArgs e)
         {
+            await app.ImportArtefact(textBoxSubset.Text, textBoxArtefact.Text);
+            foreach (string klasse in app.GetOTLClassNames())
+            {
+                ListAllClasses.Items.Add(klasse);
 
+            }
+            buttonExportArtefact.Enabled = true;
         }
 
         private void buttonExportArtefact_Click(object sender, EventArgs e)
         {
+            string[] temp = null;
+            if (ListAllClasses.Enabled == true)
+            {
+                temp = new string[ListAllClasses.SelectedIndices.Count];
+                int i = 0;
+                foreach (int ind in ListAllClasses.SelectedIndices)
+                {
 
+                    temp[i] = ListAllClasses.Items[ind].ToString();
+                    i++;
+                }
+            }
+            app.showArtefactResult();
         }
 
         private void checkAllClasses_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkAllClasses.Checked)
+            {
+                ListAllClasses.Enabled = false;
+            }
+            else
+            {
+                ListAllClasses.Enabled = true;
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }

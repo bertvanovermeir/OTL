@@ -79,6 +79,12 @@
     <Compile Include="ApplicationData\ArtefactImporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporter.cs" />
     <Compile Include="ApplicationData\SubsetImporter.cs" />
+    <Compile Include="FrontEnd\ArtefactResultWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\ArtefactResultWindow.Designer.cs">
+      <DependentUpon>ArtefactResultWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrontEnd\ExportArtefactWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     <Compile Include="OTLObjecten\OTL_RelationshipType.cs" />
     <Compile Include="ApplicationData\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FrontEnd\ArtefactResultWindow.resx">
+      <DependentUpon>ArtefactResultWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\ExportArtefactWindow.resx">
       <DependentUpon>ExportArtefactWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -134,6 +143,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\OTLWizard.OTLObjecten.OTL_ArtefactType.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

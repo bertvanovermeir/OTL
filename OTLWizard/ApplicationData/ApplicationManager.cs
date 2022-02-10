@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OTLWizard.FrontEnd;
+using OTLWizard.OTLObjecten;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,10 +14,12 @@ namespace OTLWizard
     public class ApplicationManager
     {
         private SubsetImporter subsetConn;
+        private ArtefactImporter artefactConn;
         private ExportXLSWindow exportXLSWindow;
         private LoadingWindow loadingWindow;
         private HomeWindow homeWindow;
         private ExportArtefactWindow artefactWindow;
+        private ArtefactResultWindow artefactResult;
 
         public ApplicationManager()
         {
@@ -23,8 +27,18 @@ namespace OTLWizard
             loadingWindow = new LoadingWindow(this);
             homeWindow = new HomeWindow(this);
             artefactWindow = new ExportArtefactWindow(this);
+            artefactResult = new ArtefactResultWindow(this);
             // de interface wordt opgestart via Main Window            
             Application.Run(homeWindow);
+        }
+
+        public async Task ImportArtefact(string subsetPath, string artefactPath)
+        {
+            await ImportSubset(subsetPath, "");
+            showProgressBar("Het Geometrie Artefact wordt geimporteerd.");
+            artefactConn = new ArtefactImporter(artefactPath,this);
+            await Task.Run(() => { artefactConn.ImportArtefact(); });
+            hideProgressBar();
         }
 
         /// <summary>
@@ -94,6 +108,11 @@ namespace OTLWizard
             return temp;
         }
 
+        public List<OTL_ArtefactType> GetArtefactResultData()
+        {
+            return artefactConn.GetOTLArtefactTypes();
+        }
+
         public void showExportXLS(Form form)
         {
             form.Enabled = false;
@@ -104,6 +123,12 @@ namespace OTLWizard
         {
             form.Enabled = false;
             artefactWindow.Show();
+        }
+
+        public void showArtefactResult()
+        {
+            
+            artefactResult.Show();
         }
 
         public void showHome(Form form)
