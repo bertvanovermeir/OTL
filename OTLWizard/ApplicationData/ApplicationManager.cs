@@ -67,8 +67,8 @@ namespace OTLWizard
         public async Task ImportSubset(string dbPath, string klPath)
         {
             showProgressBar("De OTL Subset wordt geimporteerd.");
-            conn = new SubsetImporter(dbPath, klPath);
-            await Task.Run(() => { conn.ParseDatabase(true, true); });
+            conn = new SubsetImporter(dbPath, klPath, this);
+            await Task.Run(() => { conn.ParseDatabase(); });
             hideProgressBar();
         }
 

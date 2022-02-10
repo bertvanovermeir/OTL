@@ -51,7 +51,7 @@ namespace OTLWizard
             {
                 OTL_Parameter p = temp.GetParameters()[i];
                 // main column name
-                sheet.Cells[start, i + 1] = p.dotNotationName;
+                sheet.Cells[start, i + 1] = p.dotNotatie;
                 // now set the help messages
                 if (help)
                 {

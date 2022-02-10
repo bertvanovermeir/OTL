@@ -67,6 +67,7 @@
             this.buttonSubset.TabIndex = 21;
             this.buttonSubset.Text = "Selecteer een subset...";
             this.buttonSubset.UseVisualStyleBackColor = true;
+            this.buttonSubset.Click += new System.EventHandler(this.buttonSubset_Click);
             // 
             // textBox1
             // 
@@ -84,6 +85,7 @@
             this.button2.TabIndex = 23;
             this.button2.Text = "Selecteer het artefact";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -104,6 +106,7 @@
             this.buttonExportArtefact.TabIndex = 26;
             this.buttonExportArtefact.Text = "Exporteer artefactinformatie";
             this.buttonExportArtefact.UseVisualStyleBackColor = true;
+            this.buttonExportArtefact.Click += new System.EventHandler(this.buttonExportArtefact_Click);
             // 
             // checkAllClasses
             // 
@@ -115,6 +118,7 @@
             this.checkAllClasses.TabIndex = 29;
             this.checkAllClasses.Text = "Selecteer alle klassen";
             this.checkAllClasses.UseVisualStyleBackColor = true;
+            this.checkAllClasses.CheckedChanged += new System.EventHandler(this.checkAllClasses_CheckedChanged);
             // 
             // ListAllClasses
             // 
@@ -135,6 +139,7 @@
             this.buttonImportClasses.TabIndex = 27;
             this.buttonImportClasses.Text = "Importeer klassen";
             this.buttonImportClasses.UseVisualStyleBackColor = true;
+            this.buttonImportClasses.Click += new System.EventHandler(this.buttonImportClasses_Click);
             // 
             // ExportArtefactWindow
             // 

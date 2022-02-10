@@ -28,5 +28,30 @@ namespace OTLWizard
         {
             app.showHome(this);
         }
+
+        private void buttonSubset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonImportClasses_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonExportArtefact_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkAllClasses_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
