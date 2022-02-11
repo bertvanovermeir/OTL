@@ -35,10 +35,10 @@ namespace OTLWizard
         public async Task ImportArtefact(string subsetPath, string artefactPath)
         {
             await ImportSubset(subsetPath, "");
-            showProgressBar("Het Geometrie Artefact wordt geimporteerd.");
+            openView(Enums.Views.Loading, Enums.Views.isNull, "Het Geometrie Artefact wordt geimporteerd.");            
             artefactConn = new ArtefactImporter(artefactPath,this);
             await Task.Run(() => { artefactConn.ImportArtefact(); });
-            hideProgressBar();
+            openView(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
         /// <summary>
@@ -48,10 +48,10 @@ namespace OTLWizard
         /// <param name="klPath"></param>
         public async Task ImportSubset(string dbPath, string klPath)
         {
-            showProgressBar("De OTL Subset wordt geimporteerd.");
+            openView(Enums.Views.Loading, Enums.Views.isNull, "De OTL Subset wordt geimporteerd.");
             subsetConn = new SubsetImporter(dbPath, klPath, this);
             await Task.Run(() => { subsetConn.ImportSubset(); });
-            hideProgressBar();
+            openView(Enums.Views.isNull, Enums.Views.Loading, null);
             // now check if any of these classes are deprecated
             string deprecatedclasses = "";
             string deprecatedparameters = "";
@@ -74,7 +74,7 @@ namespace OTLWizard
             }
             if (showWarning)
             {
-                showMessage("De volgende parameters en klasses uit de OTL worden niet meer gebruikt. Bij voorkeur kijkt u de subset eerst na.\nIndien u dit niet doet, zullen de ongeldige parameters ook worden geëxporteerd.\n\nKlassen (inclusief alle parameters):\n" + deprecatedclasses + "\n\nParameters (in een bestaande klasse):\n" +deprecatedparameters, "Kijk de subset na voor u verder gaat");
+                OpenMessage("De volgende parameters en klasses uit de OTL worden niet meer gebruikt. Bij voorkeur kijkt u de subset eerst na.\nIndien u dit niet doet, zullen de ongeldige parameters ook worden geëxporteerd.\n\nKlassen (inclusief alle parameters):\n" + deprecatedclasses + "\n\nParameters (in een bestaande klasse):\n" +deprecatedparameters, "Kijk de subset na voor u verder gaat");
             }
         }
 
@@ -87,11 +87,11 @@ namespace OTLWizard
         /// <param name="classes"></param>
         public async Task exportXls(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
-            showProgressBar("De template wordt aangemaakt.");
+            openView(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt.");
             TemplateExporter exp = new TemplateExporter(subsetConn.GetOTL_ObjectTypes());
             exp.SetClasses(classes);
             await Task.Run(() => { exp.ExportXls(exportPath, withDescriptions, withChecklistOptions); });
-            hideProgressBar();
+            openView(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
         /// <summary>
@@ -113,47 +113,58 @@ namespace OTLWizard
             return artefactConn.GetOTLArtefactTypes();
         }
 
-        public void showExportXLS(Form form)
-        {
-            form.Enabled = false;
-            exportXLSWindow.Show();
+        public void openView(Enums.Views toOpen, Enums.Views toClose, Object optionalArgument)
+        {           
+            switch (toClose)
+            {
+                case Enums.Views.Home:
+                    homeWindow.Enabled = false;
+                    break;
+                case Enums.Views.Loading:
+                    loadingWindow.Hide();
+                    break;
+                case Enums.Views.ArtefactMain:
+                    artefactWindow.Hide();
+                    break;
+                case Enums.Views.ArtefactResult:
+                    artefactResult.Hide();
+                    break;
+                case Enums.Views.SubsetMain:
+                    exportXLSWindow.Hide();
+                    break;
+                default:
+                    break;
+            }
+            switch (toOpen)
+            {
+                case Enums.Views.Home:
+                    homeWindow.Enabled = true;
+                    homeWindow.Show();
+                    homeWindow.Select();
+                    break;
+                case Enums.Views.Loading:
+                    loadingWindow.SetProgressLabelText((string)optionalArgument);
+                    loadingWindow.Show();
+                    break;
+                case Enums.Views.ArtefactMain:
+                    artefactWindow.Show();
+                    artefactWindow.Select();
+                    break;
+                case Enums.Views.ArtefactResult:
+                    artefactResult.SetUserSelection((List<string>)optionalArgument);
+                    artefactResult.Show();
+                    artefactResult.Select();
+                    break;
+                case Enums.Views.SubsetMain:
+                    exportXLSWindow.Show();
+                    exportXLSWindow.Select();
+                    break;
+                default:
+                    break;
+            }
         }
 
-        public void showExportArtefact(Form form)
-        {
-            form.Enabled = false;
-            artefactWindow.Show();
-        }
-
-        public void showArtefactResult()
-        {
-            
-            artefactResult.Show();
-        }
-
-        public void showHome(Form form)
-        {
-            // first reset all forms and databases upon refresh
-            
-
-            form.Hide();
-            homeWindow.Enabled = true;
-            homeWindow.Show();
-            homeWindow.Select();
-        }
-
-        public void showProgressBar(string text)
-        {
-            loadingWindow.SetProgressLabelText(text);
-            loadingWindow.Show();
-        }
-
-        public void hideProgressBar()
-        {
-            loadingWindow.Hide();
-        }
-
-        public void showMessage(string message, string header)
+        public void OpenMessage(string message, string header)
         {
             MessageBox.Show(message, header, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

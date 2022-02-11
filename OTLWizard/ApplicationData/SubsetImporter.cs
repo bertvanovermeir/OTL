@@ -70,7 +70,7 @@ namespace OTLWizard
             else
             {
                 // failure to open will generate a message for now, no further action
-                app.showMessage("Could not retrieve Query information.", "Fatal Error");
+                app.OpenMessage("Could not retrieve Query information.", "Fatal Error");
             }
 
             // OBJECT TYPES

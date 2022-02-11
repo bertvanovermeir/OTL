@@ -69,7 +69,7 @@ namespace OTLWizard
                     }
                 } 
                 await app.exportXls(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
-                app.showMessage("Export voltooid", "Template export");
+                app.OpenMessage("Export voltooid", "Template export");
             }
             
         }
@@ -145,7 +145,7 @@ namespace OTLWizard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            app.showHome(this);
+            app.openView(Enums.Views.Home, Enums.Views.SubsetMain, null);
         }
     }
 }

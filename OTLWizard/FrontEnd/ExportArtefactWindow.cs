@@ -26,7 +26,7 @@ namespace OTLWizard
 
         private void terug(object sender, EventArgs e)
         {
-            app.showHome(this);
+            app.openView(Enums.Views.Home, Enums.Views.ArtefactMain, null);
         }
 
         private void buttonSubset_Click(object sender, EventArgs e)
@@ -90,8 +90,13 @@ namespace OTLWizard
                     temp[i] = ListAllClasses.Items[ind].ToString();
                     i++;
                 }
+            } else
+            {
+                temp = new string[0];
+                
             }
-            app.showArtefactResult();
+            // open the result window and pass the results of the user selection in the optionalArgument parameter
+            app.openView(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
         }
 
         private void checkAllClasses_CheckedChanged(object sender, EventArgs e)

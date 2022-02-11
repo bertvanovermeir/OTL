@@ -31,12 +31,12 @@ namespace OTLWizard
 
         private void xlsExport(object sender, EventArgs e)
         {
-            app.showExportXLS(this);
+            app.openView(Enums.Views.SubsetMain, Enums.Views.Home, null);
         }
 
         private void artefactExport(object sender, EventArgs e)
         {
-            app.showExportArtefact(this);
+            app.openView(Enums.Views.ArtefactMain, Enums.Views.Home, null);
         }
     }
 }

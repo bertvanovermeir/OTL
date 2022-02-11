@@ -9,5 +9,15 @@
             Text,
             List
         }
+
+        public enum Views
+        {
+            Loading,
+            Home,
+            ArtefactMain,
+            ArtefactResult,
+            SubsetMain,
+            isNull
+        }
     }
 }

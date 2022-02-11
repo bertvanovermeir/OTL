@@ -35,7 +35,7 @@ namespace OTLWizard
             else
             {
                 // failure to open will generate a message for now, no further action
-                app.showMessage("Could not retrieve Query information.", "Fatal Error");
+                app.OpenMessage("Could not retrieve Query information.", "Fatal Error");
             }
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
