@@ -27,11 +27,12 @@ namespace OTLWizard.OTLObjecten
         public string viarelatie { get; set; }
         [DisplayName("Uitzonderingen")]
         public string uitzonderingen { get; set; }
-        [DisplayName("Opmerkingen")]
+        [DisplayName("Overervingsklasse in Subset")]
         public string opmerkingen { get; set; }
 
+        public string URL;
 
-        public OTL_ArtefactType(string objectnaam, string geometrie, string overerving, string meetcriterium, string uitzonderingen, string overervingsgrens, string steekkaarten, string overervenvan, string viarelatie)
+        public OTL_ArtefactType(string objectnaam, string geometrie, string overerving, string meetcriterium, string uitzonderingen, string overervingsgrens, string steekkaarten, string overervenvan, string viarelatie, string URL)
         {
             this.objectnaam = objectnaam;
             this.geometrie = geometrie;
@@ -42,6 +43,7 @@ namespace OTLWizard.OTLObjecten
             this.steekkaarten = steekkaarten;
             this.overervenvan = overervenvan;
             this.viarelatie = viarelatie;
+            this.URL = URL;
         }
 
         public void addRemark(string text)

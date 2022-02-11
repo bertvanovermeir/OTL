@@ -69,7 +69,7 @@ namespace OTLWizard
         private async void buttonImportClasses_Click(object sender, EventArgs e)
         {
             await app.ImportArtefact(textBoxSubset.Text, textBoxArtefact.Text);
-            foreach (string klasse in app.GetOTLClassNames())
+            foreach (string klasse in app.GetSubsetClassNames())
             {
                 ListAllClasses.Items.Add(klasse);
 
@@ -112,6 +112,11 @@ namespace OTLWizard
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListAllClasses_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

@@ -15,10 +15,12 @@ namespace OTLWizard
         private string path;
         private bool help;
         private bool checklistoptions;
+        private ApplicationManager app;
 
-        public TemplateExporter(List<OTL_ObjectType> OTL_ObjectTypes)
+        public TemplateExporter(List<OTL_ObjectType> OTL_ObjectTypes, ApplicationManager app)
         {
             this.OTL_ObjectTypes = OTL_ObjectTypes;
+            this.app = app;
             checklistoptions = true;
         }
 
@@ -162,7 +164,7 @@ namespace OTLWizard
             }
             catch
             {
-                
+                app.OpenMessage("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
             }
 
             workbook.Close();

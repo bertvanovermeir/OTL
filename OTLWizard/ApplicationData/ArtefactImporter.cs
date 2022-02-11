@@ -35,11 +35,11 @@ namespace OTLWizard
             else
             {
                 // failure to open will generate a message for now, no further action
-                app.OpenMessage("Could not retrieve Query information.", "Fatal Error");
+                app.OpenMessage("Could not retrieve Query information.", "Fatal Error",System.Windows.Forms.MessageBoxIcon.Warning);
             }
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
-            List<string> otlClasses = app.GetOTLClassNames();
+            List<string> otlClasses = app.GetSubsetClassNames();
             foreach(string otlClass in otlClasses)
             {
                 string tempquery = query.Replace("[OSLOCLASS]", otlClass);
@@ -60,13 +60,39 @@ namespace OTLWizard
                     string steekkaarten = (string)sqlite_datareader.GetValue(6);
                     string overervenvan = (string)sqlite_datareader.GetValue(7);
                     string viarelatie = (string)sqlite_datareader.GetValue(8);
-                    
+                    string URL = (string)sqlite_datareader.GetValue(9);
+
                     // check columns in query to know what to transfer, 
-                    OTL_ArtefactType artefact = new OTL_ArtefactType(objectnaam,geometrie,overerving,meetcriterium,uitzonderingen,overervingsgrens,steekkaarten,overervenvan,viarelatie);
+                    OTL_ArtefactType artefact = new OTL_ArtefactType(objectnaam,geometrie,overerving,meetcriterium,uitzonderingen,overervingsgrens,steekkaarten,overervenvan,viarelatie,URL);
                     OTL_ArtefactTypes.Add(artefact);
                 }
                 sqlite_conn_OTL.Close();
-            }          
+            }
+            // check if all classes from OTL are available to resolve Artefact
+            bool found = false;
+            foreach (OTL_ArtefactType art in OTL_ArtefactTypes)
+            {
+                
+                foreach (string otlClass in otlClasses)
+                {
+                    if(otlClass.Equals(art.overervenvan))
+                    {
+                        found = true;
+                        break;
+                    }
+
+
+                }
+                if(found)
+                {
+                    art.opmerkingen = "ja";
+                } else
+                {
+                    art.opmerkingen = "neen";
+                }
+                found = false;
+            }
+
         }
 
         public List<OTL_ArtefactType> GetOTLArtefactTypes()

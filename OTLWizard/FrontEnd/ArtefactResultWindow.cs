@@ -32,7 +32,7 @@ namespace OTLWizard.FrontEnd
                 {
                     foreach (OTL_ArtefactType oTL_ArtefactType in results)
                     {
-                        if (oTL_ArtefactType.objectnaam.Equals(item))
+                        if (oTL_ArtefactType.URL.Contains(item))
                         {
                             selected.Add(oTL_ArtefactType);
                         }
@@ -50,9 +50,37 @@ namespace OTLWizard.FrontEnd
 
         }
 
-        private void buttonExportArtefact_Click(object sender, EventArgs e)
+        private async void buttonExportArtefact_Click(object sender, EventArgs e)
         {
-            //
+            SaveFileDialog fdlg = new SaveFileDialog();
+            fdlg.Title = "Sla Spreadsheet op";
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                List<OTL_ArtefactType> results = app.GetArtefactResultData();
+                List<OTL_ArtefactType> selected = new List<OTL_ArtefactType>();
+
+                if (userSelection.Count > 0)
+                {
+                    foreach (string item in userSelection)
+                    {
+                        foreach (OTL_ArtefactType oTL_ArtefactType in results)
+                        {
+                            if (oTL_ArtefactType.URL.Contains(item))
+                            {
+                                selected.Add(oTL_ArtefactType);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    selected = results;
+                }
+                await app.exportXlsArtefact(fdlg.FileName, selected);
+                app.OpenMessage("Export voltooid", "Artefact export", MessageBoxIcon.Information);
+            }
+                
         }
 
         private void buttonExit(object sender, EventArgs e)

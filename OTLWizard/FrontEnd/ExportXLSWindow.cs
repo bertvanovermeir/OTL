@@ -68,8 +68,8 @@ namespace OTLWizard
                         i++;
                     }
                 } 
-                await app.exportXls(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
-                app.OpenMessage("Export voltooid", "Template export");
+                await app.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                app.OpenMessage("Export voltooid", "Template export",MessageBoxIcon.Information);
             }
             
         }
@@ -119,7 +119,7 @@ namespace OTLWizard
             
             await app.ImportSubset(textBoxSubset.Text, textBoxKeuzelijsten.Text);
 
-            foreach(string klasse in app.GetOTLClassNames())
+            foreach(string klasse in app.GetSubsetClassNames())
             {
                 ListAllClasses.Items.Add(klasse);
                 

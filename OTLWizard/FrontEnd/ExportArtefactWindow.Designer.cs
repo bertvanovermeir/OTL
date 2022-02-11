@@ -69,11 +69,11 @@
             this.buttonSubset.UseVisualStyleBackColor = true;
             this.buttonSubset.Click += new System.EventHandler(this.buttonSubset_Click);
             // 
-            // textBox1
+            // textBoxArtefact
             // 
             this.textBoxArtefact.Enabled = false;
             this.textBoxArtefact.Location = new System.Drawing.Point(174, 96);
-            this.textBoxArtefact.Name = "textBox1";
+            this.textBoxArtefact.Name = "textBoxArtefact";
             this.textBoxArtefact.Size = new System.Drawing.Size(614, 20);
             this.textBoxArtefact.TabIndex = 24;
             this.textBoxArtefact.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -93,10 +93,10 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(450, 13);
+            this.label1.Size = new System.Drawing.Size(515, 13);
             this.label1.TabIndex = 25;
-            this.label1.Text = "OTL Template generator maakt templates in Excel van een geimporteerde Object Type" +
-    " Library";
+            this.label1.Text = "OTL Artefact Manager controleert welk geometrie dient aangeleverd te worden voor " +
+    "bepaalde OTL klassen.";
             // 
             // buttonExportArtefact
             // 
@@ -130,6 +130,7 @@
             this.ListAllClasses.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.ListAllClasses.Size = new System.Drawing.Size(374, 251);
             this.ListAllClasses.TabIndex = 28;
+            this.ListAllClasses.SelectedIndexChanged += new System.EventHandler(this.ListAllClasses_SelectedIndexChanged);
             // 
             // buttonImportClasses
             // 
