@@ -14,6 +14,7 @@ Deze applicatie implementeert de AWV OTL standaard van de vlaamse overheid. Met 
 Gecompileerde applicatiebestanden kunnen gedownload worden vanaf [hier](https://github.com/bertvanovermeir/OTL/releases).
 Men kan kiezen voor een manuele (zip uitpakken) installatie, of een installatie met een installer. Voor de automatische installatie zijn administratorrechten nodig.
 Opgelet: windows Smartscreen geeft op sommige computers melding van een "onbekende applicatie", u kan hier gewoonweg kiezen voor "toch uitvoeren".
+
 ---
 
 ## Gebruik
