@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace OTLWizard
+namespace OTLWizard.OTLObjecten
 {
     /// <summary>
     /// Deze klasse omschrijft één parameter en de optionele invulwaarden. 

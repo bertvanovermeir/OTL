@@ -1,13 +1,9 @@
-﻿using OTLWizard.OTLObjecten;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using OTLWizard.OTLObjecten;
 
-namespace OTLWizard
+namespace OTLWizard.ApplicationData
 {
     public class ArtefactImporter
     {
@@ -39,7 +35,7 @@ namespace OTLWizard
             }
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
-            List<string> otlClasses = app.GetSubsetClassNames();
+            var otlClasses = app.GetSubsetClassNames();
             foreach(string otlClass in otlClasses)
             {
                 string tempquery = query.Replace("[OSLOCLASS]", otlClass);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace OTLWizard
+namespace OTLWizard.OTLObjecten
 {
     /// <summary>
     /// Deze klasse omschrijft een OTL objecttype en de daarbijhorende relatietypes en parameters.

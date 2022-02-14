@@ -1,4 +1,4 @@
-﻿namespace OTLWizard
+﻿namespace OTLWizard.OTLObjecten
 {
     public class Enums
     {

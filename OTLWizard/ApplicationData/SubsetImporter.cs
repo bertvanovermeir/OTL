@@ -1,8 +1,9 @@
-﻿using System.Data.SQLite;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Data.SQLite;
 using System.IO;
+using OTLWizard.OTLObjecten;
 
-namespace OTLWizard
+namespace OTLWizard.ApplicationData
 {
     /// <summary>
     /// Deze klasse omschrijft de import van de DB subset én van de TTL keuzelijstbestanden.

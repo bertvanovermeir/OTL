@@ -1,12 +1,12 @@
-﻿using OTLWizard.ApplicationData;
-using OTLWizard.FrontEnd;
-using OTLWizard.OTLObjecten;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using OTLWizard.FrontEnd;
+using OTLWizard.OTLObjecten;
 
-namespace OTLWizard
+namespace OTLWizard.ApplicationData
 {
     /// <summary>
     /// Belangrijkste klasse die de werking van het programma illustreert. 
@@ -122,14 +122,9 @@ namespace OTLWizard
         /// Interface Handle voor het vullen van de Listbox met alle mogelijke klassen die zich in de subset bevinden.
         /// </summary>
         /// <returns></returns>
-        public List<string> GetSubsetClassNames()
+        public IEnumerable<string> GetSubsetClassNames()
         {
-            List<string> temp = new List<string>();
-            foreach(OTL_ObjectType otl in subsetConn.GetOTL_ObjectTypes())
-            {
-                temp.Add(otl.otlName);
-            }
-            return temp;
+            return subsetConn.GetOTL_ObjectTypes().Select(x => x.otlName);
         }
 
         /// <summary>

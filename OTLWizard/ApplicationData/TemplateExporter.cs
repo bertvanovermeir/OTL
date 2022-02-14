@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Microsoft.Office.Interop.Excel;
+using OTLWizard.OTLObjecten;
 
-namespace OTLWizard
+namespace OTLWizard.ApplicationData
 {
     /// <summary>
     /// Deze klasse omschrijft de connectie met XLS. Ze maakt een XLS template aan.
