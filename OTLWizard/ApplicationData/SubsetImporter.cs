@@ -54,6 +54,10 @@ namespace OTLWizard
         /// </summary>
         public void ImportSubset()
         {
+            //clear the lists
+            OTL_ObjectTypes = new List<OTL_ObjectType>();
+            OTL_RelationTypes = new List<OTL_RelationshipType>();
+
             // 3 possible queries to run in order to import subset
             string queryOTLObjects = ""; // import otl objects
             string queryOTLParameters = ""; // import otl parameters per object
