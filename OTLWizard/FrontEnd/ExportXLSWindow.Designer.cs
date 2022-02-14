@@ -169,6 +169,7 @@
             this.ListAllClasses.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.ListAllClasses.Size = new System.Drawing.Size(374, 251);
             this.ListAllClasses.TabIndex = 12;
+            this.ListAllClasses.SelectedIndexChanged += new System.EventHandler(this.ListAllClasses_SelectedIndexChanged);
             // 
             // checkAllClasses
             // 

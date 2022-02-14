@@ -119,6 +119,7 @@ namespace OTLWizard
             
             await app.ImportSubset(textBoxSubset.Text, textBoxKeuzelijsten.Text);
 
+            ListAllClasses.Items.Clear();
             foreach(string klasse in app.GetSubsetClassNames())
             {
                 ListAllClasses.Items.Add(klasse);
@@ -146,6 +147,11 @@ namespace OTLWizard
         private void button1_Click(object sender, EventArgs e)
         {
             app.openView(Enums.Views.Home, Enums.Views.SubsetMain, null);
+        }
+
+        private void ListAllClasses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
