@@ -1,11 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using OTLWizard.ApplicationData;
+using System.Reflection;
 using Xunit;
+using OTLWizard.ApplicationData;
 
-
-namespace OTLWizard.UnitTests
+namespace UnitTests
 {
     public class SubSetImportTests
     {
@@ -13,7 +13,8 @@ namespace OTLWizard.UnitTests
         public void SubsetImportTest_1_type()
         {
             // arrange
-            var dbpath = Directory.GetCurrentDirectory() + "\\UnitTests\\test_1_type.db";
+            
+            var dbpath = "C:\\resources\\subset_1_type_alle_attributen_bert.db";
             var subsetImporter = new SubsetImporter(dbpath, "", null);
             
             // act

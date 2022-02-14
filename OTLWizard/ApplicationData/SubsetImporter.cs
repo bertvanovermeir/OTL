@@ -8,7 +8,7 @@ namespace OTLWizard.ApplicationData
     /// <summary>
     /// Deze klasse omschrijft de import van de DB subset én van de TTL keuzelijstbestanden.
     /// </summary>
-    class SubsetImporter
+    public class SubsetImporter
     {
         private SQLiteConnection sqlite_conn_OTL; // OTL objects
         private string klPath;
@@ -78,60 +78,74 @@ namespace OTLWizard.ApplicationData
                 app.OpenMessage("Could not retrieve Query information.", "Fatal Error", System.Windows.Forms.MessageBoxIcon.Warning);
             }
 
-            // OBJECT TYPES
+           
             // open the connection
             sqlite_conn_OTL.Open();
-            var sqlite_cmd = sqlite_conn_OTL.CreateCommand();
-            sqlite_cmd.CommandText = queryOTLObjects;
-            var sqlite_datareader = sqlite_cmd.ExecuteReader();
-            // The SQLiteDataReader allows us to run through each row per loop
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
-            {
-                // check columns in query to know what to transfer, 
-                OTL_ObjectType temp = new OTL_ObjectType((string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3),bool.Parse((string)sqlite_datareader.GetValue(4)));
-                OTL_ObjectTypes.Add(temp);
-            }
-            sqlite_conn_OTL.Close();
+            
+            if (!File.Exists(sqlite_conn_OTL.FileName))
+                throw new FileNotFoundException("Could not find the database file.");
 
-            // PARAMETERS
-            // this should be executed for each OTL class, therefore:
-            foreach (OTL_ObjectType OTLClass in OTL_ObjectTypes)
+            // OBJECT TYPES
+            using (var sqlite_cmd = new SQLiteCommand(sqlite_conn_OTL))
             {
-                // open the connection:
-                sqlite_conn_OTL.Open();
-                sqlite_cmd = sqlite_conn_OTL.CreateCommand();
-                string tempquery = queryOTLParameters.Replace("[OSLOCLASS]", OTLClass.otlName);
-                sqlite_cmd.CommandText = tempquery;
-                sqlite_datareader = sqlite_cmd.ExecuteReader();
+                sqlite_cmd.CommandText = queryOTLObjects;
+                var sqlite_datareader = sqlite_cmd.ExecuteReader();
                 // The SQLiteDataReader allows us to run through each row per loop
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                 {
                     // check columns in query to know what to transfer, 
-                    OTL_Parameter p = new OTL_Parameter(klPath, (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(3), (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), bool.Parse((string)sqlite_datareader.GetValue(4)));
-                    // override default value of the parameter if name is typeURI, this will autofill this parameter field upon export
-                    if (p.friendlyName.Contains("typeURI"))
-                    {
-                        p.defaultValue = OTLClass.uri;
-                    }
-                    OTLClass.AddParameter(p);
+                    OTL_ObjectType temp = new OTL_ObjectType((string) sqlite_datareader.GetValue(0), (string) sqlite_datareader.GetValue(1),
+                        (string) sqlite_datareader.GetValue(2), (string) sqlite_datareader.GetValue(3), bool.Parse((string) sqlite_datareader.GetValue(4)));
+                    OTL_ObjectTypes.Add(temp);
                 }
-                sqlite_conn_OTL.Close();
+                sqlite_datareader.Close();
             }
 
-            // RELATIONS (unused for now, but is imported anyway for future use)
-            // open the connection:
-            sqlite_conn_OTL.Open();
-            sqlite_cmd = sqlite_conn_OTL.CreateCommand();
-            sqlite_cmd.CommandText = queryOTLRelations;
-            sqlite_datareader = sqlite_cmd.ExecuteReader();
-            // The SQLiteDataReader allows us to run through each row per loop
-            while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+            // PARAMETERS
+            // this should be executed for each OTL class, therefore:
+            using (var sqlite_cmd = new SQLiteCommand(sqlite_conn_OTL))
             {
-                // check columns in query to know what to transfer, 
-                OTL_RelationshipType temp = new OTL_RelationshipType((string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3));
-                OTL_RelationTypes.Add(temp);
+                foreach (OTL_ObjectType OTLClass in OTL_ObjectTypes)
+                {
+                    string tempquery = queryOTLParameters.Replace("[OSLOCLASS]", OTLClass.otlName);
+                    sqlite_cmd.CommandText = tempquery;
+                    var sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    // The SQLiteDataReader allows us to run through each row per loop
+                    while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                    {
+                        // check columns in query to know what to transfer, 
+                        OTL_Parameter p = new OTL_Parameter(klPath, (string) sqlite_datareader.GetValue(0), (string) sqlite_datareader.GetValue(3),
+                            (string) sqlite_datareader.GetValue(1), (string) sqlite_datareader.GetValue(2), bool.Parse((string) sqlite_datareader.GetValue(4)));
+                        // override default value of the parameter if name is typeURI, this will autofill this parameter field upon export
+                        if (p.friendlyName.Contains("typeURI"))
+                        {
+                            p.defaultValue = OTLClass.uri;
+                        }
+
+                        OTLClass.AddParameter(p);
+
+                    }
+                    sqlite_datareader.Close();
+                }
             }
-            sqlite_conn_OTL.Close();
+
+
+            // RELATIONS (unused for now, but is imported anyway for future use)
+
+            using (var sqlite_cmd = new SQLiteCommand(sqlite_conn_OTL))
+            {
+                sqlite_cmd.CommandText = queryOTLRelations;
+                var sqlite_datareader = sqlite_cmd.ExecuteReader();
+                // The SQLiteDataReader allows us to run through each row per loop
+                while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                {
+                    // check columns in query to know what to transfer, 
+                    OTL_RelationshipType temp = new OTL_RelationshipType((string) sqlite_datareader.GetValue(1), (string) sqlite_datareader.GetValue(0),
+                        (string) sqlite_datareader.GetValue(2), (string) sqlite_datareader.GetValue(3));
+                    OTL_RelationTypes.Add(temp);
+                }
+                sqlite_datareader.Close();
+            }
         }
     }
 }
