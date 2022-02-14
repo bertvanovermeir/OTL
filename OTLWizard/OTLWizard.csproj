@@ -157,6 +157,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="UnitTests\test_1_type.db" />
+    <Content Include="UnitTests\test_1_type_zonder_attributen.db" />
+    <Content Include="UnitTests\test_2_types.db" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
