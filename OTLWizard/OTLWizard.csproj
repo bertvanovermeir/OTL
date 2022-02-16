@@ -95,6 +95,8 @@
     <Compile Include="ApplicationData\ApplicationManager.cs" />
     <Compile Include="ApplicationData\ArtefactImporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporter.cs" />
+    <Compile Include="ApplicationData\ParameterHelper.cs" />
+    <Compile Include="ApplicationData\QueryHelper.cs" />
     <Compile Include="ApplicationData\SubsetImporter.cs" />
     <Compile Include="FrontEnd\ArtefactResultWindow.cs">
       <SubType>Form</SubType>

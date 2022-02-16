@@ -6,37 +6,35 @@ using OTLWizard.OTLObjecten;
 namespace OTLWizard.ApplicationData
 {
     /// <summary>
-    /// Deze klasse omschrijft de import van de DB subset én van de TTL keuzelijstbestanden.
+    /// Deze klasse omschrijft de import van de DB subset
     /// </summary>
     public class SubsetImporter
     {
-        private SQLiteConnection sqlite_conn_OTL; // OTL objects
-        private string klPath;
-        private ApplicationManager app;
+        private readonly SQLiteConnection SqliteConnection;
+        private readonly string KeuzelijstenPad;
         private List<OTL_ObjectType> OTL_ObjectTypes;
         private List<OTL_RelationshipType> OTL_RelationTypes;
-        
 
         /// <summary>
-        /// create a new database connection. Should not be referenced more than once.
+        /// Maak een nieuwe databaseconnectie met een subset aan
         /// </summary>
-        /// <param name="path"></param>
-        public SubsetImporter(string dbpath, string klPath, ApplicationManager app)
+        /// <param name="DatabasePad"></param>
+        /// <param name="KeuzelijstenPad"></param>
+        public SubsetImporter(string DatabasePad, string KeuzelijstenPad = null)
         {
-            // init
+            // initialize
             OTL_ObjectTypes = new List<OTL_ObjectType>();
             OTL_RelationTypes = new List<OTL_RelationshipType>();
-            // create a new database connection and set the skospath to the private variable
-            sqlite_conn_OTL = new SQLiteConnection("Data Source = " + dbpath + "; Version = 3; Read Only = True;");
-            this.klPath = klPath;
-            this.app = app;
+            // create a new database connection and set the keuzelijstenpad to the private variable
+            SqliteConnection = new SQLiteConnection("Data Source = " + DatabasePad + "; Version = 3; Read Only = True;");
+            this.KeuzelijstenPad = KeuzelijstenPad;
         }
 
         /// <summary>
         /// return all OTL objecttypes in imported subset
         /// </summary>
         /// <returns></returns>
-        public List<OTL_ObjectType> GetOTL_ObjectTypes()
+        public List<OTL_ObjectType> GetOTLObjectTypes()
         {
             return OTL_ObjectTypes;
         }
@@ -45,7 +43,7 @@ namespace OTLWizard.ApplicationData
         /// return all OTL relations in imported subset
         /// </summary>
         /// <returns></returns>
-        public List<OTL_RelationshipType> GetOTL_RelationshipTypes()
+        public List<OTL_RelationshipType> GetOTLRelationshipTypes()
         {
             return OTL_RelationTypes;
         }
@@ -53,49 +51,29 @@ namespace OTLWizard.ApplicationData
         /// <summary>
         /// start parsing the database for OTL classes.
         /// </summary>
-        public void ImportSubset()
+        public void Import()
         {
-            //clear the lists
+            //clear the lists to avoid repeating imports
             OTL_ObjectTypes = new List<OTL_ObjectType>();
             OTL_RelationTypes = new List<OTL_RelationshipType>();
 
-            // 3 possible queries to run in order to import subset
-            string queryOTLObjects = ""; // import otl objects
-            string queryOTLParameters = ""; // import otl parameters per object
-            string queryOTLRelations = ""; // import otl relations
-
-            // open the queries file (queries in known order in file)
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\queries.dat"))
-            {
-                string[] lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\queries.dat", System.Text.Encoding.UTF8);
-                queryOTLObjects = lines[0];
-                queryOTLParameters = lines[1];
-                queryOTLRelations = lines[2];
-            }
-            else
-            {
-                // failure to open will generate a message for now, no further action
-                app.OpenMessage("Could not retrieve Query information.", "Fatal Error", System.Windows.Forms.MessageBoxIcon.Warning);
-            }
-
-           
             // open the connection
-            sqlite_conn_OTL.Open();
-            
-            if (!File.Exists(sqlite_conn_OTL.FileName))
+            SqliteConnection.Open();
+
+            if (!File.Exists(SqliteConnection.FileName))
                 throw new FileNotFoundException("Could not find the database file.");
 
             // OBJECT TYPES
-            using (var sqlite_cmd = new SQLiteCommand(sqlite_conn_OTL))
+            using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {
-                sqlite_cmd.CommandText = queryOTLObjects;
+                sqlite_cmd.CommandText = QueryHelper.Get(Enums.Query.Objects);
                 var sqlite_datareader = sqlite_cmd.ExecuteReader();
                 // The SQLiteDataReader allows us to run through each row per loop
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                 {
                     // check columns in query to know what to transfer, 
-                    OTL_ObjectType temp = new OTL_ObjectType((string) sqlite_datareader.GetValue(0), (string) sqlite_datareader.GetValue(1),
-                        (string) sqlite_datareader.GetValue(2), (string) sqlite_datareader.GetValue(3), bool.Parse((string) sqlite_datareader.GetValue(4)));
+                    OTL_ObjectType temp = new OTL_ObjectType((string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(1),
+                        (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3), bool.Parse((string)sqlite_datareader.GetValue(4)));
                     OTL_ObjectTypes.Add(temp);
                 }
                 sqlite_datareader.Close();
@@ -103,45 +81,41 @@ namespace OTLWizard.ApplicationData
 
             // PARAMETERS
             // this should be executed for each OTL class, therefore:
-            using (var sqlite_cmd = new SQLiteCommand(sqlite_conn_OTL))
+            using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {
                 foreach (OTL_ObjectType OTLClass in OTL_ObjectTypes)
                 {
-                    string tempquery = queryOTLParameters.Replace("[OSLOCLASS]", OTLClass.otlName);
+                    string tempquery = QueryHelper.Get(Enums.Query.Parameters).Replace("[OSLOCLASS]", OTLClass.otlName);
                     sqlite_cmd.CommandText = tempquery;
                     var sqlite_datareader = sqlite_cmd.ExecuteReader();
                     // The SQLiteDataReader allows us to run through each row per loop
                     while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                     {
                         // check columns in query to know what to transfer, 
-                        OTL_Parameter p = new OTL_Parameter(klPath, (string) sqlite_datareader.GetValue(0), (string) sqlite_datareader.GetValue(3),
-                            (string) sqlite_datareader.GetValue(1), (string) sqlite_datareader.GetValue(2), bool.Parse((string) sqlite_datareader.GetValue(4)));
+                        OTL_Parameter p = new OTL_Parameter(KeuzelijstenPad, (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(3),
+                            (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), bool.Parse((string)sqlite_datareader.GetValue(4)));
                         // override default value of the parameter if name is typeURI, this will autofill this parameter field upon export
                         if (p.friendlyName.Contains("typeURI"))
                         {
                             p.defaultValue = OTLClass.uri;
                         }
-
                         OTLClass.AddParameter(p);
-
                     }
                     sqlite_datareader.Close();
                 }
             }
 
-
             // RELATIONS (unused for now, but is imported anyway for future use)
-
-            using (var sqlite_cmd = new SQLiteCommand(sqlite_conn_OTL))
+            using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {
-                sqlite_cmd.CommandText = queryOTLRelations;
+                sqlite_cmd.CommandText = QueryHelper.Get(Enums.Query.Relations); ;
                 var sqlite_datareader = sqlite_cmd.ExecuteReader();
                 // The SQLiteDataReader allows us to run through each row per loop
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                 {
                     // check columns in query to know what to transfer, 
-                    OTL_RelationshipType temp = new OTL_RelationshipType((string) sqlite_datareader.GetValue(1), (string) sqlite_datareader.GetValue(0),
-                        (string) sqlite_datareader.GetValue(2), (string) sqlite_datareader.GetValue(3));
+                    OTL_RelationshipType temp = new OTL_RelationshipType((string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(0),
+                        (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3));
                     OTL_RelationTypes.Add(temp);
                 }
                 sqlite_datareader.Close();

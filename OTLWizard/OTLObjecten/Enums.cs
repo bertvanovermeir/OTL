@@ -19,5 +19,13 @@
             SubsetMain,
             isNull
         }
+
+        public enum Query
+        {
+            Objects,
+            Parameters,
+            Relations,
+            Artefact
+        }
     }
 }

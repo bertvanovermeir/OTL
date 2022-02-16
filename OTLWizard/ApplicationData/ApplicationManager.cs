@@ -56,10 +56,10 @@ namespace OTLWizard.ApplicationData
         public async Task ImportSubset(string dbPath, string klPath)
         {
             openView(Enums.Views.Loading, Enums.Views.isNull, "De OTL Subset wordt geimporteerd.");
-            subsetConn = new SubsetImporter(dbPath, klPath, this);
+            subsetConn = new SubsetImporter(dbPath, klPath);
             try
             {
-                await Task.Run(() => { subsetConn.ImportSubset(); });
+                await Task.Run(() => { subsetConn.Import(); });
             } catch
             {
                 OpenMessage("De subset kon niet worden geïmporteerd", "Algemene Fout", MessageBoxIcon.Error);
@@ -70,7 +70,7 @@ namespace OTLWizard.ApplicationData
             string deprecatedclasses = "";
             string deprecatedparameters = "";
             bool showWarning = false;
-            foreach(OTL_ObjectType o in subsetConn.GetOTL_ObjectTypes())
+            foreach(OTL_ObjectType o in subsetConn.GetOTLObjectTypes())
             {
                 if(o.deprecated)
                 {
@@ -104,7 +104,7 @@ namespace OTLWizard.ApplicationData
         public async Task exportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
             openView(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt.");
-            TemplateExporter exp = new TemplateExporter(subsetConn.GetOTL_ObjectTypes(), this);
+            TemplateExporter exp = new TemplateExporter(subsetConn.GetOTLObjectTypes(), this);
             exp.SetClasses(classes);
             await Task.Run(() => { exp.ExportXls(exportPath, withDescriptions, withChecklistOptions); });
             openView(Enums.Views.isNull, Enums.Views.Loading, null);
@@ -124,7 +124,7 @@ namespace OTLWizard.ApplicationData
         /// <returns></returns>
         public IEnumerable<string> GetSubsetClassNames()
         {
-            return subsetConn.GetOTL_ObjectTypes().Select(x => x.otlName);
+            return subsetConn.GetOTLObjectTypes().Select(x => x.otlName);
         }
 
         /// <summary>
