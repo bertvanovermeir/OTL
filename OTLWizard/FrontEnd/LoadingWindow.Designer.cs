@@ -52,6 +52,7 @@
             this.progressBar1.Size = new System.Drawing.Size(272, 23);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 1;
+            this.progressBar1.UseWaitCursor = true;
             this.progressBar1.Click += new System.EventHandler(this.progressBar1_Click_1);
             // 
             // LoadingWindow
@@ -70,6 +71,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Even geduld...";
             this.UseWaitCursor = true;
+            this.Load += new System.EventHandler(this.LoadingWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

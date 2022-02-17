@@ -1,9 +1,9 @@
-﻿using OTLWizard.ApplicationData;
+﻿using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Deze klasse omschrijft één parameter en de optionele invulwaarden. 
@@ -46,9 +46,9 @@ namespace OTLWizard.OTLObjecten
             this.dataTypeString = dataTypeString;
             this.deprecated = deprecated;
             this.keuzelijstenPad = keuzelijstenPad;
-            dataType = ParameterHelper.GetDataType(dataTypeString);
-            defaultValue = ParameterHelper.GetDefaultValue(dataTypeString);
-            dropdownValues = ParameterHelper.GetDropDownValues(dataTypeString, keuzelijstenPad);
+            dataType = ParameterHandler.GetDataType(dataTypeString);
+            defaultValue = ParameterHandler.GetDefaultValue(dataTypeString);
+            dropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijstenPad);
         }
     }
 }

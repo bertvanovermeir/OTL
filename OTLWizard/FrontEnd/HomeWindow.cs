@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using OTLWizard.ApplicationData;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
+using OTLWizard.Helpers;
 
 namespace OTLWizard
 {
     public partial class HomeWindow : Form
     {
-        private ApplicationManager app;
-        public HomeWindow(ApplicationManager app)
+        public HomeWindow()
         {
-            this.app = app;
             InitializeComponent();
         }
 
@@ -27,12 +25,13 @@ namespace OTLWizard
 
         private void xlsExport(object sender, EventArgs e)
         {
-            app.openView(Enums.Views.SubsetMain, Enums.Views.Home, null);
+
+            ViewHandler.Show(Enums.Views.SubsetMain, Enums.Views.Home, null);
         }
 
         private void artefactExport(object sender, EventArgs e)
         {
-            app.openView(Enums.Views.ArtefactMain, Enums.Views.Home, null);
+            ViewHandler.Show(Enums.Views.ArtefactMain, Enums.Views.Home, null);
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)

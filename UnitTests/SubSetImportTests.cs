@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Xunit;
-using OTLWizard.ApplicationData;
+using OTLWizard.Helpers;
 
 namespace UnitTests
 {
@@ -29,7 +29,7 @@ namespace UnitTests
         {
             // arrange
             var dbpath = "C:\\resources\\subset_all_v2.0.2.db";
-            var subsetImporter = new SubsetImporter(dbpath, "");
+            var subsetImporter = new SubsetImporter(dbpath);
 
             // act
             subsetImporter.Import();

@@ -92,11 +92,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationData\ApplicationManager.cs" />
+    <Compile Include="ApplicationData\ApplicationHandler.cs" />
     <Compile Include="ApplicationData\ArtefactImporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporter.cs" />
-    <Compile Include="ApplicationData\ParameterHelper.cs" />
-    <Compile Include="ApplicationData\QueryHelper.cs" />
+    <Compile Include="Helpers\ParameterHandler.cs" />
+    <Compile Include="Helpers\QueryHandler.cs" />
     <Compile Include="ApplicationData\SubsetImporter.cs" />
     <Compile Include="FrontEnd\ArtefactResultWindow.cs">
       <SubType>Form</SubType>
@@ -122,7 +122,8 @@
     <Compile Include="FrontEnd\LoadingWindow.Designer.cs">
       <DependentUpon>LoadingWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="OTLObjecten\Enums.cs" />
+    <Compile Include="Helpers\ViewHandler.cs" />
+    <Compile Include="Helpers\Enums.cs" />
     <Compile Include="ApplicationData\TemplateExporter.cs" />
     <Compile Include="FrontEnd\ExportXLSWindow.cs">
       <SubType>Form</SubType>

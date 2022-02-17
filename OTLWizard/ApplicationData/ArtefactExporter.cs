@@ -1,20 +1,17 @@
 ﻿using Microsoft.Office.Interop.Excel;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class ArtefactExporter
     {
-
-        private ApplicationManager app;
-        public ArtefactExporter(ApplicationManager app)
+        public ArtefactExporter()
         {
-            this.app = app;
         }
 
-        public void ExportXLS(string path, List<OTL_ArtefactType> artefacten)
+        public bool ExportXLS(string path, List<OTL_ArtefactType> artefacten)
         {
             Microsoft.Office.Interop.Excel.Application excel;
             Microsoft.Office.Interop.Excel.Workbook workbook;
@@ -57,30 +54,31 @@ namespace OTLWizard.ApplicationData
             try
             {
                 workbook.SaveAs(path);
+                workbook.Close();
+                excel.Quit();
+                return true;
                 
             } catch
             {
-                app.OpenMessage("Kon het bestand niet opslaan, controleer of het in gebruik is.","Fout bij opslaan",System.Windows.Forms.MessageBoxIcon.Error);
-            }
-            workbook.Close();
-            excel.Quit();
+                workbook.Close();
+                excel.Quit();
+                return false;
+            }         
         }
 
         private Worksheet newWorkSheet(Microsoft.Office.Interop.Excel.Workbook workbook, string sheetName)
         {
             var xlSheets = workbook.Sheets as Microsoft.Office.Interop.Excel.Sheets;
             var xlNewSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
-            // ecel shenanigans
+            // excel shenanigans
             if (sheetName.Length > 31)
             {
                 xlNewSheet.Name = sheetName.Substring(0, 30);
-                Console.WriteLine("Worksheet name exceeds maximum: " + sheetName + ". Will use: " + sheetName.Substring(0, 30));
             }
             else
             {
                 xlNewSheet.Name = sheetName;
             }
-
             xlNewSheet.Cells.Font.Size = 12;
             return xlNewSheet;
         }

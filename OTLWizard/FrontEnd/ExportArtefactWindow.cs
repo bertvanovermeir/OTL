@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
-using OTLWizard.ApplicationData;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
+using OTLWizard.Helpers;
 
 namespace OTLWizard
 {
     public partial class ExportArtefactWindow : Form
     {
-        private ApplicationManager app;
-        public ExportArtefactWindow(ApplicationManager app)
+        public ExportArtefactWindow()
         {
-            this.app = app;
             InitializeComponent();
         }
 
@@ -22,7 +20,7 @@ namespace OTLWizard
 
         private void terug(object sender, EventArgs e)
         {
-            app.openView(Enums.Views.Home, Enums.Views.ArtefactMain, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.ArtefactMain, null);
         }
 
         private void buttonSubset_Click(object sender, EventArgs e)
@@ -64,8 +62,8 @@ namespace OTLWizard
 
         private async void buttonImportClasses_Click(object sender, EventArgs e)
         {
-            await app.ImportArtefact(textBoxSubset.Text, textBoxArtefact.Text);
-            foreach (string klasse in app.GetSubsetClassNames())
+            await ApplicationHandler.ImportArtefact(textBoxSubset.Text, textBoxArtefact.Text);
+            foreach (string klasse in ApplicationHandler.GetSubsetClassNames())
             {
                 ListAllClasses.Items.Add(klasse);
 
@@ -92,7 +90,7 @@ namespace OTLWizard
                 
             }
             // open the result window and pass the results of the user selection in the optionalArgument parameter
-            app.openView(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
+            ViewHandler.Show(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
         }
 
         private void checkAllClasses_CheckedChanged(object sender, EventArgs e)

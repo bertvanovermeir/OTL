@@ -1,4 +1,4 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,10 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
-    public static class ParameterHelper
+    /// <summary>
+    /// convenience classes to help parse some parameter values
+    /// </summary>
+    public static class ParameterHandler
     {
+        /// <summary>
+        /// retrieve the (enum) datatype
+        /// </summary>
+        /// <param name="DataTypeString"></param>
+        /// <returns></returns>
         public static Enums.DataType GetDataType(string DataTypeString)
         {
             Enums.DataType DataType;
@@ -66,6 +74,12 @@ namespace OTLWizard.ApplicationData
             return DataType;
         }
 
+        /// <summary>
+        /// retrieve the possible dropdownvalues, if applicable
+        /// </summary>
+        /// <param name="DataTypeString"></param>
+        /// <param name="KeuzelijstenPad"></param>
+        /// <returns>list with dropdownvalues or NULL if not a list or boolean</returns>
         public static List<string> GetDropDownValues(string DataTypeString, string KeuzelijstenPad)
         {
             if (DataTypeString.Contains("XMLSchema#") || DataTypeString.Contains("rdf-schema#") || DataTypeString.Contains("generiek#Getal") || DataTypeString.Contains("#Dte"))
@@ -104,6 +118,11 @@ namespace OTLWizard.ApplicationData
             return null;
         }
 
+        /// <summary>
+        /// retrieve the default value 
+        /// </summary>
+        /// <param name="DataTypeString"></param>
+        /// <returns></returns>
         public static Object GetDefaultValue(string DataTypeString)
         {
             Object DefaultValue = null;

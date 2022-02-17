@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Deze klasse omschrijft de import van de DB subset
@@ -66,7 +66,7 @@ namespace OTLWizard.ApplicationData
             // OBJECT TYPES
             using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {
-                sqlite_cmd.CommandText = QueryHelper.Get(Enums.Query.Objects);
+                sqlite_cmd.CommandText = QueryHandler.Get(Enums.Query.Objects);
                 var sqlite_datareader = sqlite_cmd.ExecuteReader();
                 // The SQLiteDataReader allows us to run through each row per loop
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
@@ -85,7 +85,7 @@ namespace OTLWizard.ApplicationData
             {
                 foreach (OTL_ObjectType OTLClass in OTL_ObjectTypes)
                 {
-                    string tempquery = QueryHelper.Get(Enums.Query.Parameters).Replace("[OSLOCLASS]", OTLClass.otlName);
+                    string tempquery = QueryHandler.Get(Enums.Query.Parameters).Replace("[OSLOCLASS]", OTLClass.otlName);
                     sqlite_cmd.CommandText = tempquery;
                     var sqlite_datareader = sqlite_cmd.ExecuteReader();
                     // The SQLiteDataReader allows us to run through each row per loop
@@ -108,7 +108,7 @@ namespace OTLWizard.ApplicationData
             // RELATIONS (unused for now, but is imported anyway for future use)
             using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {
-                sqlite_cmd.CommandText = QueryHelper.Get(Enums.Query.Relations); ;
+                sqlite_cmd.CommandText = QueryHandler.Get(Enums.Query.Relations); ;
                 var sqlite_datareader = sqlite_cmd.ExecuteReader();
                 // The SQLiteDataReader allows us to run through each row per loop
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read

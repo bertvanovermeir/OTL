@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using OTLWizard.ApplicationData;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
+using OTLWizard.Helpers;
 
 namespace OTLWizard
 {
     public partial class ExportXLSWindow : Form
     {
-        private ApplicationManager app;
-        public ExportXLSWindow(ApplicationManager app)
+        public ExportXLSWindow()
         {
-            this.app = app;
             InitializeComponent();
         }
 
@@ -70,8 +68,8 @@ namespace OTLWizard
                         i++;
                     }
                 } 
-                await app.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
-                app.OpenMessage("Export voltooid", "Template export",MessageBoxIcon.Information);
+                await ApplicationHandler.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                ViewHandler.Show("Export voltooid", "Template export",MessageBoxIcon.Information);
             }
             
         }
@@ -119,10 +117,10 @@ namespace OTLWizard
         private async void ImportClasses(object sender, EventArgs e)
         {
             
-            await app.ImportSubset(textBoxSubset.Text, textBoxKeuzelijsten.Text);
+            await ApplicationHandler.ImportSubset(textBoxSubset.Text, textBoxKeuzelijsten.Text);
 
             ListAllClasses.Items.Clear();
-            foreach(string klasse in app.GetSubsetClassNames())
+            foreach(string klasse in ApplicationHandler.GetSubsetClassNames())
             {
                 ListAllClasses.Items.Add(klasse);
                 
@@ -148,7 +146,7 @@ namespace OTLWizard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            app.openView(Enums.Views.Home, Enums.Views.SubsetMain, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.SubsetMain, null);
         }
 
         private void ListAllClasses_SelectedIndexChanged(object sender, EventArgs e)

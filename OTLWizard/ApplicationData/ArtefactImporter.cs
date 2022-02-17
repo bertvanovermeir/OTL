@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class ArtefactImporter
     {
         private SQLiteConnection sqlite_conn_OTL;
-        private ApplicationManager app;
         private List<OTL_ArtefactType> OTL_ArtefactTypes;
 
-        public ArtefactImporter(string dbpath, ApplicationManager app)
+        public ArtefactImporter(string dbpath)
         {
-            this.app = app;
             OTL_ArtefactTypes = new List<OTL_ArtefactType>();
             sqlite_conn_OTL = new SQLiteConnection("Data Source = " + dbpath + "; Version = 3; Read Only = True;");
         }
@@ -22,10 +20,10 @@ namespace OTLWizard.ApplicationData
         {
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
-            var otlClasses = app.GetSubsetClassNames();
+            var otlClasses = ApplicationHandler.GetSubsetClassNames();
             foreach(string otlClass in otlClasses)
             {
-                string tempquery = QueryHelper.Get(Enums.Query.Artefact).Replace("[OSLOCLASS]", otlClass);
+                string tempquery = QueryHandler.Get(Enums.Query.Artefact).Replace("[OSLOCLASS]", otlClass);
                 // open the connection:
                 sqlite_conn_OTL.Open();
                 var sqlite_cmd = sqlite_conn_OTL.CreateCommand();

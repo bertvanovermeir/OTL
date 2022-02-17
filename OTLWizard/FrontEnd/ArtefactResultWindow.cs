@@ -1,18 +1,16 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OTLWizard.ApplicationData;
+using OTLWizard.Helpers;
 
 namespace OTLWizard.FrontEnd
 {
     public partial class ArtefactResultWindow : Form
     {
-        private ApplicationManager app;
         private List<string> userSelection;
-        public ArtefactResultWindow(ApplicationManager app)
+        public ArtefactResultWindow()
         {
-            this.app = app;
             userSelection = new List<string>();
             InitializeComponent();
         }
@@ -24,7 +22,7 @@ namespace OTLWizard.FrontEnd
 
         private void ArtefactResultWindow_Load(object sender, EventArgs e)
         {
-            List<OTL_ArtefactType> results = app.GetArtefactResultData();
+            List<OTL_ArtefactType> results = ApplicationHandler.GetArtefactResultData();
             List<OTL_ArtefactType> selected = new List<OTL_ArtefactType>();
 
             if(userSelection.Count > 0)
@@ -58,7 +56,7 @@ namespace OTLWizard.FrontEnd
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                List<OTL_ArtefactType> results = app.GetArtefactResultData();
+                List<OTL_ArtefactType> results = ApplicationHandler.GetArtefactResultData();
                 List<OTL_ArtefactType> selected = new List<OTL_ArtefactType>();
 
                 if (userSelection.Count > 0)
@@ -78,15 +76,15 @@ namespace OTLWizard.FrontEnd
                 {
                     selected = results;
                 }
-                await app.exportXlsArtefact(fdlg.FileName, selected);
-                app.OpenMessage("Export voltooid", "Artefact export", MessageBoxIcon.Information);
+                await ApplicationHandler.exportXlsArtefact(fdlg.FileName, selected);
+                ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
             }
                 
         }
 
         private void buttonExit(object sender, EventArgs e)
         {
-            app.openView(Enums.Views.Home, Enums.Views.ArtefactResult, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.ArtefactResult, null);
         }
     }
 }

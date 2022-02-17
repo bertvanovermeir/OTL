@@ -1,15 +1,14 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System.Data.SQLite;
 using System.IO;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
 
-    public static class QueryHelper
+    public static class QueryHandler
     {
         /// <summary>
         /// retrieves an SQL query from the query "db". 
-        /// 
         /// </summary>
         /// <param name="Query"></param>
         /// <returns>string if found, NULL if not found.</returns>
