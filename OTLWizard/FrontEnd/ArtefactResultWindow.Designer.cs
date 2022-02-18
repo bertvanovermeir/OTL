@@ -68,7 +68,7 @@
             // 
             // oTLArtefactTypeBindingSource
             // 
-            this.oTLArtefactTypeBindingSource.DataSource = typeof(OTLWizard.OTLObjecten.OTL_ArtefactType);
+            this.oTLArtefactTypeBindingSource.DataSource = typeof(OTLWizard.Helpers.OTL_ArtefactType);
             // 
             // button1
             // 

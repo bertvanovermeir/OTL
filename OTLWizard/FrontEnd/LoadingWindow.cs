@@ -1,19 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using OTLWizard.ApplicationData;
+using OTLWizard.Helpers;
 
 namespace OTLWizard
 {
     public partial class LoadingWindow : Form
     {
-        public LoadingWindow(ApplicationManager app)
+        public LoadingWindow()
         {
             InitializeComponent();
         }
@@ -34,6 +27,11 @@ namespace OTLWizard
         }
 
         private void progressBar1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoadingWindow_Load(object sender, EventArgs e)
         {
 
         }

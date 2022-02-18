@@ -1,4 +1,4 @@
-﻿namespace OTLWizard.OTLObjecten
+﻿namespace OTLWizard.Helpers
 {
     public class Enums
     {
@@ -18,6 +18,14 @@
             ArtefactResult,
             SubsetMain,
             isNull
+        }
+
+        public enum Query
+        {
+            Objects,
+            Parameters,
+            Relations,
+            Artefact
         }
     }
 }

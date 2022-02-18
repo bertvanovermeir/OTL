@@ -1,8 +1,9 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Deze klasse omschrijft één parameter en de optionele invulwaarden. 
@@ -12,16 +13,16 @@ namespace OTLWizard.OTLObjecten
     public class OTL_Parameter
     {
         // parameters are public for eventual serialization
-        public string dotNotatie; // complete dot notation name
-        public string friendlyName; // friendly name of the parameter
-        public string description; // description of the parameter
-        public List<string> dropdownValues; // a list of dropdownvalues.
-        public Object defaultValue; // the default value used for the parameter, calculated at runtime.
-        public bool deprecated; // is the parameter still in use
-        public Enums.DataType dataType; // real acad datatype calculated at runtime.   
+        public string dotNotatie { get; set; } // complete dot notation name
+        public string friendlyName { get; set; } // friendly name of the parameter
+        public string description { get; set; } // description of the parameter
+        public List<string> dropdownValues { get; set; } // a list of dropdownvalues.
+        public Object defaultValue { get; set; } // the default value used for the parameter, calculated at runtime.
+        public bool deprecated { get; set; } // is the parameter still in use
+        public Enums.DataType dataType { get; set; } // real acad datatype calculated at runtime.   
 
         private string dataTypeString; // string containing name of datatype for parsing.            
-        private string klPath; // pad keuzelijsten
+        private string keuzelijstenPad; // pad keuzelijsten
         
         public OTL_Parameter()
         {
@@ -36,7 +37,7 @@ namespace OTLWizard.OTLObjecten
         /// <param name="description"></param>
         /// <param name="dataTypeString"></param>
         /// <param name="deprecated"></param>
-        public OTL_Parameter(string klPath, string dotNotatie, string friendlyName, string description, string dataTypeString, bool deprecated)
+        public OTL_Parameter(string keuzelijstenPad, string dotNotatie, string friendlyName, string description, string dataTypeString, bool deprecated)
         {
             dropdownValues = new List<string>();
             this.dotNotatie = dotNotatie;
@@ -44,97 +45,10 @@ namespace OTLWizard.OTLObjecten
             this.description = description;
             this.dataTypeString = dataTypeString;
             this.deprecated = deprecated;
-            this.klPath = klPath;
-            ParseDataType();
-        }
-
-        /// <summary>
-        /// parse each parameter for data type, to define default value and list if necessary
-        /// </summary>
-        /// <param name="p"></param>
-        /// <returns></returns>
-        private void ParseDataType()
-        {            
-            if (dataTypeString.Contains("XMLSchema#") || dataTypeString.Contains("rdf-schema#") || dataTypeString.Contains("generiek#Getal") || dataTypeString.Contains("#Dte"))
-            {
-                string temp = dataTypeString.Split('#')[1];
-                switch (temp)
-                {
-                    case "Getal":
-                        dataType = Enums.DataType.Real;
-                        defaultValue = -99999.99d;
-                        break;
-                    case "Integer":
-                        dataType = Enums.DataType.Integer;
-                        defaultValue = 99999;
-                        break;
-                    case "Decimal":
-                        dataType = Enums.DataType.Real;
-                        defaultValue = -99999.99d;
-                        break;
-                    case "DateTime":
-                        dataType = Enums.DataType.Text;
-                        break;
-                    case "Date":
-                        dataType = Enums.DataType.Text;
-                        break;
-                    case "Time":
-                        dataType = Enums.DataType.Text;
-                        break;
-                    case "String":
-                        dataType = Enums.DataType.Text;
-                        defaultValue = "-";
-                        break;
-                    case "Boolean":
-                        dataType = Enums.DataType.List;
-                        dropdownValues = new List<string> { "- ", "True", "False" };
-                        defaultValue = "-";
-                        break;
-                    case "Literal":
-                        dataType = Enums.DataType.Real;
-                        defaultValue = -99999.99d;
-                        break;
-                    default:
-                        dataType = Enums.DataType.Text;
-                        defaultValue = "-";
-                        break;
-                }
-            }
-            // kwantWaarde
-            else if (dataTypeString.Contains("#KwantWrdIn"))
-            {
-                dataType = Enums.DataType.Real;
-                defaultValue = -99999.99d;
-            }
-            // Enums TTL (lists in acad)
-            else if (dataTypeString.Contains("#Kl"))
-            {
-                //webrequest needed here or internal files
-                dataType = Enums.DataType.List;
-                dropdownValues = new List<string> { "-" };
-                // query the files in attachment.
-                // find the correct file in folder
-                string filename = dataTypeString.Split('#')[1] + ".ttl";
-                if (File.Exists(klPath + "\\" + filename))
-                {
-                    string[] lines = File.ReadAllLines(klPath + "\\" + filename, System.Text.Encoding.UTF8);
-                    foreach (string item in lines)
-                    {
-                        if (item.Contains("skos:Concept;"))
-                        {
-                            string listText = item.Split('>')[0];
-                            string sublistText = listText.Split('/')[listText.Split('/').Length - 1];
-                            dropdownValues.Add(sublistText);
-                        }
-                    }
-                }
-                defaultValue = "-";
-            }
-            else
-            {
-                dataType = Enums.DataType.Text;
-                defaultValue = "-";
-            }
+            this.keuzelijstenPad = keuzelijstenPad;
+            dataType = ParameterHandler.GetDataType(dataTypeString);
+            defaultValue = ParameterHandler.GetDefaultValue(dataTypeString);
+            dropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijstenPad);
         }
     }
 }

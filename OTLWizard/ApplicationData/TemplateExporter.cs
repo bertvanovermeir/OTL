@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using Microsoft.Office.Interop.Excel;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Deze klasse omschrijft de connectie met XLS. Ze maakt een XLS template aan.
@@ -16,12 +16,10 @@ namespace OTLWizard.ApplicationData
         private string path;
         private bool help;
         private bool checklistoptions;
-        private ApplicationManager app;
 
-        public TemplateExporter(List<OTL_ObjectType> OTL_ObjectTypes, ApplicationManager app)
+        public TemplateExporter(List<OTL_ObjectType> OTL_ObjectTypes)
         {
             this.OTL_ObjectTypes = OTL_ObjectTypes;
-            this.app = app;
             checklistoptions = true;
         }
 
@@ -161,16 +159,17 @@ namespace OTLWizard.ApplicationData
             }
             try
             {
-                workbook.SaveAs(path); ;
+                workbook.SaveAs(path);
+                workbook.Close();
+                excel.Quit();
+                return true;
             }
             catch
             {
-                app.OpenMessage("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                workbook.Close();
+                excel.Quit();
+                return false;   
             }
-
-            workbook.Close();
-            excel.Quit();
-            return true;
         }
 
         private Worksheet newWorkSheet(Microsoft.Office.Interop.Excel.Workbook workbook, string sheetName)

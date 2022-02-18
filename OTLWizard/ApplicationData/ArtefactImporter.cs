@@ -1,44 +1,29 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class ArtefactImporter
     {
         private SQLiteConnection sqlite_conn_OTL;
-        private ApplicationManager app;
         private List<OTL_ArtefactType> OTL_ArtefactTypes;
 
-        public ArtefactImporter(string dbpath, ApplicationManager app)
+        public ArtefactImporter(string dbpath)
         {
-            this.app = app;
             OTL_ArtefactTypes = new List<OTL_ArtefactType>();
             sqlite_conn_OTL = new SQLiteConnection("Data Source = " + dbpath + "; Version = 3; Read Only = True;");
         }
 
         public void ImportArtefact()
         {
-            string query="";
-            // open the queries file (queries in known order in file)
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\queries.dat"))
-            {
-                string[] lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\queries.dat", System.Text.Encoding.UTF8);
-                query = lines[3];
-
-            }
-            else
-            {
-                // failure to open will generate a message for now, no further action
-                app.OpenMessage("Could not retrieve Query information.", "Fatal Error",System.Windows.Forms.MessageBoxIcon.Warning);
-            }
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
-            var otlClasses = app.GetSubsetClassNames();
+            var otlClasses = ApplicationHandler.GetSubsetClassNames();
             foreach(string otlClass in otlClasses)
             {
-                string tempquery = query.Replace("[OSLOCLASS]", otlClass);
+                string tempquery = QueryHandler.Get(Enums.Query.Artefact).Replace("[OSLOCLASS]", otlClass);
                 // open the connection:
                 sqlite_conn_OTL.Open();
                 var sqlite_cmd = sqlite_conn_OTL.CreateCommand();

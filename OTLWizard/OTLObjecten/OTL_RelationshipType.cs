@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Een relatie tussen typeobject A en typeobject B. Gedefinieerd door hun otl klassenaam (verder bron en doelURI genoemd).
