@@ -69,6 +69,7 @@
     <Compile Include="SubSetImportTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Geometrie_Artefact.db" />
     <Content Include="queries.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

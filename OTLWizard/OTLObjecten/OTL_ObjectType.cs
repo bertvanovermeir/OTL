@@ -21,11 +21,6 @@ namespace OTLWizard.Helpers
         private List<OTL_Parameter> parameters; // a dictionary with parameters
         private List<OTL_RelationshipType> relationTypes; // a dictionary with possible relationships for this object, according to SQL relationships
 
-        public OTL_ObjectType()
-        {
-            // for serialization
-        }
-
         /// <summary>
         /// creates a new type OTL object
         /// </summary>
@@ -34,13 +29,8 @@ namespace OTLWizard.Helpers
         /// <param name="description"></param>
         /// <param name="uri"></param>
         /// <param name="deprecated"></param>
-        public OTL_ObjectType(string otlName, string friendlyName, string description, string uri,bool deprecated)
+        public OTL_ObjectType()
         {
-            this.otlName = otlName;
-            this.friendlyName = friendlyName;
-            this.description = description;
-            this.uri = uri;
-            this.deprecated = deprecated;
             parameters = new List<OTL_Parameter>();
             relationTypes = new List<OTL_RelationshipType>();
         }
