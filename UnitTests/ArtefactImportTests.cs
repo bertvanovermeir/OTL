@@ -26,12 +26,13 @@ namespace UnitTests
             var netwerkelement1 = art_types.FirstOrDefault(a => a.URL == "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#Netwerkelement" && a.overervenvan == "Rack");
             var netwerkelement2 = art_types.FirstOrDefault(a => a.URL == "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#Netwerkelement" && a.overervenvan == "IndoorKast");
             var rack = art_types.FirstOrDefault(a => a.URL == "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#Rack");
-            //var kast = art_types.FirstOrDefault(a => a.URL == "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#IndoorKast");
+            var kast = art_types.FirstOrDefault(a => a.URL == "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#IndoorKast");
             
             Assert.Equal("ja", poort.opmerkingen);
             Assert.Equal("ja", netwerkelement1.opmerkingen);
-            Assert.Equal("nee", netwerkelement2.opmerkingen);
-            Assert.Equal("nee", rack.opmerkingen);
+            Assert.Equal("neen", netwerkelement2.opmerkingen);
+            Assert.Equal("neen", rack.opmerkingen);
+            Assert.Null( kast);
         }
     }
 }

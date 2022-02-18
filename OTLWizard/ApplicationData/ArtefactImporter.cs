@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
+using System.Linq;
 using OTLWizard.Helpers;
 
 namespace OTLWizard.Helpers
@@ -48,29 +49,12 @@ namespace OTLWizard.Helpers
                 }
                 sqlite_conn_OTL.Close();
             }
+            
             // check if all classes from OTL are available to resolve Artefact
-            bool found = false;
             foreach (OTL_ArtefactType art in OTL_ArtefactTypes)
             {
-                
-                foreach (string otlClass in otlClasses)
-                {
-                    if(otlClass.Equals(art.overervenvan))
-                    {
-                        found = true;
-                        break;
-                    }
-
-
-                }
-                if(found)
-                {
-                    art.opmerkingen = "ja";
-                } else
-                {
-                    art.opmerkingen = "neen";
-                }
-                found = false;
+                var otlClass = otlClasses.FirstOrDefault(c => c.Equals(art.overervenvan));
+                art.opmerkingen = otlClass == null ? "neen" : "ja";
             }
 
         }
