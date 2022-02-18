@@ -13,16 +13,13 @@ namespace OTLWizard.Helpers
     public class OTL_Parameter
     {
         // parameters are public for eventual serialization
-        public string dotNotatie { get; set; } // complete dot notation name
-        public string friendlyName { get; set; } // friendly name of the parameter
-        public string description { get; set; } // description of the parameter
-        public List<string> dropdownValues { get; set; } // a list of dropdownvalues.
-        public Object defaultValue { get; set; } // the default value used for the parameter, calculated at runtime.
-        public bool deprecated { get; set; } // is the parameter still in use
-        public Enums.DataType dataType { get; set; } // real acad datatype calculated at runtime.   
-
-        private string dataTypeString; // string containing name of datatype for parsing.            
-        private string keuzelijstenPad; // pad keuzelijsten
+        public string DotNotatie { get; set; } // complete dot notation name
+        public string FriendlyName { get; set; } // friendly name of the parameter
+        public string Description { get; set; } // description of the parameter
+        public List<string> DropdownValues { get; set; } // a list of dropdownvalues.
+        public Object DefaultValue { get; set; } // the default value used for the parameter, calculated at runtime.
+        public bool Deprecated { get; set; } // is the parameter still in use
+        public Enums.DataType DataType { get; set; } // real acad datatype calculated at runtime.   
         
         public OTL_Parameter()
         {
@@ -39,16 +36,14 @@ namespace OTLWizard.Helpers
         /// <param name="deprecated"></param>
         public OTL_Parameter(string keuzelijstenPad, string dotNotatie, string friendlyName, string description, string dataTypeString, bool deprecated)
         {
-            dropdownValues = new List<string>();
-            this.dotNotatie = dotNotatie;
-            this.friendlyName = friendlyName;
-            this.description = description;
-            this.dataTypeString = dataTypeString;
-            this.deprecated = deprecated;
-            this.keuzelijstenPad = keuzelijstenPad;
-            dataType = ParameterHandler.GetDataType(dataTypeString);
-            defaultValue = ParameterHandler.GetDefaultValue(dataTypeString);
-            dropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijstenPad);
+            DropdownValues = new List<string>();
+            this.DotNotatie = dotNotatie;
+            this.FriendlyName = friendlyName;
+            this.Description = description;
+            this.Deprecated = deprecated;
+            DataType = ParameterHandler.GetDataType(dataTypeString);
+            DefaultValue = ParameterHandler.GetDefaultValue(dataTypeString);
+            DropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijstenPad);
         }
     }
 }
