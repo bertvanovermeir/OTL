@@ -23,10 +23,8 @@ namespace UnitTests
             exporter.ExportXls(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions:false);
  
             // assert
-            Application excel;
-            Workbook workbook;
-            excel = new Application {Visible = false, DisplayAlerts = false};
-            workbook = excel.Workbooks.Open(Directory.GetCurrentDirectory() + "\\" + path_save_to);
+            var excel = new Application {Visible = false, DisplayAlerts = false};
+            var workbook = excel.Workbooks.Open(Directory.GetCurrentDirectory() + "\\" + path_save_to);
             var xlWorkSheet = (Worksheet) workbook.Worksheets["Netwerkpoort"];
             Assert.NotNull(xlWorkSheet);
             workbook.Close();
