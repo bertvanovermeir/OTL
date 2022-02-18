@@ -18,8 +18,7 @@ namespace OTLWizard.Helpers
 
         public static void Start()
         {
-            Application.Run(ViewHandler.homeWindow);
-            //ViewHandler.Show(Enums.Views.Home, Enums.Views.isNull, null);
+            ViewHandler.Start();
         }
 
         public static async Task ImportArtefact(string subsetPath, string artefactPath)

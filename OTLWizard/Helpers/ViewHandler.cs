@@ -22,6 +22,11 @@ namespace OTLWizard.Helpers
             MessageBox.Show(message, header, MessageBoxButtons.OK, icon);
         }
 
+        public static void Start()
+        {
+            Application.Run(homeWindow);
+        }
+
         public static void Show(Enums.Views toOpen, Enums.Views toClose, Object optionalArgument)
         {
             switch (toClose)
