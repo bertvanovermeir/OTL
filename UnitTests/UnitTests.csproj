@@ -65,11 +65,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArtefactImportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubSetImportTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Geometrie_Artefact.db" />
+    <Content Include="Geometrie_Artefact_volledig.db" />
     <Content Include="queries.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

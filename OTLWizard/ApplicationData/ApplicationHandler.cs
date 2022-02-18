@@ -28,7 +28,7 @@ namespace OTLWizard.Helpers
             artefactConn = new ArtefactImporter(artefactPath);
             try
             {
-                await Task.Run(() => { artefactConn.ImportArtefact(); });
+                await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
             } catch
             {
                 ViewHandler.Show("Het artefact kon niet worden geïmporteerd", "Algemene Fout", MessageBoxIcon.Error);

@@ -16,11 +16,10 @@ namespace OTLWizard.Helpers
             sqlite_conn_OTL = new SQLiteConnection("Data Source = " + dbpath + "; Version = 3; Read Only = True;");
         }
 
-        public void ImportArtefact()
+        public void Import(IEnumerable<string> otlClasses)
         {
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
-            var otlClasses = ApplicationHandler.GetSubsetClassNames();
             foreach(string otlClass in otlClasses)
             {
                 string tempquery = QueryHandler.Get(Enums.Query.Artefact).Replace("[OSLOCLASS]", otlClass);
