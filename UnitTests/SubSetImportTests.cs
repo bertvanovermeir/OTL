@@ -28,7 +28,7 @@ namespace UnitTests
         public void SubsetImportTest_Alle_types()
         {
             // arrange
-            var dbpath = "C:\\resources\\subset_all_v2.0.2.db";
+            var dbpath = "./../../subset_all_v2.0.2.db";
             var subsetImporter = new SubsetImporter(dbpath);
 
             // act
