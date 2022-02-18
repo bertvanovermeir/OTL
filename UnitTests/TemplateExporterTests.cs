@@ -25,8 +25,10 @@ namespace UnitTests
             // assert
             var excel = new Application {Visible = false, DisplayAlerts = false};
             var workbook = excel.Workbooks.Open(Directory.GetCurrentDirectory() + "\\" + path_save_to);
-            var xlWorkSheet = (Worksheet) workbook.Worksheets["Netwerkpoort"];
-            Assert.NotNull(xlWorkSheet);
+            var xlWorkSheetNetwerkpoort = (Worksheet) workbook.Worksheets["Netwerkpoort"];
+            Assert.NotNull(xlWorkSheetNetwerkpoort);
+            
+            // tear down
             workbook.Close();
             excel.Quit();
         }
