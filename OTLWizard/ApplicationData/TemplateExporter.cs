@@ -52,18 +52,18 @@ namespace OTLWizard.Helpers
             {
                 OTL_Parameter p = temp.GetParameters()[i];
                 // main column name
-                sheet.Cells[start, i + 1] = p.dotNotatie;
+                sheet.Cells[start, i + 1] = p.DotNotatie;
                 // now set the help messages
                 if (help)
                 {
-                    sheet.Cells[1, i + 1] = p.description;
+                    sheet.Cells[1, i + 1] = p.Description;
                     sheet.Range[sheet.Cells[1, i + 1], sheet.Cells[1, i + 1]].EntireRow.WrapText = true;
                 }
                 // now fill in dropdowns if they are applicable
-                if (p.dataType == Enums.DataType.List && checklistoptions)
+                if (p.DataType == Enums.DataType.List && checklistoptions)
                 {
                     string xlslist = "";
-                    foreach (string item in p.dropdownValues)
+                    foreach (string item in p.DropdownValues)
                     {
                         xlslist = xlslist + item + ";";
                     }
@@ -71,7 +71,7 @@ namespace OTLWizard.Helpers
                     if (xlslist.Length > 253)
                     {
                         // character limit reached, create a table dropdown space
-                        xlslist = newDropDownList(workbook, p.dropdownValues);
+                        xlslist = newDropDownList(workbook, p.DropdownValues);
                     }
                     try
                     {
@@ -87,7 +87,7 @@ namespace OTLWizard.Helpers
 
                 }
                 // set default value
-                sheet.Cells[start + 1, i + 1] = p.defaultValue;
+                sheet.Cells[start + 1, i + 1] = p.DefaultValue;
             }
             sheet.Columns.AutoFit();
             sheet.Range["A1:F1"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;

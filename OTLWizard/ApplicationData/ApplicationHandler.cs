@@ -75,9 +75,9 @@ namespace OTLWizard.Helpers
                 }
                 foreach (OTL_Parameter p in otlObject.GetParameters())
                 {
-                    if (p.deprecated && !otlObject.deprecated)
+                    if (p.Deprecated && !otlObject.deprecated)
                     {
-                        deprecatedparameters = deprecatedparameters + p.friendlyName + " in " + otlObject.friendlyName + ", ";
+                        deprecatedparameters = deprecatedparameters + p.FriendlyName + " in " + otlObject.friendlyName + ", ";
                         showWarning = true;
                     }
                 }

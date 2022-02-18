@@ -95,9 +95,9 @@ namespace OTLWizard.Helpers
                         OTL_Parameter p = new OTL_Parameter(KeuzelijstenPad, (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(3),
                             (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), bool.Parse((string)sqlite_datareader.GetValue(4)));
                         // override default value of the parameter if name is typeURI, this will autofill this parameter field upon export
-                        if (p.friendlyName.Contains("typeURI"))
+                        if (p.FriendlyName.Contains("typeURI"))
                         {
-                            p.defaultValue = OTLClass.uri;
+                            p.DefaultValue = OTLClass.uri;
                         }
                         OTLClass.AddParameter(p);
                     }

@@ -78,8 +78,7 @@ namespace OTLWizard.FrontEnd
                 }
                 await ApplicationHandler.exportXlsArtefact(fdlg.FileName, selected);
                 ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
-            }
-                
+            }                
         }
 
         private void buttonExit(object sender, EventArgs e)
