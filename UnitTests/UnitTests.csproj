@@ -72,9 +72,9 @@
     <Content Include="queries.dat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="subset_1_type_alle_attributen_bert.db">
+    <AdditionalFiles Include="subset_1_type_alle_attributen_bert.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </AdditionalFiles>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OTLWizard\OTLWizard.csproj">
