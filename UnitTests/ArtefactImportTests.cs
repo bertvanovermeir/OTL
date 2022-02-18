@@ -13,7 +13,7 @@ namespace UnitTests
             var otldbpath = "./../../subset_3_types_netwerk.db";
             var subsetImporter = new SubsetImporter(otldbpath);
             
-            var dbpath = "./../../Geometrie_Artefact.db";
+            var dbpath = "./../../Geometrie_Artefact_0.db";
             var artefactImporter = new ArtefactImporter(dbpath);
             
             // act
