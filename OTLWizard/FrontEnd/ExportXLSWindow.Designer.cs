@@ -35,18 +35,14 @@
             this.buttonSubset = new System.Windows.Forms.Button();
             this.textBoxSubset = new System.Windows.Forms.TextBox();
             this.buttonExportXLS = new System.Windows.Forms.Button();
-            this.buttonKeuzelijsten = new System.Windows.Forms.Button();
-            this.textBoxKeuzelijsten = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.buttonImportClasses = new System.Windows.Forms.Button();
             this.ListAllClasses = new System.Windows.Forms.ListBox();
             this.checkAllClasses = new System.Windows.Forms.CheckBox();
             this.checkAttributes = new System.Windows.Forms.CheckBox();
             this.checkKeuzelijsten = new System.Windows.Forms.CheckBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -110,49 +106,10 @@
             this.buttonExportXLS.UseVisualStyleBackColor = true;
             this.buttonExportXLS.Click += new System.EventHandler(this.ExportXLS);
             // 
-            // buttonKeuzelijsten
-            // 
-            this.buttonKeuzelijsten.Location = new System.Drawing.Point(15, 108);
-            this.buttonKeuzelijsten.Name = "buttonKeuzelijsten";
-            this.buttonKeuzelijsten.Size = new System.Drawing.Size(153, 23);
-            this.buttonKeuzelijsten.TabIndex = 7;
-            this.buttonKeuzelijsten.Text = "Selecteer de keuzelijsten...";
-            this.buttonKeuzelijsten.UseVisualStyleBackColor = true;
-            this.buttonKeuzelijsten.Click += new System.EventHandler(this.selecteerKeuzelijstenButton);
-            // 
-            // textBoxKeuzelijsten
-            // 
-            this.textBoxKeuzelijsten.Enabled = false;
-            this.textBoxKeuzelijsten.Location = new System.Drawing.Point(174, 111);
-            this.textBoxKeuzelijsten.Name = "textBoxKeuzelijsten";
-            this.textBoxKeuzelijsten.Size = new System.Drawing.Size(614, 20);
-            this.textBoxKeuzelijsten.TabIndex = 8;
-            this.textBoxKeuzelijsten.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(232, 13);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Download de laatste versie van de keuzelijsten ";
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(241, 50);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(27, 13);
-            this.linkLabel2.TabIndex = 10;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "hier.";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.WebGoToGithub);
-            // 
             // buttonImportClasses
             // 
             this.buttonImportClasses.Enabled = false;
-            this.buttonImportClasses.Location = new System.Drawing.Point(15, 159);
+            this.buttonImportClasses.Location = new System.Drawing.Point(15, 107);
             this.buttonImportClasses.Name = "buttonImportClasses";
             this.buttonImportClasses.Size = new System.Drawing.Size(153, 23);
             this.buttonImportClasses.TabIndex = 11;
@@ -164,10 +121,10 @@
             // 
             this.ListAllClasses.Enabled = false;
             this.ListAllClasses.FormattingEnabled = true;
-            this.ListAllClasses.Location = new System.Drawing.Point(15, 188);
+            this.ListAllClasses.Location = new System.Drawing.Point(15, 136);
             this.ListAllClasses.Name = "ListAllClasses";
             this.ListAllClasses.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.ListAllClasses.Size = new System.Drawing.Size(374, 251);
+            this.ListAllClasses.Size = new System.Drawing.Size(374, 303);
             this.ListAllClasses.TabIndex = 12;
             this.ListAllClasses.SelectedIndexChanged += new System.EventHandler(this.ListAllClasses_SelectedIndexChanged);
             // 
@@ -175,7 +132,7 @@
             // 
             this.checkAllClasses.AutoSize = true;
             this.checkAllClasses.Enabled = false;
-            this.checkAllClasses.Location = new System.Drawing.Point(396, 188);
+            this.checkAllClasses.Location = new System.Drawing.Point(395, 136);
             this.checkAllClasses.Name = "checkAllClasses";
             this.checkAllClasses.Size = new System.Drawing.Size(129, 17);
             this.checkAllClasses.TabIndex = 13;
@@ -187,7 +144,7 @@
             // 
             this.checkAttributes.AutoSize = true;
             this.checkAttributes.Enabled = false;
-            this.checkAttributes.Location = new System.Drawing.Point(396, 211);
+            this.checkAttributes.Location = new System.Drawing.Point(395, 159);
             this.checkAttributes.Name = "checkAttributes";
             this.checkAttributes.Size = new System.Drawing.Size(232, 17);
             this.checkAttributes.TabIndex = 14;
@@ -198,26 +155,14 @@
             // checkKeuzelijsten
             // 
             this.checkKeuzelijsten.AutoSize = true;
-            this.checkKeuzelijsten.Checked = true;
-            this.checkKeuzelijsten.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkKeuzelijsten.Enabled = false;
-            this.checkKeuzelijsten.Location = new System.Drawing.Point(396, 234);
+            this.checkKeuzelijsten.Location = new System.Drawing.Point(395, 182);
             this.checkKeuzelijsten.Name = "checkKeuzelijsten";
             this.checkKeuzelijsten.Size = new System.Drawing.Size(179, 17);
             this.checkKeuzelijsten.TabIndex = 15;
             this.checkKeuzelijsten.Text = "Geen keuzelijstopties aanmaken";
             this.checkKeuzelijsten.UseVisualStyleBackColor = true;
             this.checkKeuzelijsten.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(171, 134);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(355, 13);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Als je geen keuzelijstopties wil invullen hoef je deze map niet te selecteren";
             // 
             // label6
             // 
@@ -239,6 +184,17 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(177, 112);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(336, 13);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Het gebruik van keuzelijsten vereist een werkende internetverbinding.";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
             // ExportXLSWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -246,18 +202,14 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.checkKeuzelijsten);
             this.Controls.Add(this.checkAttributes);
             this.Controls.Add(this.checkAllClasses);
             this.Controls.Add(this.ListAllClasses);
             this.Controls.Add(this.buttonImportClasses);
-            this.Controls.Add(this.linkLabel2);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.textBoxKeuzelijsten);
-            this.Controls.Add(this.buttonKeuzelijsten);
             this.Controls.Add(this.buttonExportXLS);
             this.Controls.Add(this.textBoxSubset);
             this.Controls.Add(this.buttonSubset);
@@ -283,18 +235,14 @@
         private System.Windows.Forms.Button buttonSubset;
         private System.Windows.Forms.TextBox textBoxSubset;
         private System.Windows.Forms.Button buttonExportXLS;
-        private System.Windows.Forms.Button buttonKeuzelijsten;
-        private System.Windows.Forms.TextBox textBoxKeuzelijsten;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.LinkLabel linkLabel2;
         private System.Windows.Forms.Button buttonImportClasses;
         private System.Windows.Forms.ListBox ListAllClasses;
         private System.Windows.Forms.CheckBox checkAllClasses;
         private System.Windows.Forms.CheckBox checkAttributes;
         private System.Windows.Forms.CheckBox checkKeuzelijsten;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label3;
     }
 }
 

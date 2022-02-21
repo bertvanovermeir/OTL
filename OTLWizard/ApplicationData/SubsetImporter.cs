@@ -11,7 +11,7 @@ namespace OTLWizard.Helpers
     public class SubsetImporter
     {
         private readonly SQLiteConnection SqliteConnection;
-        private readonly string KeuzelijstenPad;
+        private readonly bool Keuzelijsten;
         private List<OTL_ObjectType> OTL_ObjectTypes;
         private List<OTL_RelationshipType> OTL_RelationTypes;
 
@@ -20,14 +20,14 @@ namespace OTLWizard.Helpers
         /// </summary>
         /// <param name="DatabasePad"></param>
         /// <param name="KeuzelijstenPad"></param>
-        public SubsetImporter(string DatabasePad, string KeuzelijstenPad = null)
+        public SubsetImporter(string DatabasePad, bool Keuzelijsten = false)
         {
             // initialize
             OTL_ObjectTypes = new List<OTL_ObjectType>();
             OTL_RelationTypes = new List<OTL_RelationshipType>();
             // create a new database connection and set the keuzelijstenpad to the private variable
             SqliteConnection = new SQLiteConnection("Data Source = " + DatabasePad + "; Version = 3; Read Only = True;");
-            this.KeuzelijstenPad = KeuzelijstenPad;
+            this.Keuzelijsten = Keuzelijsten;
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace OTLWizard.Helpers
                     while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                     {
                         // check columns in query to know what to transfer, 
-                        OTL_Parameter p = new OTL_Parameter(KeuzelijstenPad, (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(3),
+                        OTL_Parameter p = new OTL_Parameter(Keuzelijsten, (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(3),
                             (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), bool.Parse((string)sqlite_datareader.GetValue(4)));
                         // override default value of the parameter if name is typeURI, this will autofill this parameter field upon export
                         if (p.FriendlyName.Contains("typeURI"))

@@ -44,6 +44,7 @@ namespace OTLWizard
                 buttonImportClasses.Enabled = true;
                 checkAllClasses.Enabled = true;
                 checkAttributes.Enabled = true;
+                checkKeuzelijsten.Enabled = true;
                 ListAllClasses.Enabled = true;
                 buttonImportClasses.Enabled = true;
             }
@@ -82,21 +83,6 @@ namespace OTLWizard
 
         }
 
-        private void selecteerKeuzelijstenButton(object sender, EventArgs e)
-        {
-            ListAllClasses.Items.Clear();
-            buttonExportXLS.Enabled = false;
-            FolderBrowserDialog fdlg = new FolderBrowserDialog();           
-            fdlg.Description = "Selecteer de map waar de keuzelijsten zich bevinden";
-            fdlg.ShowNewFolderButton = false;
-            if (fdlg.ShowDialog() == DialogResult.OK)
-            {
-                textBoxKeuzelijsten.Text = fdlg.SelectedPath;
-                checkKeuzelijsten.Checked = false;
-                checkKeuzelijsten.Enabled = true;
-            }
-        }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             
@@ -115,7 +101,7 @@ namespace OTLWizard
         private async void ImportClasses(object sender, EventArgs e)
         {
             
-            await ApplicationHandler.ImportSubset(textBoxSubset.Text, textBoxKeuzelijsten.Text);
+            await ApplicationHandler.ImportSubset(textBoxSubset.Text, !checkKeuzelijsten.Checked);
 
             ListAllClasses.Items.Clear();
             foreach(string klasse in ApplicationHandler.GetSubsetClassNames())
@@ -148,6 +134,11 @@ namespace OTLWizard
         }
 
         private void ListAllClasses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }

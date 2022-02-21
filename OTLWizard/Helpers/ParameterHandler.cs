@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -78,30 +79,44 @@ namespace OTLWizard.Helpers
         /// retrieve the possible dropdownvalues, if applicable
         /// </summary>
         /// <param name="DataTypeString"></param>
-        /// <param name="KeuzelijstenPad"></param>
+        /// <param name="Keuzelijsten"></param>
         /// <returns>list with dropdownvalues or NULL if not a list or boolean</returns>
-        public static List<string> GetDropDownValues(string DataTypeString, string KeuzelijstenPad)
+        public static List<string> GetDropDownValues(string DataTypeString, bool Keuzelijsten)
         {
             if (DataTypeString.Contains("XMLSchema#") || DataTypeString.Contains("rdf-schema#") || DataTypeString.Contains("generiek#Getal") || DataTypeString.Contains("#Dte"))
             {
                 string temp = DataTypeString.Split('#')[1];
-                if(temp.Equals("Boolean"))
+                if (temp.Equals("Boolean"))
                 {
                     return new List<string> { "- ", "True", "False" };
                 }
             }
             else if (DataTypeString.Contains("#Kl"))
             {
-                //webrequest needed here or internal files
                 var DropdownValues = new List<string> { "-" };
-                // query the files in attachment.
-                // find the correct file in folder
-                string filename = DataTypeString.Split('#')[1] + ".ttl";
-                if (KeuzelijstenPad != null)
+                // find the correct file
+                if(Keuzelijsten)
                 {
-                    if (File.Exists(KeuzelijstenPad + "\\" + filename))
+                    string filename = DataTypeString.Split('#')[1] + ".ttl";
+                    var localPath = System.IO.Path.GetTempPath() + "codelijsten\\";
+                    // create the folder if it does not exist
+                    Directory.CreateDirectory(localPath);
+                    // download the TTL file
+                    try
                     {
-                        string[] lines = File.ReadAllLines(KeuzelijstenPad + "\\" + filename, System.Text.Encoding.UTF8);
+                        using (var client = new WebClient())
+                        {
+                            client.DownloadFile("https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/master/codelijsten/" + filename, localPath + filename);
+                        }
+                    }
+                    catch
+                    {
+                        // download mislukt, de keuzelijst bestaat waarschijnlijk niet.
+                    }
+
+                    if (File.Exists(localPath + filename))
+                    {
+                        string[] lines = File.ReadAllLines(localPath + filename, System.Text.Encoding.UTF8);
                         foreach (string item in lines)
                         {
                             if (item.Contains("skos:Concept;"))
@@ -112,7 +127,7 @@ namespace OTLWizard.Helpers
                             }
                         }
                     }
-                }
+                }              
                 return DropdownValues;
             }
             return null;

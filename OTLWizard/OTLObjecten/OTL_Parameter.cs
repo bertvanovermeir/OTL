@@ -34,7 +34,7 @@ namespace OTLWizard.Helpers
         /// <param name="description"></param>
         /// <param name="dataTypeString"></param>
         /// <param name="deprecated"></param>
-        public OTL_Parameter(string keuzelijstenPad, string dotNotatie, string friendlyName, string description, string dataTypeString, bool deprecated)
+        public OTL_Parameter(bool keuzelijsten, string dotNotatie, string friendlyName, string description, string dataTypeString, bool deprecated)
         {
             DropdownValues = new List<string>();
             this.DotNotatie = dotNotatie;
@@ -43,7 +43,7 @@ namespace OTLWizard.Helpers
             this.Deprecated = deprecated;
             DataType = ParameterHandler.GetDataType(dataTypeString);
             DefaultValue = ParameterHandler.GetDefaultValue(dataTypeString);
-            DropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijstenPad);
+            DropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijsten);
         }
     }
 }

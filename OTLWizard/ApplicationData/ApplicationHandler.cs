@@ -23,7 +23,7 @@ namespace OTLWizard.Helpers
 
         public static async Task ImportArtefact(string subsetPath, string artefactPath)
         {
-            await ImportSubset(subsetPath,null);
+            await ImportSubset(subsetPath);
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "Het Geometrie Artefact wordt geimporteerd.");            
             artefactConn = new ArtefactImporter(artefactPath);
             try
@@ -41,10 +41,10 @@ namespace OTLWizard.Helpers
         /// </summary>
         /// <param name="dbPath"></param>
         /// <param name="klPath"></param>
-        public static async Task ImportSubset(string dbPath, string klPath)
+        public static async Task ImportSubset(string dbPath, bool keuzelijsten = false)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De OTL Subset wordt geimporteerd.");
-            subsetConn = new SubsetImporter(dbPath, klPath);
+            subsetConn = new SubsetImporter(dbPath, keuzelijsten);
             try
             {
                 await Task.Run(() => { subsetConn.Import(); });

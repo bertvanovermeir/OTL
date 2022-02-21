@@ -1,0 +1,43 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie> a skos:ConceptScheme;
+  skos:definition "Lijst van provincies in Vlaanderen."@nl;
+  skos:prefLabel "Provincie"@nl.
+
+<https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAlgProvincie/antwerpen> a skos:Concept;
+  skos:definition ""@nl;
+  skos:inScheme <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie>;
+  skos:notation "antwerpen";
+  skos:prefLabel "antwerpen"@nl;
+  skos:topConceptOf <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie> .
+
+<https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAlgProvincie/limburg> a skos:Concept;
+  skos:definition ""@nl;
+  skos:inScheme <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie>;
+  skos:notation "limburg";
+  skos:prefLabel "limburg"@nl;
+  skos:topConceptOf <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie> .
+
+<https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAlgProvincie/oost-Vlaanderen> a skos:Concept;
+  skos:definition ""@nl;
+  skos:inScheme <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie>;
+  skos:notation "oost-Vlaanderen";
+  skos:prefLabel "oost-Vlaanderen"@nl;
+  skos:topConceptOf <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie> .
+
+<https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAlgProvincie/vlaams-Brabant> a skos:Concept;
+  skos:definition ""@nl;
+  skos:inScheme <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie>;
+  skos:notation "vlaams-Brabant";
+  skos:prefLabel "vlaams-Brabant"@nl;
+  skos:topConceptOf <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie> .
+
+<https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAlgProvincie/west-Vlaanderen> a skos:Concept;
+  skos:definition ""@nl;
+  skos:inScheme <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie>;
+  skos:notation "west-Vlaanderen";
+  skos:prefLabel "west-Vlaanderen"@nl;
+  skos:topConceptOf <https://wegenenverkeer.data.vlaanderen.be/id/conceptscheme/KlAlgProvincie> .
