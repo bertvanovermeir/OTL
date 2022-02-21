@@ -99,14 +99,24 @@ namespace OTLWizard.Helpers
         public static async Task exportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt.");
-            TemplateExporter exp = new TemplateExporter(subsetConn.GetOTLObjectTypes());
-            exp.SetClasses(classes);
-            var result = await Task.Run(() => exp.ExportXls(exportPath, withDescriptions, withChecklistOptions));
-            if(!result)
-            {
-                ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+            TemplateExporter exp = new TemplateExporter();
+            bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
+            bool successSelection = exp.SetSelectedClassesByUser(classes);
+            if (successSubset && successSelection)
+            {               
+                var result = await Task.Run(() => exp.ExportXls(exportPath, withDescriptions, withChecklistOptions));
+                if (!result)
+                {
+                    ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                }
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+                ViewHandler.Show("Export voltooid", "Template export", MessageBoxIcon.Information);
             }
-            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            else
+            {
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+                ViewHandler.Show("Er zijn geen klassen geselecteerd of de subset is leeg.", "Fout bij exporteren", System.Windows.Forms.MessageBoxIcon.Error);
+            }
         }
 
         public static async Task exportXlsArtefact(string exportPath, List<OTL_ArtefactType> artefacten)

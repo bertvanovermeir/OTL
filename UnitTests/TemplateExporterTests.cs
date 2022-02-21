@@ -19,7 +19,8 @@ namespace UnitTests
             
             // act
             subsetImporter.Import();
-            var exporter = new TemplateExporter(subsetImporter.GetOTLObjectTypes());
+            var exporter = new TemplateExporter();
+            exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             exporter.ExportXls(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions:false);
  
             // assert

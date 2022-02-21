@@ -17,15 +17,49 @@ namespace OTLWizard.Helpers
         private bool help;
         private bool checklistoptions;
 
-        public TemplateExporter(List<OTL_ObjectType> OTL_ObjectTypes)
+        public TemplateExporter()
         {
-            this.OTL_ObjectTypes = OTL_ObjectTypes;
             checklistoptions = true;
         }
 
-        public void SetClasses(string[] classes)
+        /// <summary>
+        /// set the complete OTL subset that the exporter needs to use.
+        /// </summary>
+        /// <param name="OTL_ObjectTypes"></param>
+        /// <returns>FALSE if something went wrong with the subset</returns>
+        public bool SetOTLSubset(List<OTL_ObjectType> OTL_ObjectTypes)
         {
-            this.classes = classes;
+            if(OTL_ObjectTypes == null)
+            {
+                return false;
+            } else if(OTL_ObjectTypes.Count == 0) {
+                return false;
+            } else
+            {
+                this.OTL_ObjectTypes = OTL_ObjectTypes;
+                return true;
+            }          
+        }
+
+        /// <summary>
+        /// Set the user selection of a certain subset
+        /// </summary>
+        /// <param name="classes"></param>
+        /// <returns>FALSE if user selection is invalid</returns>
+        public bool SetSelectedClassesByUser(string[] classes)
+        {
+            if(classes == null)
+            {
+                this.classes = null;
+                return true;
+            } else if(classes.Length == 0)
+            {
+                return false;
+            } else
+            {
+                this.classes = classes;
+                return true;
+            }          
         }
 
         public bool ExportXls(string path, bool help, bool checklistoptions)

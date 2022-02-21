@@ -62,14 +62,12 @@ namespace OTLWizard
                     temp = new string[ListAllClasses.SelectedIndices.Count];
                     int i = 0;
                     foreach(int ind in ListAllClasses.SelectedIndices)
-                    {
-                        
+                    {                      
                         temp[i] = ListAllClasses.Items[ind].ToString();
                         i++;
                     }
-                } 
+                }
                 await ApplicationHandler.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
-                ViewHandler.Show("Export voltooid", "Template export",MessageBoxIcon.Information);
             }
             
         }
