@@ -19,7 +19,6 @@ namespace OTLWizard.Helpers
 
         public TemplateExporter()
         {
-            checklistoptions = true;
         }
 
         /// <summary>
@@ -156,9 +155,11 @@ namespace OTLWizard.Helpers
                 DisplayAlerts = false
             };
             workbook = excel.Workbooks.Add(Type.Missing);
-            // create an empty worksheet for tables
-            newWorkSheet(workbook, "dropdownvalues");
-
+            // create an empty worksheet for tables, if dropdownlists is true
+            if(checklistoptions)
+            {
+                newWorkSheet(workbook, "dropdownvalues");
+            }
             // now check the classes the user selected, it should not be empty if it is empty, do all!
             if (classes == null)
             {
@@ -193,6 +194,9 @@ namespace OTLWizard.Helpers
                     }
                 }
             }
+            // remove the Sheet1 default worksheet           
+            Worksheet rem = workbook.Worksheets["Sheet1"];
+            rem.Delete();
             try
             {
                 workbook.SaveAs(path);
