@@ -40,10 +40,5 @@ namespace OTLWizard.Helpers
             this.viarelatie = viarelatie;
             this.URL = URL;
         }
-
-        public void addRemark(string text)
-        {
-            opmerkingen = text;
-        }
     }
 }

@@ -114,11 +114,13 @@ namespace OTLWizard.Helpers
         {
             // first we need to check how many entries we have, create a new workbook per 
 
-            Microsoft.Office.Interop.Excel.Application excel;
-            Microsoft.Office.Interop.Excel.Workbook workbook;
-            excel = new Microsoft.Office.Interop.Excel.Application();
-            excel.Visible = false;
-            excel.DisplayAlerts = false;
+            Application excel;
+            Workbook workbook;
+            excel = new Application
+            {
+                Visible = false,
+                DisplayAlerts = false
+            };
             workbook = excel.Workbooks.Add(Type.Missing);
             // create an empty worksheet for tables
             newWorkSheet(workbook, "dropdownvalues");
