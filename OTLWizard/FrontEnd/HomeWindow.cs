@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using OTLWizard.Helpers;
-using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
 {

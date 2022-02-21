@@ -1,9 +1,7 @@
-﻿using System.Diagnostics;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using Microsoft.Office.Interop.Excel;
 using Xunit;
-using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
 using System.Collections.Generic;
 
 namespace UnitTests
@@ -20,9 +18,9 @@ namespace UnitTests
             
             // act
             subsetImporter.Import();
-            var exporter = new TemplateExporter();
+            var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.ExportXls(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions:false);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions:false);
  
             // assert
             var excel = new Application {Visible = false, DisplayAlerts = false};
@@ -54,9 +52,9 @@ namespace UnitTests
 
             // act
             subsetImporter.Import();
-            var exporter = new TemplateExporter();
+            var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.ExportXls(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true);
 
             // assert
             var excel = new Application { Visible = false, DisplayAlerts = false };

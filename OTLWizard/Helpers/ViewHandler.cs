@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace OTLWizard.Helpers
+namespace OTLWizard.OTLObjecten
 {
     public static class ViewHandler
     {      

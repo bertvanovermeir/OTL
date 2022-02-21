@@ -1,8 +1,7 @@
-﻿using OTLWizard.Helpers;
+﻿using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using OTLWizard.Helpers;
 
 namespace OTLWizard.FrontEnd
 {

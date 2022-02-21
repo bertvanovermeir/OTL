@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Xunit;
-using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
 
 namespace UnitTests
 {

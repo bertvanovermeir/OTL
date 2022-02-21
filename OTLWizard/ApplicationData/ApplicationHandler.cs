@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OTLWizard.Helpers;
 
-namespace OTLWizard.Helpers
+namespace OTLWizard.OTLObjecten
 {
     /// <summary>
     /// Belangrijkste klasse die de werking van het programma illustreert. 
@@ -99,12 +98,12 @@ namespace OTLWizard.Helpers
         public static async Task exportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt.");
-            TemplateExporter exp = new TemplateExporter();
+            SubsetExporterXLS exp = new SubsetExporterXLS();
             bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {               
-                var result = await Task.Run(() => exp.ExportXls(exportPath, withDescriptions, withChecklistOptions));
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions));
                 if (!result)
                 {
                     ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
@@ -122,8 +121,8 @@ namespace OTLWizard.Helpers
         public static async Task exportXlsArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
-            ArtefactExporter exp = new ArtefactExporter();
-            var result = await Task.Run(() => exp.ExportXLS(exportPath, artefacten));
+            ArtefactExporterXLS exp = new ArtefactExporterXLS();
+            var result = await Task.Run(() => exp.Export(exportPath, artefacten));
             if (!result) 
             {
                 ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);

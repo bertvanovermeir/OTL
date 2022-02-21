@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace OTLWizard.Helpers
+namespace OTLWizard.OTLObjecten
 {
     public class OTL_ArtefactType
     {

@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
-using System.IO;
 using System.Linq;
-using OTLWizard.Helpers;
 
-namespace OTLWizard.Helpers
+namespace OTLWizard.OTLObjecten
 {
     public class ArtefactImporter
     {

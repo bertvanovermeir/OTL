@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Data.SQLite;
 using System.IO;
-using OTLWizard.Helpers;
 
-namespace OTLWizard.Helpers
+namespace OTLWizard.OTLObjecten
 {
     /// <summary>
     /// Deze klasse omschrijft de import van de DB subset

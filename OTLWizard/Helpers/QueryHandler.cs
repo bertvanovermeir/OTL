@@ -1,8 +1,6 @@
-﻿using OTLWizard.Helpers;
-using System.Data.SQLite;
-using System.IO;
+﻿using System.IO;
 
-namespace OTLWizard.Helpers
+namespace OTLWizard.OTLObjecten
 {
 
     public static class QueryHandler
