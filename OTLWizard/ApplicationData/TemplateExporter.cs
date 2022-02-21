@@ -9,7 +9,7 @@ namespace OTLWizard.Helpers
     /// <summary>
     /// Deze klasse omschrijft de connectie met XLS. Ze maakt een XLS template aan.
     /// </summary>
-    class TemplateExporter
+    public class TemplateExporter
     {
         private List<OTL_ObjectType> OTL_ObjectTypes;
         private string[] classes;
