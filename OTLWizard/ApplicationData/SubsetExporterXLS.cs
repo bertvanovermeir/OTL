@@ -189,17 +189,20 @@ namespace OTLWizard.OTLObjecten
                     }
                     else
                     {
-                        Console.WriteLine("the object " + cla + "  is not available in the database and thus ignored.\n");
+                        // object "cla" is unavailable in the database.
                     }
                 }
             }
             // remove the Sheet1 default worksheet
             try
             {
-                Worksheet rem = workbook.Worksheets["Sheet1"];
+                // remove the last sheet, which is the default one in any language
+                Worksheet rem = workbook.Worksheets[workbook.Worksheets.Count];
+                // Worksheet rem = workbook.Worksheets["Sheet1"]; (only for english)
                 rem.Delete();
             } catch {
                 // could not remove the sheet, this might happen on some computers (fix issue #13)
+                // removing is always a risky operation, that is why try-catch is not a luxury in this case.
             }
             // save file
             try
