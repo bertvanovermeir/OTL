@@ -99,7 +99,7 @@
     <Compile Include="ArtefactImportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubSetImportTests.cs" />
-    <Compile Include="TemplateExporterTests.cs" />
+    <Compile Include="SubsetExportTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Geometrie_Artefact.db" />

@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 namespace UnitTests
 {
-    public class TemplateExporterTests
+    public class SubsetExportTests
     {
         [Fact]
-        public void TemplateExportTest_3_types_NoChecklistOptions()
+        public void SubsetExportTest_3_types_NoChecklistOptions_XLS()
         {
             // arrange           
             var otldbpath = "./../../subset_3_types_netwerk.db";
@@ -43,7 +43,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void TemplateExportTest_3_types_WithChecklistOptions()
+        public void SubsetExportTest_3_types_WithChecklistOptions_XLS()
         {
             // arrange           
             var otldbpath = "./../../subset_3_types_netwerk.db";

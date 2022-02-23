@@ -193,9 +193,15 @@ namespace OTLWizard.OTLObjecten
                     }
                 }
             }
-            // remove the Sheet1 default worksheet           
-            Worksheet rem = workbook.Worksheets["Sheet1"];
-            rem.Delete();
+            // remove the Sheet1 default worksheet
+            try
+            {
+                Worksheet rem = workbook.Worksheets["Sheet1"];
+                rem.Delete();
+            } catch {
+                // could not remove the sheet, this might happen on some computers (fix issue #13)
+            }
+            // save file
             try
             {
                 workbook.SaveAs(path);
