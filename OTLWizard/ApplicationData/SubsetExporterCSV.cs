@@ -2,8 +2,10 @@
 using CsvHelper.Configuration;
 using OTLWizard.OTLObjecten;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 
 namespace OTLWizard.ApplicationData
 {
@@ -59,22 +61,34 @@ namespace OTLWizard.ApplicationData
             }
         }
 
-        // TODO
-        public bool Export(string path, bool withDescriptions, bool withChecklistOptions)
+
+        public bool Export(string path, bool help)
+        {
+            // construct matrix
+            var matrix = new List<string[]>();
+
+            foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
+            {
+                var otlnaam = classes.ToList().FirstOrDefault(o => o == otlklasse.otlName);
+                if (otlnaam == null)
+                    continue;
+                var filename = path.Substring(0,path.LastIndexOf('.')) + "_" + otlnaam + ".csv";
+                WriteCSV(filename, matrix, ';');
+            }
+            return true;
+        }
+
+
+        private bool WriteCSV(string pathForSingleFile, List<string[]> matrix, char separator)
         {
             try
             {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                using (var w = new StreamWriter(pathForSingleFile))
                 {
-                    HasHeaderRecord = true,
-                    Delimiter = ";",
-                    SanitizeForInjection = false,
-                };
-                using (var writer = new StreamWriter(path))
-                using (var csv = new CsvWriter(writer, config))
-                {
-
-                    csv.WriteRecords(OTL_ObjectTypes);
+                    foreach (string[] row in matrix)
+                    {
+                        w.WriteLine(string.Join(separator.ToString(), row));
+                    }
                 }
                 return true;
             }

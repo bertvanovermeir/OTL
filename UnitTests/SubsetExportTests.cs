@@ -3,11 +3,92 @@ using Microsoft.Office.Interop.Excel;
 using Xunit;
 using OTLWizard.OTLObjecten;
 using System.Collections.Generic;
+using OTLWizard.ApplicationData;
 
 namespace UnitTests
 {
     public class SubsetExportTests
     {
+        [Fact]
+        public void SubsetExportTest_3_types_CSV()
+        {
+            // arrange           
+            var otldbpath = "./../../subset_3_types_netwerk.db";
+            var subsetImporter = new SubsetImporter(otldbpath);
+            var path_save_to = "test_result.csv";
+
+            // act
+            subsetImporter.Import();
+            var exporter = new SubsetExporterCSV();
+            exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
+            exporter.SetSelectedClassesByUser(new [] {"Rack", "Netwerkpoort", "Netwerkelement" });
+            bool success = exporter.Export(path: "./../../" + path_save_to, help: false);
+
+            // assert
+            // 3 CSVs will be created check if they exist
+            Assert.True(success);
+            Assert.True(File.Exists("./../../" + "test_result_Netwerkpoort.csv"));
+            Assert.True(File.Exists("./../../" + "test_result_Rack.csv"));
+            Assert.True(File.Exists("./../../" + "test_result_Netwerkelement.csv"));
+            // read lines in CSV and check contents
+            var linesCSV = ReadCSV("./../../" + "test_result_Rack.csv", 1, ';');
+            Assert.Single(linesCSV);
+            Assert.Equal("assetId.identificator", linesCSV[0][0]);
+            Assert.Equal("assetId.toegekendDoor", linesCSV[0][1]);
+            Assert.Equal("typeURI", linesCSV[0][2]);
+        }
+
+        [Fact]
+        public void SubsetExportTest_3_types_Help_CSV()
+        {
+            // arrange           
+            var otldbpath = "./../../subset_3_types_netwerk.db";
+            var subsetImporter = new SubsetImporter(otldbpath);
+            var path_save_to = "test_result_help.csv";
+
+            // act
+            subsetImporter.Import();
+            var exporter = new SubsetExporterCSV();
+            exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
+            exporter.SetSelectedClassesByUser(new[] { "Rack", "Netwerkpoort", "Netwerkelement" });
+            bool success = exporter.Export(path: "./../../" + path_save_to, help: true);
+
+            // assert
+            // 3 CSVs will be created check if they exist
+            Assert.True(success);
+            Assert.True(File.Exists("./../../" + "test_result_help_Netwerkpoort.csv"));
+            Assert.True(File.Exists("./../../" + "test_result_help_Rack.csv"));
+            Assert.True(File.Exists("./../../" + "test_result_help_Netwerkelement.csv"));
+            // read lines in CSV and check contents
+            var linesCSV = ReadCSV("./../../" + "test_result_help_Rack.csv", 1, ';');
+            Assert.Equal(2,linesCSV.Count);
+            Assert.Equal("Een groep van tekens om een AIM object te identificeren of te benoemen.", linesCSV[0][0]);
+            Assert.Equal("Gegevens van de organisatie die de toekenning deed.", linesCSV[0][1]);
+            Assert.Equal("De URI van het object volgens https://www.w3.org/2001/XMLSchema#anyURI .", linesCSV[0][2]);
+            Assert.Equal("assetId.identificator", linesCSV[1][0]);
+            Assert.Equal("assetId.toegekendDoor", linesCSV[1][1]);
+            Assert.Equal("typeURI", linesCSV[1][2]);
+        }
+
+        /// <summary>
+        /// input = CSV file, output = ExpandoObject List with "lines" amount of records
+        /// </summary>
+        /// <param name="path"></param>
+        /// 7<param name="lines"></param>
+        private List<string[]> ReadCSV(string path, int numLines, char separator)
+        {
+            var lines = new List<string[]>();
+            using (var sr = new StreamReader(path))
+            {
+                while (!sr.EndOfStream)
+                    lines.Add(sr.ReadLine().Split(separator));
+            }
+            return lines;
+        }
+
+
+
+
         [Fact]
         public void SubsetExportTest_3_types_NoChecklistOptions_XLS()
         {

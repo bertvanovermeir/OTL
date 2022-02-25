@@ -97,7 +97,7 @@ namespace OTLWizard.OTLObjecten
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions));
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions));
                 if (!result)
                 {
                     ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
