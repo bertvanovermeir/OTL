@@ -1,0 +1,11 @@
+Naam OTL Object;Verwacht Geometrietype;Meten of Overerven;Meetcriterium;Overervingsgrens (in m);Meten volgens Steekkaart(en);Overerven van;Overerven via Relatie;Uitzonderingen;Overervingsklasse in Subset
+Netwerkpoort;punt 3D,;overerven;;;;Netwerkelement;Bevestiging;;ja
+Netwerkelement;punt 3D,;overerven;;;;Rack;Bevestiging;;ja
+Netwerkelement;punt 3D,;overerven;;;;IndoorKast;Bevestiging;;neen
+Netwerkelement;punt 3D,;overerven;;;;Hulppostkast;Bevestiging;;neen
+Netwerkelement;punt 3D,;overerven;;;;Wegkantkast;Bevestiging;;neen
+Netwerkelement;punt 3D,;overerven;;;;Montagekast;Bevestiging;;neen
+Rack;punt 3D,;overerven;;;;IndoorKast;Bevestiging;;neen
+Rack;punt 3D,;overerven;;;;Hulppostkast;Bevestiging;;neen
+Rack;punt 3D,;overerven;;;;Wegkantkast;Bevestiging;;neen
+Rack;punt 3D,;overerven;;;;Montagekast;Bevestiging;;neen
