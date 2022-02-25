@@ -51,7 +51,9 @@ namespace OTLWizard.FrontEnd
         private async void buttonExportArtefact_Click(object sender, EventArgs e)
         {
             SaveFileDialog fdlg = new SaveFileDialog();
-            fdlg.Title = "Sla Spreadsheet op";
+            fdlg.Title = "Sla Data op^naar Excel of CSV";
+            fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
+            fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
@@ -75,8 +77,14 @@ namespace OTLWizard.FrontEnd
                 {
                     selected = results;
                 }
-                await ApplicationHandler.exportXlsArtefact(fdlg.FileName, selected);
-                ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
+                if (fdlg.FilterIndex == 1)
+                {
+                    await ApplicationHandler.exportXlsArtefact(fdlg.FileName, selected);
+                }
+                else
+                {
+                    await ApplicationHandler.exportCSVArtefact(fdlg.FileName, selected);
+                }
             }                
         }
 

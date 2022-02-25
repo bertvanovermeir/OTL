@@ -7,7 +7,7 @@ namespace OTLWizard.OTLObjecten
 {
     public static class ViewHandler
     {      
-        private static ExportXLSWindow exportXLSWindow = new ExportXLSWindow();
+        private static ExportSubsetWindow exportXLSWindow = new ExportSubsetWindow();
         private static LoadingWindow loadingWindow = new LoadingWindow();
         public static HomeWindow homeWindow = new HomeWindow();
         private static ExportArtefactWindow artefactWindow = new ExportArtefactWindow();
@@ -48,7 +48,7 @@ namespace OTLWizard.OTLObjecten
             switch (toOpen)
             {
                 case Enums.Views.Home:
-                    exportXLSWindow = new ExportXLSWindow();
+                    exportXLSWindow = new ExportSubsetWindow();
                     loadingWindow = new LoadingWindow();
                     artefactWindow = new ExportArtefactWindow();
                     artefactResult = new ArtefactResultWindow();

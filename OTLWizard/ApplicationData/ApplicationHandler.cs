@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OTLWizard.ApplicationData;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -88,6 +89,29 @@ namespace OTLWizard.OTLObjecten
             }
         }
 
+        public static async Task exportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
+        {
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (CSV).");
+            SubsetExporterCSV exp = new SubsetExporterCSV();
+            bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
+            bool successSelection = exp.SetSelectedClassesByUser(classes);
+            if (successSubset && successSelection)
+            {
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions));
+                if (!result)
+                {
+                    ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                }
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+                ViewHandler.Show("Export voltooid", "Template export", MessageBoxIcon.Information);
+            }
+            else
+            {
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+                ViewHandler.Show("Er zijn geen klassen geselecteerd of de subset is leeg.", "Fout bij exporteren", System.Windows.Forms.MessageBoxIcon.Error);
+            }
+        }
+
         /// <summary>
         /// Interface Handle voor het exporteren van de Template XLS
         /// </summary>
@@ -97,7 +121,7 @@ namespace OTLWizard.OTLObjecten
         /// <param name="classes"></param>
         public static async Task exportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt.");
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (XLSX).");
             SubsetExporterXLS exp = new SubsetExporterXLS();
             bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
             bool successSelection = exp.SetSelectedClassesByUser(classes);
@@ -123,11 +147,30 @@ namespace OTLWizard.OTLObjecten
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
             ArtefactExporterXLS exp = new ArtefactExporterXLS();
             var result = await Task.Run(() => exp.Export(exportPath, artefacten));
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             if (!result) 
             {
                 ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+            } else
+            {
+                ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
             }
+        }
+
+        public static async Task exportCSVArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
+        {
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
+            ArtefactExporterCSV exp = new ArtefactExporterCSV();
+            var result = await Task.Run(() => exp.Export(exportPath, artefacten));
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            if (!result)
+            {
+                ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            else
+            {
+                ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
+            }
         }
 
         /// <summary>

@@ -5,9 +5,9 @@ using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
 {
-    public partial class ExportXLSWindow : Form
+    public partial class ExportSubsetWindow : Form
     {
-        public ExportXLSWindow()
+        public ExportSubsetWindow()
         {
             InitializeComponent();
         }
@@ -49,10 +49,12 @@ namespace OTLWizard
             }
         }
 
-        private async void ExportXLS(object sender, EventArgs e)
+        private async void Export(object sender, EventArgs e)
         {
             SaveFileDialog fdlg = new SaveFileDialog();
-            fdlg.Title = "Sla Spreadsheet op";
+            fdlg.Title = "Sla Data op naar Excel of CSV";
+            fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
+            fdlg.FilterIndex= 1;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
@@ -67,7 +69,14 @@ namespace OTLWizard
                         i++;
                     }
                 }
-                await ApplicationHandler.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                if(fdlg.FilterIndex == 1)
+                {
+                    await ApplicationHandler.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                }
+                else
+                {
+                    await ApplicationHandler.exportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                }
             }
             
         }

@@ -152,11 +152,11 @@
     <Compile Include="Helpers\ViewHandler.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="ApplicationData\SubsetExporterXLS.cs" />
-    <Compile Include="FrontEnd\ExportXLSWindow.cs">
+    <Compile Include="FrontEnd\ExportSubsetWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrontEnd\ExportXLSWindow.Designer.cs">
-      <DependentUpon>ExportXLSWindow.cs</DependentUpon>
+    <Compile Include="FrontEnd\ExportSubsetWindow.Designer.cs">
+      <DependentUpon>ExportSubsetWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="OTLObjecten\OTL_ArtefactType.cs" />
     <Compile Include="OTLObjecten\OTL_ObjectType.cs" />
@@ -176,8 +176,8 @@
     <EmbeddedResource Include="FrontEnd\LoadingWindow.resx">
       <DependentUpon>LoadingWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrontEnd\ExportXLSWindow.resx">
-      <DependentUpon>ExportXLSWindow.cs</DependentUpon>
+    <EmbeddedResource Include="FrontEnd\ExportSubsetWindow.resx">
+      <DependentUpon>ExportSubsetWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

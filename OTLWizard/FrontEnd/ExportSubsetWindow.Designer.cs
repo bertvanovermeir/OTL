@@ -1,6 +1,6 @@
 ﻿namespace OTLWizard
 {
-    partial class ExportXLSWindow
+    partial class ExportSubsetWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportXLSWindow));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExportSubsetWindow));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -98,13 +98,13 @@
             // buttonExportXLS
             // 
             this.buttonExportXLS.Enabled = false;
-            this.buttonExportXLS.Location = new System.Drawing.Point(641, 415);
+            this.buttonExportXLS.Location = new System.Drawing.Point(618, 415);
             this.buttonExportXLS.Name = "buttonExportXLS";
-            this.buttonExportXLS.Size = new System.Drawing.Size(147, 23);
+            this.buttonExportXLS.Size = new System.Drawing.Size(170, 23);
             this.buttonExportXLS.TabIndex = 6;
-            this.buttonExportXLS.Text = "Exporteer subset naar XLS";
+            this.buttonExportXLS.Text = "Exporteer subset naar XLS/CSV";
             this.buttonExportXLS.UseVisualStyleBackColor = true;
-            this.buttonExportXLS.Click += new System.EventHandler(this.ExportXLS);
+            this.buttonExportXLS.Click += new System.EventHandler(this.Export);
             // 
             // buttonImportClasses
             // 

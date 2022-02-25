@@ -45,7 +45,7 @@
             this.buttonExportArtefact.Name = "buttonExportArtefact";
             this.buttonExportArtefact.Size = new System.Drawing.Size(147, 23);
             this.buttonExportArtefact.TabIndex = 27;
-            this.buttonExportArtefact.Text = "Exporteer naar XLSX";
+            this.buttonExportArtefact.Text = "Exporteer naar XLSX/CSV";
             this.buttonExportArtefact.UseVisualStyleBackColor = true;
             this.buttonExportArtefact.Click += new System.EventHandler(this.buttonExportArtefact_Click);
             // 
