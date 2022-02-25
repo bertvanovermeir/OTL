@@ -79,11 +79,11 @@ namespace OTLWizard.FrontEnd
                 }
                 if (fdlg.FilterIndex == 1)
                 {
-                    await ApplicationHandler.exportXlsArtefact(fdlg.FileName, selected);
+                    await ApplicationHandler.ExportXlsArtefact(fdlg.FileName, selected);
                 }
                 else
                 {
-                    await ApplicationHandler.exportCSVArtefact(fdlg.FileName, selected);
+                    await ApplicationHandler.ExportCSVArtefact(fdlg.FileName, selected);
                 }
             }                
         }

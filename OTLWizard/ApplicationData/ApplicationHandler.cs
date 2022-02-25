@@ -89,7 +89,7 @@ namespace OTLWizard.OTLObjecten
             }
         }
 
-        public static async Task exportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
+        public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (CSV).");
             SubsetExporterCSV exp = new SubsetExporterCSV();
@@ -119,7 +119,7 @@ namespace OTLWizard.OTLObjecten
         /// <param name="withDescriptions"></param>
         /// <param name="withChecklistOptions"></param>
         /// <param name="classes"></param>
-        public static async Task exportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
+        public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (XLSX).");
             SubsetExporterXLS exp = new SubsetExporterXLS();
@@ -142,7 +142,7 @@ namespace OTLWizard.OTLObjecten
             }
         }
 
-        public static async Task exportXlsArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
+        public static async Task ExportXlsArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
             ArtefactExporterXLS exp = new ArtefactExporterXLS();
@@ -157,7 +157,7 @@ namespace OTLWizard.OTLObjecten
             }
         }
 
-        public static async Task exportCSVArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
+        public static async Task ExportCSVArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
             ArtefactExporterCSV exp = new ArtefactExporterCSV();

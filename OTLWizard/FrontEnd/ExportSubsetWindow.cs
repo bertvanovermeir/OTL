@@ -71,11 +71,11 @@ namespace OTLWizard
                 }
                 if(fdlg.FilterIndex == 1)
                 {
-                    await ApplicationHandler.exportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
                 }
                 else
                 {
-                    await ApplicationHandler.exportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
                 }
             }
             
