@@ -118,9 +118,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationData\ApplicationHandler.cs" />
+    <Compile Include="ApplicationData\ArtefactExporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporterCSV.cs" />
     <Compile Include="ApplicationData\ArtefactImporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporterXLS.cs" />
+    <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
     <Compile Include="Helpers\ParameterHandler.cs" />
     <Compile Include="Helpers\QueryHandler.cs" />

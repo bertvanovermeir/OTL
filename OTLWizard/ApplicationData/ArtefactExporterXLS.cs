@@ -1,16 +1,17 @@
 ﻿using Microsoft.Office.Interop.Excel;
+using OTLWizard.ApplicationData;
 using System;
 using System.Collections.Generic;
 
 namespace OTLWizard.OTLObjecten
 {
-    public class ArtefactExporterXLS
+    public class ArtefactExporterXLS : ArtefactExporter
     {
         public ArtefactExporterXLS()
         {
         }
 
-        public bool Export(string path, List<OTL_ArtefactType> artefacten)
+        public override bool Export(string path, List<OTL_ArtefactType> artefacten)
         {
             Microsoft.Office.Interop.Excel.Application excel;
             Microsoft.Office.Interop.Excel.Workbook workbook;

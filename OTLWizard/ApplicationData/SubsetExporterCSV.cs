@@ -9,71 +9,30 @@ using System.Linq;
 
 namespace OTLWizard.ApplicationData
 {
-    public class SubsetExporterCSV
+    public class SubsetExporterCSV : SubsetExporter
     {
-
-        private List<OTL_ObjectType> OTL_ObjectTypes;
-        private string[] classes;
-
-
         public SubsetExporterCSV()
+        {}
+
+        public override bool Export(string path, bool help, bool checklistoptions = false)
         {
-
-        }
-
-        public bool SetOTLSubset(List<OTL_ObjectType> OTL_ObjectTypes)
-        {
-            if (OTL_ObjectTypes == null)
-            {
-                return false;
-            }
-            else if (OTL_ObjectTypes.Count == 0)
-            {
-                return false;
-            }
-            else
-            {
-                this.OTL_ObjectTypes = OTL_ObjectTypes;
-                return true;
-            }
-        }
-
-        /// <summary>
-        /// Set the user selection of a certain subset
-        /// </summary>
-        /// <param name="classes"></param>
-        /// <returns>FALSE if user selection is invalid</returns>
-        public bool SetSelectedClassesByUser(string[] classes)
-        {
-            if (classes == null)
-            {
-                this.classes = null;
-                return true;
-            }
-            else if (classes.Length == 0)
-            {
-                return false;
-            }
-            else
-            {
-                this.classes = classes;
-                return true;
-            }
-        }
-
-
-        public bool Export(string path, bool help)
-        {
-            // construct matrix
-            var matrix = new List<string[]>();
-
             foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
             {
+                var matrix = new List<string[]>();
                 var otlnaam = classes.ToList().FirstOrDefault(o => o == otlklasse.otlName);
                 if (otlnaam == null)
                     continue;
-                var filename = path.Substring(0,path.LastIndexOf('.')) + "_" + otlnaam + ".csv";
-                WriteCSV(filename, matrix, ';');
+                var filename = path.Substring(0, path.LastIndexOf('.')) + "_" + otlnaam + ".csv";
+                // fill the matrix               
+                string[] dotnotaties = otlklasse.GetParameters().Select(y => y.DotNotatie).ToArray();
+                string[] omschrijvingen = otlklasse.GetParameters().Select(z => z.Description).ToArray();
+                if (help)
+                    matrix.Add(omschrijvingen);
+                matrix.Add(dotnotaties);
+                // write to file
+                var success = WriteCSV(filename, matrix, ';');
+                if (!success)
+                    return false;                   
             }
             return true;
         }

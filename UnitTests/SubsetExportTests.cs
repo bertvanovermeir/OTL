@@ -21,7 +21,7 @@ namespace UnitTests
             subsetImporter.Import();
             var exporter = new SubsetExporterCSV();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            exporter.SetSelectedClassesByUser(new [] {"Rack", "Netwerkpoort", "Netwerkelement" });
+            exporter.SetSelectedClassesByUser(null);
             bool success = exporter.Export(path: "./../../" + path_save_to, help: false);
 
             // assert

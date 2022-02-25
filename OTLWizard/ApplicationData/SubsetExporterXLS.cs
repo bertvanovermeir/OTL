@@ -1,66 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using Microsoft.Office.Interop.Excel;
+using OTLWizard.ApplicationData;
 
 namespace OTLWizard.OTLObjecten
 {
     /// <summary>
     /// Deze klasse omschrijft de connectie met XLS. Ze maakt een XLS template aan.
     /// </summary>
-    public class SubsetExporterXLS
+    public class SubsetExporterXLS : SubsetExporter
     {
-        private List<OTL_ObjectType> OTL_ObjectTypes;
-        private string[] classes;
         private string path;
         private bool help;
         private bool checklistoptions;
 
         public SubsetExporterXLS()
-        {
-        }
+        {}
 
-        /// <summary>
-        /// set the complete OTL subset that the exporter needs to use.
-        /// </summary>
-        /// <param name="OTL_ObjectTypes"></param>
-        /// <returns>FALSE if something went wrong with the subset</returns>
-        public bool SetOTLSubset(List<OTL_ObjectType> OTL_ObjectTypes)
-        {
-            if(OTL_ObjectTypes == null)
-            {
-                return false;
-            } else if(OTL_ObjectTypes.Count == 0) {
-                return false;
-            } else
-            {
-                this.OTL_ObjectTypes = OTL_ObjectTypes;
-                return true;
-            }          
-        }
-
-        /// <summary>
-        /// Set the user selection of a certain subset
-        /// </summary>
-        /// <param name="classes"></param>
-        /// <returns>FALSE if user selection is invalid</returns>
-        public bool SetSelectedClassesByUser(string[] classes)
-        {
-            if(classes == null)
-            {
-                this.classes = null;
-                return true;
-            } else if(classes.Length == 0)
-            {
-                return false;
-            } else
-            {
-                this.classes = classes;
-                return true;
-            }          
-        }
-
-        public bool Export(string path, bool help, bool checklistoptions)
+        public override bool Export(string path, bool help, bool checklistoptions)
         {
             this.path = path;
             this.help = help;

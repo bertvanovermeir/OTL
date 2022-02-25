@@ -7,7 +7,7 @@ using System.IO;
 
 namespace OTLWizard.ApplicationData
 {
-    public class ArtefactExporterCSV
+    public class ArtefactExporterCSV : ArtefactExporter
     {
         public ArtefactExporterCSV()
         {
@@ -16,7 +16,7 @@ namespace OTLWizard.ApplicationData
 
 
 
-        public bool Export(string path, List<OTL_ArtefactType> artefacts)
+        public override bool Export(string path, List<OTL_ArtefactType> artefacts)
         {
             try
             {
