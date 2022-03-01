@@ -156,5 +156,40 @@ namespace UnitTests
             workbook.Close();
             excel.Quit();
         }
+
+        [Fact]
+        public void SubsetExportTest_Aansluitmof_boolean()
+        {
+            // arrange           
+            var otldbpath = "./../../subset_aansluitmof.db";
+            var subsetImporter = new SubsetImporter(otldbpath);
+            var path_save_to = "test_result.xlsx";
+
+            // act
+            subsetImporter.Import();
+            var exporter = new SubsetExporterXLS();
+            exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true);
+
+            // assert
+            var excel = new Application { Visible = false, DisplayAlerts = false };
+            var workbook = excel.Workbooks.Open(Directory.GetCurrentDirectory() + "\\" + path_save_to);
+            List<string> WSNames = new List<string>();
+            foreach (Worksheet ws in workbook.Worksheets)
+            {
+                WSNames.Add(ws.Name);
+            }
+            // check sheet names
+            Assert.True(success);
+            Assert.Contains("Aansluitmof", WSNames);
+            Worksheet sheet = (Worksheet) workbook.Worksheets["Aansluitmof"];
+            var range = sheet.Range[sheet.Cells[2,4], sheet.Cells[2,4]];;
+            var cell = range.Cells;
+            Assert.True(cell.Validation.InCellDropdown);
+            Assert.Equal("- ;True;False;", cell.Validation.Formula1);
+            // tear down
+            workbook.Close();
+            excel.Quit();
+        }
     }
 }

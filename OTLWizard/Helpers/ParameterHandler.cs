@@ -21,34 +21,34 @@ namespace OTLWizard.OTLObjecten
 
             if (DataTypeString.Contains("XMLSchema#") || DataTypeString.Contains("rdf-schema#") || DataTypeString.Contains("generiek#Getal") || DataTypeString.Contains("#Dte"))
             {
-                string temp = DataTypeString.Split('#')[1];
+                string temp = DataTypeString.Split('#')[1].ToLower();
                 switch (temp)
                 {
-                    case "Getal":
+                    case "getal":
                         DataType = Enums.DataType.Real;
                         break;
-                    case "Integer":
+                    case "integer":
                         DataType = Enums.DataType.Integer;
                         break;
-                    case "Decimal":
+                    case "decimal":
                         DataType = Enums.DataType.Real;
                         break;
-                    case "DateTime":
+                    case "datetime":
                         DataType = Enums.DataType.Text;
                         break;
-                    case "Date":
+                    case "date":
                         DataType = Enums.DataType.Text;
                         break;
-                    case "Time":
+                    case "time":
                         DataType = Enums.DataType.Text;
                         break;
-                    case "String":
+                    case "string":
                         DataType = Enums.DataType.Text;
                         break;
-                    case "Boolean":
+                    case "boolean":
                         DataType = Enums.DataType.List;
                         break;
-                    case "Literal":
+                    case "literal":
                         DataType = Enums.DataType.Real;
                         break;
                     default:
@@ -81,8 +81,8 @@ namespace OTLWizard.OTLObjecten
         {
             if (DataTypeString.Contains("XMLSchema#") || DataTypeString.Contains("rdf-schema#") || DataTypeString.Contains("generiek#Getal") || DataTypeString.Contains("#Dte"))
             {
-                string temp = DataTypeString.Split('#')[1];
-                if (temp.Equals("Boolean"))
+                string temp = DataTypeString.Split('#')[1].ToLower();
+                if (temp.Equals("boolean"))
                 {
                     return new List<string> { "- ", "True", "False" };
                 }
@@ -140,31 +140,31 @@ namespace OTLWizard.OTLObjecten
 
             if (DataTypeString.Contains("XMLSchema#") || DataTypeString.Contains("rdf-schema#") || DataTypeString.Contains("generiek#Getal") || DataTypeString.Contains("#Dte"))
             {
-                string temp = DataTypeString.Split('#')[1];
+                string temp = DataTypeString.Split('#')[1].ToLower();
                 switch (temp)
                 {
-                    case "Getal":
+                    case "getal":
                         DefaultValue = -99999.99d;
                         break;
-                    case "Integer":
+                    case "integer":
                         DefaultValue = 99999;
                         break;
-                    case "Decimal":
+                    case "decimal":
                         DefaultValue = -99999.99d;
                         break;
-                    case "DateTime":
+                    case "datetime":
                         break;
-                    case "Date":
+                    case "date":
                         break;
-                    case "Time":
+                    case "time":
                         break;
-                    case "String":
+                    case "string":
                         DefaultValue = "-";
                         break;
-                    case "Boolean":
+                    case "boolean":
                         DefaultValue = "-";
                         break;
-                    case "Literal":
+                    case "literal":
                         DefaultValue = -99999.99d;
                         break;
                     default:

@@ -14,8 +14,6 @@ namespace OTLWizard.ApplicationData
 
         }
 
-
-
         public override bool Export(string path, List<OTL_ArtefactType> artefacts)
         {
             try

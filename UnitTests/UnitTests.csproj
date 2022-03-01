@@ -119,7 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Geometrie_Artefact_0.db" />
     <None Include="packages.config" />
+    <None Include="subset_3_types_netwerk.db" />
+    <None Include="subset_aansluitmof.db" />
+    <None Include="subset_all_v2.0.2.db" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />

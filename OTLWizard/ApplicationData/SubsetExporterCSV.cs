@@ -25,9 +25,8 @@ namespace OTLWizard.ApplicationData
                 var filename = path.Substring(0, path.LastIndexOf('.')) + "_" + otlnaam + ".csv";
                 // fill the matrix               
                 string[] dotnotaties = otlklasse.GetParameters().Select(y => y.DotNotatie).ToArray();
-                string[] omschrijvingen = otlklasse.GetParameters().Select(z => z.Description).ToArray();
                 if (help)
-                    matrix.Add(omschrijvingen);
+                    matrix.Add(otlklasse.GetParameters().Select(z => z.Description).ToArray());
                 matrix.Add(dotnotaties);
                 // write to file
                 var success = WriteCSV(filename, matrix, ';');
