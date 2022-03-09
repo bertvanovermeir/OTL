@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using Microsoft.Office.Interop.Excel;
 using OTLWizard.ApplicationData;
+using OTLWizard.Helpers;
 
 namespace OTLWizard.OTLObjecten
 {
@@ -14,13 +15,15 @@ namespace OTLWizard.OTLObjecten
     {
         private string path;
         private bool help;
+        private bool dummydata;
         private bool checklistoptions;
 
         public SubsetExporterXLS()
         {}
 
-        public override bool Export(string path, bool help, bool checklistoptions)
+        public override bool Export(string path, bool help, bool checklistoptions, bool dummydata)
         {
+            this.dummydata = dummydata;
             this.path = path;
             this.help = help;
             this.checklistoptions = checklistoptions;
@@ -36,6 +39,10 @@ namespace OTLWizard.OTLObjecten
             {
                 start = 2;
             }
+            if (dummydata)
+            {
+                DummyDataHandler.initRandom();
+            }
 
             Worksheet sheet = newWorkSheet(workbook, temp.otlName);
             // extract all necessary data from the otl table (parameters)
@@ -49,6 +56,16 @@ namespace OTLWizard.OTLObjecten
                 {
                     sheet.Cells[1, i + 1] = p.Description;
                     sheet.Range[sheet.Cells[1, i + 1], sheet.Cells[1, i + 1]].EntireRow.WrapText = true;
+                }
+                // set default value
+                sheet.Cells[start + 1, i + 1] = p.DefaultValue;
+                // overwrite if dummydata
+                if (dummydata)
+                {
+                    for(int j = 1; j < 10; j++)
+                    {
+                        sheet.Cells[start + j, i + 1] = DummyDataHandler.GetDummyValue(p);
+                    }                  
                 }
                 // now fill in dropdowns if they are applicable
                 if (p.DataType == Enums.DataType.List && checklistoptions)
@@ -77,8 +94,6 @@ namespace OTLWizard.OTLObjecten
 
 
                 }
-                // set default value
-                sheet.Cells[start + 1, i + 1] = p.DefaultValue;
             }
             sheet.Columns.AutoFit();
             sheet.Range["A1:F1"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;

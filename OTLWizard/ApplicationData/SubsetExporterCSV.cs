@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -14,7 +15,7 @@ namespace OTLWizard.ApplicationData
         public SubsetExporterCSV()
         {}
 
-        public override bool Export(string path, bool help, bool checklistoptions = false)
+        public override bool Export(string path, bool help, bool dummydata, bool checklistoptions = false)
         {
             foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
             {
@@ -28,6 +29,11 @@ namespace OTLWizard.ApplicationData
                 if (help)
                     matrix.Add(otlklasse.GetParameters().Select(z => z.Description).ToArray());
                 matrix.Add(dotnotaties);
+                if(dummydata)
+                {
+                    DummyDataHandler.initRandom();
+                    matrix.Add(otlklasse.GetParameters().Select(y => DummyDataHandler.GetDummyValue(y)).ToArray());
+                }
                 // write to file
                 var success = WriteCSV(filename, matrix, ';');
                 if (!success)
@@ -35,7 +41,6 @@ namespace OTLWizard.ApplicationData
             }
             return true;
         }
-
 
         private bool WriteCSV(string pathForSingleFile, List<string[]> matrix, char separator)
         {

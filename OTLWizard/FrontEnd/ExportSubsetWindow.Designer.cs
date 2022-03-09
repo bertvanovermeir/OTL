@@ -43,6 +43,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.voorbeelddata = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label1
@@ -195,13 +196,26 @@
             this.label3.Text = "Het gebruik van keuzelijsten vereist een werkende internetverbinding.";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // ExportXLSWindow
+            // voorbeelddata
+            // 
+            this.voorbeelddata.AutoSize = true;
+            this.voorbeelddata.Enabled = false;
+            this.voorbeelddata.Location = new System.Drawing.Point(395, 205);
+            this.voorbeelddata.Name = "voorbeelddata";
+            this.voorbeelddata.Size = new System.Drawing.Size(146, 17);
+            this.voorbeelddata.TabIndex = 21;
+            this.voorbeelddata.Text = "Voorbeelddata genereren";
+            this.voorbeelddata.UseVisualStyleBackColor = true;
+            this.voorbeelddata.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+            // 
+            // ExportSubsetWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.voorbeelddata);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
@@ -218,7 +232,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "ExportXLSWindow";
+            this.Name = "ExportSubsetWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Export OTL template";
             this.Load += new System.EventHandler(this.MainWindow_Load);
@@ -243,6 +257,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.CheckBox voorbeelddata;
     }
 }
 

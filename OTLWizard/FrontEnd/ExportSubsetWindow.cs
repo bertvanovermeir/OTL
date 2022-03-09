@@ -46,6 +46,7 @@ namespace OTLWizard
                 checkKeuzelijsten.Enabled = true;
                 ListAllClasses.Enabled = true;
                 buttonImportClasses.Enabled = true;
+                voorbeelddata.Enabled = true;
             }
         }
 
@@ -71,11 +72,11 @@ namespace OTLWizard
                 }
                 if(fdlg.FilterIndex == 1)
                 {
-                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, voorbeelddata.Checked, temp);
                 }
                 else
                 {
-                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, temp);
+                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, voorbeelddata.Checked, temp);
                 }
             }
             
@@ -147,6 +148,11 @@ namespace OTLWizard
         }
 
         private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
 
         }

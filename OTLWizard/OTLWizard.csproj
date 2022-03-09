@@ -124,6 +124,7 @@
     <Compile Include="ApplicationData\ArtefactExporterXLS.cs" />
     <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
+    <Compile Include="Helpers\DummyDataHandler.cs" />
     <Compile Include="Helpers\ParameterHandler.cs" />
     <Compile Include="Helpers\QueryHandler.cs" />
     <Compile Include="ApplicationData\SubsetImporter.cs" />

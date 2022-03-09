@@ -17,8 +17,8 @@ namespace OTLWizard.OTLObjecten
         public List<string> DropdownValues { get; set; } // a list of dropdownvalues.
         public Object DefaultValue { get; set; } // the default value used for the parameter, calculated at runtime.
         public bool Deprecated { get; set; } // is the parameter still in use
-        public Enums.DataType DataType { get; set; } // real acad datatype calculated at runtime.   
-        
+        public Enums.DataType DataType { get; set; } // real acad datatype calculated at runtime.
+        public string DataTypeString { get; set; }
         public OTL_Parameter()
         {
             // for serialization
@@ -39,6 +39,7 @@ namespace OTLWizard.OTLObjecten
             this.FriendlyName = friendlyName;
             this.Description = description;
             this.Deprecated = deprecated;
+            this.DataTypeString = dataTypeString;
             DataType = ParameterHandler.GetDataType(dataTypeString);
             DefaultValue = ParameterHandler.GetDefaultValue(dataTypeString);
             DropdownValues = ParameterHandler.GetDropDownValues(dataTypeString, keuzelijsten);

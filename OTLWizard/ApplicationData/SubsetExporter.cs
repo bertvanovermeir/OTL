@@ -47,7 +47,7 @@ namespace OTLWizard.ApplicationData
             }
         }
 
-        public abstract bool Export(string path, bool help, bool checklistoptions = false);
+        public abstract bool Export(string path, bool help, bool checklistoptions = false, bool dummydata = false);
 
 
     }

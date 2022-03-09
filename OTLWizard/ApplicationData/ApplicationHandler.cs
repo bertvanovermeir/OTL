@@ -89,7 +89,7 @@ namespace OTLWizard.OTLObjecten
             }
         }
 
-        public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
+        public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (CSV).");
             SubsetExporterCSV exp = new SubsetExporterCSV();
@@ -97,7 +97,7 @@ namespace OTLWizard.OTLObjecten
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions));
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions,dummyData));
                 if (!result)
                 {
                     ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
@@ -119,7 +119,7 @@ namespace OTLWizard.OTLObjecten
         /// <param name="withDescriptions"></param>
         /// <param name="withChecklistOptions"></param>
         /// <param name="classes"></param>
-        public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, string[] classes)
+        public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (XLSX).");
             SubsetExporterXLS exp = new SubsetExporterXLS();
@@ -127,7 +127,7 @@ namespace OTLWizard.OTLObjecten
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {               
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions));
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions, dummyData));
                 if (!result)
                 {
                     ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
