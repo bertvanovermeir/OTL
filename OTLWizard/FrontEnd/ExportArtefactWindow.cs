@@ -74,23 +74,34 @@ namespace OTLWizard
         private void buttonExportArtefact_Click(object sender, EventArgs e)
         {
             string[] temp = null;
-            if (ListAllClasses.Enabled == true)
-            {
-                temp = new string[ListAllClasses.SelectedIndices.Count];
-                int i = 0;
-                foreach (int ind in ListAllClasses.SelectedIndices)
-                {
-
-                    temp[i] = ListAllClasses.Items[ind].ToString();
-                    i++;
-                }
-            } else
+            if(checkAllClasses.Checked)
             {
                 temp = new string[0];
-                
+            } else
+            {
+                if(ListAllClasses.SelectedIndices.Count == 0)
+                {
+                    // temp will be null, application will halt further execution
+                } else
+                {
+                    temp = new string[ListAllClasses.SelectedIndices.Count];
+                    int i = 0;
+                    foreach (int ind in ListAllClasses.SelectedIndices)
+                    {
+
+                        temp[i] = ListAllClasses.Items[ind].ToString();
+                        i++;
+                    }
+                }               
             }
-            // open the result window and pass the results of the user selection in the optionalArgument parameter
-            ViewHandler.Show(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
+            if(temp != null)
+            {
+                // open the result window and pass the results of the user selection in the optionalArgument parameter
+                ViewHandler.Show(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
+            } else
+            {
+                ViewHandler.Show("Geen klassen geselecteerd.", "Fout", MessageBoxIcon.Error);
+            }           
         }
 
         private void checkAllClasses_CheckedChanged(object sender, EventArgs e)
