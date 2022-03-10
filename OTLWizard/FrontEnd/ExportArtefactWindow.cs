@@ -62,6 +62,7 @@ namespace OTLWizard
         private async void buttonImportClasses_Click(object sender, EventArgs e)
         {
             await ApplicationHandler.ImportArtefact(textBoxSubset.Text, textBoxArtefact.Text);
+            ListAllClasses.Items.Clear();
             foreach (string klasse in ApplicationHandler.GetSubsetClassNames())
             {
                 ListAllClasses.Items.Add(klasse);
