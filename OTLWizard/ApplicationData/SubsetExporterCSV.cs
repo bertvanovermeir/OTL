@@ -15,7 +15,7 @@ namespace OTLWizard.ApplicationData
         public SubsetExporterCSV()
         {}
 
-        public override bool Export(string path, bool help, bool dummydata, bool checklistoptions = false)
+        public override bool Export(string path, bool help, bool dummydata, bool wkt, bool checklistoptions = false)
         {
             foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
             {
@@ -24,7 +24,15 @@ namespace OTLWizard.ApplicationData
                 if (otlnaam == null)
                     continue;
                 var filename = path.Substring(0, path.LastIndexOf('.')) + "_" + otlnaam + ".csv";
-                // fill the matrix               
+                // fill the matrix
+                if (wkt)
+                {
+                    otlklasse.AddParameter(new OTL_Parameter(false,
+                        "geometry", "geometry",
+                        "De geometrische representatie van het OTL object beschreven in een WKT-string.",
+                        "WKT", false));
+                }
+
                 string[] dotnotaties = otlklasse.GetParameters().Select(y => y.DotNotatie).ToArray();
                 if (help)
                     matrix.Add(otlklasse.GetParameters().Select(z => z.Description).ToArray());

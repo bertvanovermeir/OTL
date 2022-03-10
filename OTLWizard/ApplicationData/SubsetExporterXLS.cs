@@ -17,15 +17,17 @@ namespace OTLWizard.OTLObjecten
         private bool help;
         private bool dummydata;
         private bool checklistoptions;
+        private bool wkt;
 
         public SubsetExporterXLS()
         {}
 
-        public override bool Export(string path, bool help, bool checklistoptions, bool dummydata)
+        public override bool Export(string path, bool help, bool checklistoptions, bool dummydata, bool wkt)
         {
             this.dummydata = dummydata;
             this.path = path;
             this.help = help;
+            this.wkt = wkt;
             this.checklistoptions = checklistoptions;
             return run();
         }
@@ -43,7 +45,13 @@ namespace OTLWizard.OTLObjecten
             {
                 DummyDataHandler.initRandom();
             }
-
+            if(wkt)
+            {
+                temp.AddParameter(new OTL_Parameter(false,
+                    "geometry", "geometry",
+                    "De geometrische representatie van het OTL object beschreven in een WKT-string.",
+                    "WKT", false));
+            }
             Worksheet sheet = newWorkSheet(workbook, temp.otlName);
             // extract all necessary data from the otl table (parameters)
             for (int i = 0; i < temp.GetParameters().Count; i++)
@@ -95,6 +103,7 @@ namespace OTLWizard.OTLObjecten
 
                 }
             }
+            // finish
             sheet.Columns.AutoFit();
             sheet.Range["A1:F1"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;
             sheet.Range["A1:Z1"].BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium, (Microsoft.Office.Interop.Excel.XlColorIndex)3, ColorTranslator.ToOle(Color.Black));

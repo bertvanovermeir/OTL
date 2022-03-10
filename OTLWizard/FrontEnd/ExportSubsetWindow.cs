@@ -42,11 +42,10 @@ namespace OTLWizard
                 textBoxSubset.Text = fdlg.FileName;
                 buttonImportClasses.Enabled = true;
                 checkAllClasses.Enabled = true;
-                checkAttributes.Enabled = true;
                 checkKeuzelijsten.Enabled = true;
                 ListAllClasses.Enabled = true;
                 buttonImportClasses.Enabled = true;
-                voorbeelddata.Enabled = true;
+                checkVoorbeelddata.Enabled = true;
             }
         }
 
@@ -72,11 +71,11 @@ namespace OTLWizard
                 }
                 if(fdlg.FilterIndex == 1)
                 {
-                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, voorbeelddata.Checked, temp);
+                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, temp);
                 }
                 else
                 {
-                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, voorbeelddata.Checked, temp);
+                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, temp);
                 }
             }
             
@@ -154,7 +153,17 @@ namespace OTLWizard
 
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
-
+            if(checkVoorbeelddata.Checked)
+            {
+                checkAttributes.Enabled = true;
+                checkWKT.Enabled = true;
+            } else
+            {
+                checkWKT.Enabled=false;
+                checkWKT.Checked=false;
+                checkAttributes.Enabled = false;
+                checkAttributes.Checked=false;
+            }
         }
     }
 }

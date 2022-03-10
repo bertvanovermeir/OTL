@@ -16,6 +16,7 @@ namespace OTLWizard.Helpers
         {
             rand = new Random();
         }
+        
         /// <summary>
         /// returns a dummy value to inject in CSV or XLS
         /// </summary>
@@ -85,6 +86,10 @@ namespace OTLWizard.Helpers
                 var num = rand.Next(0, p.DropdownValues.Count);
                 result = p.DropdownValues[num];
             }
+            else if (DataTypeString.Contains("WKT"))
+            {
+                result = GetWKTRandomString();
+            }
             else
             {
                 result = prefix + p.FriendlyName + GetRandomString();
@@ -115,6 +120,43 @@ namespace OTLWizard.Helpers
                 str = str + letter;
             }
             return ("_" + str).ToLower();
+        }
+
+        private static string GetWKTRandomString()
+        {
+            string temp = "";
+            
+
+            // kies poly, line of point
+            int keuze = rand.Next(0, 3);
+
+            switch(keuze)
+            {
+                case 0: 
+                    temp = "POLYGON Z (" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + ")";
+                    break;
+                case 1:
+                    temp = "LINESTRING Z (" + GetCoord() + "," + GetCoord() +  ")";
+                    break;
+                case 2:
+                    temp = "POINT Z (" + GetCoord() + ")";
+                    break;
+            }
+            return temp;
+        }
+
+        private static string GetCoord()
+        {
+            // 3 coords
+            double x = rand.Next(26000, 260000);
+            double y = rand.Next(155000, 241000);
+            double z = rand.Next(-20, 115);
+            // 4 getallen na komma
+            x = x + rand.NextDouble();
+            y = y + rand.NextDouble();
+            z = z + rand.NextDouble();
+
+            return (x.ToString("F4") + " " + y.ToString("F4") + " " + z.ToString("F4")).Replace(',','.');
         }
     }
 }

@@ -43,7 +43,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.voorbeelddata = new System.Windows.Forms.CheckBox();
+            this.checkVoorbeelddata = new System.Windows.Forms.CheckBox();
+            this.checkWKT = new System.Windows.Forms.CheckBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -89,6 +92,8 @@
             // 
             // textBoxSubset
             // 
+            this.textBoxSubset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSubset.Enabled = false;
             this.textBoxSubset.Location = new System.Drawing.Point(174, 80);
             this.textBoxSubset.Name = "textBoxSubset";
@@ -98,6 +103,7 @@
             // 
             // buttonExportXLS
             // 
+            this.buttonExportXLS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExportXLS.Enabled = false;
             this.buttonExportXLS.Location = new System.Drawing.Point(618, 415);
             this.buttonExportXLS.Name = "buttonExportXLS";
@@ -120,6 +126,8 @@
             // 
             // ListAllClasses
             // 
+            this.ListAllClasses.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.ListAllClasses.Enabled = false;
             this.ListAllClasses.FormattingEnabled = true;
             this.ListAllClasses.Location = new System.Drawing.Point(15, 136);
@@ -133,7 +141,7 @@
             // 
             this.checkAllClasses.AutoSize = true;
             this.checkAllClasses.Enabled = false;
-            this.checkAllClasses.Location = new System.Drawing.Point(395, 136);
+            this.checkAllClasses.Location = new System.Drawing.Point(412, 155);
             this.checkAllClasses.Name = "checkAllClasses";
             this.checkAllClasses.Size = new System.Drawing.Size(129, 17);
             this.checkAllClasses.TabIndex = 13;
@@ -145,7 +153,7 @@
             // 
             this.checkAttributes.AutoSize = true;
             this.checkAttributes.Enabled = false;
-            this.checkAttributes.Location = new System.Drawing.Point(395, 159);
+            this.checkAttributes.Location = new System.Drawing.Point(412, 257);
             this.checkAttributes.Name = "checkAttributes";
             this.checkAttributes.Size = new System.Drawing.Size(232, 17);
             this.checkAttributes.TabIndex = 14;
@@ -157,7 +165,8 @@
             // 
             this.checkKeuzelijsten.AutoSize = true;
             this.checkKeuzelijsten.Enabled = false;
-            this.checkKeuzelijsten.Location = new System.Drawing.Point(395, 182);
+            this.checkKeuzelijsten.Location = new System.Drawing.Point(412, 178);
+            this.checkKeuzelijsten.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
             this.checkKeuzelijsten.Name = "checkKeuzelijsten";
             this.checkKeuzelijsten.Size = new System.Drawing.Size(179, 17);
             this.checkKeuzelijsten.TabIndex = 15;
@@ -167,6 +176,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(622, 399);
@@ -177,6 +187,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
             this.button1.Location = new System.Drawing.Point(736, 9);
             this.button1.Name = "button1";
@@ -196,17 +207,48 @@
             this.label3.Text = "Het gebruik van keuzelijsten vereist een werkende internetverbinding.";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
-            // voorbeelddata
+            // checkVoorbeelddata
             // 
-            this.voorbeelddata.AutoSize = true;
-            this.voorbeelddata.Enabled = false;
-            this.voorbeelddata.Location = new System.Drawing.Point(395, 205);
-            this.voorbeelddata.Name = "voorbeelddata";
-            this.voorbeelddata.Size = new System.Drawing.Size(146, 17);
-            this.voorbeelddata.TabIndex = 21;
-            this.voorbeelddata.Text = "Voorbeelddata genereren";
-            this.voorbeelddata.UseVisualStyleBackColor = true;
-            this.voorbeelddata.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+            this.checkVoorbeelddata.AutoSize = true;
+            this.checkVoorbeelddata.Enabled = false;
+            this.checkVoorbeelddata.Location = new System.Drawing.Point(412, 234);
+            this.checkVoorbeelddata.Name = "checkVoorbeelddata";
+            this.checkVoorbeelddata.Size = new System.Drawing.Size(146, 17);
+            this.checkVoorbeelddata.TabIndex = 21;
+            this.checkVoorbeelddata.Text = "Voorbeelddata genereren";
+            this.checkVoorbeelddata.UseVisualStyleBackColor = true;
+            this.checkVoorbeelddata.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+            // 
+            // checkWKT
+            // 
+            this.checkWKT.AutoSize = true;
+            this.checkWKT.Enabled = false;
+            this.checkWKT.Location = new System.Drawing.Point(412, 280);
+            this.checkWKT.Name = "checkWKT";
+            this.checkWKT.Size = new System.Drawing.Size(192, 17);
+            this.checkWKT.TabIndex = 22;
+            this.checkWKT.Text = "Kolom geometrie toevoegen (WKT)";
+            this.checkWKT.UseVisualStyleBackColor = true;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(395, 136);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Algemene instellingen";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(395, 215);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(131, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Voorbeelddata instellingen";
             // 
             // ExportSubsetWindow
             // 
@@ -215,7 +257,10 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
-            this.Controls.Add(this.voorbeelddata);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.checkWKT);
+            this.Controls.Add(this.checkVoorbeelddata);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label6);
@@ -257,7 +302,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox voorbeelddata;
+        private System.Windows.Forms.CheckBox checkVoorbeelddata;
+        private System.Windows.Forms.CheckBox checkWKT;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 
