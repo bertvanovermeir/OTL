@@ -50,7 +50,7 @@ namespace OTLWizard.OTLObjecten
                 await Task.Run(() => { subsetConn.Import(); });
             } catch
             {
-                ViewHandler.Show("De subset kon niet worden geïmporteerd", "Algemene Fout", MessageBoxIcon.Error);
+                ViewHandler.Show("De subset kon niet worden geïmporteerd. (Subset Versie < 2.0 of Corrupte Database)", "Algemene Fout", MessageBoxIcon.Error);
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             CheckDeprecated();          
