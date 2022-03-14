@@ -22,7 +22,7 @@ namespace UnitTests
             var exporter = new SubsetExporterCSV();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             exporter.SetSelectedClassesByUser(null);
-            bool success = exporter.Export(path: "./../../" + path_save_to, help: false, dummydata: false, wkt: false);
+            bool success = exporter.Export(path: "./../../" + path_save_to, help: false, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             // 3 CSVs will be created check if they exist
@@ -51,7 +51,7 @@ namespace UnitTests
             var exporter = new SubsetExporterCSV();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             exporter.SetSelectedClassesByUser(new[] { "Rack", "Netwerkpoort", "Netwerkelement" });
-            bool success = exporter.Export(path: "./../../" + path_save_to, help: true, dummydata: false, wkt: false);
+            bool success = exporter.Export(path: "./../../" + path_save_to, help: true, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             // 3 CSVs will be created check if they exist
@@ -101,7 +101,7 @@ namespace UnitTests
             subsetImporter.Import();
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions:false, dummydata: false, wkt: false);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions:false, dummydata: false, wkt: false, deprecated: false);
  
             // assert
             var excel = new Application {Visible = false, DisplayAlerts = false};
@@ -135,7 +135,7 @@ namespace UnitTests
             subsetImporter.Import();
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true, dummydata: false, wkt: false);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             var excel = new Application { Visible = false, DisplayAlerts = false };
@@ -169,7 +169,7 @@ namespace UnitTests
             subsetImporter.Import();
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true, dummydata: false, wkt: false);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             var excel = new Application { Visible = false, DisplayAlerts = false };

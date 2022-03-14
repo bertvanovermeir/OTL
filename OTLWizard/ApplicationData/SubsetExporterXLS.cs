@@ -18,14 +18,16 @@ namespace OTLWizard.OTLObjecten
         private bool dummydata;
         private bool checklistoptions;
         private bool wkt;
+        private bool deprecated;
 
         public SubsetExporterXLS()
         {}
 
-        public override bool Export(string path, bool help, bool checklistoptions, bool dummydata, bool wkt)
+        public override bool Export(string path, bool help, bool checklistoptions, bool dummydata, bool wkt, bool deprecated)
         {
             this.dummydata = dummydata;
             this.path = path;
+            this.deprecated = deprecated;
             this.help = help;
             this.wkt = wkt;
             this.checklistoptions = checklistoptions;
@@ -57,8 +59,14 @@ namespace OTLWizard.OTLObjecten
             for (int i = 0; i < temp.GetParameters().Count; i++)
             {
                 OTL_Parameter p = temp.GetParameters()[i];
+                // deprecated check
+                var dotnotatie = p.DotNotatie;
+                if(p.Deprecated && deprecated)
+                {
+                    dotnotatie = "[DEPRECATED]" + dotnotatie;
+                }
                 // main column name
-                sheet.Cells[start, i + 1] = p.DotNotatie;
+                sheet.Cells[start, i + 1] = dotnotatie;
                 // now set the help messages
                 if (help)
                 {

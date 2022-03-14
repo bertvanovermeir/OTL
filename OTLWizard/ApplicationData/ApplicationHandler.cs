@@ -49,7 +49,7 @@ namespace OTLWizard.OTLObjecten
         /// </summary>
         /// <param name="dbPath"></param>
         /// <param name="klPath"></param>
-        public static async Task ImportSubset(string dbPath, bool keuzelijsten = false)
+        public static async Task<bool> ImportSubset(string dbPath, bool keuzelijsten = false)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De OTL Subset wordt geimporteerd.");
             subsetConn = new SubsetImporter(dbPath, keuzelijsten);
@@ -61,14 +61,14 @@ namespace OTLWizard.OTLObjecten
                 ViewHandler.Show("De subset kon niet worden geïmporteerd. (Subset Versie < 2.0 of Corrupte Database)", "Algemene Fout", MessageBoxIcon.Error);
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-            CheckDeprecated();          
+            return CheckDeprecated();          
         }
 
         /// <summary>
         /// check if any of these classes are deprecated
         /// this will generate a purely cosmetic message to the user. Action is in his hands.
         /// </summary>
-        private static void CheckDeprecated()
+        private static bool CheckDeprecated()
         {           
             string deprecatedclasses = "";
             string deprecatedparameters = "";
@@ -93,11 +93,12 @@ namespace OTLWizard.OTLObjecten
             {
                 ViewHandler.Show("De volgende parameters en klasses uit de OTL worden niet meer gebruikt. Bij voorkeur kijkt u de subset eerst na." +
                     "\nIndien u dit niet doet, zullen de ongeldige parameters ook worden geëxporteerd.\n\nKlassen (inclusief alle parameters):\n"
-                    + deprecatedclasses + "\n\nParameters (in een bestaande klasse):\n" + deprecatedparameters, "Kijk de subset na voor u verder gaat", MessageBoxIcon.Error);
+                    + deprecatedclasses + "\n\nParameters (in een bestaande klasse):\n" + deprecatedparameters, "Kijk de subset na voor u verder gaat", MessageBoxIcon.Information);
             }
+            return showWarning;
         }
 
-        public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, string[] classes)
+        public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (CSV).");
             SubsetExporterCSV exp = new SubsetExporterCSV();
@@ -105,7 +106,7 @@ namespace OTLWizard.OTLObjecten
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, dummyData, wkt));
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
                     ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
@@ -127,7 +128,7 @@ namespace OTLWizard.OTLObjecten
         /// <param name="withDescriptions"></param>
         /// <param name="withChecklistOptions"></param>
         /// <param name="classes"></param>
-        public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, string[] classes)
+        public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (XLSX).");
             SubsetExporterXLS exp = new SubsetExporterXLS();
@@ -135,7 +136,7 @@ namespace OTLWizard.OTLObjecten
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {               
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions, dummyData, wkt));
+                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
                     ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);

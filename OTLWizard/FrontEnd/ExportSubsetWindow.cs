@@ -46,6 +46,7 @@ namespace OTLWizard
                 ListAllClasses.Enabled = true;
                 buttonImportClasses.Enabled = true;
                 checkVoorbeelddata.Enabled = true;
+                checkDeprecated.Enabled = false;
             }
         }
 
@@ -72,11 +73,11 @@ namespace OTLWizard
                 }
                 if(fdlg.FilterIndex == 1)
                 {
-                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, temp);
+                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
                 }
                 else
                 {
-                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, temp);
+                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
                 }
             }
             
@@ -110,8 +111,8 @@ namespace OTLWizard
         private async void ImportClasses(object sender, EventArgs e)
         {
             
-            await ApplicationHandler.ImportSubset(textBoxSubset.Text, !checkKeuzelijsten.Checked);
-
+            var deprecated = await ApplicationHandler.ImportSubset(textBoxSubset.Text, !checkKeuzelijsten.Checked);
+            checkDeprecated.Enabled = deprecated;
             ListAllClasses.Items.Clear();
             foreach(string klasse in ApplicationHandler.GetSubsetClassNames())
             {
@@ -120,7 +121,7 @@ namespace OTLWizard
             }
             buttonExportXLS.Enabled = true;
 
-            TextVersion.Text = ApplicationHandler.GetOTLVersion();
+            TextVersion.Text = ApplicationHandler.GetOTLVersion();           
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)

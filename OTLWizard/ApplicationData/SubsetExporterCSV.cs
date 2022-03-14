@@ -15,7 +15,7 @@ namespace OTLWizard.ApplicationData
         public SubsetExporterCSV()
         {}
 
-        public override bool Export(string path, bool help, bool dummydata, bool wkt, bool checklistoptions = false)
+        public override bool Export(string path, bool help, bool dummydata, bool wkt, bool deprecated, bool checklistoptions = false)
         {
             foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
             {
@@ -31,6 +31,16 @@ namespace OTLWizard.ApplicationData
                         "geometry", "geometry",
                         "De geometrische representatie van het OTL object beschreven in een WKT-string.",
                         "WKT", false));
+                }
+                if(deprecated)
+                {
+                    foreach(OTL_Parameter o in otlklasse.GetParameters())
+                    {
+                        if(o.Deprecated)
+                        {
+                            o.DotNotatie = "[DEPRECATED]" + o.DotNotatie;
+                        }
+                    }
                 }
 
                 string[] dotnotaties = otlklasse.GetParameters().Select(y => y.DotNotatie).ToArray();
