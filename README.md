@@ -2,8 +2,8 @@ OTL Wizard
 ============
 
 Deze applicatie implementeert de AWV OTL standaard van de vlaamse overheid. Met deze applicatie kan je:
-- XLS/CSV templates exporteren van een bestaande subset.
-- DUmmy data toevoegen aan CSV/XLS templates.
+- XLS/CSV templates exporteren van een bestaande OTL subset.
+- Dummy data toevoegen aan CSV/XLS exports van OTL subsets.
 - Een lijst met op te leveren geometrische data exporteren vanaf een subset en het geometrieartefact.
 
 ![OTL Wizard Preview](https://i.imgur.com/gAQOZgm.png)
