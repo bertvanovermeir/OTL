@@ -53,6 +53,7 @@ namespace OTLWizard.FrontEnd
             SaveFileDialog fdlg = new SaveFileDialog();
             fdlg.Title = "Sla Data op^naar Excel of CSV";
             fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
+            fdlg.FileName = "artefact_oltver" + ApplicationHandler.GetOTLVersion() + "_export";
             fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)

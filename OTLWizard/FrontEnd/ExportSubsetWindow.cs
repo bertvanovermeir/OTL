@@ -53,6 +53,7 @@ namespace OTLWizard
         {
             SaveFileDialog fdlg = new SaveFileDialog();
             fdlg.Title = "Sla Data op naar Excel of CSV";
+            fdlg.FileName = "subset_otlver" + ApplicationHandler.GetOTLVersion() + "_export"; 
             fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
             fdlg.FilterIndex= 1;
             fdlg.RestoreDirectory = true;
