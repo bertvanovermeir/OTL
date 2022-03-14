@@ -147,7 +147,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 13);
             this.label3.TabIndex = 21;
-            this.label3.Text = "OTL Wizard v2.3.0";
+            this.label3.Text = "OTL Wizard v3.0.0";
             // 
             // HomeWindow
             // 
@@ -168,7 +168,7 @@
             this.MinimizeBox = false;
             this.Name = "HomeWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "OTLWizard | v2.3.0";
+            this.Text = "OTLWizard | v3.0.0";
             this.Load += new System.EventHandler(this.HomeWindow_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
