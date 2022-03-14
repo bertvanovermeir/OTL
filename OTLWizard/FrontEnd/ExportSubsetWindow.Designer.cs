@@ -47,6 +47,8 @@
             this.checkWKT = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.TextVersion = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -250,6 +252,26 @@
             this.label5.TabIndex = 24;
             this.label5.Text = "Voorbeelddata instellingen";
             // 
+            // TextVersion
+            // 
+            this.TextVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextVersion.Enabled = false;
+            this.TextVersion.Location = new System.Drawing.Point(725, 105);
+            this.TextVersion.Name = "TextVersion";
+            this.TextVersion.Size = new System.Drawing.Size(63, 20);
+            this.TextVersion.TabIndex = 25;
+            this.TextVersion.Text = "0.0.0";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Enabled = false;
+            this.label7.Location = new System.Drawing.Point(659, 108);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(60, 13);
+            this.label7.TabIndex = 26;
+            this.label7.Text = "OTL Versie";
+            // 
             // ExportSubsetWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,6 +279,8 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.TextVersion);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkWKT);
@@ -306,6 +330,8 @@
         private System.Windows.Forms.CheckBox checkWKT;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox TextVersion;
+        private System.Windows.Forms.Label label7;
     }
 }
 

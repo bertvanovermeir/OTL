@@ -25,7 +25,8 @@
             Objects,
             Parameters,
             Relations,
-            Artefact
+            Artefact,
+            Version
         }
     }
 }

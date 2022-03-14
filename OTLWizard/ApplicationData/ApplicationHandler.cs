@@ -36,6 +36,14 @@ namespace OTLWizard.OTLObjecten
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
+        public static string GetOTLVersion()
+        {
+            var temp = subsetConn.GetOTLVersion();
+            if (temp == null)
+                temp = "";
+            return temp;
+        }
+
         /// <summary>
         /// Interface Handle voor het importeren van de OTL database
         /// </summary>

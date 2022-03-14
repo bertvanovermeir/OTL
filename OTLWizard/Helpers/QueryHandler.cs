@@ -31,6 +31,9 @@ namespace OTLWizard.OTLObjecten
                     case Enums.Query.Artefact:
                         strQuery = lines[3];
                         break;
+                    case Enums.Query.Version:
+                        strQuery = lines[4];
+                        break;
                 }
             }
             return strQuery;

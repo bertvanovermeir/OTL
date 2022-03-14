@@ -13,6 +13,7 @@ namespace OTLWizard.OTLObjecten
         private readonly bool Keuzelijsten;
         private List<OTL_ObjectType> OTL_ObjectTypes;
         private List<OTL_RelationshipType> OTL_RelationTypes;
+        private string OTLVersion;
 
         /// <summary>
         /// Maak een nieuwe databaseconnectie met een subset aan
@@ -45,6 +46,11 @@ namespace OTLWizard.OTLObjecten
         public List<OTL_RelationshipType> GetOTLRelationshipTypes()
         {
             return OTL_RelationTypes;
+        }
+
+        public string GetOTLVersion()
+        {
+            return OTLVersion;
         }
 
         /// <summary>
@@ -121,6 +127,18 @@ namespace OTLWizard.OTLObjecten
                     OTL_RelationshipType temp = new OTL_RelationshipType((string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(0),
                         (string)sqlite_datareader.GetValue(2), (string)sqlite_datareader.GetValue(3));
                     OTL_RelationTypes.Add(temp);
+                }
+                sqlite_datareader.Close();
+            }
+            // VERSION NUMBER
+            using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
+            {
+                sqlite_cmd.CommandText = QueryHandler.Get(Enums.Query.Version); ;
+                var sqlite_datareader = sqlite_cmd.ExecuteReader();
+                // The SQLiteDataReader allows us to run through each row per loop
+                while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                {
+                    OTLVersion = (string)sqlite_datareader.GetValue(0);
                 }
                 sqlite_datareader.Close();
             }
