@@ -55,7 +55,7 @@ namespace OTLWizard.OTLObjecten
             }
             catch
             {
-                return false;
+                return true;
             }
         }
 
