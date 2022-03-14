@@ -1,6 +1,7 @@
 ﻿using OTLWizard.ApplicationData;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,10 +16,47 @@ namespace OTLWizard.OTLObjecten
     {
         private static SubsetImporter subsetConn;
         private static ArtefactImporter artefactConn;
+        private static string newestversion;
+        private static string currentversion;
 
         public static void Start()
         {
+            if (!CheckVersion())
+                ViewHandler.Show("Een nieuwe versie is beschikaar. Het is aangeraden deze te installeren.", "Versiecontrole", MessageBoxIcon.Exclamation);
             ViewHandler.Start();
+        }
+
+        public static bool CheckVersion()
+        {
+            var downloadpath = System.IO.Path.GetTempPath() + "otlappversie\\";
+            // create the folder if it does not exist
+            Directory.CreateDirectory(downloadpath);
+            // download the TTL file
+            try
+            {
+                using (var client = new System.Net.WebClient())
+                {
+                    client.DownloadFile("https://raw.githubusercontent.com/bertvanovermeir/OTL/master/OTLWizard/data/version.dat", downloadpath + "version.dat");
+                }
+                string[] lines = File.ReadAllLines(downloadpath + "version.dat", System.Text.Encoding.UTF8);
+                foreach (string item in lines)
+                {
+                    newestversion = item;
+                }
+                string[] lines2 = File.ReadAllLines("version.dat", System.Text.Encoding.UTF8);
+                foreach (string item in lines2)
+                {
+                    currentversion = item;
+                }
+                if(newestversion.Equals(currentversion))
+                    return true;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public static async Task ImportArtefact(string subsetPath, string artefactPath)
