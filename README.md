@@ -8,10 +8,6 @@ Deze applicatie implementeert de AWV OTL standaard van de vlaamse overheid. Met 
 
 Een idee voor een uitbreiding? Werkt iets niet of foutief? Log uw probleem op [de issue pagina](https://github.com/bertvanovermeir/OTL/issues).
 
-Bekijk hieronder de video over de werking van het programma:
-
-[![Click to watch video](https://i.imgur.com/6Yfp18P.png)](https://www.youtube.com/watch?v=8X_c_C34JhM "Click to watch video")
-
 ---
 
 ## Installeren
@@ -23,6 +19,8 @@ Opgelet: windows Smartscreen geeft op sommige computers melding van een "onbeken
 ---
 
 ## Gebruik
+
+Bekijk [hier](https://www.youtube.com/watch?v=8X_c_C34JhM) een video over de werking van het programma.
 
 Na de (automatische) installatie is er een snelkoppeling beschibaar in het startmenu en op het bureaublad.
 Bepaalde beperkingen op computers in bedrijven kunnen er voor zorgen dat deze snelkoppelingen niet of foutief worden aangemaakt, in dat geval kan u de applicatie uitvoeren door te navigeren naar de map waarin u de installatie heeft uitgevoerd en OTLWizard.exe aanklikken.
