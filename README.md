@@ -10,6 +10,8 @@ Bekijk hieronder de video over de werking van het programma:
 
 [![Click to watch video](https://i.imgur.com/6Yfp18P.png)](https://www.youtube.com/watch?v=8X_c_C34JhM "Click to watch video")
 
+Een idee? Een probleem ontdekt? Log uw probleem op [![De issue pagina](https://github.com/bertvanovermeir/OTL/issues)]
+
 ---
 
 ## Installeren
