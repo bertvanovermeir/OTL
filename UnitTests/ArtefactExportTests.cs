@@ -11,7 +11,7 @@ namespace UnitTests
         public void ArtefactExportTest_3_types_CSV()
         {
             // arrange           
-            var otldbpath = "./../../subset_3_types_netwerk.db";
+            var otldbpath = "./../../subset_3_types_netwerk.db"; 
             var subsetImporter = new SubsetImporter(otldbpath);
 
             var dbpath = "./../../Geometrie_Artefact_0.db";
