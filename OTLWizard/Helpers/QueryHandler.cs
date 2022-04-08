@@ -14,9 +14,9 @@ namespace OTLWizard.OTLObjecten
         {
             string strQuery = null;
             // open the queries file (queries in known order in file)
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\queries.dat"))
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\data\\queries.dat"))
             {
-                string[] lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\queries.dat", System.Text.Encoding.UTF8);
+                string[] lines = File.ReadAllLines(Directory.GetCurrentDirectory() + "\\data\\queries.dat", System.Text.Encoding.UTF8);
                 switch (Query)
                 {
                     case Enums.Query.Objects:

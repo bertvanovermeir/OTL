@@ -152,6 +152,7 @@
     <Compile Include="FrontEnd\LoadingWindow.Designer.cs">
       <DependentUpon>LoadingWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Helpers\ViewHandler.cs" />
     <Compile Include="Helpers\Enums.cs" />
     <Compile Include="ApplicationData\SubsetExporterXLS.cs" />
@@ -192,6 +193,19 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Data\install.ifp" />
+    <None Include="Data\OTLWizard_v2.3.0_manualInstall.zip" />
+    <None Include="Data\queries.bak" />
+    <Content Include="Data\queries.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Data\version.bak" />
+    <Content Include="Data\settings.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\version.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OTLWizard.OTLObjecten.OTL_ArtefactType.datasource" />
     <None Include="Properties\Settings.settings">
@@ -209,6 +223,20 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Data\backR.png" />
+    <Content Include="Data\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\logoR.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\otlR.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\OTLWizard_v2.3.0_installer.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

@@ -1,4 +1,5 @@
 ﻿using OTLWizard.ApplicationData;
+using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,6 +22,7 @@ namespace OTLWizard.OTLObjecten
 
         public static void Start()
         {
+            Settings.Init();
             if (!CheckVersion())
                 ViewHandler.Show("Een nieuwe versie is beschikaar. Het is aangeraden deze te installeren.", "Versiecontrole", MessageBoxIcon.Exclamation);
             ViewHandler.Start();
@@ -43,7 +45,7 @@ namespace OTLWizard.OTLObjecten
                 {
                     newestversion = item;
                 }
-                string[] lines2 = File.ReadAllLines("version.dat", System.Text.Encoding.UTF8);
+                string[] lines2 = File.ReadAllLines("data\\version.dat", System.Text.Encoding.UTF8);
                 foreach (string item in lines2)
                 {
                     currentversion = item;

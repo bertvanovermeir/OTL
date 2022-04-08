@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -102,7 +103,7 @@ namespace OTLWizard.OTLObjecten
                     {
                         using (var client = new WebClient())
                         {
-                            client.DownloadFile("https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/master/codelijsten/" + filename, localPath + filename);
+                            client.DownloadFile(Settings.Get("klpath") + filename, localPath + filename);
                         }
                     }
                     catch
