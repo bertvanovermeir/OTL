@@ -97,6 +97,7 @@
             this.label1.TabIndex = 25;
             this.label1.Text = "OTL Artefact Manager controleert welk geometrie dient aangeleverd te worden voor " +
     "bepaalde OTL klassen.";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // buttonExportArtefact
             // 

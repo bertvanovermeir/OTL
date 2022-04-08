@@ -23,12 +23,12 @@ namespace OTLWizard.Helpers
                 string[] lines = File.ReadAllLines("data\\lang.txt", System.Text.Encoding.UTF8);
                 foreach (string item in lines)
                 {
-                    if (item.Contains("=") && item.Contains("<" + language + ">"))
+                    if (item.Contains("=") && item.Contains("<" + language.ToUpper() + ">"))
                     {
                         try
                         {
                             string key = item.Split('=')[0].Split('>')[1];
-                            string value = item.Split('=')[1];
+                            string value = item.Split('=')[1].Replace("<br>","\n");
                             languages.Add(key.ToLower(), value);
                         }
                         catch

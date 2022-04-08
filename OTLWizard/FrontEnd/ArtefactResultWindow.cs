@@ -1,4 +1,5 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -21,6 +22,9 @@ namespace OTLWizard.FrontEnd
 
         private void ArtefactResultWindow_Load(object sender, EventArgs e)
         {
+            Text = Language.Get("artefactresultwindowheader");
+            button1.Text = Language.Get("arexit");
+            buttonExportArtefact.Text = Language.Get("arexport");
             List<OTL_ArtefactType> results = ApplicationHandler.GetArtefactResultData();
             List<OTL_ArtefactType> selected = new List<OTL_ArtefactType>();
 
@@ -51,7 +55,7 @@ namespace OTLWizard.FrontEnd
         private async void buttonExportArtefact_Click(object sender, EventArgs e)
         {
             SaveFileDialog fdlg = new SaveFileDialog();
-            fdlg.Title = "Sla Data op^naar Excel of CSV";
+            fdlg.Title = "Excel / CSV Export";
             fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
             fdlg.FileName = "artefact_oltver" + ApplicationHandler.GetOTLVersion() + "_export";
             fdlg.FilterIndex = 1;

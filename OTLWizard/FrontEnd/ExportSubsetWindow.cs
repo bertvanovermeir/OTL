@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
@@ -14,6 +15,25 @@ namespace OTLWizard
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            Text = Language.Get("exportsubsetwindowheader");
+            label1.Text = Language.Get("description1");
+            label2.Text = Language.Get("description2");
+            linkLabel1.Text = Language.Get("linkdescription1");
+            buttonSubset.Text = Language.Get("selectsubset");
+            buttonImportClasses.Text = Language.Get("importclasses");
+            label3.Text = Language.Get("description3");
+            label7.Text = Language.Get("otlversion");
+            label4.Text = Language.Get("generalsettings");
+            label5.Text = Language.Get("exampledata");
+            label8.Text = Language.Get("legacydata");
+            label6.Text = Language.Get("coffee");
+            buttonExportXLS.Text = Language.Get("exportsubset");
+            checkAllClasses.Text = Language.Get("checkallclasses");
+            checkKeuzelijsten.Text = Language.Get("checkkl");
+            checkVoorbeelddata.Text = Language.Get("checkexampledata");
+            checkAttributes.Text = Language.Get("checkattributes");
+            checkWKT.Text = Language.Get("checkwkt");
+            checkDeprecated.Text = Language.Get("checkdeprecated");
 
         }
 
@@ -32,7 +52,7 @@ namespace OTLWizard
             ListAllClasses.Items.Clear();
             buttonExportXLS.Enabled = false;
             OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Title = "Selecteer een subset";
+            fdlg.Title = Language.Get("selectsubsetfiledlg");
             fdlg.InitialDirectory = @"c:\";
             fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
             fdlg.FilterIndex = 2;
@@ -53,7 +73,7 @@ namespace OTLWizard
         private async void Export(object sender, EventArgs e)
         {
             SaveFileDialog fdlg = new SaveFileDialog();
-            fdlg.Title = "Sla Data op naar Excel of CSV";
+            fdlg.Title = Language.Get("arexport");
             fdlg.FileName = "subset_otlver" + ApplicationHandler.GetOTLVersion() + "_export"; 
             fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
             fdlg.FilterIndex= 1;

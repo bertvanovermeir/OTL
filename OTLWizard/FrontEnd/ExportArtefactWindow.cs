@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
@@ -14,7 +15,13 @@ namespace OTLWizard
 
         private void ExportArtefactWindow_Load(object sender, EventArgs e)
         {
-
+            Text = Language.Get("exportartefactwindowheader");
+            buttonSubset.Text = Language.Get("selectsubset");
+            button2.Text = Language.Get("selectartefact");
+            buttonImportClasses.Text = Language.Get("importclasses");
+            label1.Text = Language.Get("eadescription");
+            checkAllClasses.Text = Language.Get("checkallclasses");
+            buttonExportArtefact.Text = Language.Get("exportartefact");
         }
 
         private void terug(object sender, EventArgs e)
@@ -27,7 +34,7 @@ namespace OTLWizard
             ListAllClasses.Items.Clear();
             buttonExportArtefact.Enabled = false;
             OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Title = "Selecteer een subset";
+            fdlg.Title = Language.Get("selectsubsetfiledlg");
             fdlg.InitialDirectory = @"c:\";
             fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
             fdlg.FilterIndex = 2;
@@ -45,7 +52,7 @@ namespace OTLWizard
             ListAllClasses.Items.Clear();
             buttonExportArtefact.Enabled = false;
             OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Title = "Selecteer een artefactdatabase";
+            fdlg.Title = Language.Get("selectartfiledlg");
             fdlg.InitialDirectory = @"c:\";
             fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
             fdlg.FilterIndex = 2;
@@ -100,7 +107,7 @@ namespace OTLWizard
                 ViewHandler.Show(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
             } else
             {
-                ViewHandler.Show("Geen klassen geselecteerd.", "Fout", MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("noselection"), Language.Get("errorheader"), MessageBoxIcon.Error);
             }           
         }
 
@@ -122,6 +129,11 @@ namespace OTLWizard
         }
 
         private void ListAllClasses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }

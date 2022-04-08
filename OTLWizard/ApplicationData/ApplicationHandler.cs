@@ -25,7 +25,7 @@ namespace OTLWizard.OTLObjecten
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
-                ViewHandler.Show(Language.Get("header"), "Versiecontrole", MessageBoxIcon.Exclamation);
+                ViewHandler.Show(Language.Get("oldversion"), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
             ViewHandler.Start();
         }
 
@@ -65,14 +65,14 @@ namespace OTLWizard.OTLObjecten
         public static async Task ImportArtefact(string subsetPath, string artefactPath)
         {
             await ImportSubset(subsetPath);
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "Het Geometrie Artefact wordt geimporteerd.");            
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("gaimport"));            
             artefactConn = new ArtefactImporter(artefactPath);
             try
             {
                 await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
             } catch
             {
-                ViewHandler.Show("Het artefact kon niet worden geïmporteerd", "Algemene Fout", MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("gafail"), Language.Get("errorheader"), MessageBoxIcon.Error);
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
@@ -92,14 +92,14 @@ namespace OTLWizard.OTLObjecten
         /// <param name="klPath"></param>
         public static async Task<bool> ImportSubset(string dbPath, bool keuzelijsten = false)
         {
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De OTL Subset wordt geimporteerd.");
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("otlimport"));
             subsetConn = new SubsetImporter(dbPath, keuzelijsten);
             try
             {
                 await Task.Run(() => { subsetConn.Import(); });
             } catch
             {
-                ViewHandler.Show("De subset kon niet worden geïmporteerd. (Subset Versie < 2.0 of Corrupte Database)", "Algemene Fout", MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("otlfail"), Language.Get("errorheader"), MessageBoxIcon.Error);
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             return CheckDeprecated();          
@@ -132,16 +132,16 @@ namespace OTLWizard.OTLObjecten
             }
             if (showWarning)
             {
-                ViewHandler.Show("De volgende parameters en klasses uit de OTL worden niet meer gebruikt. Bij voorkeur kijkt u de subset eerst na." +
-                    "\nIndien u dit niet doet, zullen de ongeldige parameters ook worden geëxporteerd.\n\nKlassen (inclusief alle parameters):\n"
-                    + deprecatedclasses + "\n\nParameters (in een bestaande klasse):\n" + deprecatedparameters, "Kijk de subset na voor u verder gaat", MessageBoxIcon.Information);
+
+                ViewHandler.Show(Language.Get("deprecation") + "Classes (incl. parameters):\n"
+                    + deprecatedclasses + "\n\nParameters (in classes):\n" + deprecatedparameters, Language.Get("deprecationheader"), MessageBoxIcon.Information);
             }
             return showWarning;
         }
 
         public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
         {
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (CSV).");
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("templateexport") + "(CSV).");
             SubsetExporterCSV exp = new SubsetExporterCSV();
             bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
             bool successSelection = exp.SetSelectedClassesByUser(classes);
@@ -150,15 +150,15 @@ namespace OTLWizard.OTLObjecten
                 var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
-                    ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                    ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                 }
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-                ViewHandler.Show("Export voltooid", "Template export", MessageBoxIcon.Information);
+                ViewHandler.Show(Language.Get("exportfinished"), Language.Get("successheader"), MessageBoxIcon.Information);
             }
             else
             {
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-                ViewHandler.Show("Er zijn geen klassen geselecteerd of de subset is leeg.", "Fout bij exporteren", System.Windows.Forms.MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("selectionerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
 
@@ -171,7 +171,7 @@ namespace OTLWizard.OTLObjecten
         /// <param name="classes"></param>
         public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
         {
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De template wordt aangemaakt (XLSX).");
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("templateexport") + "(XLSX).");
             SubsetExporterXLS exp = new SubsetExporterXLS();
             bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
             bool successSelection = exp.SetSelectedClassesByUser(classes);
@@ -180,46 +180,46 @@ namespace OTLWizard.OTLObjecten
                 var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
-                    ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                    ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                 }
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-                ViewHandler.Show("Export voltooid", "Template export", MessageBoxIcon.Information);
+                ViewHandler.Show(Language.Get("exportfinished"), Language.Get("successheader"), MessageBoxIcon.Information);
             }
             else
             {
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-                ViewHandler.Show("Er zijn geen klassen geselecteerd of de subset is leeg.", "Fout bij exporteren", System.Windows.Forms.MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("selectionerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
             }
         }
 
         public static async Task ExportXlsArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
         {
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("artefactexport"));
             ArtefactExporterXLS exp = new ArtefactExporterXLS();
             var result = await Task.Run(() => exp.Export(exportPath, artefacten));
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             if (!result) 
             {
-                ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
             } else
             {
-                ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
+                ViewHandler.Show(Language.Get("exportfinished"), Language.Get("successheader"), MessageBoxIcon.Information);
             }
         }
 
         public static async Task ExportCSVArtefact(string exportPath, List<OTL_ArtefactType> artefacten)
         {
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, "De artefactinformatie wordt geëxporteerd.");
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("artefactexport"));
             ArtefactExporterCSV exp = new ArtefactExporterCSV();
             var result = await Task.Run(() => exp.Export(exportPath, artefacten));
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             if (!result)
             {
-                ViewHandler.Show("Kon het bestand niet opslaan, controleer of het in gebruik is.", "Fout bij opslaan", System.Windows.Forms.MessageBoxIcon.Error);
+                ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
             }
             else
             {
-                ViewHandler.Show("Export voltooid", "Artefact export", MessageBoxIcon.Information);
+                ViewHandler.Show(Language.Get("exportfinished"), Language.Get("successheader"), MessageBoxIcon.Information);
             }
         }
 

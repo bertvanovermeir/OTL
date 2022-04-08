@@ -1,6 +1,6 @@
 ﻿## default settings
 ##
-## URL for Github OTL dropdown listings (has to be RAW URL, example: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/master/codelijsten/)
+## URL for Github OTL dropdown listings (has to be RAW URL, example: https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/aim/codelijsten/)
 KlPath=https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/master/codelijsten/
 ## Language used in interface (NL/EN)
 Language=NL

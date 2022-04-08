@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows.Forms;
+using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
@@ -14,7 +15,14 @@ namespace OTLWizard
 
         private void HomeWindow_Load(object sender, EventArgs e)
         {
-
+            Text = Language.Get("homewindowheader");
+            label3.Text = Language.Get("homewindowheader") + " - " + Language.Get("changelanguage");
+            button1.Text = Language.Get("home1");
+            button3.Text = Language.Get("home3");
+            button2.Text = Language.Get("home2");
+            button4.Text = Language.Get("home4");
+            button5.Text = Language.Get("home5");
+            label1.Text = Language.Get("welcome");
         }
 
         private void label2_Click(object sender, EventArgs e)

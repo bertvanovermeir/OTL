@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using System;
 using System.Windows.Forms;
 
 namespace OTLWizard
@@ -32,7 +33,7 @@ namespace OTLWizard
 
         private void LoadingWindow_Load(object sender, EventArgs e)
         {
-
+            Text = Language.Get("loadingwindowheader");
         }
     }
 }
