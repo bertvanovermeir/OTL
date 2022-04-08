@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Xunit;
 using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 
 namespace UnitTests
 {
@@ -28,6 +29,7 @@ namespace UnitTests
         [Fact]
         public void SubsetImportTest_1_type_Keuzelijsten()
         {
+            Settings.Init();
             // arrange           
             var dbpath = "./../../subset_1_type_alle_attributen_bert.db";
             var subsetImporter = new SubsetImporter(dbpath,true);

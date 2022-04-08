@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OTLWizard.Helpers
 {
-    static class Settings
+    public static class Settings
     {
 
         public static Dictionary<string, string> values;
