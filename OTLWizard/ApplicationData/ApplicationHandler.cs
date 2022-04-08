@@ -23,8 +23,9 @@ namespace OTLWizard.OTLObjecten
         public static void Start()
         {
             Settings.Init();
+            Language.Init();
             if (!CheckVersion())
-                ViewHandler.Show("Een nieuwe versie is beschikaar. Het is aangeraden deze te installeren.", "Versiecontrole", MessageBoxIcon.Exclamation);
+                ViewHandler.Show(Language.Get("header"), "Versiecontrole", MessageBoxIcon.Exclamation);
             ViewHandler.Start();
         }
 

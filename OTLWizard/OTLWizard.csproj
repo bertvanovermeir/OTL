@@ -125,6 +125,7 @@
     <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
     <Compile Include="Helpers\DummyDataHandler.cs" />
+    <Compile Include="Helpers\Language.cs" />
     <Compile Include="Helpers\ParameterHandler.cs" />
     <Compile Include="Helpers\QueryHandler.cs" />
     <Compile Include="ApplicationData\SubsetImporter.cs" />
@@ -196,6 +197,9 @@
     <None Include="Data\install.ifp" />
     <None Include="Data\OTLWizard_v2.3.0_manualInstall.zip" />
     <None Include="Data\queries.bak" />
+    <Content Include="Data\lang.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\queries.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
