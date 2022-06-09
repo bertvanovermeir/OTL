@@ -114,7 +114,7 @@ namespace OTLWizard.OTLObjecten
             // finish
             sheet.Columns.AutoFit();
             sheet.Range["A1:F1"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;
-            sheet.Range["A1:Z1"].BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium, (Microsoft.Office.Interop.Excel.XlColorIndex)3, ColorTranslator.ToOle(Color.Black));
+            // sheet.Range["A1:Z1"].BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium, (Microsoft.Office.Interop.Excel.XlColorIndex)3, ColorTranslator.ToOle(Color.Black));
 
         }
 
