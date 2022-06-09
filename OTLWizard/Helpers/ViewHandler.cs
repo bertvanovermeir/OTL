@@ -12,6 +12,7 @@ namespace OTLWizard.OTLObjecten
         public static HomeWindow homeWindow = new HomeWindow();
         private static ExportArtefactWindow artefactWindow = new ExportArtefactWindow();
         private static ArtefactResultWindow artefactResult = new ArtefactResultWindow();
+        private static SettingsWindow settingsWindow = new SettingsWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -42,6 +43,9 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.SubsetMain:
                     exportXLSWindow.Hide();
                     break;
+                case Enums.Views.Settings:
+                    settingsWindow.Hide();
+                    break;
                 default:
                     break;
             }
@@ -52,6 +56,7 @@ namespace OTLWizard.OTLObjecten
                     loadingWindow = new LoadingWindow();
                     artefactWindow = new ExportArtefactWindow();
                     artefactResult = new ArtefactResultWindow();
+                    settingsWindow = new SettingsWindow();
                     homeWindow.Enabled = true;
                     homeWindow.Show();
                     homeWindow.Select();
@@ -72,6 +77,9 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.SubsetMain:
                     exportXLSWindow.Show();
                     exportXLSWindow.Select();
+                    break;
+                case Enums.Views.Settings:
+                    settingsWindow.Show();
                     break;
                 default:
                     break;

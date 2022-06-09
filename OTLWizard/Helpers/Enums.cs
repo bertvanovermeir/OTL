@@ -17,6 +17,7 @@
             ArtefactMain,
             ArtefactResult,
             SubsetMain,
+            Settings,
             isNull
         }
 

@@ -4,3 +4,4 @@
 KlPath=https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/master/codelijsten/
 ## Language used in interface (NL/EN)
 Language=NL
+types=onderdeel|implementatieelement|levenscyclus|installatie

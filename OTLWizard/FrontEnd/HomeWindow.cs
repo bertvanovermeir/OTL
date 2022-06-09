@@ -22,6 +22,7 @@ namespace OTLWizard
             button2.Text = Language.Get("home2");
             button4.Text = Language.Get("home4");
             button5.Text = Language.Get("home5");
+            button6.Text = Language.Get("home6");
             label1.Text = Language.Get("welcome");
         }
 
@@ -64,6 +65,11 @@ namespace OTLWizard
         private void button5_Click(object sender, EventArgs e)
         {
             Process.Start("https://sites.google.com/mow.vlaanderen.be/davie-aanlevering/startpagina?authuser=0");
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ViewHandler.Show(Enums.Views.Settings, Enums.Views.Home, null);
         }
     }
 }

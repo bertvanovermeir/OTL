@@ -95,7 +95,7 @@ namespace OTLWizard.OTLObjecten
             {
                 foreach (OTL_ObjectType OTLClass in OTL_ObjectTypes)
                 {
-                    string tempquery = QueryHandler.Get(Enums.Query.Parameters).Replace("[OSLOCLASS]", OTLClass.otlName);
+                    string tempquery = QueryHandler.Get(Enums.Query.Parameters).Replace("[OSLOCLASS]", OTLClass.uri);
                     sqlite_cmd.CommandText = tempquery;
                     var sqlite_datareader = sqlite_cmd.ExecuteReader();
                     // The SQLiteDataReader allows us to run through each row per loop
