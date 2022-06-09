@@ -31,7 +31,8 @@ namespace OTLWizard.OTLObjecten
             this.help = help;
             this.wkt = wkt;
             this.checklistoptions = checklistoptions;
-            return run();
+            bool temp = run();
+            return temp;
         }
 
         private void processClass(Workbook workbook, OTL_ObjectType temp)
@@ -138,6 +139,19 @@ namespace OTLWizard.OTLObjecten
             // first we need to check how many entries we have, create a new workbook per 
             Application excel;
             Workbook workbook;
+            // attempt at warning user
+            try
+            {
+                excel = new Application
+                {
+                    Visible = false,
+                    DisplayAlerts = false
+                };
+                workbook = excel.Workbooks.Add(Type.Missing);
+            } catch
+            {
+                return false;
+            }
             excel = new Application
             {
                 Visible = false,
