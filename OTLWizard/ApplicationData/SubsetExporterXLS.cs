@@ -152,12 +152,6 @@ namespace OTLWizard.OTLObjecten
             {
                 return false;
             }
-            excel = new Application
-            {
-                Visible = false,
-                DisplayAlerts = false
-            };
-            workbook = excel.Workbooks.Add(Type.Missing);
             // create an empty worksheet for tables, if dropdownlists is true
             if(checklistoptions)
             {
