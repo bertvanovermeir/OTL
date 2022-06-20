@@ -39,7 +39,7 @@ namespace OTLWizard.OTLObjecten
             {
                 using (var client = new System.Net.WebClient())
                 {
-                    client.DownloadFile("https://raw.githubusercontent.com/bertvanovermeir/OTL/master/OTLWizard/data/version.dat", downloadpath + "version.dat");
+                    client.DownloadFile("https://raw.githubusercontent.com/bertvanovermeir/OTL/master/OTLWizard/Data/version.dat", downloadpath + "version.dat");
                 }
                 string[] lines = File.ReadAllLines(downloadpath + "version.dat", System.Text.Encoding.UTF8);
                 foreach (string item in lines)

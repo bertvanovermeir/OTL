@@ -42,7 +42,7 @@ namespace OTLWizard.OTLObjecten
             int start = 1;
             if (help)
             {
-                start = 2;
+                start = 3;
             }
             if (dummydata)
             {
@@ -71,8 +71,10 @@ namespace OTLWizard.OTLObjecten
                 // now set the help messages
                 if (help)
                 {
+                    sheet.Cells[2, i + 1].Formula = "=HYPERLINK(\"" + p.DataTypeString + "\")";
                     sheet.Cells[1, i + 1] = p.Description;
                     sheet.Range[sheet.Cells[1, i + 1], sheet.Cells[1, i + 1]].EntireRow.WrapText = true;
+                    sheet.Range["A2:X2"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;
                 }
                 // set default value
                 sheet.Cells[start + 1, i + 1] = p.DefaultValue;
@@ -114,7 +116,7 @@ namespace OTLWizard.OTLObjecten
             }
             // finish
             sheet.Columns.AutoFit();
-            sheet.Range["A1:F1"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;
+            sheet.Range["A1:X1"].EntireRow.Interior.Color = System.Drawing.Color.LightGray;
             // sheet.Range["A1:Z1"].BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlMedium, (Microsoft.Office.Interop.Excel.XlColorIndex)3, ColorTranslator.ToOle(Color.Black));
 
         }

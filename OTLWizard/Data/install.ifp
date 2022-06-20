@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 3.1.0
+Program version = 3.2.0
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -14,8 +14,8 @@ Windows 8 = 1
 Windows 10 = 1
 Windows Server 2016 = 0
 DoNotCheckOS = 1
-Company name = Ruber Software
-Website = https://
+Company name = BitsOfData
+Website = https://www.bitsofdata.be
 SFA = 1
 DFA = 1
 Comp = 1
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v2.3.0_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v3.2.0_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -109,13 +109,13 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.CSharp.d
 46.7 KB
 dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe
-992 KB
+1000.5 KB
 exe
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.config
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-197.5 KB
+211.5 KB
 pdb
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Buffers.dll
 27.3 KB
@@ -251,18 +251,30 @@ By email: bert.vanovermeir@bitsofdata.be\par
 [Variables]
 [SCs]
 Desktop
-OTL Wizard
+OTL Wizard 3.2.0
 <InstallPath>\OTLWizard.exe
 
-<InstallPath>\icon.ico
+<InstallPath>\data\icon.ico
 0
 Startmenu
-OTL Wizard
+OTL Wizard 3.2.0
 <InstallPath>\OTLWizard.exe
 
-<InstallPath>\icon.ico
+<InstallPath>\data\icon.ico
 0
 [IFP_End]
 [Serials]
 [Serials_End]
 [Commands]
+Shell Execute
+del "C:\Program Files (x86)\Ruber Software\OTL Wizard"  /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Ruber Software\OTL Wizard\OTL Wizard.lnk" /q /f /s
+
+

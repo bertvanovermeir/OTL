@@ -62,7 +62,7 @@ namespace UnitTests
 
             // assert
             var objectTypes = subsetImporter.GetOTLObjectTypes();
-            Assert.Equal(398, objectTypes.Count);
+            Assert.Equal(403, objectTypes.Count);
         }
     }
 }

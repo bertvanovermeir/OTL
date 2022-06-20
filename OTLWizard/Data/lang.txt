@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 3.1.0
-<EN>homewindowheader=OTLWizard 3.1.0
+<NL>homewindowheader=OTLWizard 3.2.0
+<EN>homewindowheader=OTLWizard 3.2.0
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
