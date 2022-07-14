@@ -8,6 +8,8 @@ namespace OTLWizard
 {
     public partial class ExportSubsetWindow : Form
     {
+        private bool importDone = false;
+
         public ExportSubsetWindow()
         {
             InitializeComponent();
@@ -34,6 +36,7 @@ namespace OTLWizard
             checkAttributes.Text = Language.Get("checkattributes");
             checkWKT.Text = Language.Get("checkwkt");
             checkDeprecated.Text = Language.Get("checkdeprecated");
+            buttonArtefact.Text = Language.Get("buttonartefact");
 
         }
 
@@ -93,11 +96,11 @@ namespace OTLWizard
                 }
                 if(fdlg.FilterIndex == 1)
                 {
-                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
+                    await ApplicationHandler.ExportXlsSubset(fdlg.FileName, textBoxArtefact.Text, Decimal.ToInt32(numericUpDown1.Value), checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
                 }
                 else
                 {
-                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
+                    await ApplicationHandler.ExportCSVSubset(fdlg.FileName, textBoxArtefact.Text, Decimal.ToInt32(numericUpDown1.Value), checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
                 }
             }
             
@@ -140,8 +143,8 @@ namespace OTLWizard
                 
             }
             buttonExportXLS.Enabled = true;
-
-            TextVersion.Text = ApplicationHandler.GetOTLVersion();           
+            TextVersion.Text = ApplicationHandler.GetOTLVersion();
+            importDone = true;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -180,14 +183,66 @@ namespace OTLWizard
             if(checkVoorbeelddata.Checked)
             {
                 checkAttributes.Enabled = true;
-                checkWKT.Enabled = true;
+                checkWKT.Enabled=true;
+                numericUpDown1.Enabled=true;
+
             } else
             {
-                checkWKT.Enabled=false;
-                checkWKT.Checked=false;
                 checkAttributes.Enabled = false;
                 checkAttributes.Checked=false;
+                checkWKT.Enabled = false;
+                checkWKT.Checked=false;
+                numericUpDown1.Enabled = false;
+
             }
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void checkWKT_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkWKT.Checked)
+            {
+                buttonArtefact.Enabled = true;
+                buttonExportXLS.Enabled = false;
+            
+            } else
+            {
+                buttonArtefact.Enabled = false;
+                if(importDone)
+                    buttonExportXLS.Enabled = true;
+            }
+                
+              
+        }
+
+        private void buttonArtefact_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = Language.Get("selectartfiledlg");
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
+            fdlg.FilterIndex = 2;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                textBoxArtefact.Text = fdlg.FileName;
+                if (importDone)
+                    buttonExportXLS.Enabled = true;
+            }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

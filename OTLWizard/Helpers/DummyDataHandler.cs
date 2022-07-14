@@ -11,9 +11,11 @@ namespace OTLWizard.Helpers
     {
 
         public static Random rand;
+        private static List<OTL_ArtefactType> artefacts;
 
-        public static void initRandom()
+        public static void initRandom(List<OTL_ArtefactType> oTL_ArtefactTypes)
         {
+            artefacts = oTL_ArtefactTypes;
             rand = new Random();
         }
         
@@ -22,7 +24,7 @@ namespace OTLWizard.Helpers
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public static string GetDummyValue(OTL_Parameter p)
+        public static string GetDummyValue(OTL_Parameter p, OTL_ObjectType o)
         {
             var result = "";
             var prefix = "dummy_";
@@ -88,7 +90,7 @@ namespace OTLWizard.Helpers
             }
             else if (DataTypeString.Contains("WKT"))
             {
-                result = GetWKTRandomString();
+                result = GetWKTRandomString(o);
             }
             else
             {
@@ -122,26 +124,42 @@ namespace OTLWizard.Helpers
             return ("_" + str).ToLower();
         }
 
-        private static string GetWKTRandomString()
+        private static string GetWKTRandomString(OTL_ObjectType o)
         {
+            // not so random though, as the artefact will calculate if geometry is required.
             string temp = "";
+            var geom = artefacts.Where(w => w.URL == o.uri).Select(q => q).FirstOrDefault();
+            // kies poly, line of point
             
 
-            // kies poly, line of point
-            int keuze = rand.Next(0, 3);
-
-            switch(keuze)
+            if (geom != null)
             {
-                case 0: 
-                    temp = "POLYGON Z (" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + ")";
-                    break;
-                case 1:
-                    temp = "LINESTRING Z (" + GetCoord() + "," + GetCoord() +  ")";
-                    break;
-                case 2:
-                    temp = "POINT Z (" + GetCoord() + ")";
-                    break;
-            }
+                if(geom.overerving.Contains("meten"))
+                {
+                    string keuze = geom.geometrie;
+                    switch (keuze)
+                    {
+                        case "polygoon 3D,":
+                            temp = "POLYGON Z (" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + ")";
+                            break;
+                        case "lijn 3D":
+                            temp = "LINESTRING Z (" + GetCoord() + "," + GetCoord() + ")";
+                            break;
+                        case "punt 3D,":
+                            temp = "POINT Z (" + GetCoord() + ")";
+                            break;
+                        default:
+                            temp = "";
+                            break;
+                    }
+                } else
+                {
+                    temp = "";
+                }
+            } else
+            {
+                temp = "";
+            }          
             return temp;
         }
 

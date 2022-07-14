@@ -1,0 +1,3 @@
+﻿www.dataweb.de/de/NShape.html;www.dataweb.de/de/index.html;724
+www.google.de;www.dataweb.de/de/index.html;1248
+www.dataweb.de/de/NShape.html;www.dataweb.de/en/TurboDB.html;13

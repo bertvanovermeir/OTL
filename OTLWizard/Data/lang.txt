@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 3.2.0
-<EN>homewindowheader=OTLWizard 3.2.0
+<NL>homewindowheader=OTLWizard 4.0.0
+<EN>homewindowheader=OTLWizard 4.0.0
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -77,6 +77,10 @@
 <EN>home4=Deliver data in DAVIE
 <NL>home5=Handleiding DAVIE
 <EN>home5=DAVIE manual
+<NL>home6=Instellingen
+<EN>home6=Settings
+<NL>home7=Relaties aanmaken en visualiseren vanuit bestaande data
+<EN>home7=Create and visualise relations from existing data
 <NL>welcome=Welkom, maak een keuze...
 <EN>welcome=Welcome, please pick an option...
 <NL>changelanguage=Om de taal te wijzigen, verander de "language" tag in het setting.txt bestand. Herstart de applicatie.
@@ -105,11 +109,18 @@
 <EN>exportsubset=Export subset to XLS or CSV
 <NL>checkkl=Geen keuzelijstopties aanmaken
 <EN>checkkl=Do not generate Dropdownlistings
-<NL>checkexampledata=Voorbeelddata genereren
-<EN>checkexampledata=Generate example data
+<NL>checkexampledata=Voorbeelddata genereren - aantal lijnen: 
+<EN>checkexampledata=Generate example data - amount of lines: 
 <NL>checkattributes=Exporteer een omschrijving van elk attribuut
 <EN>checkattributes=Export a description of each attribute
-<NL>checkwkt=Kolom geometrie toevoegen (WKT)
-<EN>checkwkt=add Geometry column (WKT)
+<NL>checkwkt=Kolom geometrie toevoegen (WKT) - vereist geometrieartefact
+<EN>checkwkt=add Geometry column (WKT) - requires Geometry Artefact
 <NL>checkdeprecated=Deprecated attributen en klassen markeren met "[DEPRECATED]"
 <EN>checkdeprecated=Mark deprecated attributes and classes with "[DEPRECATED]"
+<NL>buttonartefact=Selecteer Geometrie Artefact
+<EN>buttonartefact=Select Geometry Artefact
+<NL>geometryoptions=Geometrie
+<EN>geometryoptions=Geometry
+
+<NL>experimental=Functies in ontwikkeling - gebruik op eigen risico
+<EN>experimental=Functies in ontwikkeling - gerbuik op eigen risico

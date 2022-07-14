@@ -51,6 +51,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.checkDeprecated = new System.Windows.Forms.CheckBox();
+            this.buttonArtefact = new System.Windows.Forms.Button();
+            this.textBoxArtefact = new System.Windows.Forms.TextBox();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -88,7 +92,7 @@
             // 
             this.buttonSubset.Location = new System.Drawing.Point(15, 78);
             this.buttonSubset.Name = "buttonSubset";
-            this.buttonSubset.Size = new System.Drawing.Size(153, 23);
+            this.buttonSubset.Size = new System.Drawing.Size(168, 23);
             this.buttonSubset.TabIndex = 4;
             this.buttonSubset.Text = "Selecteer een subset...";
             this.buttonSubset.UseVisualStyleBackColor = true;
@@ -99,9 +103,9 @@
             this.textBoxSubset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxSubset.Enabled = false;
-            this.textBoxSubset.Location = new System.Drawing.Point(174, 80);
+            this.textBoxSubset.Location = new System.Drawing.Point(189, 80);
             this.textBoxSubset.Name = "textBoxSubset";
-            this.textBoxSubset.Size = new System.Drawing.Size(614, 20);
+            this.textBoxSubset.Size = new System.Drawing.Size(641, 20);
             this.textBoxSubset.TabIndex = 5;
             this.textBoxSubset.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -109,7 +113,7 @@
             // 
             this.buttonExportXLS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExportXLS.Enabled = false;
-            this.buttonExportXLS.Location = new System.Drawing.Point(618, 415);
+            this.buttonExportXLS.Location = new System.Drawing.Point(660, 487);
             this.buttonExportXLS.Name = "buttonExportXLS";
             this.buttonExportXLS.Size = new System.Drawing.Size(170, 23);
             this.buttonExportXLS.TabIndex = 6;
@@ -120,7 +124,7 @@
             // buttonImportClasses
             // 
             this.buttonImportClasses.Enabled = false;
-            this.buttonImportClasses.Location = new System.Drawing.Point(15, 107);
+            this.buttonImportClasses.Location = new System.Drawing.Point(15, 137);
             this.buttonImportClasses.Name = "buttonImportClasses";
             this.buttonImportClasses.Size = new System.Drawing.Size(153, 23);
             this.buttonImportClasses.TabIndex = 11;
@@ -134,10 +138,10 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.ListAllClasses.Enabled = false;
             this.ListAllClasses.FormattingEnabled = true;
-            this.ListAllClasses.Location = new System.Drawing.Point(15, 136);
+            this.ListAllClasses.Location = new System.Drawing.Point(15, 175);
             this.ListAllClasses.Name = "ListAllClasses";
             this.ListAllClasses.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.ListAllClasses.Size = new System.Drawing.Size(374, 303);
+            this.ListAllClasses.Size = new System.Drawing.Size(374, 329);
             this.ListAllClasses.TabIndex = 12;
             this.ListAllClasses.SelectedIndexChanged += new System.EventHandler(this.ListAllClasses_SelectedIndexChanged);
             // 
@@ -145,7 +149,7 @@
             // 
             this.checkAllClasses.AutoSize = true;
             this.checkAllClasses.Enabled = false;
-            this.checkAllClasses.Location = new System.Drawing.Point(412, 155);
+            this.checkAllClasses.Location = new System.Drawing.Point(412, 194);
             this.checkAllClasses.Name = "checkAllClasses";
             this.checkAllClasses.Size = new System.Drawing.Size(129, 17);
             this.checkAllClasses.TabIndex = 13;
@@ -157,7 +161,7 @@
             // 
             this.checkAttributes.AutoSize = true;
             this.checkAttributes.Enabled = false;
-            this.checkAttributes.Location = new System.Drawing.Point(412, 257);
+            this.checkAttributes.Location = new System.Drawing.Point(412, 291);
             this.checkAttributes.Name = "checkAttributes";
             this.checkAttributes.Size = new System.Drawing.Size(232, 17);
             this.checkAttributes.TabIndex = 14;
@@ -169,8 +173,8 @@
             // 
             this.checkKeuzelijsten.AutoSize = true;
             this.checkKeuzelijsten.Enabled = false;
-            this.checkKeuzelijsten.Location = new System.Drawing.Point(412, 178);
-            this.checkKeuzelijsten.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
+            this.checkKeuzelijsten.Location = new System.Drawing.Point(412, 217);
+            this.checkKeuzelijsten.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             this.checkKeuzelijsten.Name = "checkKeuzelijsten";
             this.checkKeuzelijsten.Size = new System.Drawing.Size(179, 17);
             this.checkKeuzelijsten.TabIndex = 15;
@@ -183,7 +187,7 @@
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(622, 399);
+            this.label6.Location = new System.Drawing.Point(664, 471);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(166, 13);
             this.label6.TabIndex = 18;
@@ -193,7 +197,7 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(736, 9);
+            this.button1.Location = new System.Drawing.Point(778, 9);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(52, 54);
             this.button1.TabIndex = 19;
@@ -204,7 +208,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(177, 112);
+            this.label3.Location = new System.Drawing.Point(174, 142);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(336, 13);
             this.label3.TabIndex = 20;
@@ -215,11 +219,11 @@
             // 
             this.checkVoorbeelddata.AutoSize = true;
             this.checkVoorbeelddata.Enabled = false;
-            this.checkVoorbeelddata.Location = new System.Drawing.Point(412, 234);
+            this.checkVoorbeelddata.Location = new System.Drawing.Point(412, 268);
             this.checkVoorbeelddata.Name = "checkVoorbeelddata";
-            this.checkVoorbeelddata.Size = new System.Drawing.Size(146, 17);
+            this.checkVoorbeelddata.Size = new System.Drawing.Size(214, 17);
             this.checkVoorbeelddata.TabIndex = 21;
-            this.checkVoorbeelddata.Text = "Voorbeelddata genereren";
+            this.checkVoorbeelddata.Text = "Voorbeelddata genereren - aantal lijnen:";
             this.checkVoorbeelddata.UseVisualStyleBackColor = true;
             this.checkVoorbeelddata.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
@@ -227,18 +231,18 @@
             // 
             this.checkWKT.AutoSize = true;
             this.checkWKT.Enabled = false;
-            this.checkWKT.Location = new System.Drawing.Point(412, 280);
-            this.checkWKT.Margin = new System.Windows.Forms.Padding(3, 3, 3, 20);
+            this.checkWKT.Location = new System.Drawing.Point(412, 314);
             this.checkWKT.Name = "checkWKT";
             this.checkWKT.Size = new System.Drawing.Size(192, 17);
             this.checkWKT.TabIndex = 22;
             this.checkWKT.Text = "Kolom geometrie toevoegen (WKT)";
             this.checkWKT.UseVisualStyleBackColor = true;
+            this.checkWKT.CheckedChanged += new System.EventHandler(this.checkWKT_CheckedChanged);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(395, 136);
+            this.label4.Location = new System.Drawing.Point(395, 175);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(109, 13);
@@ -248,7 +252,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(395, 215);
+            this.label5.Location = new System.Drawing.Point(395, 249);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(131, 13);
@@ -259,7 +263,7 @@
             // 
             this.TextVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TextVersion.Enabled = false;
-            this.TextVersion.Location = new System.Drawing.Point(725, 105);
+            this.TextVersion.Location = new System.Drawing.Point(767, 134);
             this.TextVersion.Name = "TextVersion";
             this.TextVersion.Size = new System.Drawing.Size(63, 20);
             this.TextVersion.TabIndex = 25;
@@ -269,17 +273,18 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Enabled = false;
-            this.label7.Location = new System.Drawing.Point(659, 108);
+            this.label7.Location = new System.Drawing.Point(701, 137);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(60, 13);
             this.label7.TabIndex = 26;
             this.label7.Text = "OTL Versie";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(395, 317);
-            this.label8.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.label8.Location = new System.Drawing.Point(395, 349);
+            this.label8.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
             this.label8.TabIndex = 27;
@@ -289,20 +294,59 @@
             // 
             this.checkDeprecated.AutoSize = true;
             this.checkDeprecated.Enabled = false;
-            this.checkDeprecated.Location = new System.Drawing.Point(412, 336);
+            this.checkDeprecated.Location = new System.Drawing.Point(412, 368);
             this.checkDeprecated.Name = "checkDeprecated";
             this.checkDeprecated.Size = new System.Drawing.Size(342, 17);
             this.checkDeprecated.TabIndex = 28;
             this.checkDeprecated.Text = "Deprecated attributen en klassen markeren met \"[DEPRECATED]\"";
             this.checkDeprecated.UseVisualStyleBackColor = true;
             // 
+            // buttonArtefact
+            // 
+            this.buttonArtefact.Enabled = false;
+            this.buttonArtefact.Location = new System.Drawing.Point(15, 107);
+            this.buttonArtefact.Name = "buttonArtefact";
+            this.buttonArtefact.Size = new System.Drawing.Size(168, 24);
+            this.buttonArtefact.TabIndex = 29;
+            this.buttonArtefact.Text = "Geometrie artefact Selecteren";
+            this.buttonArtefact.UseVisualStyleBackColor = true;
+            this.buttonArtefact.Click += new System.EventHandler(this.buttonArtefact_Click);
+            // 
+            // textBoxArtefact
+            // 
+            this.textBoxArtefact.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxArtefact.Enabled = false;
+            this.textBoxArtefact.Location = new System.Drawing.Point(189, 108);
+            this.textBoxArtefact.Name = "textBoxArtefact";
+            this.textBoxArtefact.Size = new System.Drawing.Size(641, 20);
+            this.textBoxArtefact.TabIndex = 30;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Enabled = false;
+            this.numericUpDown1.Location = new System.Drawing.Point(633, 265);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.ReadOnly = true;
+            this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
+            this.numericUpDown1.TabIndex = 31;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
             // ExportSubsetWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(842, 522);
             this.ControlBox = false;
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.textBoxArtefact);
+            this.Controls.Add(this.buttonArtefact);
             this.Controls.Add(this.checkDeprecated);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
@@ -331,6 +375,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Export OTL template";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,6 +405,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkDeprecated;
+        private System.Windows.Forms.Button buttonArtefact;
+        private System.Windows.Forms.TextBox textBoxArtefact;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

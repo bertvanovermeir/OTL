@@ -19,11 +19,13 @@ namespace OTLWizard.OTLObjecten
         private bool checklistoptions;
         private bool wkt;
         private bool deprecated;
+        private List<OTL_ArtefactType> oTL_ArtefactTypes;
+        private int amountExamples;
 
         public SubsetExporterXLS()
         {}
 
-        public override bool Export(string path, bool help, bool checklistoptions, bool dummydata, bool wkt, bool deprecated)
+        public override bool Export(string path, List<OTL_ArtefactType> oTL_ArtefactTypes, int amountExamples, bool help, bool checklistoptions, bool dummydata, bool wkt, bool deprecated)
         {
             this.dummydata = dummydata;
             this.path = path;
@@ -31,6 +33,8 @@ namespace OTLWizard.OTLObjecten
             this.help = help;
             this.wkt = wkt;
             this.checklistoptions = checklistoptions;
+            this.oTL_ArtefactTypes = oTL_ArtefactTypes;
+            this.amountExamples = amountExamples;
             bool temp = run();
             return temp;
         }
@@ -46,7 +50,7 @@ namespace OTLWizard.OTLObjecten
             }
             if (dummydata)
             {
-                DummyDataHandler.initRandom();
+                DummyDataHandler.initRandom(oTL_ArtefactTypes);
             }
             if(wkt)
             {
@@ -81,9 +85,9 @@ namespace OTLWizard.OTLObjecten
                 // overwrite if dummydata
                 if (dummydata)
                 {
-                    for(int j = 1; j < 10; j++)
+                    for(int j = 1; j < amountExamples+1 ; j++)
                     {
-                        sheet.Cells[start + j, i + 1] = DummyDataHandler.GetDummyValue(p);
+                        sheet.Cells[start + j, i + 1] = DummyDataHandler.GetDummyValue(p, temp);
                     }                  
                 }
                 // now fill in dropdowns if they are applicable

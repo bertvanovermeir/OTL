@@ -59,7 +59,10 @@ namespace OTLWizard.OTLObjecten
 
         public List<OTL_ArtefactType> GetOTLArtefactTypes()
         {
-            return OTL_ArtefactTypes;
+            if(OTL_ArtefactTypes == null)
+                return new List<OTL_ArtefactType>();
+            else
+                return OTL_ArtefactTypes;
         }
     }
 }

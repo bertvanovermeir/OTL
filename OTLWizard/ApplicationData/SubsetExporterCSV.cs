@@ -15,7 +15,7 @@ namespace OTLWizard.ApplicationData
         public SubsetExporterCSV()
         {}
 
-        public override bool Export(string path, bool help, bool dummydata, bool wkt, bool deprecated, bool checklistoptions = false)
+        public override bool Export(string path, List<OTL_ArtefactType> oTL_ArtefactTypes, int amountExamples,  bool help, bool dummydata, bool wkt, bool deprecated, bool checklistoptions = false)
         {
             foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
             {
@@ -49,8 +49,11 @@ namespace OTLWizard.ApplicationData
                 matrix.Add(dotnotaties);
                 if(dummydata)
                 {
-                    DummyDataHandler.initRandom();
-                    matrix.Add(otlklasse.GetParameters().Select(y => DummyDataHandler.GetDummyValue(y)).ToArray());
+                    DummyDataHandler.initRandom(oTL_ArtefactTypes);
+                    for (int i = 0; i < amountExamples; i++)
+                    {
+                        matrix.Add(otlklasse.GetParameters().Select(y => DummyDataHandler.GetDummyValue(y, otlklasse)).ToArray());
+                    }
                 }
                 // write to file
                 var success = WriteCSV(filename, matrix, ';');

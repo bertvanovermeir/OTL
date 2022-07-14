@@ -23,6 +23,7 @@ namespace OTLWizard
             button4.Text = Language.Get("home4");
             button5.Text = Language.Get("home5");
             button6.Text = Language.Get("home6");
+            button7.Text = Language.Get("home7");
             label1.Text = Language.Get("welcome");
         }
 
@@ -44,12 +45,13 @@ namespace OTLWizard
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
-
+            label1.Text = Language.Get("experimental");
+            button7.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -70,6 +72,16 @@ namespace OTLWizard
         private void button6_Click(object sender, EventArgs e)
         {
             ViewHandler.Show(Enums.Views.Settings, Enums.Views.Home, null);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            ViewHandler.Show(Enums.Views.Relations, Enums.Views.Home, null);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

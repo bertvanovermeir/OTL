@@ -139,7 +139,7 @@ namespace OTLWizard.OTLObjecten
             return showWarning;
         }
 
-        public static async Task ExportCSVSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
+        public static async Task ExportCSVSubset(string exportPath, string wktpath, int amountExamples, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("templateexport") + "(CSV).");
             SubsetExporterCSV exp = new SubsetExporterCSV();
@@ -147,7 +147,20 @@ namespace OTLWizard.OTLObjecten
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
             {
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, dummyData, wkt, deprecated));
+                // test if WKT then import artefact
+                artefactConn = new ArtefactImporter(wktpath);
+                if (wkt)
+                {
+                    try
+                    {
+                        await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
+                    }
+                    catch
+                    {
+                        ViewHandler.Show(Language.Get("gafail"), Language.Get("errorheader"), MessageBoxIcon.Error);
+                    }
+                }
+                var result = await Task.Run(() => exp.Export(exportPath, artefactConn.GetOTLArtefactTypes(),amountExamples, withDescriptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
                     ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
@@ -169,15 +182,28 @@ namespace OTLWizard.OTLObjecten
         /// <param name="withDescriptions"></param>
         /// <param name="withChecklistOptions"></param>
         /// <param name="classes"></param>
-        public static async Task ExportXlsSubset(string exportPath, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
+        public static async Task ExportXlsSubset(string exportPath, string wktpath, int amountExamples, Boolean withDescriptions, Boolean withChecklistOptions, Boolean dummyData, Boolean wkt, Boolean deprecated, string[] classes)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("templateexport") + "(XLSX).");
             SubsetExporterXLS exp = new SubsetExporterXLS();
             bool successSubset = exp.SetOTLSubset(subsetConn.GetOTLObjectTypes());
             bool successSelection = exp.SetSelectedClassesByUser(classes);
             if (successSubset && successSelection)
-            {               
-                var result = await Task.Run(() => exp.Export(exportPath, withDescriptions, withChecklistOptions, dummyData, wkt, deprecated));
+            {
+                // test if WKT then import artefact
+                artefactConn = new ArtefactImporter(wktpath);
+                if (wkt)
+                {          
+                    try
+                    {
+                        await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
+                    }
+                    catch
+                    {
+                        ViewHandler.Show(Language.Get("gafail"), Language.Get("errorheader"), MessageBoxIcon.Error);
+                    }
+                }
+                var result = await Task.Run(() => exp.Export(exportPath, artefactConn.GetOTLArtefactTypes(), amountExamples, withDescriptions, withChecklistOptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
                     ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
@@ -242,6 +268,51 @@ namespace OTLWizard.OTLObjecten
             return artefactConn.GetOTLArtefactTypes();
         }
 
-      
+        /////////////////// RELATION TOOL FUNCTIONS /////////////////////////////
+
+        public static RealDataImporter realImporter;
+
+        public static bool R_ImportRealRelationData(string[] paths)
+        {
+            realImporter = new RealDataImporter();
+            var returnvalue = realImporter.ImportCSV(paths[0]);           
+            return returnvalue;
+        }
+
+        public static List<OTL_Entity> R_GetImportedEntities()
+        {
+            return realImporter.GetEntities();
+        }
+
+        public static void R_SaveRelationState(string path)
+        {
+
+        }
+
+        public static void R_LoadRelationState(string path)
+        {
+
+        }
+
+        public static void R_ExportRealRelationData(string path)
+        {
+
+        }
+
+        public static string[] R_GetPossibleRelations(string otlclassURI)
+        {
+            return null;
+        }
+
+        public static string R_CreateNewRealRelation(string otlURI1, string otlURI2, string relname)
+        {
+            return null;
+        }
+
+        public static void R_RemoveRealRelation(string relname)
+        {
+            
+        }
+
     }
 }

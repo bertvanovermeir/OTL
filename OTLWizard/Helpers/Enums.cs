@@ -18,6 +18,7 @@
             ArtefactResult,
             SubsetMain,
             Settings,
+            Relations,
             isNull
         }
 

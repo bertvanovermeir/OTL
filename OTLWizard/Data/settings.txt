@@ -5,3 +5,5 @@ KlPath=https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenv
 ## Language used in interface (NL/EN)
 Language=NL
 types=onderdeel|implementatieelement|levenscyclus|installatie
+otlidentifier=assetid.identificator
+otlclassuri=typeuri
