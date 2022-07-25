@@ -115,7 +115,7 @@ namespace OTLWizard.OTLObjecten
                 }
             }
 
-            // RELATIONS (unused for now, but is imported anyway for future use)
+            // RELATIONS 
             using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {
                 sqlite_cmd.CommandText = QueryHandler.Get(Enums.Query.Relations); ;

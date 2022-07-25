@@ -270,18 +270,46 @@ namespace OTLWizard.OTLObjecten
 
         /////////////////// RELATION TOOL FUNCTIONS /////////////////////////////
 
-        public static RealDataImporter realImporter;
+        public static RealDataImporter realImporter = new RealDataImporter();
+        public static List<OTL_Relationship> relationships;
 
         public static bool R_ImportRealRelationData(string[] paths)
         {
-            realImporter = new RealDataImporter();
-            var returnvalue = realImporter.ImportCSV(paths[0]);           
-            return returnvalue;
+            var generalOK = false;
+            relationships = new List<OTL_Relationship>();
+
+
+            foreach (var path in paths)
+            {
+                var returnvalue = false;
+                if(path.ToUpper().EndsWith(".CSV"))
+                    returnvalue = realImporter.Import(path, Enums.ImportType.CSV);
+                if (path.ToUpper().EndsWith(".XLS"))
+                    returnvalue = realImporter.Import(path, Enums.ImportType.XLS);
+                if (path.ToUpper().EndsWith(".XLSX"))
+                    returnvalue = realImporter.Import(path, Enums.ImportType.XLSX);
+                if (path.ToUpper().EndsWith(".JSON"))
+                    returnvalue = realImporter.Import(path, Enums.ImportType.JSON);
+                if (returnvalue == false)
+                {
+                    generalOK = false;
+                    break;
+                } else
+                {
+                    generalOK = true;
+                }
+            }                   
+            return generalOK;
         }
 
         public static List<OTL_Entity> R_GetImportedEntities()
         {
             return realImporter.GetEntities();
+        }
+
+        public static OTL_Entity R_GetImportedEntity(string assetid)
+        {
+            return realImporter.GetEntity(assetid);
         }
 
         public static void R_SaveRelationState(string path)
@@ -296,22 +324,112 @@ namespace OTLWizard.OTLObjecten
 
         public static void R_ExportRealRelationData(string path)
         {
-
+            RealDataExporter.Export(path, R_GetRealRelationsObjects().ToList());
         }
 
-        public static string[] R_GetPossibleRelations(string otlclassURI)
+        public static string[] R_GetPossibleRelations(OTL_Entity entity)
         {
-            return null;
-        }
+            var rels = subsetConn.GetOTLRelationshipTypes();
+            var entities = realImporter.GetEntities();
+            List<string> result = new List<string>();
+            var relnotfound = true;
 
-        public static string R_CreateNewRealRelation(string otlURI1, string otlURI2, string relname)
-        {
-            return null;
-        }
+            foreach (var rel in rels)
+            {
+                if(rel.bronURI.Equals(entity.TypeUri))
+                {
+                    var connectors = entities.Where(x => x.TypeUri.Equals(rel.doelURI));
+                    // we now have all connections. But need to check if the relation already exist.
+                    var remainingconnector = new List<OTL_Entity>();
 
-        public static void R_RemoveRealRelation(string relname)
-        {
+                    foreach (var connector in connectors)
+                    {
+                        foreach (var item in relationships)
+                        {
+                            if(entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
+                                && item.relationshipURI.Equals(rel.relationshipURI))
+                            {
+                                relnotfound = false;
+                                break;
+                            } else
+                            {
+                                relnotfound=true;
+                            }
+                        }
+                        if(relnotfound)
+                            remainingconnector.Add(connector);
+                    }
+                    foreach (var connector in remainingconnector)
+                    {                   
+                        if(rel.isDirectional)
+                        {
+                            result.Add(rel.relationshipName + " --> " + connector.AssetId + " | " + connector.Name);
+                        } else
+                        {
+                            result.Add(rel.relationshipName + " <--> " + connector.AssetId + " | " + connector.Name);
+                        }                       
+                    }
+                }
+            }
             
+            return result.ToArray();
+        }
+
+        public static void R_CreateNewRealRelation(string otlURI1, string otlURI2, string relURI)
+        {
+            var temp = new OTL_Relationship();
+            Guid g = Guid.NewGuid();
+            temp.assetID = g.ToString();
+            temp.doelID = otlURI2;
+            temp.bronID = otlURI1;
+            temp.relationshipURI = relURI;
+            relationships.Add(temp);
+        }
+
+        public static void R_RemoveRealRelation(string relID)
+        {
+            relationships.Remove(relationships.Where(x => x.assetID.Equals(relID)).FirstOrDefault());
+        }
+
+        public static string R_GetRelationURLFromName(string name)
+        {
+            var rels = subsetConn.GetOTLRelationshipTypes();
+            return rels.Where(x => x.relationshipURI.Contains(name)).FirstOrDefault().relationshipURI;
+        }
+
+        public static bool R_GetIsRelationshipDirectionalFromName(string name)
+        {
+            var rels = subsetConn.GetOTLRelationshipTypes();
+            return rels.Where(x => x.relationshipURI.Contains(name)).FirstOrDefault().isDirectional;
+        }
+
+        public static OTL_Relationship[] R_GetRealRelationsObjects()
+        {
+            return relationships.ToArray();
+        }
+
+        public static string[] R_GetRealRelations()
+        {
+            List<string> temp = new List<string>();
+
+            foreach (var rel in relationships)
+            {
+                if(R_GetIsRelationshipDirectionalFromName(rel.relationshipURI))
+                {
+                    temp.Add(rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " --> " + rel.doelID + " | ID:"+ rel.assetID);
+                } else
+                {
+                    temp.Add(rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " <--> " + rel.doelID + " | ID:" + rel.assetID);
+                }
+                
+            }
+            return temp.ToArray();
+        }
+
+        public static async Task<bool> R_ImportSubsetAsync(string[] vs)
+        {
+            string subsetpath = vs[0];
+            return await ImportSubset(subsetpath);
         }
 
     }

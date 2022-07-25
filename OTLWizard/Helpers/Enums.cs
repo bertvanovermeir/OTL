@@ -10,6 +10,14 @@
             List
         }
 
+        public enum ImportType
+        {
+            CSV,
+            JSON,
+            XLSX,
+            XLS
+        }
+
         public enum Views
         {
             Loading,
@@ -19,6 +27,7 @@
             SubsetMain,
             Settings,
             Relations,
+            RelationsImport,
             isNull
         }
 

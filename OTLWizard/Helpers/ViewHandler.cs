@@ -14,6 +14,7 @@ namespace OTLWizard.OTLObjecten
         private static ArtefactResultWindow artefactResult = new ArtefactResultWindow();
         private static SettingsWindow settingsWindow = new SettingsWindow();
         private static RelationWindow relationWindow = new RelationWindow();
+        private static RelationImportDataWindow relationImportDataWindow = new RelationImportDataWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -49,6 +50,9 @@ namespace OTLWizard.OTLObjecten
                     break;
                 case Enums.Views.Relations:
                     relationWindow.Hide();
+                    break;
+                case Enums.Views.RelationsImport:
+                    relationImportDataWindow.Hide();
                     break;
                 default:
                     break;
@@ -87,7 +91,15 @@ namespace OTLWizard.OTLObjecten
                     settingsWindow.Show();
                     break;
                 case Enums.Views.Relations:
+                    if(optionalArgument != null)
+                    {
+                        relationWindow.ImportUserSelectionAsync((Dictionary<string, string[]>)optionalArgument);
+                    }
                     relationWindow.Show();
+                    break;
+                case Enums.Views.RelationsImport:
+                    relationImportDataWindow.ResetInterface();
+                    relationImportDataWindow.Show();
                     break;
                 default:
                     break;

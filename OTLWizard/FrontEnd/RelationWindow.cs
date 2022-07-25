@@ -21,6 +21,7 @@ namespace OTLWizard.FrontEnd
     {
 
         Diagram diagram;
+        bool autoupdate = true;
 
         public RelationWindow()
         {
@@ -40,6 +41,12 @@ namespace OTLWizard.FrontEnd
             project1.AutoLoadLibraries = true;
             project1.Create();            
             display1.ActiveTool = new SelectionTool();
+            ((CharacterStyle)project1.Design.CharacterStyles.Caption).SizeInPoints = 7;
+            ((CharacterStyle)project1.Design.CharacterStyles.Normal).SizeInPoints = 7;
+            ((CharacterStyle)project1.Design.CharacterStyles.Heading1).SizeInPoints = 7;
+            ((CharacterStyle)project1.Design.CharacterStyles.Subtitle).SizeInPoints = 7;
+            project1.Repository.Update(project1.Design.CharacterStyles.Caption);
+
         }
 
         private void NShapeLayouter()
@@ -68,7 +75,6 @@ namespace OTLWizard.FrontEnd
         private Shape NShapeCreateNode(string NodeText)
         {
             RectangleBase shape;
-            
             shape = (RectangleBase)project1.ShapeTypes["Ellipse"].CreateInstance();
             shape.Width = 100;
             shape.Height = 60;
@@ -123,7 +129,28 @@ namespace OTLWizard.FrontEnd
             project1.Design.CapStyles.Add(style1, project1.Design.CreatePreviewStyle(style1));
         }
 
+      
 
+        internal async Task ImportUserSelectionAsync(Dictionary<string, string[]> optionalArgument)
+        {
+            var bfiles = false;
+            var bsubset = false;
+            if (optionalArgument.ContainsKey("files") && optionalArgument.ContainsKey("subset")) {
+                bsubset = await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
+                bfiles = ApplicationHandler.R_ImportRealRelationData(optionalArgument["files"]);                
+                if (bfiles && bsubset)
+                {
+                    updateUserImportView(ApplicationHandler.R_GetImportedEntities().ToArray());                                      
+                }
+                else
+                {
+                    ViewHandler.Show("One or more assets failed to load.", "error", MessageBoxIcon.Error);
+                }
+            } else
+            {
+                ViewHandler.Show("You did not provide required files", "error", MessageBoxIcon.Error);
+            }           
+        }
 
         private void display1_Load(object sender, EventArgs e)
         {
@@ -132,19 +159,7 @@ namespace OTLWizard.FrontEnd
 
         private void importToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Multiselect = true;
-            fdlg.Title = Language.Get("SelectDataFiles");
-            fdlg.InitialDirectory = @"c:\";
-            fdlg.Filter = "CSV Files (*.csv)|*.csv|JSON Files (*.json)|*.json|Excel Files (*.xlsx)|*.xlsx";
-            fdlg.FilterIndex = 1;
-            fdlg.RestoreDirectory = true;
-            if (fdlg.ShowDialog() == DialogResult.OK)
-            {
-                ApplicationHandler.R_ImportRealRelationData(fdlg.FileNames);
-                listBox1.Items.AddRange(ApplicationHandler.R_GetImportedEntities().ToArray());
-            }
+            ViewHandler.Show(Enums.Views.RelationsImport, Enums.Views.isNull, null);
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
@@ -205,19 +220,19 @@ namespace OTLWizard.FrontEnd
             Process.Start("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
         }
 
+        // disable Autoupdate
         private void button3_Click(object sender, EventArgs e)
         {
-            Guid guid = Guid.NewGuid();
-            diagram = new Diagram(guid.ToString());
-            Shape s2 = NShapeCreateNode("OTLklasse1");
-            Shape s1 = NShapeCreateNode("OTLklasse2");
-            Shape s3 = NShapeCreateNode("OTLklasse3");
-            Shape s4 = NShapeCreateNode("OTLklasse4");
-            Shape s5 = NShapeCreateNode("OTLklasse5");
-            NShapeConnectNode(s1, s2, "Voedt", true);
-            NShapeConnectNode(s2, s3, "HeeftBetrokkene", true);
-            NShapeConnectNode(s2, s3, "Sturing", true);
-            NShapeLayouter();
+            if(autoupdate)
+            {
+                button3.Text = "AutoUpdate Disabled";
+                autoupdate = false;
+            } else
+            {
+                button3.Text = "AutoUpdate Enabled";
+                updateVisuals();
+                autoupdate=true;
+            }
         }
 
         private void statuslabel_Click(object sender, EventArgs e)
@@ -228,24 +243,139 @@ namespace OTLWizard.FrontEnd
         // add relation
         private void button1_Click(object sender, EventArgs e)
         {
-            ApplicationHandler.R_CreateNewRealRelation("", "", "");
+            // first make sure a selection is made, then execute the creation process
+            
+            if(listBox1.SelectedItem != null && listBox2.SelectedItem != null)
+            {
+                var uri1 = listBox1.SelectedItem.ToString().Split('|')[0].Trim();
+                var uri2 = listBox2.SelectedItem.ToString().Replace("-->", "|").Replace("<", "").Split('|')[1].Trim();
+                var reluri = ApplicationHandler.R_GetRelationURLFromName(listBox2.SelectedItem.ToString().Replace("-->", "|").Replace("<", "").Split('|')[0].Trim());           
+                ApplicationHandler.R_CreateNewRealRelation(uri1, uri2, reluri);
+                updateUserView();
+                updateVisuals();
+            } else
+            {
+                ViewHandler.Show("select some objects first", "make selection", MessageBoxIcon.Information);
+            }
         }
 
         // remove relation
         private void button2_Click(object sender, EventArgs e)
         {
-            ApplicationHandler.R_RemoveRealRelation("");
+            if(listBox3.SelectedItem != null)
+            {
+                var rel = listBox3.SelectedItem.ToString().Split('|')[2].Trim().Split(':')[1].Trim();
+                ApplicationHandler.R_RemoveRealRelation(rel);
+                updateUserView();
+                updateVisuals();
+            }
+            else
+            {
+                ViewHandler.Show("select a relation first", "make selection", MessageBoxIcon.Information);
+            }
+
         }
 
-        // set otl version
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+           updateUserView();
+        }
+
+     
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
+
+
+        private void updateUserView()
+        {
+            var temp = ApplicationHandler.R_GetImportedEntity(listBox1.SelectedItem.ToString().Split('|')[0].Trim());
+            // update properties of one object
+            dataGridView1.DataSource = temp.Properties.ToArray();
+            dataGridView1.Update();
+            // update available relations          
+            listBox2.Items.Clear();
+            listBox2.Items.AddRange(ApplicationHandler.R_GetPossibleRelations(temp));
+            // update created relations
+            listBox3.Items.Clear();
+            listBox3.Items.AddRange(ApplicationHandler.R_GetRealRelations());
+        }
+
+        private void updateVisuals()
+        {
+            if(autoupdate)
+            {
+                var tempdict = new Dictionary<string, Shape>();
+                var drawables = ApplicationHandler.R_GetImportedEntities();
+                var reldrawables = ApplicationHandler.R_GetRealRelationsObjects();
+
+
+
+                Guid guid = Guid.NewGuid();
+                diagram = new Diagram(guid.ToString());
+
+                foreach (var drawing in drawables)
+                {
+                    foreach (var item in reldrawables)
+                    {
+                        if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
+                        {
+                            Shape s = NShapeCreateNode(drawing.AssetId);
+                            tempdict.Add(drawing.AssetId, s);
+                            break;
+                        }
+                    }
+
+                }
+                foreach (var reldrawable in reldrawables)
+                {
+
+                    NShapeConnectNode(tempdict[reldrawable.doelID], tempdict[reldrawable.bronID], reldrawable.relationshipURI.Split('#')[1], ApplicationHandler.R_GetIsRelationshipDirectionalFromName(reldrawable.relationshipURI));
+                }
+
+                NShapeLayouter();
+            } else
+            {
+                // do nothing
+            }
+            
+        }
+
+        private void updateUserImportView(OTL_Entity[] data)
+        {
+            listBox1.Items.Clear();
+            foreach (var element in data)
+            {
+                var item = element.AssetId + " | " + element.Name;
+                listBox1.Items.Add(item);
+            }
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+
+            // Confirm user wants to close
+            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+                default:
+                    ViewHandler.Show(Enums.Views.Home, Enums.Views.Relations, null);
+                    break;
+            }
+        }
+        
     }
 }

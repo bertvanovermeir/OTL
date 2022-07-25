@@ -140,9 +140,16 @@
     <Compile Include="ApplicationData\ArtefactExporterCSV.cs" />
     <Compile Include="ApplicationData\ArtefactImporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporterXLS.cs" />
+    <Compile Include="ApplicationData\RealDataExporter.cs" />
     <Compile Include="ApplicationData\RealDataImporter.cs" />
     <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
+    <Compile Include="FrontEnd\RelationImportDataWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\RelationImportDataWindow.Designer.cs">
+      <DependentUpon>RelationImportDataWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrontEnd\RelationWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -199,6 +206,7 @@
     <Compile Include="OTLObjecten\OTL_Entity.cs" />
     <Compile Include="OTLObjecten\OTL_ObjectType.cs" />
     <Compile Include="OTLObjecten\OTL_Parameter.cs" />
+    <Compile Include="OTLObjecten\OTL_Relationship.cs" />
     <Compile Include="OTLObjecten\OTL_RelationshipType.cs" />
     <Compile Include="ApplicationData\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -207,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\ExportArtefactWindow.resx">
       <DependentUpon>ExportArtefactWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\RelationImportDataWindow.resx">
+      <DependentUpon>RelationImportDataWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\RelationWindow.resx">
       <DependentUpon>RelationWindow.cs</DependentUpon>
