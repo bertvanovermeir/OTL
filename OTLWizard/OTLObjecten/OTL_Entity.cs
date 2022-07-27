@@ -11,6 +11,7 @@ namespace OTLWizard.OTLObjecten
         public string Name { get; set; }
         public string TypeUri { get; set; }
         public string AssetId { get; set; }
+        public string DisplayName { get; set; }
 
         public Dictionary<string, string> Properties { get; set; }
 

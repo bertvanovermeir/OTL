@@ -14,18 +14,18 @@ namespace OTLWizard.OTLObjecten
         public string assetID { get; set; }
         [Name("typeuri")]
         public string relationshipURI { get; set; }
-        [Name("doelid.identificator")]
+        [Name("doelassetid.identificator")]
         public string doelID { get; set; }
-        [Name("bronid.identificator")]
+        [Name("bronassetid.identificator")]
         public string bronID { get; set; }
+        [Ignore]
+        public bool isDirectional { get; set; }
+        [Ignore]
+        public string DisplayName { get; set; }
 
         public OTL_Relationship()
         {
             // for serialization
         }
-
-
-
-
     }
 }

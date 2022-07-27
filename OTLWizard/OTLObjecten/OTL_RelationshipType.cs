@@ -19,6 +19,8 @@ namespace OTLWizard.OTLObjecten
         public string relationshipName;
         public bool isDirectional;
 
+        public string DisplayName { get; set; }
+
         public OTL_RelationshipType()
         {
             // for serialization instances

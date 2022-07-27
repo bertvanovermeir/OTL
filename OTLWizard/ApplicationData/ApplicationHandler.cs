@@ -51,7 +51,7 @@ namespace OTLWizard.OTLObjecten
                 {
                     currentversion = item;
                 }
-                if(newestversion.Equals(currentversion))
+                if (newestversion.Equals(currentversion))
                     return true;
                 else
                     return false;
@@ -65,12 +65,13 @@ namespace OTLWizard.OTLObjecten
         public static async Task ImportArtefact(string subsetPath, string artefactPath)
         {
             await ImportSubset(subsetPath);
-            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("gaimport"));            
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("gaimport"));
             artefactConn = new ArtefactImporter(artefactPath);
             try
             {
                 await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
-            } catch
+            }
+            catch
             {
                 ViewHandler.Show(Language.Get("gafail"), Language.Get("errorheader"), MessageBoxIcon.Error);
             }
@@ -97,12 +98,13 @@ namespace OTLWizard.OTLObjecten
             try
             {
                 await Task.Run(() => { subsetConn.Import(); });
-            } catch
+            }
+            catch
             {
                 ViewHandler.Show(Language.Get("otlfail"), Language.Get("errorheader"), MessageBoxIcon.Error);
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-            return CheckDeprecated();          
+            return CheckDeprecated();
         }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace OTLWizard.OTLObjecten
         /// this will generate a purely cosmetic message to the user. Action is in his hands.
         /// </summary>
         private static bool CheckDeprecated()
-        {           
+        {
             string deprecatedclasses = "";
             string deprecatedparameters = "";
             bool showWarning = false;
@@ -160,7 +162,7 @@ namespace OTLWizard.OTLObjecten
                         ViewHandler.Show(Language.Get("gafail"), Language.Get("errorheader"), MessageBoxIcon.Error);
                     }
                 }
-                var result = await Task.Run(() => exp.Export(exportPath, artefactConn.GetOTLArtefactTypes(),amountExamples, withDescriptions, dummyData, wkt, deprecated));
+                var result = await Task.Run(() => exp.Export(exportPath, artefactConn.GetOTLArtefactTypes(), amountExamples, withDescriptions, dummyData, wkt, deprecated));
                 if (!result)
                 {
                     ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
@@ -193,7 +195,7 @@ namespace OTLWizard.OTLObjecten
                 // test if WKT then import artefact
                 artefactConn = new ArtefactImporter(wktpath);
                 if (wkt)
-                {          
+                {
                     try
                     {
                         await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
@@ -224,10 +226,11 @@ namespace OTLWizard.OTLObjecten
             ArtefactExporterXLS exp = new ArtefactExporterXLS();
             var result = await Task.Run(() => exp.Export(exportPath, artefacten));
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-            if (!result) 
+            if (!result)
             {
                 ViewHandler.Show(Language.Get("saveerror"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
-            } else
+            }
+            else
             {
                 ViewHandler.Show(Language.Get("exportfinished"), Language.Get("successheader"), MessageBoxIcon.Information);
             }
@@ -273,43 +276,72 @@ namespace OTLWizard.OTLObjecten
         public static RealDataImporter realImporter = new RealDataImporter();
         public static List<OTL_Relationship> relationships;
 
-        public static bool R_ImportRealRelationData(string[] paths)
+        public static void R_DestroyOnClose()
         {
-            var generalOK = false;
             relationships = new List<OTL_Relationship>();
+            realImporter = new RealDataImporter();
+        }
 
+        public static async Task R_ImportRealRelationDataAsync(string[] paths)
+        {
+            relationships = new List<OTL_Relationship>();
 
             foreach (var path in paths)
             {
-                var returnvalue = false;
-                if(path.ToUpper().EndsWith(".CSV"))
-                    returnvalue = realImporter.Import(path, Enums.ImportType.CSV);
-                if (path.ToUpper().EndsWith(".XLS"))
-                    returnvalue = realImporter.Import(path, Enums.ImportType.XLS);
-                if (path.ToUpper().EndsWith(".XLSX"))
-                    returnvalue = realImporter.Import(path, Enums.ImportType.XLSX);
-                if (path.ToUpper().EndsWith(".JSON"))
-                    returnvalue = realImporter.Import(path, Enums.ImportType.JSON);
-                if (returnvalue == false)
+                if (path.ToUpper().EndsWith(".CSV"))
                 {
-                    generalOK = false;
-                    break;
-                } else
-                {
-                    generalOK = true;
+                    try
+                    {
+                        await Task.Run(() => { realImporter.Import(path, Enums.ImportType.CSV); });
+                    }
+                    catch (Exception e)
+                    {
+                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                    }
                 }
-            }                   
-            return generalOK;
+                else if (path.ToUpper().EndsWith(".XLS"))
+                {
+                    try
+                    {
+                        await Task.Run(() => { realImporter.Import(path, Enums.ImportType.XLS); });
+                    }
+                    catch (Exception e)
+                    {
+                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                    }
+                }
+                else if (path.ToUpper().EndsWith(".XLSX"))
+                {
+                    try
+                    {
+                        await Task.Run(() => { realImporter.Import(path, Enums.ImportType.XLSX); });
+                    }
+                    catch (Exception e)
+                    {
+                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                    }
+                }
+                else if (path.ToUpper().EndsWith(".JSON"))
+                {
+                    try
+                    {
+                        await Task.Run(() => { realImporter.Import(path, Enums.ImportType.JSON); });
+                    }
+                    catch (Exception e)
+                    {
+                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            }
         }
 
         public static List<OTL_Entity> R_GetImportedEntities()
         {
             return realImporter.GetEntities();
-        }
-
-        public static OTL_Entity R_GetImportedEntity(string assetid)
-        {
-            return realImporter.GetEntity(assetid);
         }
 
         public static void R_SaveRelationState(string path)
@@ -324,19 +356,26 @@ namespace OTLWizard.OTLObjecten
 
         public static void R_ExportRealRelationData(string path)
         {
-            RealDataExporter.Export(path, R_GetRealRelationsObjects().ToList());
+            try
+            {
+                RealDataExporter.Export(path, R_GetRealRelationsObjects().ToList());
+            } catch
+            {
+                ViewHandler.Show(Language.Get("exportcsverror"), Language.Get("error"), System.Windows.Forms.MessageBoxIcon.Error);
+
+            }
         }
 
-        public static string[] R_GetPossibleRelations(OTL_Entity entity)
+        public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelations(OTL_Entity entity)
         {
             var rels = subsetConn.GetOTLRelationshipTypes();
             var entities = realImporter.GetEntities();
-            List<string> result = new List<string>();
+            List<OTL_ConnectingEntityHandle> result = new List<OTL_ConnectingEntityHandle>();
             var relnotfound = true;
 
             foreach (var rel in rels)
             {
-                if(rel.bronURI.Equals(entity.TypeUri))
+                if (rel.bronURI.Equals(entity.TypeUri))
                 {
                     var connectors = entities.Where(x => x.TypeUri.Equals(rel.doelURI));
                     // we now have all connections. But need to check if the relation already exist.
@@ -346,55 +385,61 @@ namespace OTLWizard.OTLObjecten
                     {
                         foreach (var item in relationships)
                         {
-                            if(entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
+                            if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
                                 && item.relationshipURI.Equals(rel.relationshipURI))
                             {
                                 relnotfound = false;
                                 break;
-                            } else
+                            }
+                            else
                             {
-                                relnotfound=true;
+                                relnotfound = true;
                             }
                         }
-                        if(relnotfound)
+                        if (relnotfound)
                             remainingconnector.Add(connector);
                     }
                     foreach (var connector in remainingconnector)
-                    {                   
-                        if(rel.isDirectional)
+                    {
+                        OTL_ConnectingEntityHandle ceh = new OTL_ConnectingEntityHandle();
+                        ceh.isDirectional = rel.isDirectional;
+                        ceh.relationName = rel.relationshipName;
+                        ceh.bronId = entity.AssetId;
+                        ceh.doelId = connector.AssetId;
+                        ceh.typeuri = rel.relationshipURI;
+                        if (rel.isDirectional)
                         {
-                            result.Add(rel.relationshipName + " --> " + connector.AssetId + " | " + connector.Name);
-                        } else
+                            ceh.DisplayName = rel.relationshipName + " --> " + connector.AssetId + " | " + connector.Name;
+                            result.Add(ceh);
+                        }
+                        else
                         {
-                            result.Add(rel.relationshipName + " <--> " + connector.AssetId + " | " + connector.Name);
-                        }                       
+                            ceh.DisplayName = rel.relationshipName + " <--> " + connector.AssetId + " | " + connector.Name;
+                            result.Add(ceh);
+                        }
                     }
                 }
             }
-            
-            return result.ToArray();
+
+            return result;
         }
 
-        public static void R_CreateNewRealRelation(string otlURI1, string otlURI2, string relURI)
+        public static void R_CreateNewRealRelation(OTL_ConnectingEntityHandle ceh1)
         {
             var temp = new OTL_Relationship();
             Guid g = Guid.NewGuid();
             temp.assetID = g.ToString();
-            temp.doelID = otlURI2;
-            temp.bronID = otlURI1;
-            temp.relationshipURI = relURI;
+            temp.doelID = ceh1.doelId;
+            temp.bronID = ceh1.bronId;
+            temp.relationshipURI = ceh1.typeuri;
+            temp.isDirectional = ceh1.isDirectional;
             relationships.Add(temp);
         }
 
         public static void R_RemoveRealRelation(string relID)
         {
             relationships.Remove(relationships.Where(x => x.assetID.Equals(relID)).FirstOrDefault());
-        }
 
-        public static string R_GetRelationURLFromName(string name)
-        {
-            var rels = subsetConn.GetOTLRelationshipTypes();
-            return rels.Where(x => x.relationshipURI.Contains(name)).FirstOrDefault().relationshipURI;
         }
 
         public static bool R_GetIsRelationshipDirectionalFromName(string name)
@@ -405,25 +450,33 @@ namespace OTLWizard.OTLObjecten
 
         public static OTL_Relationship[] R_GetRealRelationsObjects()
         {
-            return relationships.ToArray();
+            if(relationships == null)
+            {
+                return null;
+            } else
+            {
+                return relationships.ToArray();
+            }          
         }
 
-        public static string[] R_GetRealRelations()
+        public static List<OTL_Relationship> R_GetRealRelations()
         {
-            List<string> temp = new List<string>();
+            List<OTL_Relationship> temp = new List<OTL_Relationship>();
 
             foreach (var rel in relationships)
             {
-                if(R_GetIsRelationshipDirectionalFromName(rel.relationshipURI))
+                if (rel.isDirectional)
                 {
-                    temp.Add(rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " --> " + rel.doelID + " | ID:"+ rel.assetID);
-                } else
-                {
-                    temp.Add(rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " <--> " + rel.doelID + " | ID:" + rel.assetID);
+                    rel.DisplayName = rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " --> " + rel.doelID;
+
                 }
-                
+                else
+                {
+                    rel.DisplayName = rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " <--> " + rel.doelID;
+                }
+                temp.Add(rel);
             }
-            return temp.ToArray();
+            return temp;
         }
 
         public static async Task<bool> R_ImportSubsetAsync(string[] vs)

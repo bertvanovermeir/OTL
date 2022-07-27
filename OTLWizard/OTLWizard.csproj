@@ -203,12 +203,14 @@
       <DependentUpon>ExportSubsetWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="OTLObjecten\OTL_ArtefactType.cs" />
+    <Compile Include="OTLObjecten\OTL_ConnectingEntityHandle.cs" />
     <Compile Include="OTLObjecten\OTL_Entity.cs" />
     <Compile Include="OTLObjecten\OTL_ObjectType.cs" />
     <Compile Include="OTLObjecten\OTL_Parameter.cs" />
     <Compile Include="OTLObjecten\OTL_Relationship.cs" />
     <Compile Include="OTLObjecten\OTL_RelationshipType.cs" />
     <Compile Include="ApplicationData\Program.cs" />
+    <Compile Include="OTLObjecten\OTL_UserDataContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrontEnd\ArtefactResultWindow.resx">
       <DependentUpon>ArtefactResultWindow.cs</DependentUpon>

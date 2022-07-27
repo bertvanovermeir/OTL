@@ -93,7 +93,7 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.Relations:
                     if(optionalArgument != null)
                     {
-                        relationWindow.ImportUserSelectionAsync((Dictionary<string, string[]>)optionalArgument);
+                       _ = relationWindow.ImportUserSelectionAsync((Dictionary<string, string[]>)optionalArgument);
                     }
                     relationWindow.Show();
                     break;

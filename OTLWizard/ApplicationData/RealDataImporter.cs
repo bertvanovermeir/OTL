@@ -20,34 +20,29 @@ namespace OTLWizard.ApplicationData
             loadedEntities = new Dictionary<string,OTL_Entity>();
         }
 
-        public bool Import(string path, Enums.ImportType type)
+        public void Import(string path, Enums.ImportType type)
         {
-            var returnvalue = false;
-
             switch (type)
             {
                 case Enums.ImportType.CSV:
-                    returnvalue = ImportCSV(path);
+                    ImportCSV(path);
                     break;
                 case Enums.ImportType.JSON:
-                    returnvalue = false;
+                    ImportJSON(path);
                     break;
                 case Enums.ImportType.XLSX:
-                    returnvalue = false;
+                    ImportXLS(path);
                     break;
                 case Enums.ImportType.XLS:
-                    returnvalue = false;
+                    ImportXLS(path);
                     break;
                 default:
-                    returnvalue=false;
-                    break;
+                    throw new Exception(Language.Get("filenotsupported"));
             }
-            
-
-            return returnvalue;
         }
 
-        private bool ImportCSV(string path)
+        // CSV
+        private void ImportCSV(string path)
         {
             // check if separator is ; or , by trial and error
             var temp = readCSV(path, ';');
@@ -56,16 +51,19 @@ namespace OTLWizard.ApplicationData
                 temp = readCSV(path, ',');
                 if (temp[0].Length < 2)
                 {
-                    return false;
+                    throw new Exception(Language.Get("csvinvalid"));
                 }
-                else
+                else if (Array.ConvertAll(temp[0], d => d.ToLower()).Contains("doelassetid.identificator"))
                 {
-                    return processCSVData(temp);
+                    throw new Exception(Language.Get("csvinvalid"));
+                } else
+                {
+                    processCSVData(temp);
                 }
             }
             else
             {
-                return processCSVData(temp);
+                processCSVData(temp);
             }
         }
 
@@ -80,9 +78,8 @@ namespace OTLWizard.ApplicationData
             return lines;
         }
 
-        private bool processCSVData(List<string[]> data)
-        {
-            
+        private void processCSVData(List<string[]> data)
+        {           
             // first line is the identifier line for specific OTL data. It is presumed this will not change, but just
             // in case we use the settings file from the other part of the program
             var id = Settings.Get("otlidentifier");
@@ -98,7 +95,8 @@ namespace OTLWizard.ApplicationData
                 OTL_Entity entity = new OTL_Entity();
                 entity.AssetId = line[idindex];
                 entity.TypeUri = line[uriindex];
-                entity.Name = line[uriindex].Split('/').Last();
+                entity.Name = line[uriindex].Split('#').Last();
+                entity.DisplayName = entity.AssetId + " | " + entity.Name;
                 // properties
                 for (int i = 0; i < line.Length; i++)
                 {
@@ -115,8 +113,24 @@ namespace OTLWizard.ApplicationData
                 }
                 
             }
-            return true;
         }
+
+//XLS(X)
+
+        private void ImportXLS(string path)
+        {
+            throw new Exception(Language.Get("filenotsupported"));
+        }
+
+        //JSON
+
+        private void ImportJSON(string path)
+        {
+            throw new Exception(Language.Get("filenotsupported"));
+        }
+
+
+        // GENERAL
 
         public List<OTL_Entity> GetEntities()
         {

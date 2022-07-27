@@ -127,7 +127,6 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RelationImportDataWindow";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.RelationImportDataWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

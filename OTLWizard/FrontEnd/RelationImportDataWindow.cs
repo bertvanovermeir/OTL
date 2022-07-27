@@ -25,7 +25,8 @@ namespace OTLWizard.FrontEnd
 
         private void RelationImportDataWindow_Load(object sender, EventArgs e)
         {
-
+            this.Text = Language.Get("relimportwindow");
+            label1.Text = Language.Get("relmsg");
         }
 
         public void ResetInterface()
@@ -59,7 +60,13 @@ namespace OTLWizard.FrontEnd
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = String.Join("\r\n",fdlg.FileNames);
-                data.Add("files", fdlg.FileNames);
+                if(data.ContainsKey("files"))
+                {
+                    data["files"] = fdlg.FileNames;
+                } else
+                {
+                    data.Add("files", fdlg.FileNames);
+                }              
             }
         }
 
@@ -75,7 +82,14 @@ namespace OTLWizard.FrontEnd
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 textBox2.Text = fdlg.FileName;
-                data.Add("subset", new string[] { fdlg.FileName });
+                if(data.ContainsKey("subset"))
+                {
+                    data["subset"] = new string[] { fdlg.FileName };
+                } else
+                {
+                    data.Add("subset", new string[] { fdlg.FileName });
+                }
+                
             }
         }
 
