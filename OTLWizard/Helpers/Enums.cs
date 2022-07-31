@@ -28,6 +28,7 @@
             Settings,
             Relations,
             RelationsImport,
+            RelationsUserDefined,
             isNull
         }
 

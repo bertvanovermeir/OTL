@@ -178,3 +178,9 @@
 <EN>csvinvalid=Header is missing required attributes.
 <NL>filenotsupported=Dit bestandsformaat is niet ondersteund.
 <EN>filenotsupported=File format is not supported.
+<NL>userdefinedrelation=Andere relatie toevoegen...
+<EN>userdefinedrelation=Add other relation type...
+<NL>userdefinedasset=GebruikersAsset
+<EN>userdefinedasset=UserAsset
+<NL>itemexists=Een item met dit ID bestaat al in het huidige project.
+<EN>itemexists=An item with this ID is already present in this project.

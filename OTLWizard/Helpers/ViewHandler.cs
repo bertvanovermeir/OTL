@@ -15,6 +15,7 @@ namespace OTLWizard.OTLObjecten
         private static SettingsWindow settingsWindow = new SettingsWindow();
         private static RelationWindow relationWindow = new RelationWindow();
         private static RelationImportDataWindow relationImportDataWindow = new RelationImportDataWindow();
+        private static RelationUserDefinedWindow relationUserDefinedWindow = new RelationUserDefinedWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -53,6 +54,9 @@ namespace OTLWizard.OTLObjecten
                     break;
                 case Enums.Views.RelationsImport:
                     relationImportDataWindow.Hide();
+                    break;
+                case Enums.Views.RelationsUserDefined:
+                    relationUserDefinedWindow.Hide();
                     break;
                 default:
                     break;
@@ -100,6 +104,10 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.RelationsImport:
                     relationImportDataWindow.ResetInterface();
                     relationImportDataWindow.Show();
+                    break;
+                case Enums.Views.RelationsUserDefined:
+                    relationUserDefinedWindow.Init((OTL_ConnectingEntityHandle)optionalArgument);
+                    relationUserDefinedWindow.ShowDialog();
                     break;
                 default:
                     break;

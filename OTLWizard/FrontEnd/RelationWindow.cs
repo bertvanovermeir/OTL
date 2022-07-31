@@ -63,26 +63,31 @@ namespace OTLWizard.FrontEnd
         }
 
         private void NShapeLayouter()
-        {
-            RepulsionLayouter layouter = new RepulsionLayouter(project1);
-            // Set the repulsion force and its range
-            layouter.SpringRate = 8;
-            layouter.Repulsion = 3;
-            layouter.RepulsionRange = 500;
-            // Set the friction and the mass of the shapes
-            layouter.Friction = 0;
-            layouter.Mass = 50;
-            // Set all shapes 
-            layouter.AllShapes = display1.Diagram.Shapes;
-            // Set shapes that should be layouted
-            layouter.Shapes = display1.Diagram.Shapes;
-            //
-            // Now prepare and execute the layouter
-            layouter.Prepare();
-            layouter.Execute(10);
-            // Fit the result into the diagram bounds
-            layouter.Fit(50, 50, display1.Diagram.Width - 100, display1.Diagram.Height - 100);
-            cachedRepository1.InsertAll(diagram);           
+        {   try
+            {
+                RepulsionLayouter layouter = new RepulsionLayouter(project1);
+                // Set the repulsion force and its range
+                layouter.SpringRate = 8;
+                layouter.Repulsion = 3;
+                layouter.RepulsionRange = 500;
+                // Set the friction and the mass of the shapes
+                layouter.Friction = 0;
+                layouter.Mass = 50;
+                // Set all shapes 
+                layouter.AllShapes = display1.Diagram.Shapes;
+                // Set shapes that should be layouted
+                layouter.Shapes = display1.Diagram.Shapes;
+                //
+                // Now prepare and execute the layouter
+                layouter.Prepare();
+                layouter.Execute(10);
+                // Fit the result into the diagram bounds
+                layouter.Fit(50, 50, display1.Diagram.Width - 100, display1.Diagram.Height - 100);
+                cachedRepository1.InsertAll(diagram);
+            } catch
+            {
+                // no shapes were defined.
+            }               
         }
 
         private Shape NShapeCreateNode(string NodeText)
@@ -250,14 +255,21 @@ namespace OTLWizard.FrontEnd
         private void buttonAddRelation(object sender, EventArgs e)
         {
             // first make sure a selection is made, then execute the creation process
-            
             if(ListImportedEntities.SelectedItem != null && ListRelationsPerEntity.SelectedItems != null)
             {
+                // if the clicked option is "other" then goto different method
                 foreach (OTL_ConnectingEntityHandle item in ListRelationsPerEntity.SelectedItems)
                 {
-                    ApplicationHandler.R_CreateNewRealRelation(item);
+                    if(item.DisplayName == Language.Get("userdefinedrelation"))
+                    {
+                        ViewHandler.Show(Enums.Views.RelationsUserDefined, Enums.Views.isNull, item);
+                        ListImportedEntities.DataSource = ApplicationHandler.R_GetImportedEntities().ToArray();
+                    }
+                    else
+                    {
+                        ApplicationHandler.R_CreateNewRealRelation(item);
+                    }
                 }
-
                 updateUserView();
                 updateVisuals();
                 updateStatusText(Language.Get("st_added") + ListRelationsPerEntity.SelectedItems.ToString());

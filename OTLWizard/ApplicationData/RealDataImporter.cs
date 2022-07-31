@@ -142,16 +142,10 @@ namespace OTLWizard.ApplicationData
             entities = ent;
         }
 
-        public void ResetEntities()
+        public void AddEntity(OTL_Entity e)
         {
-            entities = new List<OTL_Entity>();
+            entities.Add(e);
         }
 
-        public OTL_Entity GetEntity(string assetid)
-        {
-            return entities.Where(w => w.AssetId.Equals(assetid)).FirstOrDefault();
-        }
-    }
-
-    
+    }   
 }

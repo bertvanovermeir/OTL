@@ -363,11 +363,12 @@ namespace OTLWizard.OTLObjecten
                 //TODO
                 // create ZIP
                 ZipFile.CreateFromDirectory(tempPath, path);
-            } catch
+            }
+            catch
             {
                 ViewHandler.Show(Language.Get("filesaveissue"), Language.Get("filesaveissueheader"), MessageBoxIcon.Error);
             }
-            
+
         }
 
         public static void R_LoadRelationState(string fileName)
@@ -399,11 +400,12 @@ namespace OTLWizard.OTLObjecten
                             throw new Exception("This is not a valid savestate file.");
                     }
                 }
-                
-            } catch(Exception e)
+
+            }
+            catch (Exception e)
             {
-                ViewHandler.Show("loadstateerror" + e.ToString(),"loadstateerrorheader",MessageBoxIcon.Error);
-            }          
+                ViewHandler.Show("loadstateerror" + e.ToString(), "loadstateerrorheader", MessageBoxIcon.Error);
+            }
         }
 
 
@@ -413,7 +415,8 @@ namespace OTLWizard.OTLObjecten
             try
             {
                 RealDataExporter.Export(path, R_GetRealRelationsObjects().ToList());
-            } catch
+            }
+            catch
             {
                 ViewHandler.Show(Language.Get("exportcsverror"), Language.Get("error"), System.Windows.Forms.MessageBoxIcon.Error);
 
@@ -475,6 +478,15 @@ namespace OTLWizard.OTLObjecten
                 }
             }
 
+            // add a placeholder relation that allows user to enter relation type and ID. WITHOUT ANY CHECKS
+            OTL_ConnectingEntityHandle c = new OTL_ConnectingEntityHandle();
+            c.isDirectional = true;
+            c.relationName = "userDefinedRelationship";
+            c.bronId = entity.AssetId;
+            c.doelId = "userDefinedAssetID";
+            c.typeuri = "userDefinedTypeURI";
+            c.DisplayName = Language.Get("userdefinedrelation");
+            result.Add(c);
             return result;
         }
 
@@ -498,14 +510,22 @@ namespace OTLWizard.OTLObjecten
 
         public static OTL_Relationship[] R_GetRealRelationsObjects()
         {
-            if(relationships == null)
+            if (relationships == null)
             {
                 return null;
-            } else
+            }
+            else
             {
                 return relationships.ToArray();
-            }          
+            }
         }
+
+        public static List<OTL_RelationshipType> R_GetAllRelationshipTypes()
+        {
+            return subsetConn.GetOTLRelationshipTypes();
+        }
+
+
 
         public static List<OTL_Relationship> R_GetRealRelations()
         {
@@ -531,6 +551,11 @@ namespace OTLWizard.OTLObjecten
         {
             string subsetpath = vs[0];
             return await ImportSubset(subsetpath);
-        }     
+        }
+
+        public static void R_AddEntity(OTL_Entity e)
+        {
+            realImporter.AddEntity(e);
+        }
     }
 }

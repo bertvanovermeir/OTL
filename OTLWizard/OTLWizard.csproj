@@ -157,6 +157,12 @@
     <Compile Include="FrontEnd\RelationImportDataWindow.Designer.cs">
       <DependentUpon>RelationImportDataWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrontEnd\RelationUserDefinedWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\RelationUserDefinedWindow.Designer.cs">
+      <DependentUpon>RelationUserDefinedWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrontEnd\RelationWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\RelationImportDataWindow.resx">
       <DependentUpon>RelationImportDataWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\RelationUserDefinedWindow.resx">
+      <DependentUpon>RelationUserDefinedWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\RelationWindow.resx">
       <DependentUpon>RelationWindow.cs</DependentUpon>
