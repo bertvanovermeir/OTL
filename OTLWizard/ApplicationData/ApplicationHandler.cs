@@ -3,6 +3,7 @@ using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -346,13 +347,66 @@ namespace OTLWizard.OTLObjecten
 
         public static void R_SaveRelationState(string path)
         {
-
+            try
+            {
+                var tempPath = Path.GetTempPath();
+                var randomdirname = Guid.NewGuid().ToString();
+                tempPath = tempPath + randomdirname + "\\";
+                Directory.CreateDirectory(tempPath);
+                // created relationships
+                XmlSerialization.WriteToXmlFile<List<OTL_Relationship>>(tempPath + "R.xml", R_GetRealRelationsObjects().ToList());
+                // imported entities and properties
+                XmlSerialization.WriteToXmlFile<List<OTL_Entity>>(tempPath + "E.xml", R_GetImportedEntities().ToList());
+                // possible relationships
+                XmlSerialization.WriteToXmlFile<List<OTL_RelationshipType>>(tempPath + "T.xml", subsetConn.GetOTLRelationshipTypes());
+                // userdata
+                //TODO
+                // create ZIP
+                ZipFile.CreateFromDirectory(tempPath, path);
+            } catch
+            {
+                ViewHandler.Show(Language.Get("filesaveissue"), Language.Get("filesaveissueheader"), MessageBoxIcon.Error);
+            }
+            
         }
 
-        public static void R_LoadRelationState(string path)
+        public static void R_LoadRelationState(string fileName)
         {
-
+            try
+            {
+                ZipArchive zip = ZipFile.OpenRead(fileName);
+                var tempPath = Path.GetTempPath();
+                var randomdirname = Guid.NewGuid().ToString();
+                tempPath = tempPath + randomdirname + "\\";
+                Directory.CreateDirectory(tempPath);
+                foreach (ZipArchiveEntry entry in zip.Entries)
+                {
+                    entry.ExtractToFile(tempPath + entry.FullName);
+                    switch (entry.FullName)
+                    {
+                        case "R.xml":
+                            relationships = (XmlSerialization.ReadFromXmlFile<List<OTL_Relationship>>(tempPath + "R.xml"));
+                            break;
+                        case "E.xml":
+                            realImporter = new RealDataImporter();
+                            realImporter.SetEntities(XmlSerialization.ReadFromXmlFile<List<OTL_Entity>>(tempPath + "E.xml"));
+                            break;
+                        case "T.xml":
+                            subsetConn = new SubsetImporter();
+                            subsetConn.SetOTLRelationshipTypes(XmlSerialization.ReadFromXmlFile<List<OTL_RelationshipType>>(tempPath + "T.xml"));
+                            break;
+                        default:
+                            throw new Exception("This is not a valid savestate file.");
+                    }
+                }
+                
+            } catch(Exception e)
+            {
+                ViewHandler.Show("loadstateerror" + e.ToString(),"loadstateerrorheader",MessageBoxIcon.Error);
+            }          
         }
+
+
 
         public static void R_ExportRealRelationData(string path)
         {
@@ -442,12 +496,6 @@ namespace OTLWizard.OTLObjecten
 
         }
 
-        public static bool R_GetIsRelationshipDirectionalFromName(string name)
-        {
-            var rels = subsetConn.GetOTLRelationshipTypes();
-            return rels.Where(x => x.relationshipURI.Contains(name)).FirstOrDefault().isDirectional;
-        }
-
         public static OTL_Relationship[] R_GetRealRelationsObjects()
         {
             if(relationships == null)
@@ -483,7 +531,6 @@ namespace OTLWizard.OTLObjecten
         {
             string subsetpath = vs[0];
             return await ImportSubset(subsetpath);
-        }
-
+        }     
     }
 }

@@ -137,6 +137,11 @@ namespace OTLWizard.ApplicationData
             return entities;
         }
 
+        public void SetEntities(List<OTL_Entity> ent)
+        {
+            entities = ent;
+        }
+
         public void ResetEntities()
         {
             entities = new List<OTL_Entity>();

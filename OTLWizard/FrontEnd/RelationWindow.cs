@@ -218,6 +218,7 @@ namespace OTLWizard.FrontEnd
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 ApplicationHandler.R_LoadRelationState(fdlg.FileName);
+                UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
             }
         }
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)

@@ -91,6 +91,12 @@
       <HintPath>..\packages\System.Data.SQLite.Linq.1.0.115.5\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Design" />
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -144,6 +150,7 @@
     <Compile Include="ApplicationData\RealDataImporter.cs" />
     <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
+    <Compile Include="ApplicationData\XmlSerialization.cs" />
     <Compile Include="FrontEnd\RelationImportDataWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +209,7 @@
     <Compile Include="FrontEnd\ExportSubsetWindow.Designer.cs">
       <DependentUpon>ExportSubsetWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\SerializableDictionary.cs" />
     <Compile Include="OTLObjecten\OTL_ArtefactType.cs" />
     <Compile Include="OTLObjecten\OTL_ConnectingEntityHandle.cs" />
     <Compile Include="OTLObjecten\OTL_Entity.cs" />

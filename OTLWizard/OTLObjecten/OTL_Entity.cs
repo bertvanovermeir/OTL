@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,13 +14,13 @@ namespace OTLWizard.OTLObjecten
         public string AssetId { get; set; }
         public string DisplayName { get; set; }
 
-        public Dictionary<string, string> Properties { get; set; }
-
+        //public Dictionary<string, string> Properties { get; set; }
+        public SerializableDictionary<string, string> Properties { get; set; }
 
 
         public OTL_Entity()
         {
-            Properties = new Dictionary<string, string>();
+            Properties = new SerializableDictionary<string, string>();
         }
     }
 }

@@ -30,6 +30,13 @@ namespace OTLWizard.OTLObjecten
             this.Keuzelijsten = Keuzelijsten;
         }
 
+        public SubsetImporter()
+        {
+            // initialize
+            OTL_ObjectTypes = new List<OTL_ObjectType>();
+            OTL_RelationTypes = new List<OTL_RelationshipType>();
+        }
+
         /// <summary>
         /// return all OTL objecttypes in imported subset
         /// </summary>
@@ -46,6 +53,11 @@ namespace OTLWizard.OTLObjecten
         public List<OTL_RelationshipType> GetOTLRelationshipTypes()
         {
             return OTL_RelationTypes;
+        }
+
+        public void SetOTLRelationshipTypes(List<OTL_RelationshipType> types)
+        {
+            OTL_RelationTypes = types;
         }
 
         public string GetOTLVersion()
