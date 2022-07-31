@@ -16,7 +16,7 @@ namespace OTLWizard.Helpers
         {
             values = new Dictionary<string, string>();
             
-            var localPath = System.IO.Path.GetTempPath() + "otlsettings\\";
+            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv2\\";
             // create the folder if it does not exist
             Directory.CreateDirectory(localPath);
 

@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 3.2.0
+Program version = 4.0.0
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v3.2.0_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.0.0_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -75,11 +75,44 @@ Execdlls = 0
 [Languages]
 7
 [Files/Dirs]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
+N/A
+[Folder]
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\CsvHelper.dll
 180 KB
 dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\CsvHelper.xml
 372.5 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.dll
+2 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.GeneralShapes.dll
+50 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.GeneralShapes.pdb
+73.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.pdb
+2.6 MB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.WinFormsUI.dll
+1 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.WinFormsUI.pdb
+689.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.WinFormsUI.xml
+180.6 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.xml
+1.6 MB
 xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\EntityFramework.dll
 4.8 MB
@@ -109,14 +142,23 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.CSharp.d
 46.7 KB
 dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe
-1000.5 KB
+1.2 MB
 exe
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.config
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-211.5 KB
+317.5 KB
 pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
+796 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Shared.WPF.dll
+12.6 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Shared.WPF.xml
+2.8 MB
+xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Buffers.dll
 27.3 KB
 dll
@@ -183,15 +225,6 @@ dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.execution.desktop.xml
 234 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
-N/A
-[Folder]
 [Licence_Begin]
 4556
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}
@@ -251,13 +284,13 @@ By email: bert.vanovermeir@bitsofdata.be\par
 [Variables]
 [SCs]
 Desktop
-OTL Wizard 3.2.0
+OTL Wizard 4.0.0
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\icon.ico
 0
 Startmenu
-OTL Wizard 3.2.0
+OTL Wizard 4.0.0
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\icon.ico
@@ -276,5 +309,13 @@ del "C:\Users\Public\Desktop\OTL Wizard.lnk" /q /f /s
 
 Shell Execute
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Ruber Software\OTL Wizard\OTL Wizard.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 3.2.0.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 3.2.0.lnk" /q /f /s
 
 
