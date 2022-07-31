@@ -24,6 +24,7 @@ namespace OTLWizard
             button5.Text = Language.Get("home5");
             button6.Text = Language.Get("home6");
             button7.Text = Language.Get("home7");
+            button7.Visible = true;
             label1.Text = Language.Get("welcome");
         }
 
@@ -50,8 +51,8 @@ namespace OTLWizard
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
-            label1.Text = Language.Get("experimental");
-            button7.Visible = true;
+            //label1.Text = Language.Get("experimental");
+            //button7.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
