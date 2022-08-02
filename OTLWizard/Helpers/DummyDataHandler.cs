@@ -140,7 +140,7 @@ namespace OTLWizard.Helpers
                     switch (keuze)
                     {
                         case "polygoon 3D,":
-                            temp = "POLYGON Z (" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + ")";
+                            temp = "POLYGON Z (" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + ")";
                             break;
                         case "lijn 3D":
                             temp = "LINESTRING Z (" + GetCoord() + "," + GetCoord() + ")";
