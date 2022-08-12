@@ -434,7 +434,7 @@ namespace OTLWizard.OTLObjecten
             {
                 if (rel.bronURI.Equals(entity.TypeUri))
                 {
-                    var connectors = entities.Where(x => x.TypeUri.Equals(rel.doelURI));
+                    var connectors = entities.Where(x => x.TypeUri.ToLower().Equals(rel.doelURI.ToLower()));
                     // we now have all connections. But need to check if the relation already exist.
                     var remainingconnector = new List<OTL_Entity>();
 
