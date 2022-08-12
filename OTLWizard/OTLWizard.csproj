@@ -264,7 +264,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Data\install.ifp" />
-    <None Include="Data\OTLWizard_v2.3.0_manualInstall.zip" />
     <None Include="Data\queries.bak" />
     <Content Include="Data\lang.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -310,7 +309,6 @@
     <Content Include="Data\otlR.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Data\OTLWizard_v2.3.0_installer.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
