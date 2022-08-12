@@ -20,7 +20,7 @@ Opgelet: windows Smartscreen geeft op sommige computers melding van een "onbeken
 
 ## Gebruik
 
-Bekijk [hier](https://www.youtube.com/watch?v=8X_c_C34JhM) een video over de werking van het programma.
+Raadpleeg [hier](https://github.com/bertvanovermeir/OTL/blob/master/Handleiding%20OTL%20Wizard.pdf) de handleiding voor het gebruik van het programma.
 
 Na de (automatische) installatie is er een snelkoppeling beschibaar in het startmenu en op het bureaublad.
 Bepaalde beperkingen op computers in bedrijven kunnen er voor zorgen dat deze snelkoppelingen niet of foutief worden aangemaakt, in dat geval kan u de applicatie uitvoeren door te navigeren naar de map waarin u de installatie heeft uitgevoerd en OTLWizard.exe aanklikken.
