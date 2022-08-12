@@ -442,8 +442,16 @@ namespace OTLWizard.OTLObjecten
                     {
                         foreach (var item in relationships)
                         {
+                            // normal creation direction
                             if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
                                 && item.relationshipURI.Equals(rel.relationshipURI))
+                            {
+                                relnotfound = false;
+                                break;
+                            }
+                            // opposite direction if directional is false (both directions count in that case)
+                            else if(entity.AssetId.Equals(item.doelID) && connector.AssetId.Equals(item.bronID)
+                                && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false)
                             {
                                 relnotfound = false;
                                 break;
