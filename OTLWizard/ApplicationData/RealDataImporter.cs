@@ -140,7 +140,12 @@ namespace OTLWizard.ApplicationData
 
         public void SetEntities(List<OTL_Entity> ent)
         {
+            loadedEntities = new Dictionary<string, OTL_Entity>();
             entities = ent;
+            foreach(OTL_Entity entity in entities)
+            {
+                loadedEntities.Add(entity.AssetId, entity);
+            }
         }
 
         public void AddEntity(OTL_Entity e)

@@ -275,7 +275,7 @@ namespace OTLWizard.OTLObjecten
         /////////////////// RELATION TOOL FUNCTIONS /////////////////////////////
 
         public static RealDataImporter realImporter = new RealDataImporter();
-        public static List<OTL_Relationship> relationships;
+        public static List<OTL_Relationship> relationships = new List<OTL_Relationship>();
 
         public static void R_DestroyOnClose()
         {
@@ -285,8 +285,6 @@ namespace OTLWizard.OTLObjecten
 
         public static async Task R_ImportRealRelationDataAsync(string[] paths)
         {
-            relationships = new List<OTL_Relationship>();
-
             foreach (var path in paths)
             {
                 if (path.ToUpper().EndsWith(".CSV"))
