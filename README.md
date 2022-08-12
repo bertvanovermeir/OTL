@@ -7,6 +7,7 @@ Deze applicatie implementeert de AWV OTL standaard van de vlaamse overheid. Met 
 - Een lijst met op te leveren geometrische data exporteren vanaf een subset en het geometrieartefact.
 
 Een idee voor een uitbreiding? Werkt iets niet of foutief? Log uw probleem op [de issue pagina](https://github.com/bertvanovermeir/OTL/issues).
+<p>Wilt u bijdragen aan de ontwikkeling of een uitbreiding maken aan de hand van deze toepassing? Laat me iets weten op bert.vanovermeir@bitsofdata.be.
 
 ---
 
