@@ -485,7 +485,7 @@ namespace OTLWizard.OTLObjecten
                     }
                 }
             }
-
+            result = result.OrderBy(o=>o.relationName).ToList();
             // add a placeholder relation that allows user to enter relation type and ID. WITHOUT ANY CHECKS
             OTL_ConnectingEntityHandle c = new OTL_ConnectingEntityHandle();
             c.isDirectional = true;
@@ -552,6 +552,8 @@ namespace OTLWizard.OTLObjecten
                 }
                 temp.Add(rel);
             }
+
+            temp = temp.OrderBy(o=>o.DisplayName).ToList();
             return temp;
         }
 

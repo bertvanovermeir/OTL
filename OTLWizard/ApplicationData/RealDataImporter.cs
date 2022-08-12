@@ -134,6 +134,7 @@ namespace OTLWizard.ApplicationData
 
         public List<OTL_Entity> GetEntities()
         {
+            entities = entities.OrderBy(o => o.TypeUri).ToList();
             return entities;
         }
 
