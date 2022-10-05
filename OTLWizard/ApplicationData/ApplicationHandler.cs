@@ -79,6 +79,7 @@ namespace OTLWizard.OTLObjecten
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
+      
         public static string GetOTLVersion()
         {
             var temp = subsetConn.GetOTLVersion();
@@ -275,16 +276,18 @@ namespace OTLWizard.OTLObjecten
         /////////////////// RELATION TOOL FUNCTIONS /////////////////////////////
 
         public static RealDataImporter realImporter = new RealDataImporter();
-        public static List<OTL_Relationship> relationships = new List<OTL_Relationship>();
+        
 
         public static void R_DestroyOnClose()
         {
-            relationships = new List<OTL_Relationship>();
             realImporter = new RealDataImporter();
         }
 
         public static async Task R_ImportRealRelationDataAsync(string[] paths)
         {
+            // set subset relation object
+            realImporter.SetRelationTypeData(subsetConn);
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("csvrealimport"));
             foreach (var path in paths)
             {
                 if (path.ToUpper().EndsWith(".CSV"))
@@ -336,6 +339,8 @@ namespace OTLWizard.OTLObjecten
                     ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                 }
             }
+            realImporter.CheckAssetCompliance();
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
         public static List<OTL_Entity> R_GetImportedEntities()
@@ -357,10 +362,14 @@ namespace OTLWizard.OTLObjecten
                 XmlSerialization.WriteToXmlFile<List<OTL_Entity>>(tempPath + "E.xml", R_GetImportedEntities().ToList());
                 // possible relationships
                 XmlSerialization.WriteToXmlFile<List<OTL_RelationshipType>>(tempPath + "T.xml", subsetConn.GetOTLRelationshipTypes());
-                // userdata
-                //TODO
-                // create ZIP
-                ZipFile.CreateFromDirectory(tempPath, path);
+            // userdata
+            //TODO
+            // create ZIP
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            ZipFile.CreateFromDirectory(tempPath, path);
             }
             catch
             {
@@ -378,16 +387,17 @@ namespace OTLWizard.OTLObjecten
                 var randomdirname = Guid.NewGuid().ToString();
                 tempPath = tempPath + randomdirname + "\\";
                 Directory.CreateDirectory(tempPath);
+                realImporter = new RealDataImporter();
+
                 foreach (ZipArchiveEntry entry in zip.Entries)
                 {
                     entry.ExtractToFile(tempPath + entry.FullName);
                     switch (entry.FullName)
                     {
                         case "R.xml":
-                            relationships = (XmlSerialization.ReadFromXmlFile<List<OTL_Relationship>>(tempPath + "R.xml"));
+                            realImporter.SetRelationships(XmlSerialization.ReadFromXmlFile<List<OTL_Relationship>>(tempPath + "R.xml"));
                             break;
-                        case "E.xml":
-                            realImporter = new RealDataImporter();
+                        case "E.xml":                            
                             realImporter.SetEntities(XmlSerialization.ReadFromXmlFile<List<OTL_Entity>>(tempPath + "E.xml"));
                             break;
                         case "T.xml":
@@ -438,7 +448,7 @@ namespace OTLWizard.OTLObjecten
 
                     foreach (var connector in connectors)
                     {
-                        foreach (var item in relationships)
+                        foreach (var item in realImporter.GetRelationships())
                         {
                             // normal creation direction
                             if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
@@ -500,29 +510,30 @@ namespace OTLWizard.OTLObjecten
         {
             var temp = new OTL_Relationship();
             Guid g = Guid.NewGuid();
-            temp.assetID = g.ToString();
+            temp.AssetId = g.ToString();
             temp.doelID = ceh1.doelId;
             temp.bronID = ceh1.bronId;
             temp.relationshipURI = ceh1.typeuri;
             temp.isDirectional = ceh1.isDirectional;
-            relationships.Add(temp);
+            temp.Activated = true;
+            temp.GenerateDisplayName();
+            realImporter.AddRelationship(temp);
         }
 
-        public static void R_RemoveRealRelation(string relID)
+        public static void R_RemoveRealRelation(string relID, bool softremove)
         {
-            relationships.Remove(relationships.Where(x => x.assetID.Equals(relID)).FirstOrDefault());
-
+            realImporter.RemoveRelationship(relID, softremove);
         }
 
         public static OTL_Relationship[] R_GetRealRelationsObjects()
         {
-            if (relationships == null)
+            if (realImporter.GetRelationships() == null)
             {
                 return null;
             }
             else
             {
-                return relationships.ToArray();
+                return realImporter.GetRelationships().ToArray();
             }
         }
 
@@ -536,22 +547,7 @@ namespace OTLWizard.OTLObjecten
         public static List<OTL_Relationship> R_GetRealRelations()
         {
             List<OTL_Relationship> temp = new List<OTL_Relationship>();
-
-            foreach (var rel in relationships)
-            {
-                if (rel.isDirectional)
-                {
-                    rel.DisplayName = rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " --> " + rel.doelID;
-
-                }
-                else
-                {
-                    rel.DisplayName = rel.relationshipURI.Split('#')[1] + " | " + rel.bronID + " <--> " + rel.doelID;
-                }
-                temp.Add(rel);
-            }
-
-            temp = temp.OrderBy(o=>o.DisplayName).ToList();
+            temp = realImporter.GetRelationships().OrderBy(o=>o.DisplayName).ToList();
             return temp;
         }
 
@@ -565,5 +561,11 @@ namespace OTLWizard.OTLObjecten
         {
             realImporter.AddEntity(e);
         }
+
+        public static void R_CreateUserAsset(string doelID)
+        {
+            realImporter.CreateUserAsset(doelID);
+        }
+
     }
 }

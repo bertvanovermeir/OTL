@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 4.0.1
-<EN>homewindowheader=OTLWizard 4.0.1
+<NL>homewindowheader=OTLWizard 4.1.0 (Bert Van Overmeir)
+<EN>homewindowheader=OTLWizard 4.1.0 (Bert Van Overmeir)
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -152,8 +152,8 @@
 <EN>aupdy=Autoupdate On
 <NL>aupdn=Automatisch updaten uit
 <EN>aupdn=Autoupdate Off
-<NL>relationwindowheader=RelatieWizard 0.1 (Bert Van Overmeir)
-<EN>relationwindowheader=RelationWizard 0.1 (Bert Van Overmeir)
+<NL>relationwindowheader=RelatieWizard 1.0 (Bert Van Overmeir)
+<EN>relationwindowheader=RelationWizard 1.0 (Bert Van Overmeir)
 <NL>st_export= objecten werden geëxporteerd.
 <EN>st_export= elements were exported.
 <NL>suretoclose=Ben je zeker dat je wil afsluiten? Alle niet opgeslagen gegevens gaan verloren.
@@ -176,6 +176,10 @@
 <EN>fileimporterror=Problem loading file: 
 <NL>csvinvalid=Header bevat niet de vereiste attributen.
 <EN>csvinvalid=Header is missing required attributes.
+<NL>csvinvalid2=Vereiste attributen niet ingevuld.
+<EN>csvinvalid2=Required attribute values are empty.
+<NL>csvinvalid3=Een of meerdere rijen bevatten incorrecte syntax.
+<EN>csvinvalid3=One or more rows contain incorrect syntax.
 <NL>filenotsupported=Dit bestandsformaat is niet ondersteund.
 <EN>filenotsupported=File format is not supported.
 <NL>userdefinedrelation=Andere relatie toevoegen...
@@ -184,3 +188,19 @@
 <EN>userdefinedasset=UserAsset
 <NL>itemexists=Een item met dit ID bestaat al in het huidige project.
 <EN>itemexists=An item with this ID is already present in this project.
+<NL>mmanual=Handleiding
+<EN>mmanual=Manual
+<NL>mabout=Over
+<EN>mabout=About
+<NL>mtitleextra=Opties
+<EN>mtitleextra=Options
+<NL>msetretention=RelatieRetentie
+<EN>msetretention=Relation Retention
+<NL>csvrealimport=CSV bestanden worden geimporteerd...
+<EN>csvrealimport=importing CSV files...
+<NL>remrelsoft=<< Relatie inactief zetten
+<EN>remrelsoft=<< Set relation inactive
+<NL>maxelemwarn=Automatische weergave van relaties en objecten uitgeschakeld om performantieredenen.
+<EN>maxelemwarn=Disabled automatic view of relations and objects for performance reasons
+<NL>maxelemwarnhead=Entity Overflow
+<EN>maxelemwarnhead=Entity Overflow

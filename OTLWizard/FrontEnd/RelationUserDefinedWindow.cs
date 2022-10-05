@@ -67,12 +67,8 @@ namespace OTLWizard.FrontEnd
                 var temp2 = ApplicationHandler.R_GetImportedEntities().Where(i => i.AssetId == textBox2.Text).FirstOrDefault();
                 if (temp2 == null)
                 {
-                    OTL_Entity e2 = new OTL_Entity();
-                    e2.AssetId = h.doelId;
-                    e2.Name = Language.Get("userdefinedasset");
-                    e2.TypeUri = "";
-                    e2.DisplayName = h.doelId + " | " + Language.Get("userdefinedasset");
-                    ApplicationHandler.R_AddEntity(e2);
+                    // create user asset
+                    ApplicationHandler.R_CreateUserAsset(h.doelId);
                 }
                 // reset
                 comboBox1.Items.Clear();

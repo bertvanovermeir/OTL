@@ -47,7 +47,6 @@ namespace OTLWizard.FrontEnd
             ((CharacterStyle)project1.Design.CharacterStyles.Subtitle).SizeInPoints = 7;
             project1.Repository.Update(project1.Design.CharacterStyles.Caption);
 
-
             // headings
             groupBox1.Text = Language.Get("gb1");
             groupBox2.Text = Language.Get("gb2");
@@ -56,10 +55,13 @@ namespace OTLWizard.FrontEnd
             button1.Text = Language.Get("addrel");
             button2.Text = Language.Get("remrel");
             button3.Text = Language.Get("aupdy");
+            button4.Text = Language.Get("remrelsoft");
             statuslabel.Text = Language.Get("statuslabel");
             this.Text = Language.Get("relationwindowheader");
             fileToolStripMenuItem.Text = Language.Get("mfile");
-            helpToolStripMenuItem.Text = Language.Get("mhelp");
+            manualToolStripMenuItem.Text = Language.Get("mmanual");
+            aboutToolStripMenuItem.Text = Language.Get("mtitleextra");
+            aboutToolStripMenuItem1.Text = Language.Get("mabout");
         }
 
         private void NShapeLayouter()
@@ -82,6 +84,8 @@ namespace OTLWizard.FrontEnd
                 layouter.Prepare();
                 layouter.Execute(10);
                 // Fit the result into the diagram bounds
+                display1.Diagram.Width = 2500;
+                display1.Diagram.Height = 2500;
                 layouter.Fit(50, 50, display1.Diagram.Width - 100, display1.Diagram.Height - 100);
                 cachedRepository1.InsertAll(diagram);
             } catch
@@ -155,6 +159,12 @@ namespace OTLWizard.FrontEnd
                 await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
                 await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);                
                 UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
+                updateUserRelations();
+                if (ApplicationHandler.R_GetImportedEntities().Count > 30)
+                {
+                    ViewHandler.Show(Language.Get("maxelemwarn"), Language.Get("maxelemwarnhead"), MessageBoxIcon.Exclamation);
+                    autoupdate = false;
+                }
             } else
             {
                 ViewHandler.Show(Language.Get("missingfiles"), "Oops", MessageBoxIcon.Error);
@@ -209,7 +219,7 @@ namespace OTLWizard.FrontEnd
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show("Development by Bert Van Overmeir for AWV (2022)", "About", MessageBoxIcon.Information);
+            ViewHandler.Show("Development by Bert Van Overmeir for AWV (2023). For more information about custom development contact bert.vanovermeir@gmail.com", "About", MessageBoxIcon.Information);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -286,10 +296,10 @@ namespace OTLWizard.FrontEnd
             if(ListCreatedRelations.SelectedItem != null)
             {
                 OTL_Relationship rel = (OTL_Relationship) ListCreatedRelations.SelectedItem;
-                ApplicationHandler.R_RemoveRealRelation(rel.assetID);
+                ApplicationHandler.R_RemoveRealRelation(rel.AssetId, false);
                 updateUserView();
                 updateVisuals();
-                updateStatusText(Language.Get("st_removed") + rel.assetID);
+                updateStatusText(Language.Get("st_removed") + rel.AssetId);
             }
             else
             {
@@ -324,6 +334,12 @@ namespace OTLWizard.FrontEnd
             ListRelationsPerEntity.ValueMember = "DisplayName";
             ListRelationsPerEntity.DataSource = ApplicationHandler.R_GetPossibleRelations(source);
             // update created relations
+            updateUserRelations();
+        }
+
+        private void updateUserRelations()
+        {
+            // update created relations
             ListCreatedRelations.DisplayMember = "DisplayName";
             ListCreatedRelations.ValueMember = "DisplayName";
             ListCreatedRelations.DataSource = ApplicationHandler.R_GetRealRelations();
@@ -341,23 +357,13 @@ namespace OTLWizard.FrontEnd
 
                 foreach (var drawing in drawables)
                 {
-                    foreach (var item in reldrawables)
-                    {
-                        if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
-                        {
                             Shape s = NShapeCreateNode(drawing.AssetId);
                             tempdict.Add(drawing.AssetId, s);
-                            break;
-                        }
-                    }
-
                 }
                 foreach (var reldrawable in reldrawables)
                 {
-
                     NShapeConnectNode(tempdict[reldrawable.doelID], tempdict[reldrawable.bronID], reldrawable.relationshipURI.Split('#')[1], reldrawable.isDirectional);
                 }
-
                 NShapeLayouter();
             } else
             {
@@ -442,6 +448,61 @@ namespace OTLWizard.FrontEnd
         private void ListRelationsPerEntity_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void manualToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/bertvanovermeir/OTL");
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ListCreatedRelations_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        // softremove
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (ListCreatedRelations.SelectedItem != null)
+            {
+                OTL_Relationship rel = (OTL_Relationship)ListCreatedRelations.SelectedItem;
+                ApplicationHandler.R_RemoveRealRelation(rel.AssetId, true);
+                updateUserView();
+                updateVisuals();
+                updateStatusText(Language.Get("st_removed") + rel.AssetId);
+            }
+            else
+            {
+                updateStatusText(Language.Get("st_remove"));
+
+            }
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            if (ListCreatedRelations.Items != null)
+            {
+                if (textBox2.Text != "")
+                {
+                    var zoekterm = textBox3.Text.ToLower();
+                    var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
+                    ListCreatedRelations.DataSource = filteredFiles;
+                }
+                else
+                {
+                    ListCreatedRelations.DataSource = ApplicationHandler.R_GetRealRelations();
+                }
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/bertvanovermeir");
         }
     }
 }
