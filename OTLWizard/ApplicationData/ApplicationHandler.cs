@@ -537,6 +537,10 @@ namespace OTLWizard.OTLObjecten
                 temp.relationshipURI = ceh1.typeuri;
                 temp.isDirectional = ceh1.isDirectional;
                 temp.Activated = true;
+                temp.Properties.Add(Settings.Get("otlidentifier"),temp.AssetId);
+                temp.Properties.Add(Settings.Get("otlclassuri"), temp.relationshipURI);
+                temp.Properties.Add(Settings.Get("otlsrcrel"), temp.bronID);
+                temp.Properties.Add(Settings.Get("otltrgtrel"), temp.doelID);
                 temp.GenerateDisplayName();
                 realImporter.AddRelationship(temp);
             }          

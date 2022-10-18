@@ -204,3 +204,9 @@
 <EN>maxelemwarn=Disabled automatic view of relations and objects for performance reasons
 <NL>maxelemwarnhead=Entity Overflow
 <EN>maxelemwarnhead=Entity Overflow
+<NL>norelationsfoundforobject=Geen mogelijke relaties gevonden voor dit object. Controleer de typeURI en Subset.
+<EN>norelationsfoundforobject=No possible relations found for this object. Check its typeURI and Subset.
+<NL>relationsfound=Aantal mogelijke relaties: 
+<EN>relationsfound=Found possible relations: 
+<NL>chckrel=Toon enkel gefilterde relaties en objecten.
+<EN>chckrel=Only show filtered relations and objects.
