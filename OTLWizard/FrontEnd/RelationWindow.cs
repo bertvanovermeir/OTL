@@ -279,7 +279,9 @@ namespace OTLWizard.FrontEnd
                     if (item.DisplayName == Language.Get("userdefinedrelation"))
                     {
                         ViewHandler.Show(Enums.Views.RelationsUserDefined, Enums.Views.isNull, item);
+                        var ind = ListImportedEntities.SelectedIndex;
                         ListImportedEntities.DataSource = ApplicationHandler.R_GetImportedEntities().ToArray();
+                        ListImportedEntities.SetSelected(ind+1, true);
                     }
                     else
                     {
