@@ -23,6 +23,7 @@ namespace OTLWizard.FrontEnd
         Diagram diagram;
         bool autoupdate = true;
         bool firstrun = true;
+        IEnumerable<OTL_Relationship> previousdataset;
         public RelationWindow()
         {
             InitializeComponent();
@@ -35,11 +36,13 @@ namespace OTLWizard.FrontEnd
 
         private void RelationWindow_Load(object sender, EventArgs e)
         {
+            previousdataset = new List<OTL_Relationship>();
+
             project1.Name = "Visual";
             project1.AddLibrary(typeof(Ellipse).Assembly, false);
             var temp = project1.ShapeTypes;
             project1.AutoLoadLibraries = true;
-            project1.Create();            
+            project1.Create();
             display1.ActiveTool = new SelectionTool();
             ((CharacterStyle)project1.Design.CharacterStyles.Caption).SizeInPoints = 7;
             ((CharacterStyle)project1.Design.CharacterStyles.Normal).SizeInPoints = 7;
@@ -66,7 +69,8 @@ namespace OTLWizard.FrontEnd
         }
 
         private void NShapeLayouter()
-        {   try
+        {
+            try
             {
                 RepulsionLayouter layouter = new RepulsionLayouter(project1);
                 // Set the repulsion force and its range
@@ -85,14 +89,15 @@ namespace OTLWizard.FrontEnd
                 layouter.Prepare();
                 layouter.Execute(10);
                 // Fit the result into the diagram bounds
-                display1.Diagram.Width = 2500;
-                display1.Diagram.Height = 2500;
+                display1.Diagram.Width = 1500;
+                display1.Diagram.Height = 1500;
                 layouter.Fit(50, 50, display1.Diagram.Width - 100, display1.Diagram.Height - 100);
                 cachedRepository1.InsertAll(diagram);
-            } catch
+            }
+            catch
             {
                 // no shapes were defined.
-            }               
+            }
         }
 
         private Shape NShapeCreateNode(string NodeText)
@@ -108,7 +113,7 @@ namespace OTLWizard.FrontEnd
             shape.SetCaptionText(0, NodeText);
             // Add shape to the diagram
             diagram.Shapes.Add(shape);
-            display1.Diagram = diagram;          
+            display1.Diagram = diagram;
             return shape;
         }
 
@@ -126,10 +131,10 @@ namespace OTLWizard.FrontEnd
             CapStyle style1 = new CapStyle(guid.ToString());
             style1.CapShape = CapShape.ClosedArrow;
             style1.CapSize = 20;
-            style1.ColorStyle = new ColorStyle();           
-            if(isDirectional)
-            {               
-                if(relationName.Equals("LigtOp"))
+            style1.ColorStyle = new ColorStyle();
+            if (isDirectional)
+            {
+                if (relationName.Equals("LigtOp"))
                     style1.ColorStyle = project1.Design.ColorStyles.Green;
                 if (relationName.Equals("Voedt"))
                     style1.ColorStyle = project1.Design.ColorStyles.Blue;
@@ -152,20 +157,22 @@ namespace OTLWizard.FrontEnd
             project1.Design.CapStyles.Add(style1, project1.Design.CreatePreviewStyle(style1));
         }
 
-      
+
 
         public async Task ImportUserSelectionAsync(Dictionary<string, string[]> optionalArgument)
         {
-            if (optionalArgument.ContainsKey("files") && optionalArgument.ContainsKey("subset")) {
+            if (optionalArgument.ContainsKey("files") && optionalArgument.ContainsKey("subset"))
+            {
                 await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
-                await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);                
+                await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);
                 UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
                 updateUserRelations();
-                updateVisuals();               
-            } else
+                updateVisuals();
+            }
+            else
             {
                 ViewHandler.Show(Language.Get("missingfiles"), "Oops", MessageBoxIcon.Error);
-            }           
+            }
         }
 
         private void display1_Load(object sender, EventArgs e)
@@ -242,14 +249,15 @@ namespace OTLWizard.FrontEnd
         // disable Autoupdate
         private void button3_Click(object sender, EventArgs e)
         {
-            if(autoupdate)
+            if (autoupdate)
             {
                 button3.Text = Language.Get("aupdn");
                 autoupdate = false;
-            } else
+            }
+            else
             {
-                button3.Text = Language.Get("aupdy");             
-                autoupdate=true;
+                button3.Text = Language.Get("aupdy");
+                autoupdate = true;
                 updateVisuals();
             }
         }
@@ -263,12 +271,12 @@ namespace OTLWizard.FrontEnd
         private void buttonAddRelation(object sender, EventArgs e)
         {
             // first make sure a selection is made, then execute the creation process
-            if(ListImportedEntities.SelectedItem != null && ListRelationsPerEntity.SelectedItems != null)
+            if (ListImportedEntities.SelectedItem != null && ListRelationsPerEntity.SelectedItems != null)
             {
                 // if the clicked option is "other" then goto different method
                 foreach (OTL_ConnectingEntityHandle item in ListRelationsPerEntity.SelectedItems)
                 {
-                    if(item.DisplayName == Language.Get("userdefinedrelation"))
+                    if (item.DisplayName == Language.Get("userdefinedrelation"))
                     {
                         ViewHandler.Show(Enums.Views.RelationsUserDefined, Enums.Views.isNull, item);
                         ListImportedEntities.DataSource = ApplicationHandler.R_GetImportedEntities().ToArray();
@@ -283,7 +291,8 @@ namespace OTLWizard.FrontEnd
                 updateVisuals();
                 updateStatusText(Language.Get("st_added") + ListRelationsPerEntity.SelectedItems.Count);
 
-            } else
+            }
+            else
             {
                 updateStatusText(Language.Get("st_add"));
             }
@@ -292,13 +301,13 @@ namespace OTLWizard.FrontEnd
         // remove relation
         private void buttonRemoveRelation(object sender, EventArgs e)
         {
-            if(ListCreatedRelations.SelectedItems != null)
+            if (ListCreatedRelations.SelectedItems != null)
             {
                 foreach (var item in ListCreatedRelations.SelectedItems)
                 {
                     OTL_Relationship rel = (OTL_Relationship)item;
                     ApplicationHandler.R_RemoveRealRelation(rel.AssetId, false);
-                    
+
                 }
                 updateStatusText(Language.Get("st_removed") + ListCreatedRelations.SelectedItems.Count);
                 updateUserView();
@@ -313,17 +322,17 @@ namespace OTLWizard.FrontEnd
 
         }
 
-       
+
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateUserView();
             updateUserRelations();
-            var temp = (OTL_Entity) ListImportedEntities.SelectedItem;
+            var temp = (OTL_Entity)ListImportedEntities.SelectedItem;
             textBox3.Text = temp.AssetId;
         }
 
-     
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -332,7 +341,7 @@ namespace OTLWizard.FrontEnd
 
         private void updateUserView()
         {
-            OTL_Entity source = (OTL_Entity) ListImportedEntities.SelectedItem;
+            OTL_Entity source = (OTL_Entity)ListImportedEntities.SelectedItem;
             // update properties of one object
             ListPropertiesPerEntity.DataSource = source.Properties.ToArray();
             ListPropertiesPerEntity.Update();
@@ -341,18 +350,19 @@ namespace OTLWizard.FrontEnd
             ListRelationsPerEntity.ValueMember = "DisplayName";
             var items = ApplicationHandler.R_GetPossibleRelations(source);
             ListRelationsPerEntity.DataSource = items;
-            if(items.Count == 1)
+            if (items.Count == 1)
             {
                 updateStatusText(Language.Get("norelationsfoundforobject"));
-            } else
+            }
+            else
             {
-                updateStatusText(Language.Get("relationsfound") + (items.Count-1));
+                updateStatusText(Language.Get("relationsfound") + (items.Count - 1));
             }
         }
 
         private void updateUserViewRelationProperties()
         {
-            OTL_Relationship source = (OTL_Relationship) ListCreatedRelations.SelectedItem;
+            OTL_Relationship source = (OTL_Relationship)ListCreatedRelations.SelectedItem;
             ListPropertiesRelation.DataSource = source.Properties.ToArray();
             ListPropertiesRelation.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ListPropertiesRelation.Update();
@@ -379,7 +389,9 @@ namespace OTLWizard.FrontEnd
         }
 
         private void updateVisuals()
-        {   
+        {
+            bool check = false;
+
             if (ApplicationHandler.R_GetImportedEntities().Count > 30 && firstrun)
             {
                 ViewHandler.Show(Language.Get("maxelemwarn"), Language.Get("maxelemwarnhead"), MessageBoxIcon.Exclamation);
@@ -390,6 +402,7 @@ namespace OTLWizard.FrontEnd
             // check if all or selection only
             if (autoupdate)
             {
+
                 var tempdict = new Dictionary<string, Shape>();
                 var drawables = ApplicationHandler.R_GetImportedEntities();
                 var reldrawables = ApplicationHandler.R_GetRealRelationsObjects();
@@ -403,25 +416,33 @@ namespace OTLWizard.FrontEnd
                         var zoekterm = textBox3.Text.ToLower();
                         var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm));
                         reldrawables = filteredFiles.Where(x => x.Activated == true).ToArray();
+                        // check if dataset has changed, if not we do nothing and should skip
+                        check = filteredFiles.Where(x => x.Activated == true).SequenceEqual(previousdataset);
+                        previousdataset = filteredFiles.Where(x => x.Activated == true);
                     }
                     else
                     {
                         reldrawables = ApplicationHandler.R_GetRealRelationsObjects();
                     }
-                    // only selected without foreign objects
-                    foreach (var drawing in drawables)
+                    if (!check)
                     {
-                        foreach (var item in reldrawables)
+                        // only selected without foreign objects
+                        foreach (var drawing in drawables)
                         {
-                            if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
+                            foreach (var item in reldrawables)
                             {
-                                Shape s = NShapeCreateNode(drawing.AssetId);
-                                tempdict.Add(drawing.AssetId, s);
-                                break;
+                                if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
+                                {
+                                    Shape s = NShapeCreateNode(drawing.AssetId);
+                                    tempdict.Add(drawing.AssetId, s);
+                                    break;
+                                }
                             }
                         }
                     }
-                } else
+
+                }
+                else
                 {
                     // all
                     foreach (var drawing in drawables)
@@ -429,20 +450,25 @@ namespace OTLWizard.FrontEnd
                         Shape s = NShapeCreateNode(drawing.AssetId);
                         tempdict.Add(drawing.AssetId, s);
                     }
-                }             
+                }
                 foreach (var reldrawable in reldrawables)
                 {
-                    if(reldrawable.Activated)
+                    if (reldrawable.Activated && !check)
                     {
                         NShapeConnectNode(tempdict[reldrawable.doelID], tempdict[reldrawable.bronID], reldrawable.relationshipURI.Split('#')[1], reldrawable.isDirectional);
                     }
                 }
-                NShapeLayouter();
-            } else
+                if (!check)
+                {
+                    NShapeLayouter();
+
+                }
+            }
+            else
             {
                 // do nothing
             }
-            
+
         }
 
         private void UI_UpdateImportedEntities(OTL_Entity[] data)
@@ -485,14 +511,15 @@ namespace OTLWizard.FrontEnd
         // searchfield entities
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if(ListImportedEntities.Items != null)
+            if (ListImportedEntities.Items != null)
             {
-                if(textBox1.Text != "")
+                if (textBox1.Text != "")
                 {
                     var zoekterm = textBox1.Text.ToLower();
                     var filteredFiles = ApplicationHandler.R_GetImportedEntities().Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
                     ListImportedEntities.DataSource = filteredFiles;
-                } else
+                }
+                else
                 {
                     ListImportedEntities.DataSource = ApplicationHandler.R_GetImportedEntities().ToArray();
                 }
@@ -545,14 +572,14 @@ namespace OTLWizard.FrontEnd
             {
                 foreach (var entity in ListCreatedRelations.SelectedItems)
                 {
-                    OTL_Relationship rel = (OTL_Relationship) entity;
+                    OTL_Relationship rel = (OTL_Relationship)entity;
                     ApplicationHandler.R_RemoveRealRelation(rel.AssetId, true);
-                    
+
                 }
                 updateStatusText(Language.Get("st_removed") + ListCreatedRelations.SelectedItems.Count);
                 updateUserView();
                 updateUserRelations();
-                updateVisuals();              
+                updateVisuals();
             }
             else
             {
@@ -563,6 +590,10 @@ namespace OTLWizard.FrontEnd
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             updateUserRelations();
+            if (checkBox1.Checked)
+            {
+                updateVisuals();
+            }
         }
 
         private void textBox3_Click(object sender, EventArgs e)
