@@ -139,8 +139,7 @@ namespace OTLWizard
             ListAllClasses.Items.Clear();
             foreach(string klasse in ApplicationHandler.GetSubsetClassNames())
             {
-                ListAllClasses.Items.Add(klasse);
-                
+                ListAllClasses.Items.Add(klasse);           
             }
             buttonExportXLS.Enabled = true;
             TextVersion.Text = ApplicationHandler.GetOTLVersion();

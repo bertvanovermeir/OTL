@@ -326,6 +326,8 @@ namespace OTLWizard.ApplicationData
             e2.Name = Language.Get("userdefinedasset");
             e2.TypeUri = "";
             e2.DisplayName = doelID + " | " + Language.Get("userdefinedasset");
+            e2.Properties.Add(Settings.Get("otlidentifier"), doelID);
+            e2.Properties.Add(Settings.Get("otlclassuri"), Language.Get("userdefinedasset"));
             AddEntity(e2);
         }
     }   

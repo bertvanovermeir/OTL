@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.0.1
+Program version = 4.1.0
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -75,15 +75,6 @@ Execdlls = 0
 [Languages]
 7
 [Files/Dirs]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
-N/A
-[Folder]
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\CsvHelper.dll
 180 KB
 dll
@@ -148,7 +139,7 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.conf
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-327.5 KB
+347.5 KB
 pdb
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
 796 KB
@@ -225,6 +216,15 @@ dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.execution.desktop.xml
 234 KB
 xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
+N/A
+[Folder]
 [Licence_Begin]
 4556
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}
@@ -284,13 +284,13 @@ By email: bert.vanovermeir@bitsofdata.be\par
 [Variables]
 [SCs]
 Desktop
-OTL Wizard 4.0.1
+OTL Wizard 4.1.0
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\wizard.ico
 0
 Startmenu
-OTL Wizard 4.0.1
+OTL Wizard 4.1.0
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\wizard.ico
@@ -308,7 +308,7 @@ del "C:\Users\Public\Desktop\OTL Wizard.lnk" /q /f /s
 
 
 Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Ruber Software\OTL Wizard\OTL Wizard.lnk" /q /f /s
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard.lnk" /q /f /s
 
 
 Shell Execute
@@ -316,7 +316,7 @@ del "C:\Users\Public\Desktop\OTL Wizard 3.2.0.lnk" /q /f /s
 
 
 Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Ruber Software\OTL Wizard\OTL Wizard 3.2.0.lnk" /q /f /s
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 3.2.0.lnk" /q /f /s
 
 
 Shell Execute
@@ -324,6 +324,14 @@ del "C:\Users\Public\Desktop\OTL Wizard 4.0.0.lnk" /q /f /s
 
 
 Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Ruber Software\OTL Wizard\OTL Wizard 4.0.0.lnk" /q /f /s
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.0.0.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 4.0.1.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.0.1.lnk" /q /f /s
 
 
