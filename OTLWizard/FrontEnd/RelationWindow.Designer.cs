@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager3 = new Dataweb.NShape.RoleBasedSecurityManager();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager1 = new Dataweb.NShape.RoleBasedSecurityManager();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +52,7 @@
             this.cachedRepository1 = new Dataweb.NShape.Advanced.CachedRepository();
             this.xmlStore1 = new Dataweb.NShape.XmlStore();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.ListPropertiesRelation = new System.Windows.Forms.DataGridView();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -66,15 +67,14 @@
             this.ListImportedEntities = new System.Windows.Forms.ListBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
-            this.ListPropertiesRelation = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesPerEntity)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -255,9 +255,9 @@
             this.project1.LibrarySearchPaths = ((System.Collections.Generic.IList<string>)(resources.GetObject("project1.LibrarySearchPaths")));
             this.project1.Name = null;
             this.project1.Repository = this.cachedRepository1;
-            roleBasedSecurityManager3.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
-            roleBasedSecurityManager3.CurrentRoleName = "Administrator";
-            this.project1.SecurityManager = roleBasedSecurityManager3;
+            roleBasedSecurityManager1.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
+            roleBasedSecurityManager1.CurrentRoleName = "Administrator";
+            this.project1.SecurityManager = roleBasedSecurityManager1;
             // 
             // cachedRepository1
             // 
@@ -291,6 +291,33 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "OTLRelationResults";
             // 
+            // ListPropertiesRelation
+            // 
+            this.ListPropertiesRelation.AllowUserToAddRows = false;
+            this.ListPropertiesRelation.AllowUserToDeleteRows = false;
+            this.ListPropertiesRelation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListPropertiesRelation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ListPropertiesRelation.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 302);
+            this.ListPropertiesRelation.Name = "ListPropertiesRelation";
+            this.ListPropertiesRelation.ReadOnly = true;
+            this.ListPropertiesRelation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.ListPropertiesRelation.ShowEditingIcon = false;
+            this.ListPropertiesRelation.Size = new System.Drawing.Size(183, 111);
+            this.ListPropertiesRelation.TabIndex = 5;
+            this.ListPropertiesRelation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
+            // 
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -301,8 +328,8 @@
             this.textBox3.TabIndex = 4;
             this.textBox3.Tag = "";
             this.textBox3.Text = "search...";
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // button4
             // 
@@ -337,6 +364,7 @@
             this.ListCreatedRelations.HorizontalScrollbar = true;
             this.ListCreatedRelations.Location = new System.Drawing.Point(4, 45);
             this.ListCreatedRelations.Name = "ListCreatedRelations";
+            this.ListCreatedRelations.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
             this.ListCreatedRelations.Size = new System.Drawing.Size(184, 251);
             this.ListCreatedRelations.TabIndex = 2;
             this.ListCreatedRelations.SelectedIndexChanged += new System.EventHandler(this.ListCreatedRelations_SelectedIndexChanged);
@@ -366,8 +394,8 @@
             this.textBox2.TabIndex = 3;
             this.textBox2.Tag = "";
             this.textBox2.Text = "search...";
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             this.textBox2.Click += new System.EventHandler(this.textBox2_Click);
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // button1
             // 
@@ -420,8 +448,8 @@
             this.textBox1.TabIndex = 2;
             this.textBox1.Tag = "";
             this.textBox1.Text = "search...";
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.textBox1.Click += new System.EventHandler(this.textBox1_Click);
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // ListPropertiesPerEntity
             // 
@@ -459,33 +487,6 @@
             this.entityCommand1.EnablePlanCaching = true;
             this.entityCommand1.Transaction = null;
             // 
-            // ListPropertiesRelation
-            // 
-            this.ListPropertiesRelation.AllowUserToAddRows = false;
-            this.ListPropertiesRelation.AllowUserToDeleteRows = false;
-            this.ListPropertiesRelation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListPropertiesRelation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ListPropertiesRelation.ColumnHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle3;
-            this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 302);
-            this.ListPropertiesRelation.Name = "ListPropertiesRelation";
-            this.ListPropertiesRelation.ReadOnly = true;
-            this.ListPropertiesRelation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.ListPropertiesRelation.ShowEditingIcon = false;
-            this.ListPropertiesRelation.Size = new System.Drawing.Size(183, 111);
-            this.ListPropertiesRelation.TabIndex = 5;
-            this.ListPropertiesRelation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
-            // 
             // RelationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -507,12 +508,12 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesPerEntity)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

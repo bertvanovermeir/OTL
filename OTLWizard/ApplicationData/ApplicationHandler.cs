@@ -452,14 +452,14 @@ namespace OTLWizard.OTLObjecten
                         {
                             // normal creation direction
                             if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
-                                && item.relationshipURI.Equals(rel.relationshipURI))
+                                && item.relationshipURI.Equals(rel.relationshipURI) && item.Activated != false)
                             {
                                 relnotfound = false;
                                 break;
                             }
                             // opposite direction if directional is false (both directions count in that case)
                             else if(entity.AssetId.Equals(item.doelID) && connector.AssetId.Equals(item.bronID)
-                                && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false)
+                                && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false && item.Activated != false)
                             {
                                 relnotfound = false;
                                 break;
@@ -508,16 +508,43 @@ namespace OTLWizard.OTLObjecten
 
         public static void R_CreateNewRealRelation(OTL_ConnectingEntityHandle ceh1)
         {
-            var temp = new OTL_Relationship();
-            Guid g = Guid.NewGuid();
-            temp.AssetId = g.ToString();
-            temp.doelID = ceh1.doelId;
-            temp.bronID = ceh1.bronId;
-            temp.relationshipURI = ceh1.typeuri;
-            temp.isDirectional = ceh1.isDirectional;
-            temp.Activated = true;
-            temp.GenerateDisplayName();
-            realImporter.AddRelationship(temp);
+            // check if this relation already exists but inactive
+            var currentlist = R_GetRealRelations();
+            var found = false;
+            var assetidfound = "";
+            foreach (var item in currentlist)
+            {
+                if(item.bronID.Equals(ceh1.bronId) && item.doelID.Equals(ceh1.doelId) && item.relationshipURI.Equals(ceh1.typeuri))
+                {
+                    assetidfound = item.AssetId;
+                    found = true;
+                    break;
+                }
+            }
+
+            if(found)
+            {
+                // do not create a new relation, as it already exists.
+                R_ActivateRealRelation(assetidfound);
+
+            } else
+            {
+                var temp = new OTL_Relationship();
+                Guid g = Guid.NewGuid();
+                temp.AssetId = g.ToString();
+                temp.doelID = ceh1.doelId;
+                temp.bronID = ceh1.bronId;
+                temp.relationshipURI = ceh1.typeuri;
+                temp.isDirectional = ceh1.isDirectional;
+                temp.Activated = true;
+                temp.GenerateDisplayName();
+                realImporter.AddRelationship(temp);
+            }          
+        }
+
+        public static void R_ActivateRealRelation(string relID)
+        {
+            realImporter.ActivateRelationship(relID);
         }
 
         public static void R_RemoveRealRelation(string relID, bool softremove)

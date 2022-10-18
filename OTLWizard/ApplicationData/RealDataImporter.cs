@@ -303,6 +303,17 @@ namespace OTLWizard.ApplicationData
             }         
         }
 
+        public void ActivateRelationship(string relID)
+        {
+            var rel = OTL_Relationships.Where(x => x.AssetId.Equals(relID)).FirstOrDefault();
+            // remove anyway to clean the list objects
+            OTL_Relationships.Remove(OTL_Relationships.Where(x => x.AssetId.Equals(relID)).FirstOrDefault());
+            OTL_RelationshipsDictionary.Remove(relID);
+            rel.Activated = true;
+            rel.GenerateDisplayName();
+            AddRelationship(rel);
+        }
+
         public void SetEntities(List<OTL_Entity> ent)
         {
             OTL_Entities = new Dictionary<string, OTL_Entity>();

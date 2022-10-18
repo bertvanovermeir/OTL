@@ -352,10 +352,21 @@ namespace OTLWizard.FrontEnd
 
         private void updateUserRelations()
         {
-            // update created relations
-            ListCreatedRelations.DisplayMember = "DisplayName";
-            ListCreatedRelations.ValueMember = "DisplayName";
-            ListCreatedRelations.DataSource = ApplicationHandler.R_GetRealRelations();
+            if (ListCreatedRelations.Items != null)
+            {
+                ListCreatedRelations.DisplayMember = "DisplayName";
+                ListCreatedRelations.ValueMember = "DisplayName";
+                if (textBox2.Text != "")
+                {
+                    var zoekterm = textBox3.Text.ToLower();
+                    var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
+                    ListCreatedRelations.DataSource = filteredFiles;
+                }
+                else
+                {
+                    ListCreatedRelations.DataSource = ApplicationHandler.R_GetRealRelations();
+                }
+            }
         }
 
         private void updateVisuals()
@@ -499,19 +510,7 @@ namespace OTLWizard.FrontEnd
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            if (ListCreatedRelations.Items != null)
-            {
-                if (textBox2.Text != "")
-                {
-                    var zoekterm = textBox3.Text.ToLower();
-                    var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
-                    ListCreatedRelations.DataSource = filteredFiles;
-                }
-                else
-                {
-                    ListCreatedRelations.DataSource = ApplicationHandler.R_GetRealRelations();
-                }
-            }
+            updateUserRelations();
         }
 
         private void textBox3_Click(object sender, EventArgs e)
