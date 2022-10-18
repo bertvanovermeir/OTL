@@ -296,12 +296,15 @@ namespace OTLWizard.FrontEnd
         {
             if(ListCreatedRelations.SelectedItem != null)
             {
-                OTL_Relationship rel = (OTL_Relationship) ListCreatedRelations.SelectedItem;
-                ApplicationHandler.R_RemoveRealRelation(rel.AssetId, false);
+                foreach (var item in ListCreatedRelations.SelectedItems)
+                {
+                    OTL_Relationship rel = (OTL_Relationship)item;
+                    ApplicationHandler.R_RemoveRealRelation(rel.AssetId, false);
+                    updateStatusText(Language.Get("st_removed") + rel.AssetId);
+                }
                 updateUserView();
                 updateUserRelations();
                 updateVisuals();
-                updateStatusText(Language.Get("st_removed") + rel.AssetId);
             }
             else
             {
@@ -494,17 +497,19 @@ namespace OTLWizard.FrontEnd
         {
             if (ListCreatedRelations.SelectedItem != null)
             {
-                OTL_Relationship rel = (OTL_Relationship)ListCreatedRelations.SelectedItem;
-                ApplicationHandler.R_RemoveRealRelation(rel.AssetId, true);
+                foreach (var entity in ListCreatedRelations.SelectedItems)
+                {
+                    OTL_Relationship rel = (OTL_Relationship) entity;
+                    ApplicationHandler.R_RemoveRealRelation(rel.AssetId, true);
+                    updateStatusText(Language.Get("st_removed") + rel.AssetId);
+                }
                 updateUserView();
                 updateUserRelations();
-                updateVisuals();
-                updateStatusText(Language.Get("st_removed") + rel.AssetId);
+                updateVisuals();              
             }
             else
             {
                 updateStatusText(Language.Get("st_remove"));
-
             }
         }
 
