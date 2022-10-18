@@ -334,7 +334,16 @@ namespace OTLWizard.FrontEnd
             ListRelationsPerEntity.ValueMember = "DisplayName";
             ListRelationsPerEntity.DataSource = ApplicationHandler.R_GetPossibleRelations(source);
             // update created relations
-            updateUserRelations();
+            updateUserRelations();          
+        }
+
+        private void updateUserViewRelationProperties()
+        {
+            OTL_Relationship source = (OTL_Relationship) ListCreatedRelations.SelectedItem;
+            ListPropertiesRelation.DataSource = source.Properties.ToArray();
+            ListPropertiesRelation.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ListPropertiesRelation.Update();
+            ListPropertiesRelation.Refresh();
         }
 
         private void updateUserRelations()
@@ -462,7 +471,7 @@ namespace OTLWizard.FrontEnd
 
         private void ListCreatedRelations_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            updateUserViewRelationProperties();
         }
 
         // softremove
@@ -503,6 +512,11 @@ namespace OTLWizard.FrontEnd
         private void label1_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/bertvanovermeir");
+        }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

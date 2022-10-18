@@ -30,7 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager6 = new Dataweb.NShape.RoleBasedSecurityManager();
+            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager1 = new Dataweb.NShape.RoleBasedSecurityManager();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,6 +66,7 @@
             this.ListImportedEntities = new System.Windows.Forms.ListBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
+            this.ListPropertiesRelation = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -72,6 +74,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesPerEntity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -144,14 +147,14 @@
             // manualToolStripMenuItem
             // 
             this.manualToolStripMenuItem.Name = "manualToolStripMenuItem";
-            this.manualToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.manualToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.manualToolStripMenuItem.Text = "Manual";
             this.manualToolStripMenuItem.Click += new System.EventHandler(this.manualToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(114, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
@@ -252,9 +255,9 @@
             this.project1.LibrarySearchPaths = ((System.Collections.Generic.IList<string>)(resources.GetObject("project1.LibrarySearchPaths")));
             this.project1.Name = null;
             this.project1.Repository = this.cachedRepository1;
-            roleBasedSecurityManager6.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
-            roleBasedSecurityManager6.CurrentRoleName = "Administrator";
-            this.project1.SecurityManager = roleBasedSecurityManager6;
+            roleBasedSecurityManager1.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
+            roleBasedSecurityManager1.CurrentRoleName = "Administrator";
+            this.project1.SecurityManager = roleBasedSecurityManager1;
             // 
             // cachedRepository1
             // 
@@ -276,6 +279,7 @@
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.ListPropertiesRelation);
             this.groupBox3.Controls.Add(this.textBox3);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.button2);
@@ -332,7 +336,7 @@
             this.ListCreatedRelations.HorizontalScrollbar = true;
             this.ListCreatedRelations.Location = new System.Drawing.Point(4, 45);
             this.ListCreatedRelations.Name = "ListCreatedRelations";
-            this.ListCreatedRelations.Size = new System.Drawing.Size(184, 368);
+            this.ListCreatedRelations.Size = new System.Drawing.Size(184, 251);
             this.ListCreatedRelations.TabIndex = 2;
             this.ListCreatedRelations.SelectedIndexChanged += new System.EventHandler(this.ListCreatedRelations_SelectedIndexChanged);
             // 
@@ -424,10 +428,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListPropertiesPerEntity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesPerEntity.ColumnHeadersVisible = false;
-            this.ListPropertiesPerEntity.Location = new System.Drawing.Point(7, 328);
+            this.ListPropertiesPerEntity.Location = new System.Drawing.Point(7, 302);
             this.ListPropertiesPerEntity.Name = "ListPropertiesPerEntity";
             this.ListPropertiesPerEntity.ReadOnly = true;
-            this.ListPropertiesPerEntity.Size = new System.Drawing.Size(183, 154);
+            this.ListPropertiesPerEntity.Size = new System.Drawing.Size(183, 180);
             this.ListPropertiesPerEntity.TabIndex = 1;
             this.ListPropertiesPerEntity.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -440,7 +444,7 @@
             this.ListImportedEntities.HorizontalScrollbar = true;
             this.ListImportedEntities.Location = new System.Drawing.Point(6, 45);
             this.ListImportedEntities.Name = "ListImportedEntities";
-            this.ListImportedEntities.Size = new System.Drawing.Size(184, 277);
+            this.ListImportedEntities.Size = new System.Drawing.Size(184, 251);
             this.ListImportedEntities.TabIndex = 0;
             this.ListImportedEntities.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -451,6 +455,33 @@
             this.entityCommand1.Connection = null;
             this.entityCommand1.EnablePlanCaching = true;
             this.entityCommand1.Transaction = null;
+            // 
+            // ListPropertiesRelation
+            // 
+            this.ListPropertiesRelation.AllowUserToAddRows = false;
+            this.ListPropertiesRelation.AllowUserToDeleteRows = false;
+            this.ListPropertiesRelation.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListPropertiesRelation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ListPropertiesRelation.ColumnHeadersVisible = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 302);
+            this.ListPropertiesRelation.Name = "ListPropertiesRelation";
+            this.ListPropertiesRelation.ReadOnly = true;
+            this.ListPropertiesRelation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.ListPropertiesRelation.ShowEditingIcon = false;
+            this.ListPropertiesRelation.Size = new System.Drawing.Size(183, 111);
+            this.ListPropertiesRelation.TabIndex = 5;
+            this.ListPropertiesRelation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
             // RelationWindow
             // 
@@ -478,6 +509,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesPerEntity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -519,5 +551,6 @@
         private System.Windows.Forms.ToolStripMenuItem manualToolStripMenuItem;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.DataGridView ListPropertiesRelation;
     }
 }
