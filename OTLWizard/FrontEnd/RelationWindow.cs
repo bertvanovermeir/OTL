@@ -281,6 +281,7 @@ namespace OTLWizard.FrontEnd
                     }
                 }
                 updateUserView();
+                updateUserRelations();
                 updateVisuals();
                 updateStatusText(Language.Get("st_added") + ListRelationsPerEntity.SelectedItems.ToString());
 
@@ -298,6 +299,7 @@ namespace OTLWizard.FrontEnd
                 OTL_Relationship rel = (OTL_Relationship) ListCreatedRelations.SelectedItem;
                 ApplicationHandler.R_RemoveRealRelation(rel.AssetId, false);
                 updateUserView();
+                updateUserRelations();
                 updateVisuals();
                 updateStatusText(Language.Get("st_removed") + rel.AssetId);
             }
@@ -313,7 +315,10 @@ namespace OTLWizard.FrontEnd
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           updateUserView();
+            updateUserView();
+            updateUserRelations();
+            var temp = (OTL_Entity) ListImportedEntities.SelectedItem;
+            textBox3.Text = temp.AssetId;
         }
 
      
@@ -333,8 +338,7 @@ namespace OTLWizard.FrontEnd
             ListRelationsPerEntity.DisplayMember = "DisplayName";
             ListRelationsPerEntity.ValueMember = "DisplayName";
             ListRelationsPerEntity.DataSource = ApplicationHandler.R_GetPossibleRelations(source);
-            // update created relations
-            updateUserRelations();          
+                   
         }
 
         private void updateUserViewRelationProperties()
@@ -482,6 +486,7 @@ namespace OTLWizard.FrontEnd
                 OTL_Relationship rel = (OTL_Relationship)ListCreatedRelations.SelectedItem;
                 ApplicationHandler.R_RemoveRealRelation(rel.AssetId, true);
                 updateUserView();
+                updateUserRelations();
                 updateVisuals();
                 updateStatusText(Language.Get("st_removed") + rel.AssetId);
             }
@@ -507,6 +512,19 @@ namespace OTLWizard.FrontEnd
                     ListCreatedRelations.DataSource = ApplicationHandler.R_GetRealRelations();
                 }
             }
+        }
+
+        private void textBox3_Click(object sender, EventArgs e)
+        {
+            textBox3.Clear();
+        }
+        private void textBox2_Click(object sender, EventArgs e)
+        {
+            textBox2.Clear();
+        }
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
         }
 
         private void label1_Click(object sender, EventArgs e)
