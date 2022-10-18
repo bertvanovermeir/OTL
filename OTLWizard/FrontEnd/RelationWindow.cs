@@ -281,7 +281,10 @@ namespace OTLWizard.FrontEnd
                         ViewHandler.Show(Enums.Views.RelationsUserDefined, Enums.Views.isNull, item);
                         var ind = ListImportedEntities.SelectedIndex;
                         ListImportedEntities.DataSource = ApplicationHandler.R_GetImportedEntities().ToArray();
-                        ListImportedEntities.SetSelected(ind+1, true);
+                        if(ind+1 < ListImportedEntities.Items.Count)
+                        {
+                            ListImportedEntities.SetSelected(ind + 1, true);
+                        }
                     }
                     else
                     {
@@ -292,7 +295,6 @@ namespace OTLWizard.FrontEnd
                 updateUserRelations();
                 updateVisuals();
                 updateStatusText(Language.Get("st_added") + ListRelationsPerEntity.SelectedItems.Count);
-
             }
             else
             {
