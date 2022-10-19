@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -65,7 +66,7 @@ namespace OTLWizard.OTLObjecten
 
         public static async Task ImportArtefact(string subsetPath, string artefactPath)
         {
-            await ImportSubset(subsetPath);
+            await ImportSubset(subsetPath, false);
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("gaimport"));
             artefactConn = new ArtefactImporter(artefactPath);
             try
@@ -93,7 +94,7 @@ namespace OTLWizard.OTLObjecten
         /// </summary>
         /// <param name="dbPath"></param>
         /// <param name="klPath"></param>
-        public static async Task<bool> ImportSubset(string dbPath, bool keuzelijsten = false)
+        public static async Task<bool> ImportSubset(string dbPath, bool showdeprecationmsg, bool keuzelijsten = false)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("otlimport"));
             subsetConn = new SubsetImporter(dbPath, keuzelijsten);
@@ -106,14 +107,14 @@ namespace OTLWizard.OTLObjecten
                 ViewHandler.Show(Language.Get("otlfail"), Language.Get("errorheader"), MessageBoxIcon.Error);
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
-            return CheckDeprecated();
+            return CheckDeprecated(showdeprecationmsg);
         }
 
         /// <summary>
         /// check if any of these classes are deprecated
         /// this will generate a purely cosmetic message to the user. Action is in his hands.
         /// </summary>
-        private static bool CheckDeprecated()
+        private static bool CheckDeprecated(bool showmsg)
         {
             string deprecatedclasses = "";
             string deprecatedparameters = "";
@@ -134,7 +135,7 @@ namespace OTLWizard.OTLObjecten
                     }
                 }
             }
-            if (showWarning)
+            if (showWarning && showmsg)
             {
 
                 ViewHandler.Show(Language.Get("deprecation") + "Classes (incl. parameters):\n"
@@ -260,7 +261,7 @@ namespace OTLWizard.OTLObjecten
         /// <returns></returns>
         public static IEnumerable<string> GetSubsetClassNames()
         {
-            return subsetConn.GetOTLObjectTypes().Select(x => x.otlName);
+            return subsetConn.GetOTLObjectTypes().Select(x => x.otlName).OrderBy(y => y);
         }
 
         /// <summary>
@@ -433,77 +434,84 @@ namespace OTLWizard.OTLObjecten
 
         public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelations(OTL_Entity entity)
         {
-            var rels = subsetConn.GetOTLRelationshipTypes();
-            var entities = realImporter.GetEntities();
-            List<OTL_ConnectingEntityHandle> result = new List<OTL_ConnectingEntityHandle>();
-            var relnotfound = true;
-
-            foreach (var rel in rels)
+            if(entity != null)
             {
-                if (rel.bronURI.Equals(entity.TypeUri))
-                {
-                    var connectors = entities.Where(x => x.TypeUri.ToLower().Equals(rel.doelURI.ToLower()));
-                    // we now have all connections. But need to check if the relation already exist.
-                    var remainingconnector = new List<OTL_Entity>();
+                var rels = subsetConn.GetOTLRelationshipTypes();
+                var entities = realImporter.GetEntities();
+                List<OTL_ConnectingEntityHandle> result = new List<OTL_ConnectingEntityHandle>();
+                var relnotfound = true;
 
-                    foreach (var connector in connectors)
+                foreach (var rel in rels)
+                {
+                    if (rel.bronURI.Equals(entity.TypeUri))
                     {
-                        foreach (var item in realImporter.GetRelationships())
+                        var connectors = entities.Where(x => x.TypeUri.ToLower().Equals(rel.doelURI.ToLower()));
+                        // we now have all connections. But need to check if the relation already exist.
+                        var remainingconnector = new List<OTL_Entity>();
+
+                        foreach (var connector in connectors)
                         {
-                            // normal creation direction
-                            if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
-                                && item.relationshipURI.Equals(rel.relationshipURI) && item.Activated != false)
+                            foreach (var item in realImporter.GetRelationships())
                             {
-                                relnotfound = false;
-                                break;
+                                // normal creation direction
+                                if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
+                                    && item.relationshipURI.Equals(rel.relationshipURI) && item.Activated != false)
+                                {
+                                    relnotfound = false;
+                                    break;
+                                }
+                                // opposite direction if directional is false (both directions count in that case)
+                                else if (entity.AssetId.Equals(item.doelID) && connector.AssetId.Equals(item.bronID)
+                                    && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false && item.Activated != false)
+                                {
+                                    relnotfound = false;
+                                    break;
+                                }
+                                else
+                                {
+                                    relnotfound = true;
+                                }
                             }
-                            // opposite direction if directional is false (both directions count in that case)
-                            else if(entity.AssetId.Equals(item.doelID) && connector.AssetId.Equals(item.bronID)
-                                && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false && item.Activated != false)
+                            if (relnotfound)
+                                remainingconnector.Add(connector);
+                        }
+                        foreach (var connector in remainingconnector)
+                        {
+                            OTL_ConnectingEntityHandle ceh = new OTL_ConnectingEntityHandle();
+                            ceh.isDirectional = rel.isDirectional;
+                            ceh.relationName = rel.relationshipName;
+                            ceh.bronId = entity.AssetId;
+                            ceh.doelId = connector.AssetId;
+                            ceh.typeuri = rel.relationshipURI;
+                            if (rel.isDirectional)
                             {
-                                relnotfound = false;
-                                break;
+                                ceh.GenerateDisplayName(" --> ", connector.Name);
+                                result.Add(ceh);
                             }
                             else
                             {
-                                relnotfound = true;
+                                ceh.GenerateDisplayName(" <--> ", connector.Name);
+                                result.Add(ceh);
                             }
-                        }
-                        if (relnotfound)
-                            remainingconnector.Add(connector);
-                    }
-                    foreach (var connector in remainingconnector)
-                    {
-                        OTL_ConnectingEntityHandle ceh = new OTL_ConnectingEntityHandle();
-                        ceh.isDirectional = rel.isDirectional;
-                        ceh.relationName = rel.relationshipName;
-                        ceh.bronId = entity.AssetId;
-                        ceh.doelId = connector.AssetId;
-                        ceh.typeuri = rel.relationshipURI;
-                        if (rel.isDirectional)
-                        {
-                            ceh.DisplayName = rel.relationshipName + " --> " + connector.AssetId + " | " + connector.Name;
-                            result.Add(ceh);
-                        }
-                        else
-                        {
-                            ceh.DisplayName = rel.relationshipName + " <--> " + connector.AssetId + " | " + connector.Name;
-                            result.Add(ceh);
                         }
                     }
                 }
+                result = result.OrderBy(o => o.relationName).ToList();
+                // add a placeholder relation that allows user to enter relation type and ID. WITHOUT ANY CHECKS
+                OTL_ConnectingEntityHandle c = new OTL_ConnectingEntityHandle();
+                c.isDirectional = true;
+                c.relationName = "userDefinedRelationship";
+                c.bronId = entity.AssetId;
+                c.doelId = "userDefinedAssetID";
+                c.typeuri = "userDefinedTypeURI";
+                c.DisplayName = Language.Get("userdefinedrelation");
+                result.Add(c);
+                return result;
+            } else
+            {
+                return null;
             }
-            result = result.OrderBy(o=>o.relationName).ToList();
-            // add a placeholder relation that allows user to enter relation type and ID. WITHOUT ANY CHECKS
-            OTL_ConnectingEntityHandle c = new OTL_ConnectingEntityHandle();
-            c.isDirectional = true;
-            c.relationName = "userDefinedRelationship";
-            c.bronId = entity.AssetId;
-            c.doelId = "userDefinedAssetID";
-            c.typeuri = "userDefinedTypeURI";
-            c.DisplayName = Language.Get("userdefinedrelation");
-            result.Add(c);
-            return result;
+            
         }
 
         public static void R_CreateNewRealRelation(OTL_ConnectingEntityHandle ceh1)
@@ -585,7 +593,42 @@ namespace OTLWizard.OTLObjecten
         public static async Task<bool> R_ImportSubsetAsync(string[] vs)
         {
             string subsetpath = vs[0];
-            return await ImportSubset(subsetpath);
+            bool success = true;
+            if (subsetpath.Equals("download"))
+            {
+                // dowload the subset from the website to a temp folder
+                string filename = "otl.db";
+                var localPath = System.IO.Path.GetTempPath() + "otldownload\\";
+                
+                // create the folder if it does not exist
+                Directory.CreateDirectory(localPath);
+                // download the TTL file
+                ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("otldownload"));
+                try
+                {
+                    using (var client = new WebClient())
+                    {
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                        client.DownloadFile(Settings.GetRaw("otlpath"), localPath + filename);
+                        success = true;
+                    }
+                    subsetpath = localPath + filename;
+                }
+                catch
+                {
+                    success = false;
+                    ViewHandler.Show(Language.Get("otldownloadfail"), Language.Get("errorheader"), MessageBoxIcon.Error);
+                }
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            }
+            if(success)
+            {
+                await ImportSubset(subsetpath, false);
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
         public static void R_AddEntity(OTL_Entity e)

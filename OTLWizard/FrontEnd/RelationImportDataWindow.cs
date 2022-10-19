@@ -27,6 +27,7 @@ namespace OTLWizard.FrontEnd
         {
             this.Text = Language.Get("relimportwindow");
             label1.Text = Language.Get("relmsg");
+            checkBox1.Text = Language.Get("downotl");
         }
 
         public void ResetInterface()
@@ -45,7 +46,10 @@ namespace OTLWizard.FrontEnd
         // apply
         private void button1_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.Relations, Enums.Views.RelationsImport, data);
+            if (data.ContainsKey("files") && data.ContainsKey("subset"))
+            {
+                ViewHandler.Show(Enums.Views.Relations, Enums.Views.RelationsImport, data);
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -96,6 +100,32 @@ namespace OTLWizard.FrontEnd
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             // do nothing
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(checkBox1.Checked)
+            {
+                textBox2.Enabled = false;
+                if (data.ContainsKey("subset"))
+                {
+                    data["subset"] = new string[] { "download" };
+                }
+                else
+                {
+                    data.Add("subset", new string[] { "download" });
+                }
+            } else
+            {
+                textBox2.Enabled = true;
+                if(data.ContainsKey("subset"))
+                {
+                    if(data["subset"].Equals("download"))
+                    {
+                        data.Remove("subset");
+                    }
+                }
+            }
         }
     }
 }

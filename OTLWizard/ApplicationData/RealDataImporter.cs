@@ -160,7 +160,7 @@ namespace OTLWizard.ApplicationData
                         entity.TypeUri = (string)line.ItemArray[uriindex];
                         entity.Name = (string)line.ItemArray[uriindex];
                         entity.Name = entity.Name.Split('#').Last();
-                        entity.DisplayName = entity.AssetId + " | " + entity.Name;
+                        entity.GenerateDisplayName();
 
                         // properties
                         for (int i = 0; i < line.ItemArray.Length; i++)
@@ -336,7 +336,7 @@ namespace OTLWizard.ApplicationData
             e2.AssetId = doelID;
             e2.Name = Language.Get("userdefinedasset");
             e2.TypeUri = "";
-            e2.DisplayName = doelID + " | " + Language.Get("userdefinedasset");
+            e2.GenerateDisplayName();
             e2.Properties.Add(Settings.Get("otlidentifier"), doelID);
             e2.Properties.Add(Settings.Get("otlclassuri"), Language.Get("userdefinedasset"));
             AddEntity(e2);

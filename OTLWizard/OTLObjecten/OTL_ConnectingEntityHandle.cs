@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,28 @@ namespace OTLWizard.OTLObjecten
         public OTL_ConnectingEntityHandle()
         {
 
+        }
+
+        public void GenerateDisplayName(string arrow, string connectorname)
+        {
+            var tmp = doelId;
+
+            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
+            {               
+                // change the relationshipuris, if applicable, if not silently fail.
+                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
+                try
+                {
+                    var col = tmp.Split('-');
+                    var replacer = col[col.Length - 1];
+                    tmp = tmp.Replace("-" + replacer, "");
+                }
+                catch
+                {
+                    // silent error
+                }
+            }
+            this.DisplayName = relationName + arrow + tmp + " | " + connectorname;
         }
 
     }

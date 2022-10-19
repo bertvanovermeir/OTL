@@ -22,5 +22,28 @@ namespace OTLWizard.OTLObjecten
         {
             Properties = new SerializableDictionary<string, string>();
         }
+
+        public void GenerateDisplayName()
+        {
+            var tmp = AssetId;
+
+            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
+            {
+                // change the relationshipuris, if applicable, if not silently fail.
+                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
+                try
+                {
+                    var col = tmp.Split('-');
+                    var replacer = col[col.Length - 1];
+                    tmp = tmp.Replace("-" + replacer, "");
+                }
+                catch
+                {
+                    // silent error
+                }
+            }
+
+            this.DisplayName = tmp + " | " + this.Name;
+        }
     }
 }

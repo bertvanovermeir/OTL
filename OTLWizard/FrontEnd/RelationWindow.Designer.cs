@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager8 = new Dataweb.NShape.RoleBasedSecurityManager();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager4 = new Dataweb.NShape.RoleBasedSecurityManager();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,12 +39,15 @@
             this.separatorToolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statuslabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button3 = new System.Windows.Forms.Button();
             this.display1 = new Dataweb.NShape.WinFormsUI.Display();
             this.diagramSetController1 = new Dataweb.NShape.Controllers.DiagramSetController();
@@ -67,9 +70,11 @@
             this.ListImportedEntities = new System.Windows.Forms.ListBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.entityCommand1 = new System.Data.Entity.Core.EntityClient.EntityCommand();
-            this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideBase64NotationDAVIEImportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideRelationshipURIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.otherSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -84,6 +89,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -138,6 +144,18 @@
             this.openToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.openToolStripMenuItem.Text = "Open Existing Project";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
+            // 
+            // newProjectToolStripMenuItem
+            // 
+            this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.newProjectToolStripMenuItem.Text = "Sluiten";
+            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -210,6 +228,18 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "OTLRelationVisual";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(7, 432);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.TabIndex = 4;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -261,9 +291,9 @@
             this.project1.LibrarySearchPaths = ((System.Collections.Generic.IList<string>)(resources.GetObject("project1.LibrarySearchPaths")));
             this.project1.Name = null;
             this.project1.Repository = this.cachedRepository1;
-            roleBasedSecurityManager8.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
-            roleBasedSecurityManager8.CurrentRoleName = "Administrator";
-            this.project1.SecurityManager = roleBasedSecurityManager8;
+            roleBasedSecurityManager4.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
+            roleBasedSecurityManager4.CurrentRoleName = "Administrator";
+            this.project1.SecurityManager = roleBasedSecurityManager4;
             // 
             // cachedRepository1
             // 
@@ -307,14 +337,14 @@
             this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesRelation.ColumnHeadersVisible = false;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle4;
             this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 302);
             this.ListPropertiesRelation.Name = "ListPropertiesRelation";
             this.ListPropertiesRelation.ReadOnly = true;
@@ -493,29 +523,46 @@
             this.entityCommand1.EnablePlanCaching = true;
             this.entityCommand1.Transaction = null;
             // 
-            // newProjectToolStripMenuItem
+            // optionsToolStripMenuItem
             // 
-            this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
-            this.newProjectToolStripMenuItem.Text = "Sluiten";
-            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.hideBase64NotationDAVIEImportToolStripMenuItem,
+            this.hideRelationshipURIToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.otherSettingsToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
             // 
-            // toolStripSeparator1
+            // hideBase64NotationDAVIEImportToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(184, 6);
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.Checked = true;
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.Name = "hideBase64NotationDAVIEImportToolStripMenuItem";
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.Text = "Hide base64 Notation";
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.Click += new System.EventHandler(this.hideBase64NotationDAVIEImportToolStripMenuItem_Click);
             // 
-            // checkBox1
+            // hideRelationshipURIToolStripMenuItem
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 432);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.hideRelationshipURIToolStripMenuItem.Checked = true;
+            this.hideRelationshipURIToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.hideRelationshipURIToolStripMenuItem.Name = "hideRelationshipURIToolStripMenuItem";
+            this.hideRelationshipURIToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.hideRelationshipURIToolStripMenuItem.Text = "Hide Relationship ID";
+            this.hideRelationshipURIToolStripMenuItem.Click += new System.EventHandler(this.hideRelationshipURIToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(185, 6);
+            // 
+            // otherSettingsToolStripMenuItem
+            // 
+            this.otherSettingsToolStripMenuItem.Name = "otherSettingsToolStripMenuItem";
+            this.otherSettingsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.otherSettingsToolStripMenuItem.Text = "Other Settings...";
+            this.otherSettingsToolStripMenuItem.Click += new System.EventHandler(this.otherSettingsToolStripMenuItem_Click);
             // 
             // RelationWindow
             // 
@@ -590,5 +637,10 @@
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideBase64NotationDAVIEImportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideRelationshipURIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem otherSettingsToolStripMenuItem;
     }
 }

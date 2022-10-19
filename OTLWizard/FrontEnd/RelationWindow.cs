@@ -64,8 +64,19 @@ namespace OTLWizard.FrontEnd
             this.Text = Language.Get("relationwindowheader");
             fileToolStripMenuItem.Text = Language.Get("mfile");
             manualToolStripMenuItem.Text = Language.Get("mmanual");
-            aboutToolStripMenuItem.Text = Language.Get("mtitleextra");
+            aboutToolStripMenuItem.Text = Language.Get("mhelp");
             aboutToolStripMenuItem1.Text = Language.Get("mabout");
+            saveToolStripMenuItem.Text = Language.Get("saveproj");
+            openToolStripMenuItem.Text = Language.Get("openproj");
+            importToolStripMenuItem.Text = Language.Get("impfle");
+            exportToolStripMenuItem.Text = Language.Get("expfle");
+            newProjectToolStripMenuItem.Text = Language.Get("closerelmgr");
+            hideBase64NotationDAVIEImportToolStripMenuItem.Text = Language.Get("hidebase64");
+            hideBase64NotationDAVIEImportToolStripMenuItem.Checked = Boolean.Parse(Settings.Get("hidebase64cosmetic"));
+            hideRelationshipURIToolStripMenuItem.Text = Language.Get("hidereluri");
+            hideRelationshipURIToolStripMenuItem.Checked = Boolean.Parse(Settings.Get("hidereluricosmetic"));
+            otherSettingsToolStripMenuItem.Text = Language.Get("othersettings");
+            optionsToolStripMenuItem.Text = Language.Get("mtitleextra");
         }
 
         private void NShapeLayouter()
@@ -163,11 +174,14 @@ namespace OTLWizard.FrontEnd
         {
             if (optionalArgument.ContainsKey("files") && optionalArgument.ContainsKey("subset"))
             {
-                await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
-                await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);
-                UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
-                updateUserRelations();
-                updateVisuals();
+                var result = await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
+                if(result)
+                {
+                    await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);
+                    UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
+                    updateUserRelations();
+                    updateVisuals();
+                }                
             }
             else
             {
@@ -205,7 +219,7 @@ namespace OTLWizard.FrontEnd
             // todo: check if file was already saved this session, then dont execute the savefiledialog
 
             SaveFileDialog fdlg = new SaveFileDialog();
-            fdlg.Title = Language.Get("SaveState");
+            fdlg.Title = Language.Get("savestate");
             fdlg.FileName = "relations";
             fdlg.Filter = "XMLR files (*.xmlr)|*.xmlr";
             fdlg.FilterIndex = 1;
@@ -229,7 +243,7 @@ namespace OTLWizard.FrontEnd
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog fdlg = new OpenFileDialog();
-            fdlg.Title = Language.Get("SelectSaveState");
+            fdlg.Title = Language.Get("selectsavestate");
             fdlg.InitialDirectory = @"c:\";
             fdlg.Filter = "XMLR Files (*.xmlr)|*.xmlr";
             fdlg.FilterIndex = 1;
@@ -333,7 +347,24 @@ namespace OTLWizard.FrontEnd
             updateUserView();
             updateUserRelations();
             var temp = (OTL_Entity)ListImportedEntities.SelectedItem;
-            textBox3.Text = temp.AssetId;
+            var val = temp.AssetId;
+            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
+            {
+                // change the relationshipuris, if applicable, if not silently fail.
+                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
+                try
+                {
+                    var col = val.Split('-');
+                    var replacer = col[col.Length - 1];
+                    val = val.Replace("-" + replacer, "");
+                }
+                catch
+                {
+                    // silent error
+                }
+            }
+            textBox3.Text = val;
+
         }
 
 
@@ -379,7 +410,7 @@ namespace OTLWizard.FrontEnd
             {
                 ListCreatedRelations.DisplayMember = "DisplayName";
                 ListCreatedRelations.ValueMember = "DisplayName";
-                if (textBox2.Text != "")
+                if (textBox3.Text != "")
                 {
                     var zoekterm = textBox3.Text.ToLower();
                     var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
@@ -631,6 +662,40 @@ namespace OTLWizard.FrontEnd
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+        //base64 main enabler
+        private void hideBase64NotationDAVIEImportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(hideBase64NotationDAVIEImportToolStripMenuItem.Checked)
+            {
+                hideBase64NotationDAVIEImportToolStripMenuItem.Checked = false;
+            } else
+            {
+                hideBase64NotationDAVIEImportToolStripMenuItem.Checked = true;
+            }
+            Settings.Update("hidebase64cosmetic", hideBase64NotationDAVIEImportToolStripMenuItem.Checked.ToString().ToLower());
+            Settings.WriteSettings();
+            ViewHandler.Show(Language.Get("restartrequiredsetting"), Language.Get("restartrequiredsettingtitle"), MessageBoxIcon.Information);
+        }
+
+        private void hideRelationshipURIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(hideRelationshipURIToolStripMenuItem.Checked)
+            {
+                hideRelationshipURIToolStripMenuItem.Checked = false;
+            } else
+            {
+                hideRelationshipURIToolStripMenuItem.Checked = true;
+            }
+            Settings.Update("hidereluricosmetic", hideRelationshipURIToolStripMenuItem.Checked.ToString().ToLower());
+            Settings.WriteSettings();
+            ViewHandler.Show(Language.Get("restartrequiredsetting"), Language.Get("restartrequiredsettingtitle"), MessageBoxIcon.Information);
+        }
+
+        private void otherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv5\\";
+            Process.Start("notepad.exe", localPath + "settings.txt");
         }
     }
 }

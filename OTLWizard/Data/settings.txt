@@ -4,7 +4,7 @@
 KlPath=https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenverkeer/master/codelijsten/
 ## Language used in interface (NL/EN)
 Language=NL
-types=onderdeel|implementatieelement|levenscyclus|installatie
+types=onderdeel|implementatieelement|levenscyclus|installatie|agent
 otlidentifier=assetid.identificator
 otlclassuri=typeuri
 otlsrcrel=bronAssetId.identificator
@@ -12,3 +12,6 @@ otltrgtrel=doelAssetId.identificator
 relationretention=false
 otlactiverel=isactief
 firstrun=0
+otlpath=https://wegenenverkeer.data.vlaanderen.be/doc/implementatiemodel/master/html/OTL.db
+hidereluricosmetic=true
+hidebase64cosmetic=true

@@ -35,14 +35,51 @@ namespace OTLWizard.OTLObjecten
 
         public void GenerateDisplayName()
         {
+            var bron = bronID;
+            var doel = doelID;
+            var dit = AssetId;
+
+            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
+            {
+                // change the relationshipuris, if applicable, if not silently fail.
+                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
+                try
+                {
+                    var col = bron.Split('-');
+                    var replacer = col[col.Length - 1];
+                    bron = bron.Replace("-" + replacer, "");
+                    col = doel.Split('-');
+                    replacer = col[col.Length - 1];
+                    doel = doel.Replace("-" + replacer, "");
+                    col = dit.Split('-');
+                    replacer = col[col.Length - 1];
+                    dit = dit.Replace("-" + replacer, "");
+                }
+                catch
+                {
+                    // silent error
+                }
+            }
+
+            if (Boolean.Parse(Settings.Get("hidereluricosmetic")))
+            {
+                // change the relationshipuris, if applicable, if not silently fail.
+                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
+                dit = "";
+            } else
+            {
+                dit = "(" + dit + ") ";
+            }
+
+
             if (this.isDirectional)
             {
-                this.DisplayName = this.relationshipURI.Split('#')[1] + " | " + this.bronID + " --> " + this.doelID;
+                this.DisplayName = dit + this.relationshipURI.Split('#')[1] + " | " + bron + " --> " + doel;
 
             }
             else
             {
-                this.DisplayName = this.relationshipURI.Split('#')[1] + " | " + this.bronID + " <--> " + this.doelID;
+                this.DisplayName = dit + this.relationshipURI.Split('#')[1] + " | " + bron + " <--> " + doel;
             }
             // actief of niet
             if(Activated)
