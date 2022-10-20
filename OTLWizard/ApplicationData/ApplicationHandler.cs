@@ -291,56 +291,38 @@ namespace OTLWizard.OTLObjecten
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("csvrealimport"));
             foreach (var path in paths)
             {
-                if (path.ToUpper().EndsWith(".CSV"))
+                try
                 {
-                    try
+                    if (path.ToUpper().EndsWith(".CSV"))
                     {
                         await Task.Run(() => { realImporter.Import(path, Enums.ImportType.CSV); });
                     }
-                    catch (Exception e)
-                    {
-                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
-                    }
-                }
-                else if (path.ToUpper().EndsWith(".XLS"))
-                {
-                    try
+                    else if (path.ToUpper().EndsWith(".XLS") || path.ToUpper().EndsWith(".XLSX"))
                     {
                         await Task.Run(() => { realImporter.Import(path, Enums.ImportType.XLS); });
                     }
-                    catch (Exception e)
+                    else
                     {
-                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                        ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                     }
                 }
-                else if (path.ToUpper().EndsWith(".XLSX"))
-                {
-                    try
-                    {
-                        await Task.Run(() => { realImporter.Import(path, Enums.ImportType.XLSX); });
-                    }
                     catch (Exception e)
-                    {
-                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
-                    }
-                }
-                else if (path.ToUpper().EndsWith(".JSON"))
                 {
-                    try
-                    {
-                        await Task.Run(() => { realImporter.Import(path, Enums.ImportType.JSON); });
-                    }
-                    catch (Exception e)
-                    {
-                        ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
-                    }
+                    ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                 }
-                else
+
+            if (realImporter.GetErrors().Count > 0)
                 {
-                    ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                    string tmp = "";
+                    foreach(var error in realImporter.GetErrors())
+                    {
+                        tmp = tmp + "\n\r" + error;
+                    }
+                    ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + tmp, Language.Get("errorheader") , System.Windows.Forms.MessageBoxIcon.Error);
+                    realImporter.ResetErrors();
                 }
             }
-            realImporter.CheckAssetCompliance();
+            realImporter.CheckAssetCompliance();           
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 

@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using Microsoft.Office.Interop.Excel;
 using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
@@ -17,9 +18,11 @@ namespace OTLWizard.ApplicationData
     {
         private List<OTL_Entity> entities;
         private Dictionary<string,OTL_Entity> OTL_Entities;
+        
         private List<OTL_Relationship> OTL_Relationships;
         private Dictionary<string,OTL_Relationship> OTL_RelationshipsDictionary;
         private SubsetImporter subsetImporter;
+        private List<string> errors;
 
         public RealDataImporter()
         {
@@ -34,24 +37,30 @@ namespace OTLWizard.ApplicationData
             subsetImporter = s;
         }
 
+        public List<string> GetErrors()
+        {
+            return errors;
+        }
+        public void ResetErrors()
+        {
+            errors = new List<string>();
+        }
+
         public void Import(string path, Enums.ImportType type)
         {
+            errors= new List<string>();
+
             switch (type)
             {
                 case Enums.ImportType.CSV:
                     ImportCSV(path);
                     break;
-                case Enums.ImportType.JSON:
-                    ImportJSON(path);
-                    break;
-                case Enums.ImportType.XLSX:
-                    ImportXLS(path);
-                    break;
                 case Enums.ImportType.XLS:
                     ImportXLS(path);
                     break;
                 default:
-                    throw new Exception(Language.Get("filenotsupported"));
+                    errors.Add(Language.Get("filenotsupported"));
+                    break;
             }
         }
 
@@ -74,26 +83,53 @@ namespace OTLWizard.ApplicationData
         // CSV
         private void ImportCSV(string path)
         {
+            var filename = "";
+            try
+            {
+                filename = path.Split('\\').Last();
+
+            } catch
+            {
+                filename = path;
+            }
+
             // check if separator is ; or , by trial and error
             var temp = readCSV(path, ';');
-            if(temp.Columns.Count < 2)
-            {
-                temp = readCSV(path, ',');
-            }
-            // try again
-            if(temp.Columns.Count < 2)
-            {
-                throw new Exception(Language.Get("csvinvalid"));
+            if(temp == null)
+            {   
+                
+                    temp = readCSV(path, ',');
+                    // try again
+                    if (temp == null)
+                    {
+                        errors.Add(filename + " > " + Language.Get("foutpos1"));
+                    }
+                               
             } else
             {
+                if(temp.Columns.Count < 2)
+                {
+                    temp = readCSV(path, ',');
+                    // try again
+                    if (temp == null)
+                    {
+                        errors.Add(filename + " > " + Language.Get("foutpos1"));
+                    }
+                }
+            }
+            if(temp != null && temp.Columns.Count > 1)
+            {
                 processCSVData(temp);
-            }           
+            } else
+            {
+                errors.Add(filename + " > " + Language.Get("foutpos2"));
+            }
         }
 
-        private DataTable readCSV(string path, char separator)
+        private System.Data.DataTable readCSV(string path, char separator)
         {
             List<string> badRecord = new List<string>();
-            var dt = new DataTable();
+            var dt = new System.Data.DataTable();
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = separator.ToString(),
@@ -112,13 +148,13 @@ namespace OTLWizard.ApplicationData
 
             if(badRecord.Count > 0)
             {
-                throw new Exception(Language.Get("csvinvalid3"));
+                return null;
             }
 
             return dt;
         }
 
-        private void processCSVData(DataTable data)
+        private void processCSVData(System.Data.DataTable data)
         {           
             // first line is the identifier line for specific OTL data. It is presumed this will not change, but just
             // in case we use the settings file from the other part of the program
@@ -143,8 +179,9 @@ namespace OTLWizard.ApplicationData
             {
                 if(line.ItemArray[idindex].Equals("") | line.ItemArray[uriindex].Equals("")) {
                     // invalid CSV, do not process
-                    throw new Exception(Language.Get("csvinvalid2"));
-                } else
+                    errors.Add("file-internal" + " > " + Language.Get("foutpos3"));
+                }
+                else
                 {
                     // check if relationship columns exist in file
                     var relvalue = "";
@@ -176,7 +213,14 @@ namespace OTLWizard.ApplicationData
                         // check if exists
                         if (OTL_Entities.ContainsKey(entity.AssetId))
                         {
-                            // it is a double entry
+                            // check if "extern asset"
+                            if(OTL_Entities[entity.AssetId].Name.Equals(Language.Get("userdefinedasset")))
+                            {
+                                // it is a double entity but currently an external asset, convert to real asset.
+                                OTL_Entities[entity.AssetId] = entity;
+                                entities.RemoveAll(e => e.AssetId.Equals(entity.AssetId));
+                                entities.Add(entity);
+                            }
                         }
                         else
                         {
@@ -244,16 +288,48 @@ namespace OTLWizard.ApplicationData
 
         private void ImportXLS(string path)
         {
-            throw new Exception(Language.Get("filenotsupported"));
+            List<string> files = new List<string>();
+
+            // convert XLSX to CSV and then read it.
+            // first we need to check how many entries we have, create a new workbook per            
+            try
+            {
+                Application excel;
+                Workbook workbook;
+                // attempt at warning user
+                excel = new Application
+                {
+                    Visible = false,
+                    DisplayAlerts = false
+                };
+                workbook = excel.Workbooks.Open(path);
+
+                foreach(Worksheet item in workbook.Worksheets)
+                {
+
+                    item.Activate();
+                    // dowload the subset from the website to a temp folder
+                    string filename = item.Name + ".csv";
+                    var localPath = System.IO.Path.GetTempPath() + "otltempconversion\\";
+                    // create the folder if it does not exist
+                    Directory.CreateDirectory(localPath);
+                    workbook.SaveAs(localPath + filename, XlFileFormat.xlCSVWindows);
+                    files.Add(localPath + filename);
+                }
+
+                workbook.Close();
+            }
+            catch
+            {
+                //
+            }        
+
+            foreach(string file in files)
+            {
+                ImportCSV(file);
+            }
+
         }
-
-        //JSON
-
-        private void ImportJSON(string path)
-        {
-            throw new Exception(Language.Get("filenotsupported"));
-        }
-
 
         // GENERAL
 

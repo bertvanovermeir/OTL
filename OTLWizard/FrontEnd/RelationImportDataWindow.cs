@@ -35,6 +35,7 @@ namespace OTLWizard.FrontEnd
             data = new Dictionary<string,string[]>();
             textBox1.Text = "";
             textBox2.Text = "";
+            checkBox1.Checked = false;
         }
 
         // cancel
