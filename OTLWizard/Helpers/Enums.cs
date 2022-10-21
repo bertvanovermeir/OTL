@@ -29,6 +29,7 @@
             Relations,
             RelationsImport,
             RelationsUserDefined,
+            RelationImportSummary,
             isNull
         }
 

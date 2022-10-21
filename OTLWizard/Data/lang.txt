@@ -178,8 +178,16 @@
 <EN>foutpos1= contains one or more rows with corrupt data.
 <NL>foutpos2=Header bevat niet de vereiste kolommen.
 <EN>foutpos2=header does not contain required columns.
-<NL>foutpos3=Een of meerdere rijen bevatten incorrecte syntax.
-<EN>foutpos3=One or more rows contain incorrect syntax.
+<NL>foutpos3=AssetId of TypeUri konden niet gevonden worden in de header.
+<EN>foutpos3=AssetId or TypeUri could not be retrieved in header info.
+<NL>foutpos4=AssetId of TypeUri zijn niet ingevuld.
+<EN>foutpos4=AssetId or TypeUri are empty.
+<NL>foutpos5=AssetId is reeds geimporteerd.
+<EN>foutpos5=AssetId already imported.
+<NL>foutpos6=Assetinformatie toegekend aan bestaande Asset.
+<EN>foutpos6=Assetinformation added to existing Asset.
+<NL>foutpos7=Deze relatie bestaat al.
+<EN>foutpos7=This relation already exists.
 <NL>filenotsupported=Dit bestandsformaat is niet ondersteund.
 <EN>filenotsupported=File format is not supported.
 <NL>userdefinedrelation=Andere relatie toevoegen...
@@ -244,3 +252,5 @@
 <EN>filesaveissue=Problem saving the file.
 <NL>filesaveissueheader=Fout
 <EN>filesaveissueheader=Error
+<NL>importsummaryheader=Samenvatting van de import
+<EN>importsummaryheader=Summary of the import

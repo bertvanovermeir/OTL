@@ -22,7 +22,8 @@ namespace OTLWizard.ApplicationData
         private List<OTL_Relationship> OTL_Relationships;
         private Dictionary<string,OTL_Relationship> OTL_RelationshipsDictionary;
         private SubsetImporter subsetImporter;
-        private List<string> errors;
+        private List<ErrorContainer> errors;
+        private string currentFileName;
 
         public RealDataImporter()
         {
@@ -30,6 +31,7 @@ namespace OTLWizard.ApplicationData
             OTL_Entities = new Dictionary<string,OTL_Entity>();
             OTL_Relationships = new List<OTL_Relationship>();
             OTL_RelationshipsDictionary = new Dictionary<string, OTL_Relationship>();
+            errors = new List<ErrorContainer>();
         }
 
         public void SetRelationTypeData(SubsetImporter s)
@@ -37,19 +39,18 @@ namespace OTLWizard.ApplicationData
             subsetImporter = s;
         }
 
-        public List<string> GetErrors()
+        public List<ErrorContainer> GetErrors()
         {
             return errors;
         }
         public void ResetErrors()
         {
-            errors = new List<string>();
+            errors = new List<ErrorContainer>();
         }
 
         public void Import(string path, Enums.ImportType type)
         {
-            errors= new List<string>();
-
+            currentFileName = GetFileName(path);
             switch (type)
             {
                 case Enums.ImportType.CSV:
@@ -59,9 +60,23 @@ namespace OTLWizard.ApplicationData
                     ImportXLS(path);
                     break;
                 default:
-                    errors.Add(Language.Get("filenotsupported"));
+                    errors.Add(new ErrorContainer(currentFileName, "/","Error",Language.Get("filenotsupported")));
                     break;
             }
+        }
+
+        private string GetFileName(string path)
+        {
+            var filename = "";
+            try
+            {
+                filename = path.Split('\\').Last();
+            }
+            catch
+            {
+                filename = path;
+            }
+            return filename;
         }
 
         public void CheckAssetCompliance()
@@ -83,16 +98,6 @@ namespace OTLWizard.ApplicationData
         // CSV
         private void ImportCSV(string path)
         {
-            var filename = "";
-            try
-            {
-                filename = path.Split('\\').Last();
-
-            } catch
-            {
-                filename = path;
-            }
-
             // check if separator is ; or , by trial and error
             var temp = readCSV(path, ';');
             if(temp == null)
@@ -102,7 +107,7 @@ namespace OTLWizard.ApplicationData
                     // try again
                     if (temp == null)
                     {
-                        errors.Add(filename + " > " + Language.Get("foutpos1"));
+                        errors.Add(new ErrorContainer(currentFileName, "/","Error",Language.Get("foutpos1")));
                     }
                                
             } else
@@ -113,7 +118,7 @@ namespace OTLWizard.ApplicationData
                     // try again
                     if (temp == null)
                     {
-                        errors.Add(filename + " > " + Language.Get("foutpos1"));
+                        errors.Add(new ErrorContainer(currentFileName, "/","Error", Language.Get("foutpos1")));
                     }
                 }
             }
@@ -122,7 +127,7 @@ namespace OTLWizard.ApplicationData
                 processCSVData(temp);
             } else
             {
-                errors.Add(filename + " > " + Language.Get("foutpos2"));
+                errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos2")));
             }
         }
 
@@ -148,6 +153,7 @@ namespace OTLWizard.ApplicationData
 
             if(badRecord.Count > 0)
             {
+                errors.Add(new ErrorContainer(currentFileName, "tbd", "Error", "badrecord"));
                 return null;
             }
 
@@ -177,9 +183,14 @@ namespace OTLWizard.ApplicationData
 
             foreach (DataRow line in data.Rows)
             {
-                if(line.ItemArray[idindex].Equals("") | line.ItemArray[uriindex].Equals("")) {
-                    // invalid CSV, do not process
-                    errors.Add("file-internal" + " > " + Language.Get("foutpos3"));
+                if(idindex < 0 | uriindex <0)
+                {
+                    // these parameters were not found in the CSV file, invalid file
+                    errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(),"Error", Language.Get("foutpos3")));
+                }
+                else if(line.ItemArray[idindex].Equals("") | line.ItemArray[uriindex].Equals("")) {
+                    // assetid or asseturi not filled in
+                    errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Error",Language.Get("foutpos4")));
                 }
                 else
                 {
@@ -220,6 +231,11 @@ namespace OTLWizard.ApplicationData
                                 OTL_Entities[entity.AssetId] = entity;
                                 entities.RemoveAll(e => e.AssetId.Equals(entity.AssetId));
                                 entities.Add(entity);
+                                errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(),"Warning", Language.Get("foutpos6")));
+                            }
+                            else
+                            {
+                                errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Warning", Language.Get("foutpos5")));
                             }
                         }
                         else
@@ -273,6 +289,8 @@ namespace OTLWizard.ApplicationData
                         if (OTL_RelationshipsDictionary.ContainsKey(temp.AssetId))
                         {
                             // it is a double entry
+                            errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Warning", Language.Get("foutpos7")));
+
                         }
                         else
                         {

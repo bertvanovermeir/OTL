@@ -16,6 +16,7 @@ namespace OTLWizard.OTLObjecten
         private static RelationWindow relationWindow = new RelationWindow();
         private static RelationImportDataWindow relationImportDataWindow = new RelationImportDataWindow();
         private static RelationUserDefinedWindow relationUserDefinedWindow = new RelationUserDefinedWindow();
+        private static RelationImportSummaryWindow relationImportSummaryWindow = new RelationImportSummaryWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -58,6 +59,9 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.RelationsUserDefined:
                     relationUserDefinedWindow.Hide();
                     break;
+                case Enums.Views.RelationImportSummary:
+                    relationImportSummaryWindow.Hide();
+                    break;
                 default:
                     break;
             }
@@ -93,6 +97,10 @@ namespace OTLWizard.OTLObjecten
                     break;
                 case Enums.Views.Settings:
                     settingsWindow.Show();
+                    break;
+                case Enums.Views.RelationImportSummary:
+                    relationImportSummaryWindow.SetDataSource(optionalArgument);
+                    relationImportSummaryWindow.ShowDialog();
                     break;
                 case Enums.Views.Relations:
                     if(optionalArgument != null)

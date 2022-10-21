@@ -310,20 +310,14 @@ namespace OTLWizard.OTLObjecten
                 {
                     ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                 }
-
-            if (realImporter.GetErrors().Count > 0)
-                {
-                    string tmp = "";
-                    foreach(var error in realImporter.GetErrors())
-                    {
-                        tmp = tmp + "\n\r" + error;
-                    }
-                    ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + tmp, Language.Get("errorheader") , System.Windows.Forms.MessageBoxIcon.Error);
-                    realImporter.ResetErrors();
-                }
-            }
+            }           
             realImporter.CheckAssetCompliance();           
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            if (realImporter.GetErrors().Count > 0)
+            {
+                ViewHandler.Show(Enums.Views.RelationImportSummary, Enums.Views.isNull, realImporter.GetErrors().ToArray());
+                realImporter.ResetErrors();
+            }
         }
 
         public static List<OTL_Entity> R_GetImportedEntities()

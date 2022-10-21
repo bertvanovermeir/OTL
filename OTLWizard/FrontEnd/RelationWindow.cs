@@ -425,7 +425,13 @@ namespace OTLWizard.FrontEnd
 
         private void updateVisuals()
         {
-            bool check = false;
+            var check = false;
+            var validUpdate = true;
+
+            if(ApplicationHandler.R_GetImportedEntities().Count == 0)
+            {
+                validUpdate = false;
+            }
 
             if (ApplicationHandler.R_GetImportedEntities().Count > 30 && firstrun)
             {
@@ -435,7 +441,7 @@ namespace OTLWizard.FrontEnd
                 firstrun = false;
             }
             // check if all or selection only
-            if (autoupdate)
+            if (autoupdate && validUpdate)
             {
 
                 var tempdict = new Dictionary<string, Shape>();
@@ -496,7 +502,6 @@ namespace OTLWizard.FrontEnd
                 if (!check)
                 {
                     NShapeLayouter();
-
                 }
             }
             else
