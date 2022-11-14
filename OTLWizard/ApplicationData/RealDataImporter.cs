@@ -153,7 +153,10 @@ namespace OTLWizard.ApplicationData
 
             if(badRecord.Count > 0)
             {
-                errors.Add(new ErrorContainer(currentFileName, "tbd", "Error", "badrecord"));
+                foreach(var record in badRecord)
+                {
+                    errors.Add(new ErrorContainer(currentFileName,  string.Join(string.Empty, record.ToArray()), "Bad Record", Language.Get("foutpos8")));
+                }
                 return null;
             }
 
@@ -165,10 +168,12 @@ namespace OTLWizard.ApplicationData
             // first line is the identifier line for specific OTL data. It is presumed this will not change, but just
             // in case we use the settings file from the other part of the program
             var id = Settings.Get("otlidentifier").ToLower();
+            var agentid = Settings.Get("otlidentifieragent").ToLower();
             var uri = Settings.Get("otlclassuri").ToLower();
             var src = Settings.Get("otlsrcrel").ToLower();
             var trgt = Settings.Get("otltrgtrel").ToLower();
             var act = Settings.Get("otlactiverel").ToLower();
+            var agenturi = Settings.Get("agenturi").ToLower();
 
             // either add to entites or relations, depending on content of cells
             // we do not (in an easy way) know which columns belong to which object. Empty rows will be omitted to "simulate" wise behaviour.
@@ -180,9 +185,20 @@ namespace OTLWizard.ApplicationData
             var relsrcindex = data.Columns.IndexOf(src);
             var reltrgtindex = data.Columns.IndexOf(trgt);
             var activeindex = data.Columns.IndexOf(act);
+            var agentidindex = data.Columns.IndexOf(agentid);
 
             foreach (DataRow line in data.Rows)
             {
+                var isagent = false;
+                if(agentidindex > -1)
+                {
+                    // we have an agent object, this is special...
+                    // it does not have an URI, and has an agentid.identificator
+                    // set idindex as agentidindex
+                    idindex = agentidindex;
+                    uriindex = agentidindex;
+                    isagent = true;
+                }
                 if(idindex < 0 | uriindex <0)
                 {
                     // these parameters were not found in the CSV file, invalid file
@@ -208,6 +224,11 @@ namespace OTLWizard.ApplicationData
                         entity.TypeUri = (string)line.ItemArray[uriindex];
                         entity.Name = (string)line.ItemArray[uriindex];
                         entity.Name = entity.Name.Split('#').Last();
+                        if (isagent)
+                        {
+                            entity.TypeUri = agenturi;
+                            entity.Name = agenturi.Split('/').Last();                           
+                        }
                         entity.GenerateDisplayName();
 
                         // properties
@@ -320,6 +341,9 @@ namespace OTLWizard.ApplicationData
                     Visible = false,
                     DisplayAlerts = false
                 };
+                excel.Application.DecimalSeparator = ".";
+                excel.Application.ThousandsSeparator = "";
+                excel.Application.UseSystemSeparators = false;
                 workbook = excel.Workbooks.Open(path);
 
                 foreach(Worksheet item in workbook.Worksheets)
@@ -331,11 +355,13 @@ namespace OTLWizard.ApplicationData
                     var localPath = System.IO.Path.GetTempPath() + "otltempconversion\\";
                     // create the folder if it does not exist
                     Directory.CreateDirectory(localPath);
-                    workbook.SaveAs(localPath + filename, XlFileFormat.xlCSVWindows);
+
+                    workbook.SaveAs(localPath + filename, XlFileFormat.xlTextWindows);
                     files.Add(localPath + filename);
                 }
 
                 workbook.Close();
+                excel.Application.UseSystemSeparators = true;
             }
             catch
             {
