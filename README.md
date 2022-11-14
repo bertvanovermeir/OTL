@@ -5,6 +5,7 @@ Deze applicatie implementeert de AWV OTL standaard van de vlaamse overheid. Met 
 - XLS/CSV templates exporteren van een bestaande OTL subset.
 - Dummy data toevoegen aan CSV/XLS exports van OTL subsets.
 - Een lijst met op te leveren geometrische data exporteren vanaf een subset en het geometrieartefact.
+- Relaties aanmaken en aanpassen tussen verschillende OTL assets
 
 Een idee voor een uitbreiding? Werkt iets niet of foutief? Log uw probleem op [de issue pagina](https://github.com/bertvanovermeir/OTL/issues).
 <p>Wilt u bijdragen aan de ontwikkeling of een uitbreiding maken aan de hand van deze toepassing? Laat me iets weten op bert.vanovermeir@bitsofdata.be.
