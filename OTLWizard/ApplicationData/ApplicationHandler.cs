@@ -27,7 +27,7 @@ namespace OTLWizard.OTLObjecten
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
-                ViewHandler.Show(Language.Get("oldversion") + "\n\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
+                ViewHandler.Show(Language.Get("oldversion") + "\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
             ViewHandler.Start();
         }
 
