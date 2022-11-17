@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.1.0
+Program version = 4.2.1
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.0.0_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.2.1_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -133,13 +133,13 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.CSharp.d
 46.7 KB
 dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe
-1.2 MB
+1.4 MB
 exe
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.config
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-347.5 KB
+377.5 KB
 pdb
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
 796 KB
@@ -284,13 +284,13 @@ By email: bert.vanovermeir@bitsofdata.be\par
 [Variables]
 [SCs]
 Desktop
-OTL Wizard 4.1.0
+OTL Wizard 4.2.1
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\wizard.ico
 0
 Startmenu
-OTL Wizard 4.1.0
+OTL Wizard 4.2.1
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\wizard.ico
@@ -333,5 +333,21 @@ del "C:\Users\Public\Desktop\OTL Wizard 4.0.1.lnk" /q /f /s
 
 Shell Execute
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.0.1.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 4.1.0.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 4.2.0.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.1.0.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.2.0.lnk" /q /f /s
 
 
