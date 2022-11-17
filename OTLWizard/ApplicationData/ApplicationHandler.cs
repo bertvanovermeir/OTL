@@ -61,8 +61,15 @@ namespace OTLWizard.OTLObjecten
         {
             var downloadpath = System.IO.Path.GetTempPath() + "otlappversie\\";
             // create the folder if it does not exist
-            Directory.CreateDirectory(downloadpath);
-            // download the TTL file
+            if(Directory.Exists(downloadpath))
+            {
+                Directory.Delete(downloadpath, true);
+                Directory.CreateDirectory(downloadpath);
+            }
+            else
+            {
+                Directory.CreateDirectory(downloadpath);
+            }
             try
             {
                 using (var client = new System.Net.WebClient())
