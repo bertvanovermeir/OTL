@@ -10,13 +10,13 @@ namespace OTLWizard.OTLObjecten
 {
     public class OTL_Relationship
     {
-        [Name("assetid.identificator")]
+        [Name("AssetId.identificator")]
         public string AssetId { get; set; }
-        [Name("typeuri")]
+        [Name("typeURI")]
         public string relationshipURI { get; set; }
-        [Name("doelassetid.identificator")]
+        [Name("doelAssetId.identificator")]
         public string doelID { get; set; }
-        [Name("bronassetid.identificator")]
+        [Name("bronAssetId.identificator")]
         public string bronID { get; set; }
         [Ignore]
         public bool isDirectional { get; set; }

@@ -290,6 +290,7 @@
     <Content Include="Data\version.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Data\versioning.dat" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OTLWizard.OTLObjecten.OTL_ArtefactType.datasource" />
     <None Include="Properties\Settings.settings">

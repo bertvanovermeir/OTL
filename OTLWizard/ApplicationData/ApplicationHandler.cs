@@ -27,8 +27,34 @@ namespace OTLWizard.OTLObjecten
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
-                ViewHandler.Show(Language.Get("oldversion"), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
+                ViewHandler.Show(Language.Get("oldversion") + "\n\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
             ViewHandler.Start();
+        }
+
+        public static string GetVersionUpdateHistory()
+        {
+            var tempstr = "";
+            var downloadpath = System.IO.Path.GetTempPath() + "otlappversioning\\";
+            // create the folder if it does not exist
+            Directory.CreateDirectory(downloadpath);
+            // download the TTL file
+            try
+            {
+                using (var client = new System.Net.WebClient())
+                {
+                    client.DownloadFile("https://raw.githubusercontent.com/bertvanovermeir/OTL/master/OTLWizard/Data/versioning.dat", downloadpath + "versioning.dat");
+                }
+                string[] lines = File.ReadAllLines(downloadpath + "versioning.dat", System.Text.Encoding.UTF8);
+                foreach (string item in lines)
+                {
+                    tempstr = tempstr + "\n" + item;
+                }       
+            }
+            catch
+            {
+                // could not check for updates, just silently continue. This is the user's responsablility.       
+            }
+            return tempstr;
         }
 
         public static bool CheckVersion()
@@ -60,6 +86,7 @@ namespace OTLWizard.OTLObjecten
             }
             catch
             {
+                // could not check for updates, just silently continue. This is the user's responsablility.
                 return true;
             }
         }
