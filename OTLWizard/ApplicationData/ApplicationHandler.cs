@@ -23,7 +23,7 @@ namespace OTLWizard.OTLObjecten
         private static string currentversion;
 
         public static void Start()
-        {
+        {           
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
@@ -112,7 +112,7 @@ namespace OTLWizard.OTLObjecten
             artefactConn = new ArtefactImporter(artefactPath);
             try
             {
-                await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
+                await Task.Run(() => { artefactConn.Import(GetSubsetUris()); });
             }
             catch
             {
@@ -121,6 +121,32 @@ namespace OTLWizard.OTLObjecten
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
+        public static void SetArtefactForClass(OTL_ObjectType o)
+        {
+            var geom = GetArtefactResultData().Where(w => w.URL == o.uri).Select(q => q).FirstOrDefault();
+            if(geom != null && geom.geometrie.Length > 2)
+            {
+                o.geometryRepresentation = geom.geometrie.Trim().Substring(0, geom.geometrie.Length - 1).Split(',');
+            } else
+            {
+                o.geometryRepresentation = null;
+            }
+        }
+
+        public static async Task ImportArtefact(string artefactPath)
+        {
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("gaimport"));
+            artefactConn = new ArtefactImporter(artefactPath);
+            try
+            {
+                await Task.Run(() => { artefactConn.Import(GetSubsetUris()); });
+            }
+            catch
+            {
+                ViewHandler.Show(Language.Get("sdfgafail"), Language.Get("errorheader"), MessageBoxIcon.Error);
+            }
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+        }
       
         public static string GetOTLVersion()
         {
@@ -199,7 +225,7 @@ namespace OTLWizard.OTLObjecten
                 {
                     try
                     {
-                        await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
+                        await Task.Run(() => { artefactConn.Import(GetSubsetUris()); });
                     }
                     catch
                     {
@@ -242,7 +268,7 @@ namespace OTLWizard.OTLObjecten
                 {
                     try
                     {
-                        await Task.Run(() => { artefactConn.Import(GetSubsetClassNames()); });
+                        await Task.Run(() => { artefactConn.Import(GetSubsetUris()); });
                     }
                     catch
                     {
@@ -305,6 +331,11 @@ namespace OTLWizard.OTLObjecten
             return subsetConn.GetOTLObjectTypes().Select(x => x.otlName).OrderBy(y => y);
         }
 
+        public static IEnumerable<string> GetSubsetUris()
+        {
+            return subsetConn.GetOTLObjectTypes().Select(x => x.uri).OrderBy(y => y);
+        }
+
         /// <summary>
         /// Interface Handle voor het opvragen van alle ingeladen artefactdata, dit kan nog gefilterd worden
         /// in een later stadium met de user selection.
@@ -316,6 +347,8 @@ namespace OTLWizard.OTLObjecten
         }
 
         /////////////////// RELATION TOOL FUNCTIONS /////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
 
         public static RealDataImporter realImporter = new RealDataImporter();
         
@@ -658,5 +691,39 @@ namespace OTLWizard.OTLObjecten
             realImporter.CreateUserAsset(doelID);
         }
 
+        /////////////////// XSD TOOL FUNCTIONS //////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        public static XsdHandler sdf = new XsdHandler();
+
+
+        public static void SDX_ImportSDX(string path)
+        {
+
+        }
+
+        public static void SDX_ExportSDX(string path, string[] classes)
+        {
+            List<OTL_ObjectType> temp = null;
+
+                if (classes == null)
+                {
+                    temp = subsetConn.GetOTLObjectTypes();
+                }
+                else if (classes.Length == 0)
+                {
+                    temp = subsetConn.GetOTLObjectTypes();
+            }
+                else
+                {
+                    temp = subsetConn.GetOTLObjectTypesFor(classes);
+            }
+            var ok = sdf.Export(temp, path);
+            if(ok)
+                ViewHandler.Show(Language.Get("sdfsuccess"), Language.Get("errorheader"), MessageBoxIcon.Information);
+            else
+                ViewHandler.Show(Language.Get("sdffail"), Language.Get("errorheader"), MessageBoxIcon.Error);
+
+        }
     }
 }

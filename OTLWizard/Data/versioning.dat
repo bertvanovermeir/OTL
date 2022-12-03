@@ -1,5 +1,10 @@
-﻿Release Notes: Hotfix 4.2.1
----------------------------
-- fixes a syntax issue preventing relationships to be imported into the DAVIE application.
+﻿Nieuwigheden versie 4.3
+-----------------------
 
-Visit https://github.com/bertvanovermeir/OTL to download the new version.
+- Nieuw:	XSD (SDF) templates aanmaken met keuzelijsten voor Autocad Maps/Civil3D vanuit een subset. (beta)
+
+- Fix:		Onvolledige resultaten bij het ophalen van de geometrie uit het geometrieartefact voor bepaalde klasses.
+- Fix:		Versiecontrole popup blijft verschijnen na update naar nieuwste versie.
+- Fix:		Optimalisatie intern algoritme ophalen keuzelijsten. 
+
+Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.

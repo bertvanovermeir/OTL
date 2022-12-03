@@ -14,6 +14,7 @@ namespace OTLWizard.OTLObjecten
         public string AssetId { get; set; }
         public string DisplayName { get; set; }
 
+      
         //public Dictionary<string, string> Properties { get; set; }
         public SerializableDictionary<string, string> Properties { get; set; }
 

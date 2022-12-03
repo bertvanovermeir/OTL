@@ -19,6 +19,12 @@ namespace OTLWizard.OTLObjecten
         public bool Deprecated { get; set; } // is the parameter still in use
         public Enums.DataType DataType { get; set; } // real acad datatype calculated at runtime.
         public string DataTypeString { get; set; }
+
+        // parameters SDF (ComplexType element)
+        public string SDF_Name { get; set; } // vb: huidigbeeld_omschrijving
+        public string SDF_RestrictionBase { get; set; } //vb: xs:string
+        //TBD
+
         public OTL_Parameter()
         {
             // for serialization

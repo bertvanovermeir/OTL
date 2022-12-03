@@ -151,6 +151,7 @@
     <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
     <Compile Include="ApplicationData\XmlSerialization.cs" />
+    <Compile Include="ApplicationData\XsdHandler.cs" />
     <Compile Include="FrontEnd\RelationImportDataWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -174,6 +175,12 @@
     </Compile>
     <Compile Include="FrontEnd\RelationWindow.Designer.cs">
       <DependentUpon>RelationWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrontEnd\SDXWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\SDXWindow.Designer.cs">
+      <DependentUpon>SDXWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="FrontEnd\SettingsWindow.cs">
       <SubType>Form</SubType>
@@ -231,6 +238,8 @@
     <Compile Include="OTLObjecten\OTL_Relationship.cs" />
     <Compile Include="OTLObjecten\OTL_RelationshipType.cs" />
     <Compile Include="ApplicationData\Program.cs" />
+    <Compile Include="OTLObjecten\OTL_SDXAttribute.cs" />
+    <Compile Include="OTLObjecten\OTL_SDXObject.cs" />
     <Compile Include="OTLObjecten\OTL_UserDataContainer.cs" />
     <Compile Include="Helpers\Versioning.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -251,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\RelationWindow.resx">
       <DependentUpon>RelationWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\SDXWindow.resx">
+      <DependentUpon>SDXWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\SettingsWindow.resx">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
@@ -282,6 +294,10 @@
     <Content Include="Data\queries.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Data\test.xsd">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\version.bak" />
     <Content Include="Data\settings.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -290,7 +306,9 @@
     <Content Include="Data\version.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="Data\versioning.dat" />
+    <None Include="Data\versioning.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\OTLWizard.OTLObjecten.OTL_ArtefactType.datasource" />
     <None Include="Properties\Settings.settings">

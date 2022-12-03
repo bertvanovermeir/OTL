@@ -17,6 +17,7 @@ namespace OTLWizard.OTLObjecten
         public string description;
         public string uri;
         public bool deprecated;
+        public string[] geometryRepresentation;
 
         private List<OTL_Parameter> parameters; // a dictionary with parameters
         private List<OTL_RelationshipType> relationTypes; // a dictionary with possible relationships for this object, according to SQL relationships
@@ -42,6 +43,7 @@ namespace OTLWizard.OTLObjecten
 
         public List<OTL_Parameter> GetParameters()
         {
+            parameters.Sort((x, y) => x.DotNotatie.CompareTo(y.DotNotatie));
             return parameters;
         }
 

@@ -30,7 +30,19 @@
             RelationsImport,
             RelationsUserDefined,
             RelationImportSummary,
+            SDX,
             isNull
+        }
+
+        public enum SDFAttributeTypes
+        {
+            Simple,
+            List,
+            Real,
+            Integer,
+            Bool,
+            Geometry,
+            FeatId
         }
 
         public enum Query

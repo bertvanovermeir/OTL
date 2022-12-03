@@ -15,6 +15,7 @@ namespace OTLWizard.OTLObjecten
             sqlite_conn_OTL = new SQLiteConnection("Data Source = " + dbpath + "; Version = 3; Read Only = True;");
         }
 
+        // classes refer to URIs
         public void Import(IEnumerable<string> otlClasses)
         {
             // iterate over all OTL objects included in the subset

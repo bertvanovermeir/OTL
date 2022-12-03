@@ -24,7 +24,7 @@ namespace OTLWizard
             button5.Text = Language.Get("home5");
             button6.Text = Language.Get("home6");
             button7.Text = Language.Get("home7");
-            button7.Visible = true;
+            button8.Text = Language.Get("home8");
             label1.Text = Language.Get("welcome");
         }
 
@@ -83,6 +83,11 @@ namespace OTLWizard
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            ViewHandler.Show(Enums.Views.SDX, Enums.Views.Home, null);
         }
     }
 }

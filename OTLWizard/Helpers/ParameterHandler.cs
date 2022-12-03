@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using static OTLWizard.OTLObjecten.Enums;
 
 namespace OTLWizard.OTLObjecten
 {
@@ -128,6 +129,55 @@ namespace OTLWizard.OTLObjecten
                 return DropdownValues;
             }
             return null;
+        }
+
+        public static SDFAttributeTypes GetDataTypeSDF(string DataTypeString)
+        {
+            SDFAttributeTypes tempType;
+            if (DataTypeString.Contains("XMLSchema#") || DataTypeString.Contains("rdf-schema#") || DataTypeString.Contains("generiek#Getal") || DataTypeString.Contains("#Dte"))
+            {
+                string temp = DataTypeString.Split('#')[1].ToLower();
+                switch (temp)
+                {
+                    case "getal":
+                        tempType = SDFAttributeTypes.Real;
+                        break;
+                    case "integer":
+                        tempType = SDFAttributeTypes.Integer;
+                        break;
+                    case "decimal":
+                        tempType = SDFAttributeTypes.Real;
+                        break;
+                    case "string":
+                        tempType = SDFAttributeTypes.Simple;
+                        break;
+                    case "boolean":
+                        tempType = SDFAttributeTypes.Bool;
+                        break;
+                    case "literal":
+                        tempType = SDFAttributeTypes.Real;
+                        break;
+                    default:
+                        tempType = SDFAttributeTypes.Simple;
+                        break;
+                }
+            }
+            // kwantWaarde
+            else if (DataTypeString.Contains("#KwantWrdIn"))
+            {
+                tempType = SDFAttributeTypes.Real;
+            }
+            // Enums TTL (lists in acad)
+            else if (DataTypeString.Contains("#Kl"))
+            {
+                tempType = SDFAttributeTypes.List;
+            }
+            else
+            {
+                tempType = SDFAttributeTypes.Simple;
+            }
+
+            return tempType;
         }
 
         /// <summary>

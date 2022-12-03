@@ -46,6 +46,22 @@ namespace OTLWizard.OTLObjecten
             return OTL_ObjectTypes;
         }
 
+        public List<OTL_ObjectType> GetOTLObjectTypesFor(string[] classnames)
+        {
+            List<OTL_ObjectType> result = new List<OTL_ObjectType>();
+            foreach(string classname in classnames)
+            {
+                foreach(OTL_ObjectType o in OTL_ObjectTypes)
+                {
+                    if(o.otlName == classname)
+                    {
+                        result.Add(o);
+                    }
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// return all OTL relations in imported subset
         /// </summary>
