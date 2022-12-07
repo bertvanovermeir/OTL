@@ -26,12 +26,21 @@
             ArtefactResult,
             SubsetMain,
             Settings,
-            Relations,
+            RelationsMain,
             RelationsImport,
             RelationsUserDefined,
             RelationImportSummary,
-            SDX,
+            SDFMain,
+            Tutorial,
             isNull
+        }
+
+        public enum Tutorial
+        {
+            subsettool,
+            artefacttool,
+            relationtool,
+            sdftool
         }
 
         public enum SDFAttributeTypes

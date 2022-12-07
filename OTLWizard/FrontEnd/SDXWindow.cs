@@ -14,7 +14,7 @@ namespace OTLWizard.FrontEnd
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.Home, Enums.Views.SDX, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.SDFMain, null);
 
         }
 

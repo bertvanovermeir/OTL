@@ -77,7 +77,7 @@ namespace OTLWizard
 
         private void button7_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.Relations, Enums.Views.Home, null);
+            ViewHandler.Show(Enums.Views.RelationsMain, Enums.Views.Home, null);
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -87,7 +87,7 @@ namespace OTLWizard
 
         private void button8_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.SDX, Enums.Views.Home, null);
+            ViewHandler.Show(Enums.Views.SDFMain, Enums.Views.Home, null);
         }
     }
 }

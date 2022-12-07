@@ -49,7 +49,7 @@ namespace OTLWizard.FrontEnd
         {
             if (data.ContainsKey("files") && data.ContainsKey("subset"))
             {
-                ViewHandler.Show(Enums.Views.Relations, Enums.Views.RelationsImport, data);
+                ViewHandler.Show(Enums.Views.RelationsMain, Enums.Views.RelationsImport, data);
             }
         }
 

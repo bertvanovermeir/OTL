@@ -84,8 +84,11 @@ namespace OTLWizard.OTLObjecten
             // setup base
             XmlElement element = createXsElement(appendTo, "element");
             XmlElement annotation = createXsElement(element, "annotation");
-            createXsElement(annotation, "documentation").InnerText = element_annotation_documentation_innerText;
-            
+            if(element_annotation_documentation_innerText.Length > 183)
+                createXsElement(annotation, "documentation").InnerText = element_annotation_documentation_innerText.Substring(0,182);
+            else
+                createXsElement(annotation, "documentation").InnerText = element_annotation_documentation_innerText;
+
             // setup default values for all
             element.SetAttribute("name", element_name);
             
@@ -110,7 +113,10 @@ namespace OTLWizard.OTLObjecten
                     element.SetAttribute("minOccurs", element_minOccurs);
                     element.SetAttribute("default", element_default);
                     XmlElement simpletype2 = createXsElement(element, "simpleType");
-                    createXsElement(simpletype2, "restriction").SetAttribute("base", element_base);
+                    XmlElement restriction2 = createXsElement(simpletype2, "restriction");
+                    restriction2.SetAttribute("base", element_base);
+                    createXsElement(restriction2, "maxLength").SetAttribute("value", "50");
+
                     break;
                 case Enums.SDFAttributeTypes.Real:
                     element.SetAttribute("minOccurs", element_minOccurs);

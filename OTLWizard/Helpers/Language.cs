@@ -44,7 +44,7 @@ namespace OTLWizard.Helpers
         {
             try
             {
-                return languages[key];
+                return languages[key.ToLower()];
             }
             catch
             {

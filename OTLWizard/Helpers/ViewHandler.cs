@@ -18,6 +18,7 @@ namespace OTLWizard.OTLObjecten
         private static RelationUserDefinedWindow relationUserDefinedWindow = new RelationUserDefinedWindow();
         private static RelationImportSummaryWindow relationImportSummaryWindow = new RelationImportSummaryWindow();
         private static SDXWindow sdxWindow = new SDXWindow();
+        private static TutorialWindow tutorialWindow = new TutorialWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -51,7 +52,7 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.Settings:
                     settingsWindow.Hide();
                     break;
-                case Enums.Views.Relations:
+                case Enums.Views.RelationsMain:
                     relationWindow.Hide();
                     break;
                 case Enums.Views.RelationsImport:
@@ -63,7 +64,7 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.RelationImportSummary:
                     relationImportSummaryWindow.Hide();
                     break;
-                case Enums.Views.SDX:
+                case Enums.Views.SDFMain:
                     sdxWindow.Hide();
                     break;
                 default:
@@ -106,7 +107,7 @@ namespace OTLWizard.OTLObjecten
                     relationImportSummaryWindow.SetDataSource(optionalArgument);
                     relationImportSummaryWindow.ShowDialog();
                     break;
-                case Enums.Views.Relations:
+                case Enums.Views.RelationsMain:
                     if(optionalArgument != null)
                     {
                        _ = relationWindow.ImportUserSelectionAsync((Dictionary<string, string[]>)optionalArgument);
@@ -121,12 +122,19 @@ namespace OTLWizard.OTLObjecten
                     relationUserDefinedWindow.Init((OTL_ConnectingEntityHandle)optionalArgument);
                     relationUserDefinedWindow.ShowDialog();
                     break;
-                case Enums.Views.SDX:
+                case Enums.Views.SDFMain:
                     sdxWindow.Show();
                     break;
                 default:
                     break;
             }
+            // tutorial open if necessary
+            openTutorial(toOpen);
+        }
+
+        private static void openTutorial(Enums.Views toOpen)
+        {
+            tutorialWindow.SetTutorial(toOpen);
         }
     }
 }

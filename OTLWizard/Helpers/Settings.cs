@@ -16,7 +16,7 @@ namespace OTLWizard.Helpers
         {
             values = new Dictionary<string, string>();
             
-            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv5\\";
+            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6\\";
             // create the folder if it does not exist
             Directory.CreateDirectory(localPath);
 
@@ -42,7 +42,7 @@ namespace OTLWizard.Helpers
         {
             try
             {
-                return values[key].ToLower();
+                return values[key.ToLower()].ToLower();
             } catch
             {
                 return "";
@@ -63,9 +63,9 @@ namespace OTLWizard.Helpers
 
         public static bool Update(string key, string value)
         {
-            if (values.ContainsKey(key))
+            if (values.ContainsKey(key.ToLower()))
             {
-                values[key] = value;
+                values[key.ToLower()] = value;
                 
                 return true;
             } else
@@ -79,7 +79,7 @@ namespace OTLWizard.Helpers
             try
             {
                 // save to file
-                var localPath = System.IO.Path.GetTempPath() + "otlsettingsv5\\";
+                var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6\\";
                 // create the folder if it does not exist
                 Directory.CreateDirectory(localPath);
                 // write it

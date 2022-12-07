@@ -232,7 +232,7 @@ namespace OTLWizard.FrontEnd
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.Home, Enums.Views.Relations, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.RelationsMain, null);
         }
 
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -538,7 +538,7 @@ namespace OTLWizard.FrontEnd
                     break;
                 default:
                     ApplicationHandler.R_DestroyOnClose();
-                    ViewHandler.Show(Enums.Views.Home, Enums.Views.Relations, null);
+                    ViewHandler.Show(Enums.Views.Home, Enums.Views.RelationsMain, null);
                     break;
             }
         }
@@ -699,7 +699,7 @@ namespace OTLWizard.FrontEnd
 
         private void otherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv5\\";
+            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6\\";
             Process.Start("notepad.exe", localPath + "settings.txt");
         }
     }

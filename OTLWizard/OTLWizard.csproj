@@ -188,6 +188,12 @@
     <Compile Include="FrontEnd\SettingsWindow.Designer.cs">
       <DependentUpon>SettingsWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrontEnd\TutorialWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\TutorialWindow.Designer.cs">
+      <DependentUpon>TutorialWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\DummyDataHandler.cs" />
     <Compile Include="Helpers\ErrorContainer.cs" />
     <Compile Include="Helpers\Language.cs" />
@@ -276,6 +282,9 @@
     <EmbeddedResource Include="FrontEnd\ExportSubsetWindow.resx">
       <DependentUpon>ExportSubsetWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\TutorialWindow.resx">
+      <DependentUpon>TutorialWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -288,6 +297,51 @@
     </Compile>
     <None Include="Data\install.ifp" />
     <None Include="Data\queries.bak" />
+    <Content Include="Data\animations\artefactmain1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\artefactmain2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\artefactmain3.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\relationsmain1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\relationsmain2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\relationsmain3.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\SDFMain1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\sdfmain2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\sdfmain3.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\sdfmain4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\subsetmain1.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\subsetmain2.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\subsetmain3.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\subsetmain4.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\animations\subsetmain5.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Data\lang.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

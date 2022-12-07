@@ -17,3 +17,7 @@ otlpath=https://wegenenverkeer.data.vlaanderen.be/doc/implementatiemodel/master/
 hidereluricosmetic=true
 hidebase64cosmetic=true
 agenturi=http://purl.org/dc/terms/Agent
+showtutorialsubsetmain=1
+showtutorialartefactmain=1
+showtutorialrelationsmain=1
+showtutorialsdfmain=1
