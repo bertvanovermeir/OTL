@@ -14,6 +14,7 @@ namespace OTLWizard.Helpers
 
         public static void Init()
         {
+            languages.Clear();
             language = Settings.Get("language");
             if (language.Equals(""))
                 language = "NL";

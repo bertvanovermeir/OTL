@@ -16,7 +16,7 @@ namespace OTLWizard
         private void HomeWindow_Load(object sender, EventArgs e)
         {
             Text = Language.Get("homewindowheader");
-            label3.Text = Language.Get("homewindowheader") + " - " + Language.Get("changelanguage");
+            label3.Text = Language.Get("homewindowheader");
             button1.Text = Language.Get("home1");
             button3.Text = Language.Get("home3");
             button2.Text = Language.Get("home2");
@@ -26,6 +26,12 @@ namespace OTLWizard
             button7.Text = Language.Get("home7");
             button8.Text = Language.Get("home8");
             label1.Text = Language.Get("welcome");
+            if(Settings.Get("language").Equals("nl")) {
+                radioButton2.Checked = true;
+            } else
+            {
+                radioButton1.Checked = true;
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -88,6 +94,36 @@ namespace OTLWizard
         private void button8_Click(object sender, EventArgs e)
         {
             ViewHandler.Show(Enums.Views.SDFMain, Enums.Views.Home, null);
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.linkedin.com/in/bertvanovermeir/");
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radioButton2.Checked)
+            {
+                Settings.Update("language", "nl");
+                refreshAfterLangChange();
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            if(radioButton1.Checked)
+            {
+                Settings.Update("language", "en");
+                refreshAfterLangChange();
+            }
+        }
+
+        private void refreshAfterLangChange()
+        {
+            Settings.WriteSettings();
+            Language.Init();
         }
     }
 }

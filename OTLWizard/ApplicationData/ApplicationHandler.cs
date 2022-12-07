@@ -694,7 +694,7 @@ namespace OTLWizard.OTLObjecten
         /////////////////// XSD TOOL FUNCTIONS //////////////////////////////////
         /////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////
-        public static XsdHandler sdf = new XsdHandler();
+        public static XsdHandler sdf;
 
 
         public static void SDX_ImportSDX(string path)
@@ -704,6 +704,7 @@ namespace OTLWizard.OTLObjecten
 
         public static void SDX_ExportSDX(string path, string[] classes)
         {
+            sdf = new XsdHandler();
             List<OTL_ObjectType> temp = null;
 
                 if (classes == null)
