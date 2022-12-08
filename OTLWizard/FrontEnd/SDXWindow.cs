@@ -23,6 +23,7 @@ namespace OTLWizard.FrontEnd
 
             buttonSubset.Enabled = radioButtonSDXModeNew.Checked;
             buttonSDX.Enabled = !radioButtonSDXModeNew.Checked;
+            buttonartefact.Enabled = radioButtonSDXModeNew.Checked;
             setStatusComponents(false);
         }
 
@@ -30,6 +31,7 @@ namespace OTLWizard.FrontEnd
         {
             buttonSubset.Enabled = !radioButtonSDXModeEdit.Checked;
             buttonSDX.Enabled = radioButtonSDXModeEdit.Checked;
+            buttonartefact.Enabled = !radioButtonSDXModeEdit.Checked;
             setStatusComponents(false);
         }
 
@@ -42,7 +44,6 @@ namespace OTLWizard.FrontEnd
             buttonImportAll.Enabled = enabled;
             checkAllClasses.Enabled = enabled;
             ListAllClasses.Enabled = enabled;
-            buttonartefact.Enabled = enabled;
             buttonExportSDX.Enabled = false;
             checkAllClasses.Enabled = false;
             ListAllClasses.Enabled = false;
@@ -105,7 +106,10 @@ namespace OTLWizard.FrontEnd
                         i++;
                     }
                 }
-                ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
+                if(radioButtonSDXModeEdit.Checked)
+                    //ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
+                if(radioButtonSDXModeNew.Checked)
+                    ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
             }
         }
 
@@ -113,7 +117,12 @@ namespace OTLWizard.FrontEnd
         {
             if(radioButtonSDXModeEdit.Checked)
             {
-                ApplicationHandler.SDX_ImportSDX(textBoxSDX.Text);
+                ApplicationHandler.SDX_ImportSDX(textBoxSDX.Text, true);
+                ListAllClasses.Items.Clear();
+                foreach (string klasse in ApplicationHandler.getXSDClassNames())
+                {
+                    ListAllClasses.Items.Add(klasse);
+                }
             } else // mode new SDX
             {
                 await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, true);

@@ -204,7 +204,6 @@
             // radioButtonSDXModeEdit
             // 
             this.radioButtonSDXModeEdit.AutoSize = true;
-            this.radioButtonSDXModeEdit.Enabled = false;
             this.radioButtonSDXModeEdit.Location = new System.Drawing.Point(195, 47);
             this.radioButtonSDXModeEdit.Name = "radioButtonSDXModeEdit";
             this.radioButtonSDXModeEdit.Size = new System.Drawing.Size(186, 17);

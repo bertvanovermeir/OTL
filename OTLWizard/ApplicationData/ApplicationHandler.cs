@@ -27,7 +27,7 @@ namespace OTLWizard.OTLObjecten
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
-                ViewHandler.Show(Language.Get("oldversion") + "\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
+                ViewHandler.Show(Language.Get("oldversion") + "\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);   
             ViewHandler.Start();
         }
 
@@ -695,11 +695,23 @@ namespace OTLWizard.OTLObjecten
         /////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////
         public static XsdHandler sdf;
+        public static string[] xsdClassNames;
 
-
-        public static void SDX_ImportSDX(string path)
+        public static void SDX_ImportSDX(string path, bool onlyClassNames)
         {
+            sdf = new XsdHandler();
+            if (onlyClassNames)
+            {
+                xsdClassNames = sdf.GetXSDClasses(path);
+            } else
+            {
 
+            }
+        }
+
+        public static string[] getXSDClassNames()
+        {
+            return xsdClassNames;
         }
 
         public static void SDX_ExportSDX(string path, string[] classes)
@@ -726,5 +738,23 @@ namespace OTLWizard.OTLObjecten
                 ViewHandler.Show(Language.Get("sdffail"), Language.Get("errorheader"), MessageBoxIcon.Error);
 
         }
+
+        /////////////////// VWR TOOL FUNCTIONS //////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        
+
+        public static async void VWR_ImportSubset(string path)
+        {
+            await ImportSubset(path, false);
+            var temp = new OTL_DataContainer();
+            temp.ObjectTypes = subsetConn.GetOTLObjectTypes();
+            temp.RelationshipTypes = subsetConn.GetOTLRelationshipTypes();
+            ViewHandler.Show(Enums.Views.SubsetViewer, Enums.Views.SubsetViewerImport, temp);
+        }
+
+
+
+
     }
 }

@@ -52,8 +52,6 @@
             this.statuslabel = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.display1 = new Dataweb.NShape.WinFormsUI.Display();
             this.diagramSetController1 = new Dataweb.NShape.Controllers.DiagramSetController();
             this.project1 = new Dataweb.NShape.Project(this.components);
             this.cachedRepository1 = new Dataweb.NShape.Advanced.CachedRepository();
@@ -252,8 +250,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.checkBox1);
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Controls.Add(this.display1);
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(345, 478);
@@ -265,53 +261,15 @@
             // 
             this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(7, 422);
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(6, 450);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(80, 17);
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(6, 445);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(333, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Update";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // display1
-            // 
-            this.display1.AllowDrop = true;
-            this.display1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.display1.BackColorGradient = System.Drawing.SystemColors.Control;
-            this.display1.DiagramMargin = 20;
-            this.display1.DiagramSetController = this.diagramSetController1;
-            this.display1.GridColor = System.Drawing.Color.Gainsboro;
-            this.display1.GridSize = 19;
-            this.display1.HideDeniedMenuItems = true;
-            this.display1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.display1.Location = new System.Drawing.Point(6, 19);
-            this.display1.Name = "display1";
-            this.display1.PropertyController = null;
-            this.display1.SelectionHilightColor = System.Drawing.Color.Firebrick;
-            this.display1.SelectionInactiveColor = System.Drawing.Color.Gray;
-            this.display1.SelectionInteriorColor = System.Drawing.Color.WhiteSmoke;
-            this.display1.SelectionNormalColor = System.Drawing.Color.DarkGreen;
-            this.display1.ShowScrollBars = true;
-            this.display1.Size = new System.Drawing.Size(333, 397);
-            this.display1.TabIndex = 0;
-            this.display1.ToolPreviewBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(119)))), ((int)(((byte)(136)))), ((int)(((byte)(153)))));
-            this.display1.ToolPreviewColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(70)))), ((int)(((byte)(130)))), ((int)(((byte)(180)))));
-            this.display1.ZoomWithMouseWheel = true;
-            this.display1.Load += new System.EventHandler(this.display1_Load);
             // 
             // diagramSetController1
             // 
@@ -673,7 +631,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
-        private Dataweb.NShape.WinFormsUI.Display display1;
         private Dataweb.NShape.Project project1;
         private Dataweb.NShape.Controllers.DiagramSetController diagramSetController1;
         private Dataweb.NShape.Advanced.CachedRepository cachedRepository1;
@@ -685,7 +642,6 @@
         private System.Windows.Forms.ListBox ListCreatedRelations;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator separatorToolStripMenuItem;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridView ListPropertiesPerEntity;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;

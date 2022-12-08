@@ -1,7 +1,5 @@
-﻿using Dataweb.NShape;
-using Dataweb.NShape.Advanced;
-using Dataweb.NShape.GeneralShapes;
-using Dataweb.NShape.Layouters;
+﻿using Microsoft.Msagl.Drawing;
+using Microsoft.Msagl.Layout.MDS;
 using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
@@ -19,11 +17,9 @@ namespace OTLWizard.FrontEnd
 {
     public partial class RelationWindow : Form
     {
+        Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
+        Microsoft.Msagl.Drawing.Graph graph;
 
-        Diagram diagram;
-        bool autoupdate = true;
-        bool firstrun = true;
-        IEnumerable<OTL_Relationship> previousdataset;
         public RelationWindow()
         {
             InitializeComponent();
@@ -34,22 +30,24 @@ namespace OTLWizard.FrontEnd
 
         }
 
+        private void CreateNode(OTL_Entity otl)
+        {
+            var node = graph.AddNode(otl.AssetId);
+            node.LabelText = otl.AssetId;
+            node.Label.FontSize = 6;
+            setGraphicalRepresentation(node, Microsoft.Msagl.Drawing.Color.Gray, Microsoft.Msagl.Drawing.Shape.Box);
+        }
+
+        private void setGraphicalRepresentation(Node node, Microsoft.Msagl.Drawing.Color fill, Microsoft.Msagl.Drawing.Shape shape)
+        {
+            node.Attr.FillColor = fill;
+            node.Attr.Shape = shape;
+        }
+
         private void RelationWindow_Load(object sender, EventArgs e)
         {
-            previousdataset = new List<OTL_Relationship>();
-
-            project1.Name = "Visual";
-            project1.AddLibrary(typeof(Ellipse).Assembly, false);
-            var temp = project1.ShapeTypes;
-            project1.AutoLoadLibraries = true;
-            project1.Create();
-            display1.ActiveTool = new SelectionTool();
-            ((CharacterStyle)project1.Design.CharacterStyles.Caption).SizeInPoints = 7;
-            ((CharacterStyle)project1.Design.CharacterStyles.Normal).SizeInPoints = 7;
-            ((CharacterStyle)project1.Design.CharacterStyles.Heading1).SizeInPoints = 7;
-            ((CharacterStyle)project1.Design.CharacterStyles.Subtitle).SizeInPoints = 7;
-            project1.Repository.Update(project1.Design.CharacterStyles.Caption);
-
+            // MSAGL
+            Layouter();
             // headings
             groupBox1.Text = Language.Get("gb1");
             groupBox2.Text = Language.Get("gb2");
@@ -57,7 +55,6 @@ namespace OTLWizard.FrontEnd
             groupBox4.Text = Language.Get("gb4");
             button1.Text = Language.Get("addrel");
             button2.Text = Language.Get("remrel");
-            button3.Text = Language.Get("aupdy");
             button4.Text = Language.Get("remrelsoft");
             checkBox1.Text = Language.Get("chckrel");
             statuslabel.Text = Language.Get("statuslabel");
@@ -79,96 +76,39 @@ namespace OTLWizard.FrontEnd
             optionsToolStripMenuItem.Text = Language.Get("mtitleextra");
         }
 
-        private void NShapeLayouter()
+        private void updateLayouter()
         {
-            try
-            {
-                RepulsionLayouter layouter = new RepulsionLayouter(project1);
-                // Set the repulsion force and its range
-                layouter.SpringRate = 8;
-                layouter.Repulsion = 3;
-                layouter.RepulsionRange = 500;
-                // Set the friction and the mass of the shapes
-                layouter.Friction = 0;
-                layouter.Mass = 50;
-                // Set all shapes 
-                layouter.AllShapes = display1.Diagram.Shapes;
-                // Set shapes that should be layouted
-                layouter.Shapes = display1.Diagram.Shapes;
-                //
-                // Now prepare and execute the layouter
-                layouter.Prepare();
-                layouter.Execute(10);
-                // Fit the result into the diagram bounds
-                display1.Diagram.Width = 1500;
-                display1.Diagram.Height = 1500;
-                layouter.Fit(50, 50, display1.Diagram.Width - 100, display1.Diagram.Height - 100);
-                cachedRepository1.InsertAll(diagram);
-            }
-            catch
-            {
-                // no shapes were defined.
-            }
+            viewer.Graph = graph;
+            viewer.Update();
         }
 
-        private Shape NShapeCreateNode(string NodeText)
+        private void Layouter()
         {
-            RectangleBase shape;
-            shape = (RectangleBase)project1.ShapeTypes["Ellipse"].CreateInstance();
-            shape.Width = 100;
-            shape.Height = 60;
-            // Set position of the shape (diagram coordinates)
-            shape.X = 100;
-            shape.Y = 100;
-            // Set text of the shape
-            shape.SetCaptionText(0, NodeText);
-            // Add shape to the diagram
-            diagram.Shapes.Add(shape);
-            display1.Diagram = diagram;
-            return shape;
+            graph = new Microsoft.Msagl.Drawing.Graph("graph");
+            graph.AddNode(Language.Get("laadeenproject"));
+            //bind the graph to the viewer 
+            graph.LayoutAlgorithmSettings = new MdsLayoutSettings();
+            graph.LayoutAlgorithmSettings.PackingMethod = Microsoft.Msagl.Core.Layout.PackingMethod.Columns;
+            graph.LayoutAlgorithmSettings.EdgeRoutingSettings.EdgeRoutingMode = Microsoft.Msagl.Core.Routing.EdgeRoutingMode.Rectilinear;
+            viewer.Graph = graph;
+            //associate the viewer with the form 
+            SuspendLayout();
+            viewer.Dock = System.Windows.Forms.DockStyle.Fill;
+            groupBox4.Controls.Add(viewer);
+            ResumeLayout();
         }
 
-        private void NShapeConnectNode(Shape referredShape, Shape referringShape, string relationName, bool isDirectional)
+        private void ConnectNode(OTL_Relationship otl)
         {
-            // Create a line shape for connecting the two shapes
-            Polyline arrow = (Polyline)project1.ShapeTypes["Polyline"].CreateInstance();
-            // Add shape to the diagram
-            diagram.Shapes.Add(arrow);
-            // Connect one of the line shape's endings (first vertex) to the referring shape's reference point
-            arrow.Connect(ControlPointId.FirstVertex, referringShape, ControlPointId.Reference);
-            // Connect the other of the line shape's endings (last vertex) to the referred shape
-            arrow.Connect(ControlPointId.LastVertex, referredShape, ControlPointId.Reference);
-            Guid guid = Guid.NewGuid();
-            CapStyle style1 = new CapStyle(guid.ToString());
-            style1.CapShape = CapShape.ClosedArrow;
-            style1.CapSize = 20;
-            style1.ColorStyle = new ColorStyle();
-            if (isDirectional)
+            var relation = graph.AddEdge(otl.bronID, otl.doelID);
+            relation.LabelText = otl.relationshipURI.Split('#')[1];
+            relation.Label.FontSize = 4;
+            if (!otl.isDirectional)
             {
-                if (relationName.Equals("LigtOp"))
-                    style1.ColorStyle = project1.Design.ColorStyles.Green;
-                if (relationName.Equals("Voedt"))
-                    style1.ColorStyle = project1.Design.ColorStyles.Blue;
-                if (relationName.Equals("Bevestiging"))
-                    style1.ColorStyle = project1.Design.ColorStyles.Red;
-                if (relationName.Equals("HoortBij"))
-                    style1.ColorStyle = project1.Design.ColorStyles.White;
-                if (relationName.Equals("SluitAanOp"))
-                    style1.ColorStyle = project1.Design.ColorStyles.Gray;
-                if (relationName.Equals("Sturing"))
-                    style1.ColorStyle = project1.Design.ColorStyles.Yellow;
-                if (relationName.Equals("HeeftAanvullendeGeometrie"))
-                    style1.ColorStyle = project1.Design.ColorStyles.LightGreen;
-                if (relationName.Equals("HeeftBetrokkene"))
-                    style1.ColorStyle = project1.Design.ColorStyles.LightBlue;
-                if (relationName.Equals("HeeftBeheer"))
-                    style1.ColorStyle = project1.Design.ColorStyles.LightYellow;
-                arrow.EndCapStyle = style1;
+                relation.Attr.ArrowheadAtSource = ArrowStyle.None;
+                relation.Attr.ArrowheadAtTarget = ArrowStyle.None;
             }
-            project1.Design.CapStyles.Add(style1, project1.Design.CreatePreviewStyle(style1));
         }
-
-
 
         public async Task ImportUserSelectionAsync(Dictionary<string, string[]> optionalArgument)
         {
@@ -263,17 +203,7 @@ namespace OTLWizard.FrontEnd
         // disable Autoupdate
         private void button3_Click(object sender, EventArgs e)
         {
-            if (autoupdate)
-            {
-                button3.Text = Language.Get("aupdn");
-                autoupdate = false;
-            }
-            else
-            {
-                button3.Text = Language.Get("aupdy");
-                autoupdate = true;
-                updateVisuals();
-            }
+            
         }
 
         private void statuslabel_Click(object sender, EventArgs e)
@@ -335,7 +265,6 @@ namespace OTLWizard.FrontEnd
             else
             {
                 updateStatusText(Language.Get("st_remove"));
-
             }
 
         }
@@ -425,7 +354,6 @@ namespace OTLWizard.FrontEnd
 
         private void updateVisuals()
         {
-            var check = false;
             var validUpdate = true;
 
             if(ApplicationHandler.R_GetImportedEntities().Count == 0)
@@ -433,22 +361,12 @@ namespace OTLWizard.FrontEnd
                 validUpdate = false;
             }
 
-            if (ApplicationHandler.R_GetImportedEntities().Count > 30 && firstrun)
-            {
-                ViewHandler.Show(Language.Get("maxelemwarn"), Language.Get("maxelemwarnhead"), MessageBoxIcon.Exclamation);
-                autoupdate = false;
-                button3.Text = Language.Get("aupdn");
-                firstrun = false;
-            }
             // check if all or selection only
-            if (autoupdate && validUpdate)
+            if (validUpdate)
             {
-
-                var tempdict = new Dictionary<string, Shape>();
+                graph = new Microsoft.Msagl.Drawing.Graph("graph");
                 var drawables = ApplicationHandler.R_GetImportedEntities();
                 var reldrawables = ApplicationHandler.R_GetRealRelationsObjects();
-                Guid guid = Guid.NewGuid();
-                diagram = new Diagram(guid.ToString());
 
                 if (checkBox1.Checked)
                 {
@@ -457,16 +375,8 @@ namespace OTLWizard.FrontEnd
                         var zoekterm = textBox3.Text.ToLower();
                         var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm));
                         reldrawables = filteredFiles.Where(x => x.Activated == true).ToArray();
-                        // check if dataset has changed, if not we do nothing and should skip
-                        check = filteredFiles.Where(x => x.Activated == true).SequenceEqual(previousdataset);
-                        previousdataset = filteredFiles.Where(x => x.Activated == true);
                     }
-                    else
-                    {
-                        reldrawables = ApplicationHandler.R_GetRealRelationsObjects();
-                    }
-                    if (!check)
-                    {
+                    
                         // only selected without foreign objects
                         foreach (var drawing in drawables)
                         {
@@ -474,13 +384,12 @@ namespace OTLWizard.FrontEnd
                             {
                                 if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
                                 {
-                                    Shape s = NShapeCreateNode(drawing.AssetId);
-                                    tempdict.Add(drawing.AssetId, s);
+                                    CreateNode(drawing);
                                     break;
                                 }
                             }
                         }
-                    }
+                    
 
                 }
                 else
@@ -488,21 +397,17 @@ namespace OTLWizard.FrontEnd
                     // all
                     foreach (var drawing in drawables)
                     {
-                        Shape s = NShapeCreateNode(drawing.AssetId);
-                        tempdict.Add(drawing.AssetId, s);
+                        CreateNode(drawing);
                     }
                 }
                 foreach (var reldrawable in reldrawables)
                 {
-                    if (reldrawable.Activated && !check)
+                    if (reldrawable.Activated)
                     {
-                        NShapeConnectNode(tempdict[reldrawable.doelID], tempdict[reldrawable.bronID], reldrawable.relationshipURI.Split('#')[1], reldrawable.isDirectional);
+                        ConnectNode(reldrawable);
                     }
                 }
-                if (!check)
-                {
-                    NShapeLayouter();
-                }
+                updateLayouter();
             }
             else
             {
@@ -666,7 +571,7 @@ namespace OTLWizard.FrontEnd
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-
+            updateLayouter();
         }
         //base64 main enabler
         private void hideBase64NotationDAVIEImportToolStripMenuItem_Click(object sender, EventArgs e)

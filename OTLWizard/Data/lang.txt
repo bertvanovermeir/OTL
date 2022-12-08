@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 4.2.1 (Bert Van Overmeir)
-<EN>homewindowheader=OTLWizard 4.2.1 (Bert Van Overmeir)
+<NL>homewindowheader=OTLWizard 4.3.0 (Bert Van Overmeir)
+<EN>homewindowheader=OTLWizard 4.3.0 (Bert Van Overmeir)
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -77,8 +77,8 @@
 <EN>home4=Deliver data in DAVIE
 <NL>home5=Handleiding DAVIE
 <EN>home5=DAVIE manual
-<NL>home6=Instellingen
-<EN>home6=Settings
+<NL>home6=Een grafische weergave aanmaken van een Subset
+<EN>home6=Create a graphical representation of a Subset
 <NL>home7=Relaties aanmaken en visualiseren vanuit bestaande data
 <EN>home7=Create and visualise relations from existing data
 <NL>welcome=Welkom, maak een keuze...
@@ -327,3 +327,23 @@
 <EN>close=Close
 <NL>dontshowthisagain=Niet meer tonen
 <EN>dontshowthisagain=Don't show this again
+<NL>tooltip0=Het starterspakket is zeker de moeite waard. Het helpt bij het opstellen van OTL conforme bestanden én is een must-read. Klik hier om een kijkje te nemen.
+<EN>tooltip0=The starter bundle for OTL and BIM is certainly worth your time. Click here to check it out.
+<NL>tooltiplink0=https://wegenenverkeer.be/zakelijk/documenten?search=starterspakket
+<EN>tooltiplink0=https://wegenenverkeer.be/zakelijk/documenten?search=starterspakket
+<NL>tooltip1=Wist je dat er ook een plugin bestaat om OTL in Civil3D te gebruiken? Klik hier voor meer informatie.
+<EN>tooltip1=Did you know there is a Civil3D OTL plugin available? Click here for more information.
+<NL>tooltiplink1=https://dynamopackages.com/
+<EN>tooltiplink1=https://dynamopackages.com/
+<NL>tooltip2=Zelf een OTL toepassing ontwikkelen in Python? Klik hier.
+<EN>tooltip2=Design a Python plugin yourself with OTL? Click here.
+<NL>tooltiplink2=https://github.com/davidvlaminck/OTLMOW
+<EN>tooltiplink2=https://github.com/davidvlaminck/OTLMOW
+<NL>tooltip3=Wist je dat er een OTL e-learning beschikbaar is voor beginners? Klik hier voor meer informatie.
+<EN>tooltip3=Did you know an OTL e-learning is available for beginners? Click here for more information.
+<NL>tooltiplink3=https://rise.articulate.com/share/NvNA4Gsp_WQHi8dkkXosds3QbNdlpzgB#/
+<EN>tooltiplink3=https://rise.articulate.com/share/NvNA4Gsp_WQHi8dkkXosds3QbNdlpzgB#/
+<NL>tooltip4=Een opmerking of probleem gevonden in de applicatie? Klik hier om deze te rapporteren.
+<EN>tooltip4=Found a bug or have a suggestion? Click here to report.
+<NL>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
+<EN>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues

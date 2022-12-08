@@ -71,6 +71,29 @@ namespace OTLWizard.ApplicationData
             return (XmlElement)document.AppendChild(document.CreateElement("xs", name, "http://www.w3.org/2001/XMLSchema"));
         }
 
+        public string[] GetXSDClasses(string path)
+        {
+            List<string> classes = new List<string>();
+            document = new XmlDocument();
+            XmlNodeList node;
+
+            FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            document.Load(fs);
+            // testing filters
+            // setup name space manager for XSD
+            var nsmgr = new XmlNamespaceManager(document.NameTable);
+            nsmgr.AddNamespace("xs", "http://www.w3.org/2001/XMLSchema");
+
+            node = document.SelectNodes("/xs:schema/xs:element[starts-with(@name,'OTL_')]", nsmgr);
+            for (var i = 0; i <= node.Count - 1; i++)
+            {
+                var str = node[i].Attributes["name"].Value;
+                classes.Add(str);
+            }
+            return classes.ToArray();
+        }
+
+
         // test method unpacking
         public void Import()
         {
@@ -91,12 +114,12 @@ namespace OTLWizard.ApplicationData
             for (var i = 0; i <= xmlnode.Count - 1; i++)
             {
                 var str = xmlnode[i].Attributes["name"].Value;
-                //Console.WriteLine("klasse: " + str);
+                Console.WriteLine("klasse: " + str);
                 xmlnode2 = xmldoc.SelectNodes("/xs:schema/xs:complexType[starts-with(@name,'" + str + "')]", nsmgr);
                 for (var j = 0; j <= xmlnode2.Count - 1; j++)
                 {
                     var str2 = xmlnode2[j].Attributes["name"].Value;
-                    //Console.WriteLine("    attributenTypeLijst: " + str2);
+                    Console.WriteLine("    attributenTypeLijst: " + str2);
                     xmlnode3 = xmldoc.SelectNodes("/xs:schema/xs:complexType[starts-with(@name,'" + str + "')]/xs:complexContent/xs:extension/xs:sequence/xs:element", nsmgr);
                     for (var k = 0; k <= xmlnode3.Count - 1; k++)
                     {
@@ -106,7 +129,7 @@ namespace OTLWizard.ApplicationData
                         if (xmlnode4.Count > 0)
                             str4 = xmlnode4[0].Attributes["base"].Value;
 
-                        //Console.WriteLine("        attribuut: " + str3 + " - " + str4);
+                        Console.WriteLine("        attribuut: " + str3 + " - " + str4);
                     }
                 }
             }

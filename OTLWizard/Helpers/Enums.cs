@@ -32,6 +32,8 @@
             RelationImportSummary,
             SDFMain,
             Tutorial,
+            SubsetViewer,
+            SubsetViewerImport,
             isNull
         }
 

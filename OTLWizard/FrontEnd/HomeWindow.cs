@@ -8,6 +8,8 @@ namespace OTLWizard
 {
     public partial class HomeWindow : Form
     {
+
+        private int tooltip = 0;
         public HomeWindow()
         {
             InitializeComponent();
@@ -32,6 +34,14 @@ namespace OTLWizard
             {
                 radioButton1.Checked = true;
             }
+            setToolTip();
+        }
+
+        private void setToolTip()
+        {
+            Random r = new Random();
+            tooltip = r.Next(0, 5);
+            label2.Text = Language.Get("tooltip" + tooltip);
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -124,6 +134,23 @@ namespace OTLWizard
         {
             Settings.WriteSettings();
             Language.Init();
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            // link to current tooltip
+            Process.Start(Language.Get("tooltiplink" + tooltip));
+        }
+
+        private void label2_Click_1(object sender, EventArgs e)
+        {
+            // link to current tooltip
+            Process.Start(Language.Get("tooltiplink" + tooltip));
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            ViewHandler.Show(Enums.Views.SubsetViewerImport, Enums.Views.Home, null);
         }
     }
 }
