@@ -20,7 +20,6 @@ namespace OTLWizard.OTLObjecten
         private static SDXWindow sdxWindow = new SDXWindow();
         private static TutorialWindow tutorialWindow = new TutorialWindow();
         private static SubsetViewerWindow subsetViewerWindow = new SubsetViewerWindow();
-        private static SubsetViewerImportWindow subsetViewerImportWindow = new SubsetViewerImportWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -71,9 +70,6 @@ namespace OTLWizard.OTLObjecten
                     break;
                 case Enums.Views.SubsetViewer:
                     subsetViewerWindow.Hide();
-                    break;
-                case Enums.Views.SubsetViewerImport:
-                    subsetViewerImportWindow.Hide();
                     break;
                 default:
                     break;
@@ -134,11 +130,8 @@ namespace OTLWizard.OTLObjecten
                     sdxWindow.Show();
                     break;
                 case Enums.Views.SubsetViewer:
-                    subsetViewerWindow.setOTLData((OTL_DataContainer)optionalArgument);
+                    subsetViewerWindow = new SubsetViewerWindow();
                     subsetViewerWindow.Show();
-                    break;
-                case Enums.Views.SubsetViewerImport:
-                    subsetViewerImportWindow.Show();
                     break;
                 default:
                     break;
@@ -149,6 +142,7 @@ namespace OTLWizard.OTLObjecten
 
         private static void openTutorial(Enums.Views toOpen)
         {
+            tutorialWindow = new TutorialWindow();
             tutorialWindow.SetTutorial(toOpen);
         }
     }

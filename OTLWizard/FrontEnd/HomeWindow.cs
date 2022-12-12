@@ -150,7 +150,7 @@ namespace OTLWizard
 
         private void button6_Click_1(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.SubsetViewerImport, Enums.Views.Home, null);
+            ViewHandler.Show(Enums.Views.SubsetViewer, Enums.Views.Home, null);
         }
     }
 }

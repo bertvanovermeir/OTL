@@ -2,6 +2,7 @@
 using Microsoft.Msagl.Layout.MDS;
 using Microsoft.Msagl.Miscellaneous;
 using Microsoft.Msagl.Prototype.Ranking;
+using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,6 @@ namespace OTLWizard.FrontEnd
         Microsoft.Msagl.GraphViewerGdi.GViewer viewer = new Microsoft.Msagl.GraphViewerGdi.GViewer();
         Microsoft.Msagl.Drawing.Graph graph;
 
-
         List<OTL_ObjectType> objects = new List<OTL_ObjectType>();
         List<OTL_RelationshipType> relationshipTypes = new List<OTL_RelationshipType>();
 
@@ -29,24 +29,88 @@ namespace OTLWizard.FrontEnd
         bool drawImplementatieElement = true;
         Color colorAbstractRelation = Microsoft.Msagl.Drawing.Color.Pink;
         Color colorImplementatieElementRelation = Microsoft.Msagl.Drawing.Color.Gray;
-        int relationFontSize = 6;
+        int relationFontSize = 10;
         Shape abstractNodeShape = Shape.Ellipse;
         Color abstractNodeColor = Color.LightBlue;
         Shape implementatieelementNodeShape = Shape.Box;
         Color implementatieelementNodeColor = Color.LightGreen;
         Shape defaultNodeShape = Shape.Box;
         Color defaultNodeColor = Color.LightSalmon;
-        int defaultFontSize = 8;
+        int defaultFontSize = 12;
 
         public SubsetViewerWindow()
         {
             InitializeComponent();
+            initColorComponents();
+            initShapeComponents();
+            SetBaseValues();
         }
 
-        public void setOTLData(OTL_DataContainer container)
+        private void SetBaseValues()
         {
-            objects = container.ObjectTypes;
-            relationshipTypes = container.RelationshipTypes;
+            checkBox1.Checked = drawAbstract;
+            checkBox2.Checked = drawImplementatieElement;
+            comboBox7.SelectedItem = "Pink";
+            comboBox8.SelectedItem = "Gray";
+            numericUpDown1.Value = 10;
+            comboBox6.SelectedItem = "Ellipse";
+            comboBox1.SelectedItem = "LightBlue";
+            comboBox5.SelectedItem = "Box";
+            comboBox2.SelectedItem = "LightGreen";
+            comboBox4.SelectedItem = "Box";
+            comboBox3.SelectedItem = "LightSalmon";
+            numericUpDown2.Value = 12;        
+        }
+
+        public void setOTLData()
+        {
+            objects = ApplicationHandler.VWR_GetSubset();
+            relationshipTypes = ApplicationHandler.VWR_GetRelationTypes();
+        }
+
+        public void loadOTLData()
+        {
+            graph = new Microsoft.Msagl.Drawing.Graph("graph");
+
+            foreach (OTL_ObjectType o in objects)
+            {
+                drawOTLClass(o);
+            }
+
+            relationshipTypes = makeRelationUnique();
+
+            foreach (OTL_RelationshipType o in relationshipTypes)
+            {
+                // start drawing process
+                if (o.isAbstract && drawAbstract)
+                    drawRelation(o, true, false);
+                else if (o.isImplementatieElement && drawImplementatieElement)
+                    drawRelation(o, false, true);
+                else if(!o.isAbstract && !o.isImplementatieElement)
+                    drawRelation(o, false, false);
+            }
+        }
+
+        public void initShapeComponents()
+        {
+            var shapeobj = typeof(Shape);
+            var shapearr = shapeobj.GetFields().ToArray().Where(x => !x.Name.Equals("value__")).Select(o => o.Name);
+
+            comboBox4.Items.AddRange(shapearr.ToArray());
+            comboBox5.Items.AddRange(shapearr.ToArray());
+            comboBox6.Items.AddRange(shapearr.ToArray());
+        }
+
+        public void initColorComponents()
+        {
+            var colorobj = typeof(Color);
+            var colorarr = colorobj.GetProperties().ToArray().Where(x => x.Name.Length > 1).Select(o => o.Name);
+
+            comboBox1.Items.AddRange(colorarr.ToArray());
+            comboBox2.Items.AddRange(colorarr.ToArray());
+            comboBox3.Items.AddRange(colorarr.ToArray());
+            comboBox7.Items.AddRange(colorarr.ToArray());
+            comboBox8.Items.AddRange(colorarr.ToArray());
         }
 
         private List<OTL_RelationshipType> makeRelationUnique()
@@ -72,29 +136,30 @@ namespace OTLWizard.FrontEnd
             return cleanedList;
         }
 
+        private void updateLayouter()
+        {
+            //bind the graph to the viewer 
+            graph.LayoutAlgorithmSettings = new MdsLayoutSettings();
+            graph.LayoutAlgorithmSettings.PackingMethod = Microsoft.Msagl.Core.Layout.PackingMethod.Columns;
+            graph.LayoutAlgorithmSettings.EdgeRoutingSettings.EdgeRoutingMode = Microsoft.Msagl.Core.Routing.EdgeRoutingMode.Rectilinear;
+            viewer.Graph = graph;
+            viewer.Update();
+        }
+
 
         private void SubsetViewerWindow_Load(object sender, EventArgs e)
         {
+            button2.Enabled = false;
+            groupBox2.Enabled = false;
+            button3.Enabled = false;
+            // text
+            this.Text = Language.Get("subsetviewerheader");
+
+
+
             graph = new Microsoft.Msagl.Drawing.Graph("graph");
-
-            foreach (OTL_ObjectType o in objects)
-            {
-                drawOTLClass(o);
-            }
-
-            relationshipTypes = makeRelationUnique();
-
-            foreach (OTL_RelationshipType o in relationshipTypes)
-            {
-                // start drawing process
-                if ((o.bronURI.Contains("abstracten#") || o.doelURI.Contains("abstracten#")) && drawAbstract)
-                    drawRelation(o, true, false);
-                else if ((o.bronURI.Contains("implementatieelement#") || o.doelURI.Contains("implementatieelement#")) && drawImplementatieElement)
-                    drawRelation(o, false, true);
-                else
-                    drawRelation(o, false, false);
-            }
-
+            graph.AddNode(Language.Get("laadeenproject"));
+          
             //bind the graph to the viewer 
             graph.LayoutAlgorithmSettings = new MdsLayoutSettings();
             graph.LayoutAlgorithmSettings.PackingMethod = Microsoft.Msagl.Core.Layout.PackingMethod.Columns;
@@ -103,7 +168,7 @@ namespace OTLWizard.FrontEnd
             //associate the viewer with the form 
             SuspendLayout();
             viewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            Controls.Add(viewer);
+            splitContainer1.Panel2.Controls.Add(viewer);
             ResumeLayout();
         }
 
@@ -165,7 +230,63 @@ namespace OTLWizard.FrontEnd
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            ViewHandler.Show(Enums.Views.SubsetViewerImport, Enums.Views.SubsetViewer, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.SubsetViewer, null);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var colors = typeof(Color).GetProperties();
+            var shapes = typeof(Shape).GetFields();
+
+            drawAbstract = checkBox1.Checked;
+            drawImplementatieElement = checkBox2.Checked;
+            colorAbstractRelation = (Color)colors.Where(c => c.Name.Equals(comboBox7.SelectedItem)).FirstOrDefault().GetValue(null);
+            colorImplementatieElementRelation = (Color)colors.Where(c => c.Name.Equals(comboBox8.SelectedItem)).FirstOrDefault().GetValue(null);
+            relationFontSize = Decimal.ToInt32(numericUpDown1.Value);
+            abstractNodeShape = (Shape)shapes.Where(c => c.Name.Equals(comboBox6.SelectedItem)).FirstOrDefault().GetValue(null);
+            abstractNodeColor = (Color)colors.Where(c => c.Name.Equals(comboBox1.SelectedItem)).FirstOrDefault().GetValue(null);
+            implementatieelementNodeShape = (Shape)shapes.Where(c => c.Name.Equals(comboBox5.SelectedItem)).FirstOrDefault().GetValue(null);
+            implementatieelementNodeColor = (Color)colors.Where(c => c.Name.Equals(comboBox2.SelectedItem)).FirstOrDefault().GetValue(null);
+            defaultNodeShape = (Shape)shapes.Where(c => c.Name.Equals(comboBox4.SelectedItem)).FirstOrDefault().GetValue(null);
+            defaultNodeColor = (Color)colors.Where(c => c.Name.Equals(comboBox3.SelectedItem)).FirstOrDefault().GetValue(null);
+            defaultFontSize = Decimal.ToInt32(numericUpDown2.Value);
+
+            setOTLData();
+            loadOTLData();
+            updateLayouter();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Title = Language.Get("selectsubsetfiledlg");
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Database Files (*.db)|*.db|Database Files (*.db)|*.db";
+            fdlg.FilterIndex = 2;
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                textBox1.Text = fdlg.FileName;
+                button3.Enabled = true; 
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ApplicationHandler.VWR_ImportSubset(textBox1.Text);
+            button2.Enabled = true;
+            groupBox2.Enabled = true;
+        }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

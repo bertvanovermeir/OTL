@@ -2,9 +2,13 @@
 -----------------------
 
 - Nieuw:	XSD (SDF) templates aanmaken met keuzelijsten voor Autocad Maps/Civil3D vanuit een subset. (beta)
+- Nieuw:	Subset Visualisatie tool met aanpasbare instellingen (incl. sort algoritme) voor de diagramma. (beta)
+- Nieuw:	Tutorials voor de werking van de meest gebruikte functies.
 
 - Fix:		Onvolledige resultaten bij het ophalen van de geometrie uit het geometrieartefact voor bepaalde klasses.
+- Fix:		bij overerven met uitzondering voor meten wordt nu ook het voorgestelde artefact getoond.
 - Fix:		Versiecontrole popup blijft verschijnen na update naar nieuwste versie.
 - Fix:		Optimalisatie intern algoritme ophalen keuzelijsten. 
+- Fix:		Optimalisatie algoritme genereren diagramma in relatietool.
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.

@@ -18,6 +18,8 @@ namespace OTLWizard.OTLObjecten
         public string relationshipURI;
         public string relationshipName;
         public bool isDirectional;
+        public bool isAbstract = false;
+        public bool isImplementatieElement = false ;
 
         public string DisplayName { get; set; }
 
@@ -61,6 +63,10 @@ namespace OTLWizard.OTLObjecten
             {
                 isDirectional = true;
             }
+            if ((this.bronURI.Contains("abstracten#") || this.doelURI.Contains("abstracten#")))
+                isAbstract = true;
+            else if ((this.bronURI.Contains("implementatieelement#") || this.doelURI.Contains("implementatieelement#")))
+                isImplementatieElement = true;
         }
     }
 }

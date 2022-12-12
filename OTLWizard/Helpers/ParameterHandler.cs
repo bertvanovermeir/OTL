@@ -195,13 +195,13 @@ namespace OTLWizard.OTLObjecten
                 switch (temp)
                 {
                     case "getal":
-                        DefaultValue = -99999.99d;
+                        DefaultValue = "";
                         break;
                     case "integer":
-                        DefaultValue = 99999;
+                        DefaultValue = "";
                         break;
                     case "decimal":
-                        DefaultValue = -99999.99d;
+                        DefaultValue = "";
                         break;
                     case "datetime":
                         break;
@@ -210,23 +210,23 @@ namespace OTLWizard.OTLObjecten
                     case "time":
                         break;
                     case "string":
-                        DefaultValue = "-";
+                        DefaultValue = "";
                         break;
                     case "boolean":
                         DefaultValue = "-";
                         break;
                     case "literal":
-                        DefaultValue = -99999.99d;
+                        DefaultValue = "";
                         break;
                     default:
-                        DefaultValue = "-";
+                        DefaultValue = "";
                         break;
                 }
             }
             // kwantWaarde
             else if (DataTypeString.Contains("#KwantWrdIn"))
             {
-                DefaultValue = -99999.99d;
+                DefaultValue = "";
             }
             // Enums TTL (lists in acad)
             else if (DataTypeString.Contains("#Kl"))
@@ -235,7 +235,7 @@ namespace OTLWizard.OTLObjecten
             }
             else
             {
-                DefaultValue = "-";
+                DefaultValue = "";
             }
             return DefaultValue;
         }

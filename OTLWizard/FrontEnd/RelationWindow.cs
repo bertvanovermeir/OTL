@@ -33,8 +33,8 @@ namespace OTLWizard.FrontEnd
         private void CreateNode(OTL_Entity otl)
         {
             var node = graph.AddNode(otl.AssetId);
-            node.LabelText = otl.AssetId;
-            node.Label.FontSize = 6;
+            node.LabelText = "<" + otl.AssetId + ">\n" + otl.Name;
+            node.Label.FontSize = 3;
             setGraphicalRepresentation(node, Microsoft.Msagl.Drawing.Color.Gray, Microsoft.Msagl.Drawing.Shape.Box);
         }
 
@@ -102,7 +102,7 @@ namespace OTLWizard.FrontEnd
         {
             var relation = graph.AddEdge(otl.bronID, otl.doelID);
             relation.LabelText = otl.relationshipURI.Split('#')[1];
-            relation.Label.FontSize = 4;
+            relation.Label.FontSize = 3;
             if (!otl.isDirectional)
             {
                 relation.Attr.ArrowheadAtSource = ArrowStyle.None;

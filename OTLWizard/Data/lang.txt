@@ -78,7 +78,7 @@
 <NL>home5=Handleiding DAVIE
 <EN>home5=DAVIE manual
 <NL>home6=Een grafische weergave aanmaken van een Subset
-<EN>home6=Create a graphical representation of a Subset
+<EN>home6=Create a graphical representation of a Subset (NL Version)
 <NL>home7=Relaties aanmaken en visualiseren vanuit bestaande data
 <EN>home7=Create and visualise relations from existing data
 <NL>welcome=Welkom, maak een keuze...
@@ -347,3 +347,7 @@
 <EN>tooltip4=Found a bug or have a suggestion? Click here to report.
 <NL>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
 <EN>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
+<NL>laadeenproject=Laad een project om te beginnen
+<EN>laadeenproject=Load a project to start
+<NL>subsetviewerheader=Subset Viewer 0.1 (Bert Van Overmeir)
+<EN>subsetviewerheader=Subset Viewer 0.1 (Bert Van Overmeir)

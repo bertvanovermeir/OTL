@@ -746,13 +746,18 @@ namespace OTLWizard.OTLObjecten
 
         public static async void VWR_ImportSubset(string path)
         {
-            await ImportSubset(path, false);
-            var temp = new OTL_DataContainer();
-            temp.ObjectTypes = subsetConn.GetOTLObjectTypes();
-            temp.RelationshipTypes = subsetConn.GetOTLRelationshipTypes();
-            ViewHandler.Show(Enums.Views.SubsetViewer, Enums.Views.SubsetViewerImport, temp);
+            await ImportSubset(path, false);         
         }
 
+        public static List<OTL_ObjectType> VWR_GetSubset()
+        {
+            return subsetConn.GetOTLObjectTypes();
+        }
+
+        public static List<OTL_RelationshipType> VWR_GetRelationTypes()
+        {
+            return subsetConn.GetOTLRelationshipTypes();
+        }
 
 
 

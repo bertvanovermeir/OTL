@@ -132,30 +132,29 @@ namespace OTLWizard.Helpers
             // kies poly, line of point
             
 
-            if (geom != null)
-            {
-                if(geom.overerving.Contains("meten"))
-                {
-                    string keuze = geom.geometrie;
-                    switch (keuze)
+            if (geom != null && geom.geometrie.Length > 1)
+            {             
+                    string[] keuzelijst = geom.geometrie.Split(',');
+                    foreach(string keuze in keuzelijst)
                     {
-                        case "polygoon 3D,":
-                            temp = "POLYGON Z (" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + ")";
-                            break;
-                        case "lijn 3D":
-                            temp = "LINESTRING Z (" + GetCoord() + "," + GetCoord() + ")";
-                            break;
-                        case "punt 3D,":
-                            temp = "POINT Z (" + GetCoord() + ")";
-                            break;
-                        default:
-                            temp = "";
-                            break;
-                    }
-                } else
-                {
-                    temp = "";
-                }
+                        switch (keuze)
+                        {
+                            case "polygoon 3D":
+                                temp += "POLYGON Z ((" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "))|";
+                                break;
+                            case "lijn 3D":
+                                temp += "LINESTRING Z (" + GetCoord() + "," + GetCoord() + ")|";
+                                break;
+                            case "punt 3D":
+                                temp += "POINT Z (" + GetCoord() + ")|";
+                                break;
+                            default:
+                                temp += "";
+                                break;
+                        }
+                    }   
+                    if(temp.EndsWith("|"))
+                        temp = temp.Substring(0, temp.Length - 1);
             } else
             {
                 temp = "";
