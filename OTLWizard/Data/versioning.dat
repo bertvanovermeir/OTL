@@ -1,14 +1,11 @@
-﻿Nieuwigheden versie 4.3
+﻿Nieuwigheden versie 4.4
 -----------------------
 
-- Nieuw:	XSD (SDF) templates aanmaken met keuzelijsten voor Autocad Maps/Civil3D vanuit een subset. (beta)
-- Nieuw:	Subset Visualisatie tool met aanpasbare instellingen (incl. sort algoritme) voor de diagramma. (beta)
-- Nieuw:	Tutorials voor de werking van de meest gebruikte functies.
+- Fix	Export in sommige gevallen niet mogelijk naar XSD/SDF
+- Fix	XLS(X) importeren in relatietool toont nu enkel relevante foutmeldingen, een fout is nu ook echt een fout!
+- Fix	QOL verbeteringen (sortering, file export dialogen met minder kliks...)
+- Fix	Ondersteuning voor Windows 11 feature update 22H2
 
-- Fix:		Onvolledige resultaten bij het ophalen van de geometrie uit het geometrieartefact voor bepaalde klasses.
-- Fix:		bij overerven met uitzondering voor meten wordt nu ook het voorgestelde artefact getoond.
-- Fix:		Versiecontrole popup blijft verschijnen na update naar nieuwste versie.
-- Fix:		Optimalisatie intern algoritme ophalen keuzelijsten. 
-- Fix:		Optimalisatie algoritme genereren diagramma in relatietool.
+- Info	Bij problemen met Excel exports in de tool na updaten Windows, doe een Repair installatie van het office pakket. Probeer nadien opnieuw.
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.

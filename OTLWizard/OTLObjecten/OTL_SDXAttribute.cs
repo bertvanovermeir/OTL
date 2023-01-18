@@ -84,8 +84,8 @@ namespace OTLWizard.OTLObjecten
             // setup base
             XmlElement element = createXsElement(appendTo, "element");
             XmlElement annotation = createXsElement(element, "annotation");
-            if(element_annotation_documentation_innerText.Length > 183)
-                createXsElement(annotation, "documentation").InnerText = element_annotation_documentation_innerText.Substring(0,182);
+            if(element_annotation_documentation_innerText.Length > 159)
+                createXsElement(annotation, "documentation").InnerText = element_annotation_documentation_innerText.Substring(0,159);
             else
                 createXsElement(annotation, "documentation").InnerText = element_annotation_documentation_innerText;
 

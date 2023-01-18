@@ -89,7 +89,7 @@ namespace OTLWizard.FrontEnd
             // execute the export
             SaveFileDialog fdlg = new SaveFileDialog();
             fdlg.Title = Language.Get("sdxexport");
-            fdlg.FileName = "tbd" + "_export";
+            fdlg.FileName = "xsd" + "_export";
             fdlg.Filter = "XSD files (*.xsd)|*.xsd|XSD files (*.xsd)|*.xsd";
             fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
@@ -107,7 +107,7 @@ namespace OTLWizard.FrontEnd
                     }
                 }
                 if(radioButtonSDXModeEdit.Checked)
-                    //ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
+                    ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
                 if(radioButtonSDXModeNew.Checked)
                     ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
             }

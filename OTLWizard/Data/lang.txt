@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 4.3.0 (Bert Van Overmeir)
-<EN>homewindowheader=OTLWizard 4.3.0 (Bert Van Overmeir)
+<NL>homewindowheader=OTLWizard 4.4.0 (Bert Van Overmeir)
+<EN>homewindowheader=OTLWizard 4.4.0 (Bert Van Overmeir)
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -152,8 +152,8 @@
 <EN>aupdy=Autoupdate On
 <NL>aupdn=Automatisch updaten uit
 <EN>aupdn=Autoupdate Off
-<NL>relationwindowheader=RelatieWizard 1.1 (Bert Van Overmeir)
-<EN>relationwindowheader=RelationWizard 1.1 (Bert Van Overmeir)
+<NL>relationwindowheader=RelatieWizard 2.0 (Bert Van Overmeir)
+<EN>relationwindowheader=RelationWizard 2.0 (Bert Van Overmeir)
 <NL>st_export= objecten werden geëxporteerd.
 <EN>st_export= elements were exported.
 <NL>suretoclose=Ben je zeker dat je wil afsluiten? Alle niet opgeslagen gegevens gaan verloren.
@@ -259,8 +259,8 @@
 <NL>home8=Een XSD bestand aanmaken of wijzigen
 <EN>home8=Updating or Adapting an XSD file
 
-<EN>sdfwizardheader=SDF Wizard 1.0 (Bert Van Overmeir)
-<NL>sdfwizardheader=SDF Wizard 1.0 (Bert Van Overmeir)
+<EN>sdfwizardheader=SDF Wizard 1.1 (Bert Van Overmeir)
+<NL>sdfwizardheader=SDF Wizard 1.1 (Bert Van Overmeir)
 <EN>buttonartefacttext=Import geometry artefact
 <NL>buttonartefacttext=Geometrie artefact importeren
 <EN>buttonsdxtext=Import XSD file
@@ -349,5 +349,5 @@
 <EN>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
 <NL>laadeenproject=Laad een project om te beginnen
 <EN>laadeenproject=Load a project to start
-<NL>subsetviewerheader=Subset Viewer 0.1 (Bert Van Overmeir)
-<EN>subsetviewerheader=Subset Viewer 0.1 (Bert Van Overmeir)
+<NL>subsetviewerheader=Subset Viewer 1.0 (Bert Van Overmeir)
+<EN>subsetviewerheader=Subset Viewer 1.0 (Bert Van Overmeir)

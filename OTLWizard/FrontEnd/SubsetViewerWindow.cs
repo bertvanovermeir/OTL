@@ -174,6 +174,8 @@ namespace OTLWizard.FrontEnd
 
         private void drawOTLClass(OTL_ObjectType otl)
         {
+
+
             var node = graph.AddNode(otl.uri);
             node.LabelText = otl.otlName;
             node.Label.FontSize = defaultFontSize;

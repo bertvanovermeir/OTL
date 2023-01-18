@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.2.1
+Program version = 4.4
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.2.1_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.4_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -132,14 +132,32 @@ xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.CSharp.dll
 46.7 KB
 dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.dll
+1.5 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.Drawing.dll
+146 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.Drawing.xml
+140.3 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+151 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.GraphViewerGdi.xml
+56.2 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.xml
+936.3 KB
+xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe
-1.4 MB
+1.9 MB
 exe
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.config
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-377.5 KB
+469.5 KB
 pdb
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
 796 KB
@@ -225,6 +243,9 @@ N/A
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
 N/A
 [Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\animations\
+N/A
+[Folder]
 [Licence_Begin]
 4556
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}
@@ -284,13 +305,13 @@ By email: bert.vanovermeir@bitsofdata.be\par
 [Variables]
 [SCs]
 Desktop
-OTL Wizard 4.2.1
+OTL Wizard
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\wizard.ico
 0
 Startmenu
-OTL Wizard 4.2.1
+OTL Wizard
 <InstallPath>\OTLWizard.exe
 
 <InstallPath>\data\wizard.ico
@@ -301,14 +322,6 @@ OTL Wizard 4.2.1
 [Commands]
 Shell Execute
 del "C:\Program Files (x86)\Ruber Software\OTL Wizard"  /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard.lnk" /q /f /s
 
 
 Shell Execute
@@ -349,5 +362,21 @@ del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\
 
 Shell Execute
 del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.2.0.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 4.2.1.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.2.1.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\Users\Public\Desktop\OTL Wizard 4.3.lnk" /q /f /s
+
+
+Shell Execute
+del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.3.lnk" /q /f /s
 
 

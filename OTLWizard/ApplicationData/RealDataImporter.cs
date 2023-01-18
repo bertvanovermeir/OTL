@@ -98,37 +98,47 @@ namespace OTLWizard.ApplicationData
         // CSV
         private void ImportCSV(string path)
         {
+            currentFileName = GetFileName(path);
             // check if separator is ; or , by trial and error
-            var temp = readCSV(path, ';');
-            if(temp == null)
-            {   
-                
-                    temp = readCSV(path, ',');
-                    // try again
-                    if (temp == null)
-                    {
-                        errors.Add(new ErrorContainer(currentFileName, "/","Error",Language.Get("foutpos1")));
-                    }
-                               
-            } else
+            // check if first line contains , or ; and use method for reading defined by that
+            // Read a text file line by line.  
+            char separator = '/';
+            string[] lines = File.ReadAllLines(path);
+            if(lines != null)
             {
-                if(temp.Columns.Count < 2)
+                if (lines[0].Contains(","))
                 {
-                    temp = readCSV(path, ',');
-                    // try again
-                    if (temp == null)
-                    {
-                        errors.Add(new ErrorContainer(currentFileName, "/","Error", Language.Get("foutpos1")));
-                    }
+                    separator = ',';
+                } else if (lines[0].Contains(";"))
+                {
+                    separator = ';';
+                } else if (lines[0].Contains("\t"))
+                {
+                    separator = '\t';
+                } else
+                {
+                    // not a valid file
                 }
-            }
-            if(temp != null && temp.Columns.Count > 1)
-            {
-                processCSVData(temp);
             } else
             {
-                errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos2")));
+                // not a valid file
             }
+            if(separator != '/')
+            {
+                var temp = readCSV(path, separator);
+
+                if (temp != null && temp.Columns.Count > 1)
+                {
+                    processCSVData(temp);
+                }
+                else
+                {
+                    errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos2")));
+                }
+            } else
+            {
+                errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos1")));
+            }          
         }
 
         private System.Data.DataTable readCSV(string path, char separator)
@@ -138,6 +148,7 @@ namespace OTLWizard.ApplicationData
             var config = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
                 Delimiter = separator.ToString(),
+                Quote = '"',
                 BadDataFound = context => badRecord.Add(context.RawRecord)
             };
             using (var reader = new StreamReader(path))
@@ -159,8 +170,26 @@ namespace OTLWizard.ApplicationData
                 }
                 return null;
             }
-
+            // remove empty rows from datatable
+            RemoveEmptyRows(dt);
             return dt;
+        }
+
+        private void RemoveEmptyRows(System.Data.DataTable source)
+        {
+            for (int i = source.Rows.Count; i >= 1; i--)
+            {
+                DataRow currentRow = source.Rows[i - 1];
+                foreach (var colValue in currentRow.ItemArray)
+                {
+                    if (!string.IsNullOrEmpty(colValue.ToString()))
+                        break;
+
+                    // If we get here, all the columns are empty
+                    source.Rows[i - 1].Delete();
+                }
+            }
+            source.AcceptChanges();
         }
 
         private void processCSVData(System.Data.DataTable data)
@@ -356,7 +385,7 @@ namespace OTLWizard.ApplicationData
                     // create the folder if it does not exist
                     Directory.CreateDirectory(localPath);
 
-                    workbook.SaveAs(localPath + filename, XlFileFormat.xlTextWindows);
+                    workbook.SaveAs(localPath + filename, XlFileFormat.xlCSVWindows);
                     files.Add(localPath + filename);
                 }
 
