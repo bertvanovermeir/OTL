@@ -124,6 +124,7 @@ namespace OTLWizard.OTLObjecten
                                 DropdownValues.Add(sublistText);
                             }
                         }
+                        DropdownValues.Sort();
                     }
                 }              
                 return DropdownValues;
