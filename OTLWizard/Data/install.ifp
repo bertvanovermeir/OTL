@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.4
+Program version = 4.4.1
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.4_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.4.1_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -247,16 +247,16 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\animations\
 N/A
 [Folder]
 [Licence_Begin]
-4556
+4568
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}
 \viewkind4\uc1\pard\b\fs20 Disclaimer\b0\par
-Last updated: April 04, 2022\par
+Last updated: January, 2023\par
 \par
 \b Interpretation and Definitions\par
 \b0 The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.\par
 \par
 For the purposes of this Disclaimer:\par
-- Company (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to OTL Wizard.\par
+- Company (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to OTL Wizard development team.\par
 - Service refers to the Application.\par
 - You means the individual accessing the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.\par
 - Application means the software program provided by the Company downloaded by You on any electronic device named OTL Wizard.\par
@@ -298,7 +298,7 @@ The Company will not be liable to You or anyone else for any decision made or ac
 \b Contact Us\par
 \b0 If you have any questions about this Disclaimer, You can contact Us:\par
 \par
-By email: bert.vanovermeir@bitsofdata.be\par
+By email: bert.vanovermeir@gmail.com\par
 }
  [Licence_End]
 [Registry]
