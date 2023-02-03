@@ -1,6 +1,6 @@
-﻿Nieuwigheden versie 4.4.1
+﻿Nieuwigheden versie 4.4.2
 -------------------------
 
-- Fix Alfabetische ordenen bij keuzelijsten
+- HotFix	Karakterlimiet exporteren naar Acad Maps voor strings opgeheven 50 > 120
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.

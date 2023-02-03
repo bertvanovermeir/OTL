@@ -115,7 +115,7 @@ namespace OTLWizard.OTLObjecten
                     XmlElement simpletype2 = createXsElement(element, "simpleType");
                     XmlElement restriction2 = createXsElement(simpletype2, "restriction");
                     restriction2.SetAttribute("base", element_base);
-                    createXsElement(restriction2, "maxLength").SetAttribute("value", "50");
+                    createXsElement(restriction2, "maxLength").SetAttribute("value", "120");
 
                     break;
                 case Enums.SDFAttributeTypes.Real:
