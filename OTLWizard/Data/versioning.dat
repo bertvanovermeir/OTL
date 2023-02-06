@@ -1,6 +1,7 @@
 ﻿Nieuwigheden versie 4.4.2
 -------------------------
 
-- HotFix	Karakterlimiet exporteren naar Acad Maps voor strings opgeheven 50 > 120
+- HotFix	Karakterlimiet exporteren naar Acad Maps voor strings opgeheven 50 > 120.
+- HotFix	Probleem opgelost waarbij assets niet werden ingeladen in de relatie editor bij een lege eerste kolom.
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.

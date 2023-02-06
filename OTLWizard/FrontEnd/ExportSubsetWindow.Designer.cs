@@ -161,7 +161,7 @@
             // 
             this.checkAttributes.AutoSize = true;
             this.checkAttributes.Enabled = false;
-            this.checkAttributes.Location = new System.Drawing.Point(412, 291);
+            this.checkAttributes.Location = new System.Drawing.Point(412, 314);
             this.checkAttributes.Name = "checkAttributes";
             this.checkAttributes.Size = new System.Drawing.Size(232, 17);
             this.checkAttributes.TabIndex = 14;
@@ -174,7 +174,6 @@
             this.checkKeuzelijsten.AutoSize = true;
             this.checkKeuzelijsten.Enabled = false;
             this.checkKeuzelijsten.Location = new System.Drawing.Point(412, 217);
-            this.checkKeuzelijsten.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             this.checkKeuzelijsten.Name = "checkKeuzelijsten";
             this.checkKeuzelijsten.Size = new System.Drawing.Size(179, 17);
             this.checkKeuzelijsten.TabIndex = 15;
@@ -219,7 +218,7 @@
             // 
             this.checkVoorbeelddata.AutoSize = true;
             this.checkVoorbeelddata.Enabled = false;
-            this.checkVoorbeelddata.Location = new System.Drawing.Point(412, 268);
+            this.checkVoorbeelddata.Location = new System.Drawing.Point(412, 291);
             this.checkVoorbeelddata.Name = "checkVoorbeelddata";
             this.checkVoorbeelddata.Size = new System.Drawing.Size(214, 17);
             this.checkVoorbeelddata.TabIndex = 21;
@@ -231,7 +230,8 @@
             // 
             this.checkWKT.AutoSize = true;
             this.checkWKT.Enabled = false;
-            this.checkWKT.Location = new System.Drawing.Point(412, 314);
+            this.checkWKT.Location = new System.Drawing.Point(412, 240);
+            this.checkWKT.Margin = new System.Windows.Forms.Padding(3, 3, 3, 15);
             this.checkWKT.Name = "checkWKT";
             this.checkWKT.Size = new System.Drawing.Size(192, 17);
             this.checkWKT.TabIndex = 22;
@@ -252,7 +252,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(395, 249);
+            this.label5.Location = new System.Drawing.Point(395, 272);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(131, 13);
@@ -283,7 +283,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(395, 349);
+            this.label8.Location = new System.Drawing.Point(396, 349);
             this.label8.Margin = new System.Windows.Forms.Padding(3, 15, 3, 3);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(66, 13);
@@ -294,7 +294,7 @@
             // 
             this.checkDeprecated.AutoSize = true;
             this.checkDeprecated.Enabled = false;
-            this.checkDeprecated.Location = new System.Drawing.Point(412, 368);
+            this.checkDeprecated.Location = new System.Drawing.Point(413, 368);
             this.checkDeprecated.Name = "checkDeprecated";
             this.checkDeprecated.Size = new System.Drawing.Size(342, 17);
             this.checkDeprecated.TabIndex = 28;
@@ -325,7 +325,7 @@
             // numericUpDown1
             // 
             this.numericUpDown1.Enabled = false;
-            this.numericUpDown1.Location = new System.Drawing.Point(633, 265);
+            this.numericUpDown1.Location = new System.Drawing.Point(633, 288);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.ReadOnly = true;
             this.numericUpDown1.Size = new System.Drawing.Size(39, 20);

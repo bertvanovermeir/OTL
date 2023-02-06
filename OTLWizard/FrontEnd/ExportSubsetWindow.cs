@@ -70,6 +70,7 @@ namespace OTLWizard
                 buttonImportClasses.Enabled = true;
                 checkVoorbeelddata.Enabled = true;
                 checkDeprecated.Enabled = false;
+                checkWKT.Enabled = true;
             }
         }
 
@@ -182,17 +183,12 @@ namespace OTLWizard
             if(checkVoorbeelddata.Checked)
             {
                 checkAttributes.Enabled = true;
-                checkWKT.Enabled=true;
                 numericUpDown1.Enabled=true;
-
             } else
             {
                 checkAttributes.Enabled = false;
                 checkAttributes.Checked=false;
-                checkWKT.Enabled = false;
-                checkWKT.Checked=false;
                 numericUpDown1.Enabled = false;
-
             }
         }
 

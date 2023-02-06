@@ -179,15 +179,14 @@ namespace OTLWizard.ApplicationData
         {
             for (int i = source.Rows.Count; i >= 1; i--)
             {
+                bool found = false;
                 DataRow currentRow = source.Rows[i - 1];
                 foreach (var colValue in currentRow.ItemArray)
                 {
-                    if (!string.IsNullOrEmpty(colValue.ToString()))
-                        break;
-
-                    // If we get here, all the columns are empty
-                    source.Rows[i - 1].Delete();
+                    if (!string.IsNullOrEmpty(colValue.ToString())) { found = true; break; } 
                 }
+                if(!found)
+                    source.Rows[i - 1].Delete();
             }
             source.AcceptChanges();
         }
