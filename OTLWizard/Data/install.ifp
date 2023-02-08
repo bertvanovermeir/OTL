@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.4.1
+Program version = 4.4.3
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.4.1_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.4.3_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -241,9 +241,6 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
 N/A
 [Folder]
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\animations\
 N/A
 [Folder]
 [Licence_Begin]
