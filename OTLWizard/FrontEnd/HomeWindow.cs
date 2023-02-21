@@ -18,7 +18,7 @@ namespace OTLWizard
         private void HomeWindow_Load(object sender, EventArgs e)
         {
             Text = Language.Get("homewindowheader");
-            label3.Text = Language.Get("homewindowheader");
+            linkLabel1.Text = Language.Get("homewindowheader");
             button1.Text = Language.Get("home1");
             button3.Text = Language.Get("home3");
             button2.Text = Language.Get("home2");
@@ -28,7 +28,8 @@ namespace OTLWizard
             button7.Text = Language.Get("home7");
             button8.Text = Language.Get("home8");
             label1.Text = Language.Get("welcome");
-            if(Settings.Get("language").Equals("nl")) {
+            label4.Text = Language.Get("collab");
+            if (Settings.Get("language").Equals("nl")) {
                 radioButton2.Checked = true;
             } else
             {
@@ -67,8 +68,7 @@ namespace OTLWizard
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
-            //label1.Text = Language.Get("experimental");
-            //button7.Visible = true;
+            Process.Start("https://geosolutions.be/");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -151,6 +151,16 @@ namespace OTLWizard
         private void button6_Click_1(object sender, EventArgs e)
         {
             ViewHandler.Show(Enums.Views.SubsetViewer, Enums.Views.Home, null);
+        }
+
+        private void pictureBox4_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://wegenenverkeer.be/zakelijk/bim");
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/bertvanovermeir/OTL");
         }
     }
 }

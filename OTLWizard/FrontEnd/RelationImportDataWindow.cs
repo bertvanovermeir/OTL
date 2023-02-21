@@ -59,7 +59,7 @@ namespace OTLWizard.FrontEnd
             fdlg.Multiselect = true;
             fdlg.Title = Language.Get("SelectDataFiles");
             fdlg.InitialDirectory = @"c:\";
-            fdlg.Filter = "Data Files (*.csv;*.xls;*.xlsx)|*csv;*xls;*.xlsx";
+            fdlg.Filter = "Data Files (*.csv;*.xls;*.xlsx;*.sdf)|*csv;*xls;*.xlsx;*.sdf";
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {

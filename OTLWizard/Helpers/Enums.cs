@@ -15,7 +15,8 @@
             CSV,
             JSON,
             XLSX,
-            XLS
+            XLS,
+            SDF
         }
 
         public enum Views

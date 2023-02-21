@@ -21,3 +21,4 @@ showtutorialsubsetmain=1
 showtutorialartefactmain=1
 showtutorialrelationsmain=1
 showtutorialsdfmain=1
+sdfpath=c:/program files/FDO Toolbox/FdoCmd.exe

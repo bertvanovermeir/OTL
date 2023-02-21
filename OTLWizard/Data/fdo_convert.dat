@@ -1,0 +1,1 @@
+﻿FdoCmd.exe query-features --class %OTL% --from-file "%PATH%" --format CSV > "%EXPORT%"

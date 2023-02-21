@@ -1,8 +1,9 @@
-﻿Nieuwigheden versie 4.4.3
+﻿Nieuwigheden versie 4.5.0
 -------------------------
 
-- SDF bestandsgeneratie bugfixes en algoritme-optimalisatie
-- optimalisatie bestandsgroottes
-- verbeterde foutrapportering
+- Je kan nu SDF (Autocad Maps Spatial Database) files inladen in de relatietool
+- cosmetische aanpassingen
+- taalaanpassingen
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
+U wordt nu omgeleid naar de downloadpagina.

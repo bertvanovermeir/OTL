@@ -2,6 +2,7 @@
 using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -27,7 +28,10 @@ namespace OTLWizard.OTLObjecten
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
-                ViewHandler.Show(Language.Get("oldversion") + "\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);   
+            {
+                ViewHandler.Show(Language.Get("oldversion") + "\n" + GetVersionUpdateHistory(), Language.Get("oldversionheader"), MessageBoxIcon.Exclamation);
+                Process.Start("https://github.com/bertvanovermeir/OTL/releases");
+            }
             ViewHandler.Start();
         }
 
@@ -375,6 +379,18 @@ namespace OTLWizard.OTLObjecten
                     {
                         await Task.Run(() => { realImporter.Import(path, Enums.ImportType.XLS); });
                     }
+                    else if(path.ToUpper().EndsWith(".SDF")) {
+                        // check if sdf path exists, prompt the user with a dialog to change it
+                        if(File.Exists(Settings.Get("sdfpath")) && Settings.Get("sdfpath").ToLower().Contains("fdocmd.exe"))
+                        {
+                            await Task.Run(() => { realImporter.Import(path, Enums.ImportType.SDF); });
+                        } else
+                        {
+                            ViewHandler.Show(Language.Get("dependencymissing2"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                            setFDODependency();
+                            ViewHandler.Show(Language.Get("restartprocess"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Information);
+                        }
+                    }
                     else
                     {
                         ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
@@ -391,6 +407,21 @@ namespace OTLWizard.OTLObjecten
             {
                 ViewHandler.Show(Enums.Views.RelationImportSummary, Enums.Views.isNull, realImporter.GetErrors().ToArray());
                 realImporter.ResetErrors();
+            }
+        }
+
+        private static void setFDODependency()
+        {
+            OpenFileDialog fdlg = new OpenFileDialog();
+            fdlg.Multiselect = true;
+            fdlg.Title = Language.Get("SelectFDOCMDFilePath");
+            fdlg.InitialDirectory = @"c:\";
+            fdlg.Filter = "Executable Files (*.exe)|*.exe";
+            fdlg.RestoreDirectory = true;
+            if (fdlg.ShowDialog() == DialogResult.OK)
+            {
+                Settings.Update("sdfpath",fdlg.FileName);
+                Settings.WriteSettings();
             }
         }
 

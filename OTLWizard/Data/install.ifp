@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.4.3
+Program version = 4.5.0
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.4.3_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.5.0_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -157,7 +157,7 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.conf
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-469.5 KB
+475.5 KB
 pdb
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
 796 KB
@@ -186,6 +186,9 @@ dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SQLite.xml
 1.1 MB
 xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SqlServerCe.dll
+459.2 KB
+dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Memory.dll
 145.1 KB
 dll
@@ -234,6 +237,9 @@ dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.execution.desktop.xml
 234 KB
 xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\amd64\
+N/A
+[Folder]
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
 N/A
 [Folder]
@@ -243,59 +249,30 @@ N/A
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
 N/A
 [Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\setup\
+N/A
+[Folder]
 [Licence_Begin]
-4568
+1048
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}
-\viewkind4\uc1\pard\b\fs20 Disclaimer\b0\par
-Last updated: January, 2023\par
+\viewkind4\uc1\pard\ul\b\fs20 Please Read Carefully!\par
+\ulnone\b0\par
+\b OTL Wizard \b0 is distributed under CC BY-NC-SA 4.0 license.\par
+ \par
+In order to take advantage of SDF (Autocad Maps) functionalities within OTL Wizard, it is bundled with\par
+\b FDO Toolbox\b0  (by jumpinjackie) distributed under GNU Lesser General Public License v2.1.\par
 \par
-\b Interpretation and Definitions\par
-\b0 The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.\par
+If you \ul do not wish\ulnone  to install the FDO toolbox, \ul cancel the additional installation\ulnone  at the end of this wizard. \par
+if you\ul  do wish\ulnone  to use SDF within OTL Wizard \ul do not cancel the additional installation\ulnone  at the end of this wizard.\par
+More information about FDO Toolbox can be found at https://github.com/jumpinjackie/fdotoolbox\par
 \par
-For the purposes of this Disclaimer:\par
-- Company (referred to as either "the Company", "We", "Us" or "Our" in this Disclaimer) refers to OTL Wizard development team.\par
-- Service refers to the Application.\par
-- You means the individual accessing the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.\par
-- Application means the software program provided by the Company downloaded by You on any electronic device named OTL Wizard.\par
+You are encouraged to read the full disclaimer at https://github.com/bertvanovermeir/OTL.\par
 \par
-\b Disclaimer\b0\par
-The information contained on the Service is for general information purposes only.\par
+Thank you for downloading and using OTL Wizard!\par
 \par
-The Company assumes no responsibility for errors or omissions in the contents of the Service.\par
+Bert\par
+bert.vanovermeir@geosolutions.be\par
 \par
-In no event shall the Company be liable for any special, direct, indirect, consequential, or incidental damages or any damages whatsoever, whether in an action of contract, negligence or other tort, arising out of or in connection with the use of the Service or the contents of the Service. The Company reserves the right to make additions, deletions, or modifications to the contents on the Service at any time without prior notice.\par
-\par
-\b External Links Disclaimer\par
-\b0 The Service may contain links to external websites that are not provided or maintained by or in any way affiliated with the Company.\par
-\par
-Please note that the Company does not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.\par
-\par
-\b Errors and Omissions Disclaimer\par
-\b0 The information given by the Service is for general guidance on matters of interest only. Even if the Company takes every precaution to insure that the content of the Service is both current and accurate, errors can occur. Plus, given the changing nature of laws, rules and regulations, there may be delays, omissions or inaccuracies in the information contained on the Service.\par
-\par
-The Company is not responsible for any errors or omissions, or for the results obtained from the use of this information.\par
-\par
-\b Fair Use Disclaimer\par
-\b0 The Company may use copyrighted material which has not always been specifically authorized by the copyright owner. The Company is making such material available for criticism, comment, news reporting, teaching, scholarship, or research.\par
-\par
-The Company believes this constitutes a "fair use" of any such copyrighted material as provided for in section 107 of the United States Copyright law.\par
-\par
-If You wish to use copyrighted material from the Service for your own purposes that go beyond fair use, You must obtain permission from the copyright owner.\par
-\par
-\b No Responsibility Disclaimer\par
-\b0 The information on the Service is provided with the understanding that the Company is not herein engaged in rendering legal, accounting, tax, or other professional advice and services. As such, it should not be used as a substitute for consultation with professional accounting, tax, legal or other competent advisers.\par
-\par
-In no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever arising out of or in connection with your access or use or inability to access or use the Service.\par
-\par
-\b "Use at Your Own Risk" Disclaimer\par
-\b0 All information in the Service is provided "as is", with no guarantee of completeness, accuracy, timeliness or of the results obtained from the use of this information, and without warranty of any kind, express or implied, including, but not limited to warranties of performance, merchantability and fitness for a particular purpose.\par
-\par
-The Company will not be liable to You or anyone else for any decision made or action taken in reliance on the information given by the Service or for any consequential, special or similar damages, even if advised of the possibility of such damages.\par
-\par
-\b Contact Us\par
-\b0 If you have any questions about this Disclaimer, You can contact Us:\par
-\par
-By email: bert.vanovermeir@gmail.com\par
 }
  [Licence_End]
 [Registry]
@@ -317,63 +294,7 @@ OTL Wizard
 [Serials]
 [Serials_End]
 [Commands]
-Shell Execute
-del "C:\Program Files (x86)\Ruber Software\OTL Wizard"  /q /f /s
+Execute Application
+<InstallPath>\setup\FDOToolbox-Release-v1.5.2-x64-Setup.exe
 
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 3.2.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 3.2.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 4.0.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.0.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 4.0.1.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.0.1.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 4.1.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 4.2.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.1.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.2.0.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 4.2.1.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.2.1.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\Users\Public\Desktop\OTL Wizard 4.3.lnk" /q /f /s
-
-
-Shell Execute
-del "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\BitsOfData\OTL Wizard\OTL Wizard 4.3.lnk" /q /f /s
-
-
+-wait

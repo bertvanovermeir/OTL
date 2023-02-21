@@ -59,6 +59,9 @@ namespace OTLWizard.ApplicationData
                 case Enums.ImportType.XLS:
                     ImportXLS(path);
                     break;
+                case Enums.ImportType.SDF:
+                    ImportSDF(path);
+                    break;
                 default:
                     errors.Add(new ErrorContainer(currentFileName, "/","Error",Language.Get("filenotsupported")));
                     break;
@@ -92,6 +95,38 @@ namespace OTLWizard.ApplicationData
                 var doel = entities.Where(ent => rel.doelID == ent.AssetId).ToList().Select(x => x.AssetId).FirstOrDefault();
                 if (doel == null)
                     CreateUserAsset(rel.doelID);
+            }
+        }
+
+        //SDF
+        private void ImportSDF(string path)
+        {
+            List<string> files = new List<string>();
+            // convert SDF to CSV
+            SDFImporter sdf = new SDFImporter(path);
+            if (sdf.checkDependencies()){
+                List<string> classnames = sdf.loadClasses();
+
+                var localPath = System.IO.Path.GetTempPath() + "otlsdftempconversion\\";
+                Directory.CreateDirectory(localPath);
+                foreach (string classname in classnames)
+                {
+                    string contents = sdf.loadDataForClass(classname);
+                    contents = contents.Replace('_', '.');
+                    string filename = classname + ".csv";
+                    File.WriteAllText(localPath + filename, contents);
+                    files.Add(localPath + filename);
+                }              
+
+                // import the converted data from CSV
+                foreach (string file in files)
+                {
+                    ImportCSV(file);
+                }
+                Directory.Delete(localPath, true);
+            } else
+            {
+                errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("dependencymissing")));
             }
         }
 

@@ -1,0 +1,1 @@
+﻿FdoCmd.exe list-classses --from-file "%PATH%" > "%LISTING%"

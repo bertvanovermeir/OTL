@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 4.4.3 (Bert Van Overmeir)
-<EN>homewindowheader=OTLWizard 4.4.3 (Bert Van Overmeir)
+<NL>homewindowheader=OTLWizard 4.5.0 - BVO 
+<EN>homewindowheader=OTLWizard 4.5.0 - BVO
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -152,8 +152,8 @@
 <EN>aupdy=Autoupdate On
 <NL>aupdn=Automatisch updaten uit
 <EN>aupdn=Autoupdate Off
-<NL>relationwindowheader=RelatieWizard 2.0 (Bert Van Overmeir)
-<EN>relationwindowheader=RelationWizard 2.0 (Bert Van Overmeir)
+<NL>relationwindowheader=RelatieWizard 2.0 - BVO
+<EN>relationwindowheader=RelationWizard 2.0 - BVO
 <NL>st_export= objecten werden geëxporteerd.
 <EN>st_export= elements were exported.
 <NL>suretoclose=Ben je zeker dat je wil afsluiten? Alle niet opgeslagen gegevens gaan verloren.
@@ -206,8 +206,8 @@
 <EN>mtitleextra=Options
 <NL>msetretention=RelatieRetentie
 <EN>msetretention=Relation Retention
-<NL>csvrealimport=CSV bestanden worden geimporteerd...
-<EN>csvrealimport=importing CSV files...
+<NL>csvrealimport=De bestanden worden geimporteerd...
+<EN>csvrealimport=Importing files...
 <NL>remrelsoft=<< Relatie inactief zetten
 <EN>remrelsoft=<< Set relation inactive
 <NL>maxelemwarn=Automatische weergave van relaties en objecten uitgeschakeld om performantieredenen.
@@ -259,8 +259,8 @@
 <NL>home8=Een XSD bestand aanmaken of wijzigen
 <EN>home8=Updating or Adapting an XSD file
 
-<EN>sdfwizardheader=SDF Wizard 1.1 (Bert Van Overmeir)
-<NL>sdfwizardheader=SDF Wizard 1.1 (Bert Van Overmeir)
+<EN>sdfwizardheader=SDF Wizard 1.1 - BVO
+<NL>sdfwizardheader=SDF Wizard 1.1 - BVO
 <EN>buttonartefacttext=Import geometry artefact
 <NL>buttonartefacttext=Geometrie artefact importeren
 <EN>buttonsdxtext=Import XSD file
@@ -349,5 +349,13 @@
 <EN>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
 <NL>laadeenproject=Laad een project om te beginnen
 <EN>laadeenproject=Load a project to start
-<NL>subsetviewerheader=Subset Viewer 1.0 (Bert Van Overmeir)
-<EN>subsetviewerheader=Subset Viewer 1.0 (Bert Van Overmeir)
+<NL>subsetviewerheader=Subset Viewer 1.0 - BVO
+<EN>subsetviewerheader=Subset Viewer 1.0 - BVO
+<NL>dependencymissing=FDO Toolbox command executable ontbreekt. De SDF Database kon niet worden geladen. Installeer de Toolbox opnieuw.
+<EN>dependencymissing=FDO Toolbox command executable is missing. The SDF Database could not be loaded. Install the Toolbox again.
+<NL>dependencymissing2=FDO Toolbox, noodzakelijk voor SDF files te importeren, is niet gevonden op de computer. In het volgende dialoogvenster kan je zelf het pad aanduiden naar "fdocmd.exe". Meestal bevindt deze file zich in "C:\Program Files\FDO Toolbox" 
+<EN>dependencymissing2=FDO Toolbox, a non-optional plugin needed for importing SDF data is missing. Please locate the path to "fdocmd.exe" on the next screen manually.
+<NL>restartprocess=Pad geregistreerd. Start het importeerproces opnieuw.
+<EN>restartprocess=Path registered. Please restart the import process.
+<NL>collab=een samenwerking van
+<EN>collab=a collaboration between
