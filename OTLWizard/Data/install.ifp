@@ -15,7 +15,7 @@ Windows 10 = 1
 Windows Server 2016 = 0
 DoNotCheckOS = 1
 Company name = BitsOfData
-Website = https://www.bitsofdata.be
+Website = https://geosolutions.be/
 SFA = 1
 DFA = 1
 Comp = 1
@@ -157,7 +157,7 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.conf
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-475.5 KB
+477.5 KB
 pdb
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
 796 KB
@@ -243,13 +243,13 @@ N/A
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
 N/A
 [Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\setup\
+N/A
+[Folder]
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
 N/A
 [Folder]
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\setup\
 N/A
 [Folder]
 [Licence_Begin]

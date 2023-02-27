@@ -44,6 +44,7 @@ namespace OTLWizard.ApplicationData
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.CreateNoWindow = true;
             startInfo.FileName = application;
             startInfo.Arguments = "query-features --class " + otlname + " --from-file \"" + path + "\" --format CSV > ";
             startInfo.RedirectStandardOutput = true;
@@ -60,7 +61,8 @@ namespace OTLWizard.ApplicationData
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.CreateNoWindow= true;
             startInfo.FileName = application;
             startInfo.Arguments = "list-classes --from-file \"" + path + "\"";
             startInfo.RedirectStandardOutput = true;
