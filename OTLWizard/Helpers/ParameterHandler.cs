@@ -115,13 +115,19 @@ namespace OTLWizard.OTLObjecten
                     if (File.Exists(localPath + filename))
                     {
                         string[] lines = File.ReadAllLines(localPath + filename, System.Text.Encoding.UTF8);
+                        string sublistText = "";
                         foreach (string item in lines)
                         {
                             if (item.Contains("skos:Concept;"))
                             {
                                 string listText = item.Split('>')[0];
-                                string sublistText = listText.Split('/')[listText.Split('/').Length - 1];
+                                sublistText = listText.Split('/')[listText.Split('/').Length - 1];
                                 DropdownValues.Add(sublistText);
+                            }
+                            if(item.Contains("https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAdmsStatus/uitgebruik"))
+                            {
+                                if(DropdownValues.Contains(sublistText))
+                                    DropdownValues.Remove(sublistText);
                             }
                         }
                         DropdownValues.Sort();
