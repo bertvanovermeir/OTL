@@ -10,7 +10,7 @@ namespace OTLWizard.OTLObjecten
 {
     public class OTL_Relationship
     {
-        [Name("AssetId.identificator")]
+        [Name("assetId.identificator")]
         public string AssetId { get; set; }
         [Name("typeURI")]
         public string relationshipURI { get; set; }
