@@ -662,6 +662,11 @@ namespace OTLWizard.OTLObjecten
             return subsetConn.GetOTLRelationshipTypes();
         }
 
+        public static OTL_Entity R_GetEntityForID(string id)
+        {
+            return realImporter.GetEntities().Where(e => e.AssetId == id).FirstOrDefault();
+        }
+
 
 
         public static List<OTL_Relationship> R_GetRealRelations()

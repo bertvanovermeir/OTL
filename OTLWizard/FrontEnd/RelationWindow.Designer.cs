@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager2 = new Dataweb.NShape.RoleBasedSecurityManager();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager1 = new Dataweb.NShape.RoleBasedSecurityManager();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +75,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.ListPropertiesTarget = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -94,6 +95,7 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesTarget)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -269,6 +271,7 @@
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "checkBox1";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // diagramSetController1
@@ -282,9 +285,9 @@
             this.project1.LibrarySearchPaths = ((System.Collections.Generic.IList<string>)(resources.GetObject("project1.LibrarySearchPaths")));
             this.project1.Name = null;
             this.project1.Repository = this.cachedRepository1;
-            roleBasedSecurityManager2.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
-            roleBasedSecurityManager2.CurrentRoleName = "Administrator";
-            this.project1.SecurityManager = roleBasedSecurityManager2;
+            roleBasedSecurityManager1.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
+            roleBasedSecurityManager1.CurrentRoleName = "Administrator";
+            this.project1.SecurityManager = roleBasedSecurityManager1;
             // 
             // cachedRepository1
             // 
@@ -328,18 +331,17 @@
             this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesRelation.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle1;
             this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 292);
             this.ListPropertiesRelation.Name = "ListPropertiesRelation";
             this.ListPropertiesRelation.ReadOnly = true;
-            this.ListPropertiesRelation.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.ListPropertiesRelation.ShowEditingIcon = false;
             this.ListPropertiesRelation.Size = new System.Drawing.Size(157, 111);
             this.ListPropertiesRelation.TabIndex = 5;
@@ -401,6 +403,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.ListPropertiesTarget);
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.ListRelationsPerEntity);
@@ -446,7 +449,7 @@
             this.ListRelationsPerEntity.Location = new System.Drawing.Point(6, 45);
             this.ListRelationsPerEntity.Name = "ListRelationsPerEntity";
             this.ListRelationsPerEntity.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ListRelationsPerEntity.Size = new System.Drawing.Size(215, 381);
+            this.ListRelationsPerEntity.Size = new System.Drawing.Size(215, 238);
             this.ListRelationsPerEntity.TabIndex = 0;
             this.ListRelationsPerEntity.SelectedIndexChanged += new System.EventHandler(this.ListRelationsPerEntity_SelectedIndexChanged);
             // 
@@ -571,6 +574,20 @@
             this.splitContainer3.SplitterDistance = 178;
             this.splitContainer3.TabIndex = 0;
             // 
+            // ListPropertiesTarget
+            // 
+            this.ListPropertiesTarget.AllowUserToAddRows = false;
+            this.ListPropertiesTarget.AllowUserToDeleteRows = false;
+            this.ListPropertiesTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListPropertiesTarget.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ListPropertiesTarget.ColumnHeadersVisible = false;
+            this.ListPropertiesTarget.Location = new System.Drawing.Point(3, 292);
+            this.ListPropertiesTarget.Name = "ListPropertiesTarget";
+            this.ListPropertiesTarget.ReadOnly = true;
+            this.ListPropertiesTarget.Size = new System.Drawing.Size(217, 140);
+            this.ListPropertiesTarget.TabIndex = 3;
+            // 
             // RelationWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -610,6 +627,7 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesTarget)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -660,5 +678,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.DataGridView ListPropertiesTarget;
     }
 }

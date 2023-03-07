@@ -33,8 +33,11 @@ namespace OTLWizard.OTLObjecten
                 try
                 {
                     var col = tmp.Split('-');
-                    var replacer = col[col.Length - 1];
-                    tmp = tmp.Replace("-" + replacer, "");
+                    if(col.Length > 4)
+                    {
+                        var replacer = col[col.Length - 1];
+                        tmp = tmp.Replace("-" + replacer, "");
+                    }                  
                 }
                 catch
                 {

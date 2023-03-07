@@ -307,7 +307,7 @@ namespace OTLWizard.FrontEnd
         {
             OTL_Entity source = (OTL_Entity)ListImportedEntities.SelectedItem;
             // update properties of one object
-            ListPropertiesPerEntity.DataSource = source.Properties.ToArray();
+            ListPropertiesPerEntity.DataSource = source.Properties.OrderBy(x => x.Key).ToArray();
             ListPropertiesPerEntity.Update();
             // update available relations          
             ListRelationsPerEntity.DisplayMember = "DisplayName";
@@ -327,10 +327,32 @@ namespace OTLWizard.FrontEnd
         private void updateUserViewRelationProperties()
         {
             OTL_Relationship source = (OTL_Relationship)ListCreatedRelations.SelectedItem;
-            ListPropertiesRelation.DataSource = source.Properties.ToArray();
+            source.Properties.OrderBy(x => x.Key).ToList();
+            ListPropertiesRelation.DataSource = source.Properties.OrderBy(x => x.Key).ToArray();
             ListPropertiesRelation.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ListPropertiesRelation.Update();
             ListPropertiesRelation.Refresh();
+        }
+
+        private void updateUserViewRelationTargetProperties()
+        {
+            OTL_ConnectingEntityHandle otl_handle = (OTL_ConnectingEntityHandle)ListRelationsPerEntity.SelectedItem;
+            if (otl_handle.DisplayName == Language.Get("userdefinedrelation"))
+            {
+                // this is not a real relation
+                ListPropertiesTarget.DataSource = null;
+                ListPropertiesTarget.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                ListPropertiesTarget.Update();
+                ListPropertiesTarget.Refresh();
+            } else
+            {
+                ListPropertiesTarget.DataSource = ApplicationHandler.R_GetEntityForID(otl_handle.doelId).Properties.OrderBy(x => x.Key).ToArray();
+                ListPropertiesTarget.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                ListPropertiesTarget.Update();
+                ListPropertiesTarget.Refresh();
+            }
+
+                
         }
 
         private void updateUserRelations()
@@ -492,7 +514,7 @@ namespace OTLWizard.FrontEnd
 
         private void ListRelationsPerEntity_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            updateUserViewRelationTargetProperties();
         }
 
         private void manualToolStripMenuItem_Click(object sender, EventArgs e)

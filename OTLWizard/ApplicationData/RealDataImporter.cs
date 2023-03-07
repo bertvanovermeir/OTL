@@ -304,7 +304,6 @@ namespace OTLWizard.ApplicationData
                                 entity.Properties.Add(key, value);
                             }
                         }
-
                         // check if exists
                         if (OTL_Entities.ContainsKey(entity.AssetId))
                         {
