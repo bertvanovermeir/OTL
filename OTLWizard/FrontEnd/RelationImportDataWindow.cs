@@ -27,7 +27,8 @@ namespace OTLWizard.FrontEnd
         private void RelationImportDataWindow_Load(object sender, EventArgs e)
         {
             this.Text = Language.Get("relimportwindow");
-            label1.Text = Language.Get("relmsg");
+            label1.Text = Language.Get("relmsg2");
+            label2.Text = Language.Get("relmsg");
             checkBox1.Text = Language.Get("downotl");
         }
 
@@ -129,6 +130,16 @@ namespace OTLWizard.FrontEnd
                     }
                 }
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

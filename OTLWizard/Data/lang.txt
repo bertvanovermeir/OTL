@@ -11,7 +11,7 @@
 <EN>errorheader=Error
 <NL>otlimport=De OTL subset wordt geimporteerd...
 <EN>otlimport=OTL Subset is being imported...
-<NL>otlfail=De subset kon niet worden geïmporteerd. (Subset Versie < 2.0 of Corrupte Database)
+<NL>otlfail=De subset kon niet worden geïmporteerd. Mogelijk is de database corrupt. Indien u gebruik maakte van de optie "OTL downloaden van de website", is deze mogelijk offline. Gebruik in dat geval een lokale versie van de subset.
 <EN>otlfail=Subset could not be imported. (Subset Version < 2.0 or Corrupt Database)
 <NL>saveerror=Kon het bestand niet opslaan, controleer of het in gebruik is.
 <EN>saveerror=Could not save the file at the selected location or file in use.
@@ -166,7 +166,9 @@
 <EN>mhelp=Help
 <NL>relimportwindow=Importeer bestanden
 <EN>relimportwindow=Import Files
-<NL>relmsg=Selecteer de bestanden om te importeren. De bijhorende subset bevat best ook minimaal deze klassen.
+<NL>relmsg2=U vergat per ongeluk enkele bestanden? Geen probleem, deze kan u op een later tijdstip bijkomend importeren.
+<EN>relmsg3=Did you forget an additional file or files? No problem, you can import them later.
+<NL>relmsg=U kan zowel CSV, XLS(X) en SDF bestanden importeren. Voor SDF dient de FDO toolbox geinstalleerd te zijn.
 <EN>relmsg=Select the files to import. Select a Subset that contains at least the OTL classes used in the files.
 <NL>missingfiles=Probleem met het laden van de bestanden.
 <EN>missingfiles=Problem loading files.
@@ -359,3 +361,5 @@
 <EN>restartprocess=Path registered. Please restart the import process.
 <NL>collab=een samenwerking van
 <EN>collab=a collaboration between
+<NL>SelectDataFiles=Selecteer bestanden
+<EN>SelectDataFiles=Select files

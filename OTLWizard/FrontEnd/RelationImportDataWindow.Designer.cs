@@ -36,6 +36,7 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -107,6 +108,7 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Select the files to import. Select a Subset that contains at least the OTL classe" +
     "s used in the files.";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // checkBox1
             // 
@@ -119,6 +121,18 @@
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 195);
+            this.label2.Margin = new System.Windows.Forms.Padding(3, 0, 3, 3);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(460, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Select the files to import. Select a Subset that contains at least the OTL classe" +
+    "s used in the files.";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
+            // 
             // RelationImportDataWindow
             // 
             this.AcceptButton = this.button1;
@@ -127,6 +141,7 @@
             this.CancelButton = this.button2;
             this.ClientSize = new System.Drawing.Size(762, 233);
             this.ControlBox = false;
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox2);
@@ -156,5 +171,6 @@
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label2;
     }
 }
