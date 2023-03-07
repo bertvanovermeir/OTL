@@ -342,6 +342,7 @@
             this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 292);
             this.ListPropertiesRelation.Name = "ListPropertiesRelation";
             this.ListPropertiesRelation.ReadOnly = true;
+            this.ListPropertiesRelation.RowHeadersVisible = false;
             this.ListPropertiesRelation.ShowEditingIcon = false;
             this.ListPropertiesRelation.Size = new System.Drawing.Size(157, 111);
             this.ListPropertiesRelation.TabIndex = 5;
@@ -492,6 +493,7 @@
             this.ListPropertiesPerEntity.Location = new System.Drawing.Point(7, 292);
             this.ListPropertiesPerEntity.Name = "ListPropertiesPerEntity";
             this.ListPropertiesPerEntity.ReadOnly = true;
+            this.ListPropertiesPerEntity.RowHeadersVisible = false;
             this.ListPropertiesPerEntity.Size = new System.Drawing.Size(217, 180);
             this.ListPropertiesPerEntity.TabIndex = 1;
             this.ListPropertiesPerEntity.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
@@ -585,8 +587,10 @@
             this.ListPropertiesTarget.Location = new System.Drawing.Point(3, 292);
             this.ListPropertiesTarget.Name = "ListPropertiesTarget";
             this.ListPropertiesTarget.ReadOnly = true;
+            this.ListPropertiesTarget.RowHeadersVisible = false;
             this.ListPropertiesTarget.Size = new System.Drawing.Size(217, 140);
             this.ListPropertiesTarget.TabIndex = 3;
+            this.ListPropertiesTarget.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListPropertiesTarget_CellContentClick);
             // 
             // RelationWindow
             // 

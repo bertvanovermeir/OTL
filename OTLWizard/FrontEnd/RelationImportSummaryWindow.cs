@@ -27,11 +27,18 @@ namespace OTLWizard.FrontEnd
         public void SetDataSource(object source)
         {
             dataGridView1.DataSource = source;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.RelationImportSummary, null);
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

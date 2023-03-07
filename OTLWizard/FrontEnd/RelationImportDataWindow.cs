@@ -15,6 +15,7 @@ namespace OTLWizard.FrontEnd
     public partial class RelationImportDataWindow : Form
     {
         private Dictionary<string,string[]> data = new Dictionary<string, string[]>();
+        private string sessionDirectory = @"c:\";
 
         public RelationImportDataWindow()
         {
@@ -58,7 +59,7 @@ namespace OTLWizard.FrontEnd
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.Multiselect = true;
             fdlg.Title = Language.Get("SelectDataFiles");
-            fdlg.InitialDirectory = @"c:\";
+            fdlg.InitialDirectory = sessionDirectory;
             fdlg.Filter = "Data Files (*.csv;*.xls;*.xlsx;*.sdf)|*csv;*xls;*.xlsx;*.sdf";
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
@@ -70,7 +71,9 @@ namespace OTLWizard.FrontEnd
                 } else
                 {
                     data.Add("files", fdlg.FileNames);
-                }              
+                }
+                if (fdlg.FileNames.Length > 0)
+                    sessionDirectory = System.IO.Path.GetDirectoryName(fdlg.FileNames[0]);
             }
         }
 
@@ -79,7 +82,7 @@ namespace OTLWizard.FrontEnd
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.Multiselect = false;
             fdlg.Title = Language.Get("SelectSubset");
-            fdlg.InitialDirectory = @"c:\";
+            fdlg.InitialDirectory = sessionDirectory;
             fdlg.Filter = "OTL db Files (*.db)|*.db";
             fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
@@ -93,7 +96,7 @@ namespace OTLWizard.FrontEnd
                 {
                     data.Add("subset", new string[] { fdlg.FileName });
                 }
-                
+                sessionDirectory = System.IO.Path.GetDirectoryName(fdlg.FileName);
             }
         }
 

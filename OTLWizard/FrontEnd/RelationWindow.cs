@@ -308,6 +308,7 @@ namespace OTLWizard.FrontEnd
             OTL_Entity source = (OTL_Entity)ListImportedEntities.SelectedItem;
             // update properties of one object
             ListPropertiesPerEntity.DataSource = source.Properties.OrderBy(x => x.Key).ToArray();
+            ListPropertiesPerEntity.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ListPropertiesPerEntity.Update();
             // update available relations          
             ListRelationsPerEntity.DisplayMember = "DisplayName";
@@ -628,6 +629,11 @@ namespace OTLWizard.FrontEnd
         {
             var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6\\";
             Process.Start("notepad.exe", localPath + "settings.txt");
+        }
+
+        private void ListPropertiesTarget_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
