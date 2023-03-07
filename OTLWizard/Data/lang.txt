@@ -226,8 +226,8 @@
 <EN>openproj=Open Project
 <NL>impfle=Importeer Bestanden
 <EN>impfle=Import Files
-<NL>expfle=Exporteer Bestanden
-<EN>expfle=Export Files
+<NL>expfle=Exporteer Bestand
+<EN>expfle=Export File
 <NL>closerelmgr=Afsluiten
 <EN>closerelmgr=Exit
 <NL>savestate=Project Opslaan
