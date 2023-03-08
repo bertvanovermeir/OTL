@@ -795,7 +795,7 @@ namespace OTLWizard.OTLObjecten
             return subsetConn.GetOTLRelationshipTypes();
         }
 
-
+        
 
     }
 }

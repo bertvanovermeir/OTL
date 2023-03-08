@@ -1,15 +1,14 @@
 ﻿Nieuwigheden versie 4.6.0
 -------------------------
 
-- fix assetId met kleine letter bij export relaties\n
-- fix base64 notatie bug\n
+- fix assetId met kleine letter bij export relaties
+- fix base64 notatie bug
 - fix typeURI wordt nu ingevuld bij export SDF template schema
 - add extra attributenvenster doelobjecten in relatietool voor makkelijker te werken
 - fix verbeterde gebruikerservaring attributenvensters weergave
 - fix inladen SDF geeft geen filtsende schermen meer weer
 - fix taalfouten algemeen
 - fix uitgebruik keuzelijstopties worden niet meer geëxporteerd
-- add visuele weergave van WKT geometrie van assets in extra scherm
 
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
