@@ -1,9 +1,16 @@
-﻿Nieuwigheden versie 4.5.0
+﻿Nieuwigheden versie 4.6.0
 -------------------------
 
-- Je kan nu SDF (Autocad Maps Spatial Database) files inladen in de relatietool
-- cosmetische aanpassingen
-- taalaanpassingen
+- fix assetId met kleine letter bij export relaties\n
+- fix base64 notatie bug\n
+- fix typeURI wordt nu ingevuld bij export SDF template schema
+- add extra attributenvenster doelobjecten in relatietool voor makkelijker te werken
+- fix verbeterde gebruikerservaring attributenvensters weergave
+- fix inladen SDF geeft geen filtsende schermen meer weer
+- fix taalfouten algemeen
+- fix uitgebruik keuzelijstopties worden niet meer geëxporteerd
+- add visuele weergave van WKT geometrie van assets in extra scherm
+
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
 U wordt nu omgeleid naar de downloadpagina.
