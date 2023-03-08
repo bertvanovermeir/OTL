@@ -73,8 +73,8 @@
 <EN>home2=More information about OTL
 <NL>home3=Een lijst exporteren met te modelleren OTL objecten (LOG0)
 <EN>home3=Export a list of OTL Objects to model in LOG0
-<NL>home4=Aanleverplatform DAVIE
-<EN>home4=Deliver data in DAVIE
+<NL>home4=Handleiding OTL Wizard (PDF)
+<EN>home4=Manual OTL Wizard (PDF)
 <NL>home5=Handleiding DAVIE
 <EN>home5=DAVIE manual
 <NL>home6=Een grafische weergave aanmaken van een Subset
@@ -274,7 +274,7 @@
 <EN>buttonexportsdx=Export XSD file
 <NL>buttonexportsdx=Exporteer XSD bestand
 <EN>labelexplanationsdf=Select an XSD schema or start with a new subset.. This file can be used to implement the OTL in Civil3D/Maps.
-<NL>labelexplanationsdf=Selecteer een XSD schema of vertrek vanuit een subset. Dit bestand kan gebruikt worden in Civil3D/Maps om de OTL te implementeren.
+<NL>labelexplanationsdf=Selecteer een XSD schema of vertrek vanuit subset én geometrieartefact. Dit bestand kan gebruikt worden in Civil3D/Maps om de OTL te implementeren.
 <EN>label4sdf=General Settings
 <NL>label4sdf=Algemene instellingen
 <EN>label7sdf=OTL Version

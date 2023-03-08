@@ -627,7 +627,7 @@ namespace OTLWizard.FrontEnd
 
         private void otherSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6\\";
+            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv7\\";
             Process.Start("notepad.exe", localPath + "settings.txt");
         }
 

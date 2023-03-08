@@ -332,6 +332,9 @@
     </Compile>
     <None Include="Data\fdo_convert.dat" />
     <None Include="Data\fdo_list.dat" />
+    <None Include="Data\Handleiding OTL Wizard.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Data\install.ifp" />
     <None Include="Data\queries.bak" />
     <Content Include="Data\animations\artefactmain1.gif">

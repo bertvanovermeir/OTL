@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -95,10 +96,13 @@ namespace OTLWizard.OTLObjecten
             foreach (OTL_Parameter p in o.GetParameters())
             {
                 var tempType = ParameterHandler.GetDataTypeSDF(p.DataTypeString);
-                if(p.DropdownValues != null)
-                    AddAttribute(p.DotNotatie, p.Description, "", p.DropdownValues.ToArray(), tempType);
+                var dval = "";
+                if (p.DotNotatie.ToLower().Equals(Settings.Get("otlclassuri").ToLower()))
+                    dval = (string) p.DefaultValue;
+                if (p.DropdownValues != null)
+                    AddAttribute(p.DotNotatie, p.Description, dval, p.DropdownValues.ToArray(), tempType);
                 else
-                    AddAttribute(p.DotNotatie, p.Description, "", null, tempType);
+                    AddAttribute(p.DotNotatie, p.Description, dval, null, tempType);
             }
 
         }

@@ -23,7 +23,6 @@ namespace OTLWizard
             button3.Text = Language.Get("home3");
             button2.Text = Language.Get("home2");
             button4.Text = Language.Get("home4");
-            button5.Text = Language.Get("home5");
             button6.Text = Language.Get("home6");
             button7.Text = Language.Get("home7");
             button8.Text = Language.Get("home8");
@@ -78,7 +77,7 @@ namespace OTLWizard
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Process.Start("https://apps.mow.vlaanderen.be/davie-aanlevering/");
+            Process.Start("Data\\handleiding OTL Wizard.pdf");
         }
 
         private void button5_Click(object sender, EventArgs e)
