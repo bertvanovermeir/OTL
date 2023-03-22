@@ -8,7 +8,7 @@ Deze applicatie implementeert de AWV OTL standaard van de vlaamse overheid. Met 
 - Relaties aanmaken en aanpassen tussen verschillende OTL assets vanuit CSV/XLS én SDF bestanden.
 - Een visuele representatie weergeven van alle klassen en relaties in een subset.
 
-![image](https://user-images.githubusercontent.com/9445277/226841261-5673c4ea-6d83-4223-99b5-87341690c618.png)
+![image](https://user-images.githubusercontent.com/9445277/226841565-ac2f425e-b381-403f-81f6-232fc7dcc52e.png)
 
 Een idee voor een uitbreiding? Werkt iets niet of foutief? Log uw probleem op [de issue pagina](https://github.com/bertvanovermeir/OTL/issues).
 <p>Wilt u bijdragen aan de ontwikkeling of een uitbreiding maken aan de hand van deze toepassing? Laat me iets weten op bert.vanovermeir@bitsofdata.be.
