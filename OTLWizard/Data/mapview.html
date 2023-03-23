@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+      <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+      <script type="text/javascript">
+
+         var map = null;
+         function GetMap() {
+            // Initialize the map
+            map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),{credentials:"XgztV5wYl1ttbABnqX3J~lDyFWEBAZv_pAzojPBF1xw~AmlPcScLW0qNwjZ2b7NUaFL6wALuy8WVUMq25YYCF8cHYR46TnTQkOKvkyXutFLD"}); 
+			<OTL_GEO>
+            map.setView({center:loc2, zoom: 9} );
+			<OTL_PUSH>
+         }
+      </script>
+   </head>
+   <body onload="GetMap();">
+      <div id='mapDiv' style="position:relative; width:400px; height:400px;"></div>
+   </body>
+</html>

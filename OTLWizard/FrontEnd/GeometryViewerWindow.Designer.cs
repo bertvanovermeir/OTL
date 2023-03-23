@@ -28,12 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "GeometryViewerWindow";
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.SuspendLayout();
+            // 
+            // GeometryViewerWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(1055, 564);
+            this.Name = "GeometryViewerWindow";
+            this.Load += new System.EventHandler(this.GeometryViewerWindow_Load_1);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Create_Geometry);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }

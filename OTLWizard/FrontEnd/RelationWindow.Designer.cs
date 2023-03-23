@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager1 = new Dataweb.NShape.RoleBasedSecurityManager();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager2 = new Dataweb.NShape.RoleBasedSecurityManager();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,14 +44,27 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideBase64NotationDAVIEImportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideRelationshipURIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gISToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showAllAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.doNotShowLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.startGISViewerInToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roadsViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aerialPhotgraphyViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zoomLevelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.levelToolStripMenuItem = new System.Windows.Forms.ToolStripTextBox();
+            this.assetColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sourceAssetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sourcecolorToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
+            this.targetcolorAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.targetcolorToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
+            this.backgroundAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bckgrndcolorToolStripMenuItem = new System.Windows.Forms.ToolStripComboBox();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.otherSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statuslabel = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.diagramSetController1 = new Dataweb.NShape.Controllers.DiagramSetController();
             this.project1 = new Dataweb.NShape.Project(this.components);
             this.cachedRepository1 = new Dataweb.NShape.Advanced.CachedRepository();
@@ -63,6 +76,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.ListCreatedRelations = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ListPropertiesTarget = new System.Windows.Forms.DataGridView();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.ListRelationsPerEntity = new System.Windows.Forms.ListBox();
@@ -75,12 +89,17 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.ListPropertiesTarget = new System.Windows.Forms.DataGridView();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
+            this.label1 = new System.Windows.Forms.Label();
+            this.showAssetNameWherePossibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesTarget)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesPerEntity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -95,7 +114,8 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesTarget)).BeginInit();
+            this.tabControl1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -173,8 +193,10 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showAssetNameWherePossibleToolStripMenuItem,
             this.hideBase64NotationDAVIEImportToolStripMenuItem,
             this.hideRelationshipURIToolStripMenuItem,
+            this.gISToolStripMenuItem,
             this.toolStripSeparator2,
             this.otherSettingsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
@@ -198,6 +220,169 @@
             this.hideRelationshipURIToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.hideRelationshipURIToolStripMenuItem.Text = "Hide Relationship ID";
             this.hideRelationshipURIToolStripMenuItem.Click += new System.EventHandler(this.hideRelationshipURIToolStripMenuItem_Click);
+            // 
+            // gISToolStripMenuItem
+            // 
+            this.gISToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showAllAssetsToolStripMenuItem,
+            this.doNotShowLabelsToolStripMenuItem,
+            this.startGISViewerInToolStripMenuItem,
+            this.zoomLevelToolStripMenuItem,
+            this.assetColorToolStripMenuItem});
+            this.gISToolStripMenuItem.Name = "gISToolStripMenuItem";
+            this.gISToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.gISToolStripMenuItem.Text = "GIS Viewer...";
+            this.gISToolStripMenuItem.Click += new System.EventHandler(this.gISToolStripMenuItem_Click);
+            // 
+            // showAllAssetsToolStripMenuItem
+            // 
+            this.showAllAssetsToolStripMenuItem.Checked = true;
+            this.showAllAssetsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showAllAssetsToolStripMenuItem.Name = "showAllAssetsToolStripMenuItem";
+            this.showAllAssetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showAllAssetsToolStripMenuItem.Text = "Show all assets";
+            this.showAllAssetsToolStripMenuItem.Click += new System.EventHandler(this.showAllAssetsToolStripMenuItem_Click);
+            // 
+            // doNotShowLabelsToolStripMenuItem
+            // 
+            this.doNotShowLabelsToolStripMenuItem.Checked = true;
+            this.doNotShowLabelsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.doNotShowLabelsToolStripMenuItem.Name = "doNotShowLabelsToolStripMenuItem";
+            this.doNotShowLabelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.doNotShowLabelsToolStripMenuItem.Text = "Show labels";
+            this.doNotShowLabelsToolStripMenuItem.Click += new System.EventHandler(this.doNotShowLabelsToolStripMenuItem_Click);
+            // 
+            // startGISViewerInToolStripMenuItem
+            // 
+            this.startGISViewerInToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.roadsViewToolStripMenuItem,
+            this.aerialPhotgraphyViewToolStripMenuItem});
+            this.startGISViewerInToolStripMenuItem.Name = "startGISViewerInToolStripMenuItem";
+            this.startGISViewerInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startGISViewerInToolStripMenuItem.Text = "Open GIS view as...";
+            // 
+            // roadsViewToolStripMenuItem
+            // 
+            this.roadsViewToolStripMenuItem.Checked = true;
+            this.roadsViewToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.roadsViewToolStripMenuItem.Name = "roadsViewToolStripMenuItem";
+            this.roadsViewToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.roadsViewToolStripMenuItem.Text = "Roads View";
+            this.roadsViewToolStripMenuItem.Click += new System.EventHandler(this.roadsViewToolStripMenuItem_Click);
+            // 
+            // aerialPhotgraphyViewToolStripMenuItem
+            // 
+            this.aerialPhotgraphyViewToolStripMenuItem.Name = "aerialPhotgraphyViewToolStripMenuItem";
+            this.aerialPhotgraphyViewToolStripMenuItem.Size = new System.Drawing.Size(197, 22);
+            this.aerialPhotgraphyViewToolStripMenuItem.Text = "Aerial Photgraphy View";
+            this.aerialPhotgraphyViewToolStripMenuItem.Click += new System.EventHandler(this.aerialPhotgraphyViewToolStripMenuItem_Click);
+            // 
+            // zoomLevelToolStripMenuItem
+            // 
+            this.zoomLevelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.levelToolStripMenuItem});
+            this.zoomLevelToolStripMenuItem.Name = "zoomLevelToolStripMenuItem";
+            this.zoomLevelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomLevelToolStripMenuItem.Text = "Zoom Level";
+            this.zoomLevelToolStripMenuItem.Click += new System.EventHandler(this.zoomLevelToolStripMenuItem_Click);
+            // 
+            // levelToolStripMenuItem
+            // 
+            this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
+            this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 23);
+            this.levelToolStripMenuItem.Text = "level";
+            this.levelToolStripMenuItem.Enter += new System.EventHandler(this.levelToolStripMenuItem_InFocus);
+            this.levelToolStripMenuItem.Click += new System.EventHandler(this.levelToolStripMenuItem_Click);
+            this.levelToolStripMenuItem.TextChanged += new System.EventHandler(this.levelToolStripMenuItem_OutFocus);
+            // 
+            // assetColorToolStripMenuItem
+            // 
+            this.assetColorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sourceAssetToolStripMenuItem,
+            this.targetcolorAssetsToolStripMenuItem,
+            this.backgroundAssetsToolStripMenuItem});
+            this.assetColorToolStripMenuItem.Name = "assetColorToolStripMenuItem";
+            this.assetColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assetColorToolStripMenuItem.Text = "Asset Color";
+            // 
+            // sourceAssetToolStripMenuItem
+            // 
+            this.sourceAssetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sourcecolorToolStripMenuItem});
+            this.sourceAssetToolStripMenuItem.Name = "sourceAssetToolStripMenuItem";
+            this.sourceAssetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sourceAssetToolStripMenuItem.Text = "Source Asset";
+            // 
+            // sourcecolorToolStripMenuItem
+            // 
+            this.sourcecolorToolStripMenuItem.Items.AddRange(new object[] {
+            "black",
+            "blue",
+            "gray",
+            "green",
+            "orange",
+            "pink",
+            "purple",
+            "red",
+            "white",
+            "yellow"});
+            this.sourcecolorToolStripMenuItem.Name = "sourcecolorToolStripMenuItem";
+            this.sourcecolorToolStripMenuItem.Size = new System.Drawing.Size(180, 23);
+            this.sourcecolorToolStripMenuItem.Text = "targetcolor";
+            this.sourcecolorToolStripMenuItem.TextUpdate += new System.EventHandler(this.sourceColorChanged);
+            this.sourcecolorToolStripMenuItem.Click += new System.EventHandler(this.redToolStripMenuItem_Click);
+            // 
+            // targetcolorAssetsToolStripMenuItem
+            // 
+            this.targetcolorAssetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.targetcolorToolStripMenuItem});
+            this.targetcolorAssetsToolStripMenuItem.Name = "targetcolorAssetsToolStripMenuItem";
+            this.targetcolorAssetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.targetcolorAssetsToolStripMenuItem.Text = "Target Assets";
+            // 
+            // targetcolorToolStripMenuItem
+            // 
+            this.targetcolorToolStripMenuItem.Items.AddRange(new object[] {
+            "red",
+            "orange",
+            "green",
+            "blue",
+            "yellow",
+            "purple",
+            "pink",
+            "white",
+            "black",
+            "gray"});
+            this.targetcolorToolStripMenuItem.Name = "targetcolorToolStripMenuItem";
+            this.targetcolorToolStripMenuItem.Size = new System.Drawing.Size(180, 23);
+            this.targetcolorToolStripMenuItem.Text = "targetcolor";
+            this.targetcolorToolStripMenuItem.TextUpdate += new System.EventHandler(this.targetColorChanged);
+            // 
+            // backgroundAssetsToolStripMenuItem
+            // 
+            this.backgroundAssetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bckgrndcolorToolStripMenuItem});
+            this.backgroundAssetsToolStripMenuItem.Name = "backgroundAssetsToolStripMenuItem";
+            this.backgroundAssetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backgroundAssetsToolStripMenuItem.Text = "Background Assets";
+            // 
+            // bckgrndcolorToolStripMenuItem
+            // 
+            this.bckgrndcolorToolStripMenuItem.Items.AddRange(new object[] {
+            "red",
+            "orange",
+            "green",
+            "blue",
+            "yellow",
+            "purple",
+            "pink",
+            "white",
+            "black",
+            "gray"});
+            this.bckgrndcolorToolStripMenuItem.Name = "bckgrndcolorToolStripMenuItem";
+            this.bckgrndcolorToolStripMenuItem.Size = new System.Drawing.Size(180, 23);
+            this.bckgrndcolorToolStripMenuItem.Text = "bckgrndcolor";
+            this.bckgrndcolorToolStripMenuItem.TextUpdate += new System.EventHandler(this.backgroundColorChanged);
             // 
             // toolStripSeparator2
             // 
@@ -246,34 +431,6 @@
             this.statuslabel.Text = "StatusLabel";
             this.statuslabel.Click += new System.EventHandler(this.statuslabel_Click);
             // 
-            // groupBox4
-            // 
-            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.checkBox1);
-            this.groupBox4.Location = new System.Drawing.Point(3, 3);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(345, 478);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "OTLRelationVisual";
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Location = new System.Drawing.Point(6, 450);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.Visible = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // diagramSetController1
             // 
             this.diagramSetController1.ActiveTool = null;
@@ -285,9 +442,9 @@
             this.project1.LibrarySearchPaths = ((System.Collections.Generic.IList<string>)(resources.GetObject("project1.LibrarySearchPaths")));
             this.project1.Name = null;
             this.project1.Repository = this.cachedRepository1;
-            roleBasedSecurityManager1.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
-            roleBasedSecurityManager1.CurrentRoleName = "Administrator";
-            this.project1.SecurityManager = roleBasedSecurityManager1;
+            roleBasedSecurityManager2.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
+            roleBasedSecurityManager2.CurrentRoleName = "Administrator";
+            this.project1.SecurityManager = roleBasedSecurityManager2;
             // 
             // cachedRepository1
             // 
@@ -331,14 +488,14 @@
             this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesRelation.ColumnHeadersVisible = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle2;
             this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 292);
             this.ListPropertiesRelation.Name = "ListPropertiesRelation";
             this.ListPropertiesRelation.ReadOnly = true;
@@ -414,6 +571,22 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "OTLConnectingClassPane";
+            // 
+            // ListPropertiesTarget
+            // 
+            this.ListPropertiesTarget.AllowUserToAddRows = false;
+            this.ListPropertiesTarget.AllowUserToDeleteRows = false;
+            this.ListPropertiesTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ListPropertiesTarget.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ListPropertiesTarget.ColumnHeadersVisible = false;
+            this.ListPropertiesTarget.Location = new System.Drawing.Point(3, 292);
+            this.ListPropertiesTarget.Name = "ListPropertiesTarget";
+            this.ListPropertiesTarget.ReadOnly = true;
+            this.ListPropertiesTarget.RowHeadersVisible = false;
+            this.ListPropertiesTarget.Size = new System.Drawing.Size(217, 140);
+            this.ListPropertiesTarget.TabIndex = 3;
+            this.ListPropertiesTarget.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListPropertiesTarget_CellContentClick);
             // 
             // textBox2
             // 
@@ -571,26 +744,73 @@
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.groupBox4);
+            this.splitContainer3.Panel2.Controls.Add(this.tabControl1);
             this.splitContainer3.Size = new System.Drawing.Size(535, 488);
             this.splitContainer3.SplitterDistance = 178;
             this.splitContainer3.TabIndex = 0;
             // 
-            // ListPropertiesTarget
+            // tabControl1
             // 
-            this.ListPropertiesTarget.AllowUserToAddRows = false;
-            this.ListPropertiesTarget.AllowUserToDeleteRows = false;
-            this.ListPropertiesTarget.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(0, 0);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(351, 486);
+            this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(343, 460);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.chromiumWebBrowser1);
+            this.tabPage2.Controls.Add(this.label1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(343, 460);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // chromiumWebBrowser1
+            // 
+            this.chromiumWebBrowser1.ActivateBrowserOnCreation = false;
+            this.chromiumWebBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ListPropertiesTarget.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ListPropertiesTarget.ColumnHeadersVisible = false;
-            this.ListPropertiesTarget.Location = new System.Drawing.Point(3, 292);
-            this.ListPropertiesTarget.Name = "ListPropertiesTarget";
-            this.ListPropertiesTarget.ReadOnly = true;
-            this.ListPropertiesTarget.RowHeadersVisible = false;
-            this.ListPropertiesTarget.Size = new System.Drawing.Size(217, 140);
-            this.ListPropertiesTarget.TabIndex = 3;
-            this.ListPropertiesTarget.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListPropertiesTarget_CellContentClick);
+            this.chromiumWebBrowser1.Location = new System.Drawing.Point(4, 7);
+            this.chromiumWebBrowser1.Name = "chromiumWebBrowser1";
+            this.chromiumWebBrowser1.Size = new System.Drawing.Size(333, 447);
+            this.chromiumWebBrowser1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(163, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Deze asset heeft geen geometrie";
+            // 
+            // showAssetNameWherePossibleToolStripMenuItem
+            // 
+            this.showAssetNameWherePossibleToolStripMenuItem.Checked = true;
+            this.showAssetNameWherePossibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showAssetNameWherePossibleToolStripMenuItem.Name = "showAssetNameWherePossibleToolStripMenuItem";
+            this.showAssetNameWherePossibleToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.showAssetNameWherePossibleToolStripMenuItem.Text = "Show asset name where possible";
+            this.showAssetNameWherePossibleToolStripMenuItem.Click += new System.EventHandler(this.showAssetNameWherePossibleToolStripMenuItem_Click);
             // 
             // RelationWindow
             // 
@@ -609,13 +829,12 @@
             this.Load += new System.EventHandler(this.RelationWindow_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesTarget)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesPerEntity)).EndInit();
@@ -631,7 +850,9 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesTarget)).EndInit();
+            this.tabControl1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -648,7 +869,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.Label statuslabel;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ColorDialog colorDialog1;
@@ -673,7 +893,6 @@
         private System.Windows.Forms.DataGridView ListPropertiesRelation;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hideBase64NotationDAVIEImportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem hideRelationshipURIToolStripMenuItem;
@@ -683,5 +902,26 @@
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.DataGridView ListPropertiesTarget;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private CefSharp.WinForms.ChromiumWebBrowser chromiumWebBrowser1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripMenuItem gISToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showAllAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem doNotShowLabelsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem startGISViewerInToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roadsViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aerialPhotgraphyViewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zoomLevelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox levelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem assetColorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sourceAssetToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem targetcolorAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backgroundAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox sourcecolorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox targetcolorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox bckgrndcolorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showAssetNameWherePossibleToolStripMenuItem;
     }
 }

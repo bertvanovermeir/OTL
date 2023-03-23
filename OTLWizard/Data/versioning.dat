@@ -1,15 +1,17 @@
-﻿Nieuwigheden versie 4.6.0
+﻿Nieuwigheden versie 5.0.0
 -------------------------
 
-- fix assetId met kleine letter bij export relaties
-- fix base64 notatie bug
-- fix typeURI wordt nu ingevuld bij export SDF template schema
-- add extra attributenvenster doelobjecten in relatietool voor makkelijker te werken
-- fix verbeterde gebruikerservaring attributenvensters weergave
-- fix inladen SDF geeft geen filtsende schermen meer weer
-- fix taalfouten algemeen
-- fix uitgebruik keuzelijstopties worden niet meer geëxporteerd
+- Assets in de relatietool kunnen nu worden weergegeven op de kaart en in birds eye 3D wanneer beschikbaar (bij gebruik van de geometry-WKT kolom). Internetverbinding vereist.
+- Assets worden nu gesorteerd op AssetId of op naam, wanneer deze beschikbaar is voor het asset.
+- Assets, zowel actieve als op de achtergrond, zijn aanklikbaar op de kaart en tonen beperkte info om te helpen bij aanmaken relaties.
+- Weegavefouten met base64 notatie zijn nu echt opgelost
+- Het inladen van assets is geoptimaliseerd. Daar merkt u waarschijnlijk weinig tot niets van :)
+- SDF Autocad Map bestanden kunnen nu in een aparte module naar CSV worden geëxporteerd.
 
+Opmerkingen: 
+- als u wil gebruik maken van de nieuwe functie om assets weer te geven op een kaart, vergeet dan zeker niet de instellingen naar jouw hand te zetten onder 'opties' > 'GIS viewer' in de relatietool.
+- je kan nog geen relaties leggen door te klikken op de kaart, deze functionaliteit wordt opgenomen in een verdere versie. De kaart dient enkel ter raadpleging.
+- tonen assets foutief, dan is de WKT representatie (geometry kolom) hoogst waarschijnlijk foutief opgesteld. Het programma voert een conversie uit van Lambert72 naar GPS coordinaten.
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
 U wordt nu omgeleid naar de downloadpagina.

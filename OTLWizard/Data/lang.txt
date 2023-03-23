@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 4.6.0 - BVO 
-<EN>homewindowheader=OTLWizard 4.6.0 - BVO
+<NL>homewindowheader=OTLWizard 5.0.0 - BVO 
+<EN>homewindowheader=OTLWizard 5.0.0 - BVO
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -67,20 +67,22 @@
 <EN>noselection=No classes selected.
 
 ## home window
-<NL>home1=Een XLS/CSV template exporteren van een bestaande subset
+<NL>home1=Een nieuwe Excel of CSV aanlevertemplate aanmaken van een subset
 <EN>home1=Export an XLS/CSV template using an existing subset
 <NL>home2=Meer informatie over de OTL
 <EN>home2=More information about OTL
-<NL>home3=Een lijst exporteren met te modelleren OTL objecten (LOG0)
+<NL>home3=Aan te leveren geometrie raadplegen voor een subset
 <EN>home3=Export a list of OTL Objects to model in LOG0
 <NL>home4=Handleiding OTL Wizard (PDF)
 <EN>home4=Manual OTL Wizard (PDF)
 <NL>home5=Handleiding DAVIE
 <EN>home5=DAVIE manual
-<NL>home6=Een grafische weergave aanmaken van een Subset
+<NL>home6=Een subset met zijn relaties weergeven in een afbeelding
 <EN>home6=Create a graphical representation of a Subset (NL Version)
-<NL>home7=Relaties aanmaken en visualiseren vanuit bestaande data
-<EN>home7=Create and visualise relations from existing data
+<NL>home7=Relaties aanmaken en visualiseren vanuit bestaande data in XLS/CSV/SDF formaat
+<EN>home7=Create and visualise relations from existing CSV/XLS/SDF data
+<NL>home9=bestaande data converteren van SDF naar CSV
+<EN>home9=Convert Existing Data from SDF to CSV
 <NL>welcome=Welkom, maak een keuze...
 <EN>welcome=Welcome, please pick an option...
 <NL>changelanguage=Om de taal te wijzigen, verander de "language" tag in het setting.txt bestand. Herstart de applicatie.
@@ -140,8 +142,10 @@
 <EN>gb2=Possible relations
 <NL>gb3=Aangemaakte relaties
 <EN>gb3=Created relations
-<NL>gb4=Schematische weergave
-<EN>gb4=Schematic representation
+<NL>gb4=Relaties weergeven
+<EN>gb4=Display Relations
+<NL>gb5=Assets weergeven
+<EN>gb5=Display Assets
 <NL>statuslabel=...
 <EN>statuslabel=...
 <NL>addrel=Relatie toevoegen >>
@@ -258,8 +262,8 @@
 <EN>filesaveissueheader=Error
 <NL>importsummaryheader=Samenvatting van de import
 <EN>importsummaryheader=Summary of the import
-<NL>home8=Een XSD bestand aanmaken of wijzigen
-<EN>home8=Updating or Adapting an XSD file
+<NL>home8=Een XSD bestand aanmaken om te gebruiken in Autocad Map
+<EN>home8=Creating an XSD file to use in Autocad Map
 
 <EN>sdfwizardheader=SDF Wizard 1.2 - BVO
 <NL>sdfwizardheader=SDF Wizard 1.2 - BVO
@@ -363,3 +367,21 @@
 <EN>collab=a collaboration between
 <NL>SelectDataFiles=Selecteer bestanden
 <EN>SelectDataFiles=Select files
+<NL>relationuserdefinedwindow=Eigen relatie aanmaken met extern asset
+<EN>relationuserdefinedwindow=Create a new relation with an external asset
+<NL>clickassettobegin=Er is geen asset geselecteerd of deze asset bevat geen geometrische data
+<EN>clickassettobegin=No asset selected or asset does not contain geometric data
+<NL>convertdescription=Met deze Wizard kan u Autocad Map (SDF) bestanden converteren naar CSV.
+<EN>convertdescription=This wizard allows you to convert Autocad Map (SDF) data to CSV.
+<NL>converttitle=SDF converteren naar CSV
+<EN>converttitle=Convert SDF to CSV
+<NL>convertselectfile=Selecteer een SDF database
+<EN>convertselectfile=Select an SDF database
+<NL>convertconvert=Converteer naar CSV
+<EN>convertconvert=Converteer naar CSV
+<NL>nofileselected=Geen bestand geselecteerd
+<EN>nofileselected=No file selected
+<NL>convertok=Conversie voltooid!
+<EN>convertok=Conversion finished!
+<NL>convertokheader=Succes
+<EN>convertokheader=Succes

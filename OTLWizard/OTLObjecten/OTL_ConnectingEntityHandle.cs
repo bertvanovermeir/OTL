@@ -16,35 +16,24 @@ namespace OTLWizard.OTLObjecten
         public string doelId { get; set; }
         public string typeuri { get; set; }
         public string relationName { get; set; }
+        public string doelName { get; set; }
+        public string bronName { get; set; }
+
+
 
         public OTL_ConnectingEntityHandle()
         {
-
+            doelName = "";
+            bronName = "";
         }
 
         public void GenerateDisplayName(string arrow, string connectorname)
         {
-            var tmp = doelId;
-
-            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
-            {               
-                // change the relationshipuris, if applicable, if not silently fail.
-                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
-                try
-                {
-                    var col = tmp.Split('-');
-                    if(col.Length > 4)
-                    {
-                        var replacer = col[col.Length - 1];
-                        tmp = tmp.Replace("-" + replacer, "");
-                    }                  
-                }
-                catch
-                {
-                    // silent error
-                }
+            DisplayName = relationName + arrow + OTLUtils.SimplifyBase64Notation(doelId) + " | " + connectorname;
+            if(!doelName.Equals(""))
+            {
+                DisplayName = relationName + arrow + doelName + " | " + connectorname;
             }
-            this.DisplayName = relationName + arrow + tmp + " | " + connectorname;
         }
 
     }

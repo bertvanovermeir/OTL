@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+      <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+      <script type="text/javascript">
+
+         var map = null;
+         function GetMap() {
+            // Initialize the map
+            map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),{credentials:"XgztV5wYl1ttbABnqX3J~lDyFWEBAZv_pAzojPBF1xw~AmlPcScLW0qNwjZ2b7NUaFL6wALuy8WVUMq25YYCF8cHYR46TnTQkOKvkyXutFLD"}); 
+
+            var loc1 = new Microsoft.Maps.Location(33.719753, -117.98925);
+            var loc2 = new Microsoft.Maps.Location(33.993065, -117.918015);
+            var loc3 = new Microsoft.Maps.Location(34.13095, -118.25497);
+
+            // Add a pin to the map
+            var pin1 = new Microsoft.Maps.Pushpin(loc1); 
+            var pin2 = new Microsoft.Maps.Pushpin(loc2); 
+            var pin3 = new Microsoft.Maps.Pushpin(loc3); 
+
+            // Create a polyline
+            var lineVertices = new Array(loc1, loc2, loc3);
+            var line = new Microsoft.Maps.Polyline(lineVertices);
+
+            map.setView({center:loc2, zoom: 9} );
+
+            map.entities.push(line);
+            map.entities.push(pin1);
+            map.entities.push(pin2);
+            map.entities.push(pin3);
+
+         }
+      </script>
+   </head>
+   <body onload="GetMap();">
+      <div id='mapDiv' style="position:relative; width:400px; height:400px;"></div>
+   </body>
+</html>

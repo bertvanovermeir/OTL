@@ -20,6 +20,8 @@ namespace OTLWizard.OTLObjecten
         private static SDXWindow sdxWindow = new SDXWindow();
         private static TutorialWindow tutorialWindow = new TutorialWindow();
         private static SubsetViewerWindow subsetViewerWindow = new SubsetViewerWindow();
+        private static GeometryViewerWindow geometryViewerWindow = new GeometryViewerWindow();
+        private static DataConversionWindow dataConversionWindow = new DataConversionWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -70,6 +72,12 @@ namespace OTLWizard.OTLObjecten
                     break;
                 case Enums.Views.SubsetViewer:
                     subsetViewerWindow.Hide();
+                    break;
+                case Enums.Views.GeometryViewer:
+                    geometryViewerWindow.Hide();
+                    break;
+                case Enums.Views.DataConversion:
+                    dataConversionWindow.Hide();
                     break;
                 default:
                     break;
@@ -132,6 +140,14 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.SubsetViewer:
                     subsetViewerWindow = new SubsetViewerWindow();
                     subsetViewerWindow.Show();
+                    break;
+                case Enums.Views.GeometryViewer:
+                    geometryViewerWindow = new GeometryViewerWindow();
+                    geometryViewerWindow.Show();
+                    break;
+                case Enums.Views.DataConversion:
+                    dataConversionWindow = new DataConversionWindow();
+                    dataConversionWindow.Show();
                     break;
                 default:
                     break;

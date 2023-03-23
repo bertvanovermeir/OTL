@@ -161,5 +161,10 @@ namespace OTLWizard
         {
             Process.Start("https://github.com/bertvanovermeir/OTL");
         }
+
+        private void button5_Click_1(object sender, EventArgs e)
+        {
+            ViewHandler.Show(Enums.Views.DataConversion, Enums.Views.Home, null);
+        }
     }
 }

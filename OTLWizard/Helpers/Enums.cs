@@ -35,6 +35,8 @@
             Tutorial,
             SubsetViewer,
             SubsetViewerImport,
+            GeometryViewer,
+            DataConversion,
             isNull
         }
 

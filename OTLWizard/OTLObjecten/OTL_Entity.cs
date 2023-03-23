@@ -13,38 +13,35 @@ namespace OTLWizard.OTLObjecten
         public string TypeUri { get; set; }
         public string AssetId { get; set; }
         public string DisplayName { get; set; }
-
-      
-        //public Dictionary<string, string> Properties { get; set; }
+        public SerializableDictionary<string,string> GlobalWKT { get; set; }
         public SerializableDictionary<string, string> Properties { get; set; }
 
 
         public OTL_Entity()
         {
             Properties = new SerializableDictionary<string, string>();
+            GlobalWKT = new SerializableDictionary<string, string>();
         }
 
         public void GenerateDisplayName()
         {
-            var tmp = AssetId;
-
-            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
+            DisplayName = OTLUtils.SimplifyBase64Notation(AssetId) + " | " + this.Name;
+            if (Boolean.Parse(Settings.Get("showassetnamewherepossible")))
             {
-                // change the relationshipuris, if applicable, if not silently fail.
-                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
-                try
+                if (Properties.ContainsKey("naam"))
                 {
-                    var col = tmp.Split('-');
-                    var replacer = col[col.Length - 1];
-                    tmp = tmp.Replace("-" + replacer, "");
-                }
-                catch
-                {
-                    // silent error
+                    var naam = Properties["naam"];
+                    if (!naam.Equals(""))
+                    {
+                        DisplayName = naam + " | " + this.Name;
+                    }
                 }
             }
+        }
 
-            this.DisplayName = tmp + " | " + this.Name;
+        public string GetPreferredDisplayValue()
+        {
+            return DisplayName.Split('|')[0].Trim();
         }
     }
 }

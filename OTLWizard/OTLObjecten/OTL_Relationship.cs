@@ -21,6 +21,10 @@ namespace OTLWizard.OTLObjecten
         [Ignore]
         public bool isDirectional { get; set; }
         [Ignore]
+        public string doelName { get; set; }
+        [Ignore]
+        public string bronName { get; set; }
+        [Ignore]
         public string DisplayName { get; set; }
         [Name("isActief")]
         public bool Activated { get; set; }
@@ -31,55 +35,40 @@ namespace OTLWizard.OTLObjecten
         public OTL_Relationship()
         {
             Properties = new SerializableDictionary<string, string>();
+            bronName = "";
+            doelName = "";
         }
 
         public void GenerateDisplayName()
         {
-            var bron = bronID;
-            var doel = doelID;
-            var dit = AssetId;
-
-            if (Boolean.Parse(Settings.Get("hidebase64cosmetic")))
+            var bron = OTLUtils.SimplifyBase64Notation(bronID);
+            var doel = OTLUtils.SimplifyBase64Notation(doelID);
+            if(Boolean.Parse(Settings.Get("showassetnamewherepossible")))
             {
-                // change the relationshipuris, if applicable, if not silently fail.
-                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
-                try
-                {
-                    var col = bron.Split('-');
-                    var replacer = col[col.Length - 1];
-                    bron = bron.Replace("-" + replacer, "");
-                    col = doel.Split('-');
-                    replacer = col[col.Length - 1];
-                    doel = doel.Replace("-" + replacer, "");
-                    col = dit.Split('-');
-                    replacer = col[col.Length - 1];
-                    dit = dit.Replace("-" + replacer, "");
-                }
-                catch
-                {
-                    // silent error
-                }
+                if (!bronName.Equals(""))
+                    bron = bronName;
+                if (!doelName.Equals(""))
+                    doel = doelName;
             }
+            var relatieAssetId = OTLUtils.SimplifyBase64Notation(AssetId);
 
             if (Boolean.Parse(Settings.Get("hidereluricosmetic")))
-            {
-                // change the relationshipuris, if applicable, if not silently fail.
-                // they look like this: 632f6526-7bdf-4d44-a289-a0a00a993793-b25kZXJkZWVsI0VpbmRzdHVr               
-                dit = "";
+            {              
+                relatieAssetId = "";
             } else
             {
-                dit = "(" + dit + ") ";
+                relatieAssetId = "(" + relatieAssetId + ") ";
             }
 
 
             if (this.isDirectional)
             {
-                this.DisplayName = dit + this.relationshipURI.Split('#')[1] + " | " + bron + " --> " + doel;
+                this.DisplayName = relatieAssetId + this.relationshipURI.Split('#')[1] + " | " + bron + " --> " + doel;
 
             }
             else
             {
-                this.DisplayName = dit + this.relationshipURI.Split('#')[1] + " | " + bron + " <--> " + doel;
+                this.DisplayName = relatieAssetId + this.relationshipURI.Split('#')[1] + " | " + bron + " <--> " + doel;
             }
             // actief of niet
             if(Activated)

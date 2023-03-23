@@ -563,6 +563,14 @@ namespace OTLWizard.OTLObjecten
                             ceh.relationName = rel.relationshipName;
                             ceh.bronId = entity.AssetId;
                             ceh.doelId = connector.AssetId;
+                            if (connector.Properties.ContainsKey("naam"))
+                                ceh.doelName = connector.Properties["naam"];
+                            else
+                                ceh.doelName = "";
+                            if (entity.Properties.ContainsKey("naam"))
+                                ceh.bronName = entity.Properties["naam"];
+                            else
+                                ceh.bronName = "";
                             ceh.typeuri = rel.relationshipURI;
                             if (rel.isDirectional)
                             {
@@ -622,6 +630,8 @@ namespace OTLWizard.OTLObjecten
                 Guid g = Guid.NewGuid();
                 temp.AssetId = g.ToString();
                 temp.doelID = ceh1.doelId;
+                temp.doelName = ceh1.doelName;
+                temp.bronName = ceh1.bronName;
                 temp.bronID = ceh1.bronId;
                 temp.relationshipURI = ceh1.typeuri;
                 temp.isDirectional = ceh1.isDirectional;
@@ -715,11 +725,6 @@ namespace OTLWizard.OTLObjecten
             {
                 return false;
             }
-        }
-
-        public static void R_AddEntity(OTL_Entity e)
-        {
-            realImporter.AddEntity(e);
         }
 
         public static void R_CreateUserAsset(string doelID)

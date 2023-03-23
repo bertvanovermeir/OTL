@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.5.0
+Program version = 4.6.0
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.5.0_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.6.0_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -157,8 +157,20 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.conf
 1.9 KB
 config
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-477.5 KB
+487.5 KB
 pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Drawing.dll
+9 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Drawing.xml
+6.5 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Geometry.dll
+10 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Geometry.xml
+13.1 KB
+xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
 796 KB
 dll
@@ -188,6 +200,9 @@ C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SQLite
 xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SqlServerCe.dll
 459.2 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Drawing.Common.dll
+50 KB
 dll
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Memory.dll
 145.1 KB
@@ -296,5 +311,5 @@ OTL Wizard
 [Commands]
 Execute Application
 <InstallPath>\setup\FDOToolbox-Release-v1.5.2-x64-Setup.exe
-
+/S
 -wait

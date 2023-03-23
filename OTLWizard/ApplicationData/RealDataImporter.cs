@@ -17,10 +17,10 @@ namespace OTLWizard.ApplicationData
     public class RealDataImporter
     {
         private List<OTL_Entity> entities;
-        private Dictionary<string,OTL_Entity> OTL_Entities;
-        
+        private Dictionary<string, OTL_Entity> OTL_Entities;
+
         private List<OTL_Relationship> OTL_Relationships;
-        private Dictionary<string,OTL_Relationship> OTL_RelationshipsDictionary;
+        private Dictionary<string, OTL_Relationship> OTL_RelationshipsDictionary;
         private SubsetImporter subsetImporter;
         private List<ErrorContainer> errors;
         private string currentFileName;
@@ -28,7 +28,7 @@ namespace OTLWizard.ApplicationData
         public RealDataImporter()
         {
             entities = new List<OTL_Entity>();
-            OTL_Entities = new Dictionary<string,OTL_Entity>();
+            OTL_Entities = new Dictionary<string, OTL_Entity>();
             OTL_Relationships = new List<OTL_Relationship>();
             OTL_RelationshipsDictionary = new Dictionary<string, OTL_Relationship>();
             errors = new List<ErrorContainer>();
@@ -63,7 +63,7 @@ namespace OTLWizard.ApplicationData
                     ImportSDF(path);
                     break;
                 default:
-                    errors.Add(new ErrorContainer(currentFileName, "/","Error",Language.Get("filenotsupported")));
+                    errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("filenotsupported")));
                     break;
             }
         }
@@ -104,7 +104,8 @@ namespace OTLWizard.ApplicationData
             List<string> files = new List<string>();
             // convert SDF to CSV
             SDFImporter sdf = new SDFImporter(path);
-            if (sdf.checkDependencies()){
+            if (sdf.checkDependencies())
+            {
                 List<string> classnames = sdf.loadClasses();
 
                 var localPath = System.IO.Path.GetTempPath() + "otlsdftempconversion\\";
@@ -116,7 +117,7 @@ namespace OTLWizard.ApplicationData
                     string filename = classname + ".csv";
                     File.WriteAllText(localPath + filename, contents);
                     files.Add(localPath + filename);
-                }              
+                }
 
                 // import the converted data from CSV
                 foreach (string file in files)
@@ -124,7 +125,8 @@ namespace OTLWizard.ApplicationData
                     ImportCSV(file);
                 }
                 Directory.Delete(localPath, true);
-            } else
+            }
+            else
             {
                 errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("dependencymissing")));
             }
@@ -139,26 +141,30 @@ namespace OTLWizard.ApplicationData
             // Read a text file line by line.  
             char separator = '/';
             string[] lines = File.ReadAllLines(path);
-            if(lines != null)
+            if (lines != null)
             {
                 if (lines[0].Contains(","))
                 {
                     separator = ',';
-                } else if (lines[0].Contains(";"))
+                }
+                else if (lines[0].Contains(";"))
                 {
                     separator = ';';
-                } else if (lines[0].Contains("\t"))
+                }
+                else if (lines[0].Contains("\t"))
                 {
                     separator = '\t';
-                } else
+                }
+                else
                 {
                     // not a valid file
                 }
-            } else
+            }
+            else
             {
                 // not a valid file
             }
-            if(separator != '/')
+            if (separator != '/')
             {
                 var temp = readCSV(path, separator);
 
@@ -170,10 +176,11 @@ namespace OTLWizard.ApplicationData
                 {
                     errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos2")));
                 }
-            } else
+            }
+            else
             {
                 errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos1")));
-            }          
+            }
         }
 
         private System.Data.DataTable readCSV(string path, char separator)
@@ -188,20 +195,20 @@ namespace OTLWizard.ApplicationData
             };
             using (var reader = new StreamReader(path))
 
-                using (var csv = new CsvReader(reader, config))
-                {
-                    // Do any configuration to `CsvReader` before creating CsvDataReader.
-                    using (var dr = new CsvDataReader(csv))
-                    {                        
-                        dt.Load(dr);
-                    }
-                }
-
-            if(badRecord.Count > 0)
+            using (var csv = new CsvReader(reader, config))
             {
-                foreach(var record in badRecord)
+                // Do any configuration to `CsvReader` before creating CsvDataReader.
+                using (var dr = new CsvDataReader(csv))
                 {
-                    errors.Add(new ErrorContainer(currentFileName,  string.Join(string.Empty, record.ToArray()), "Bad Record", Language.Get("foutpos8")));
+                    dt.Load(dr);
+                }
+            }
+
+            if (badRecord.Count > 0)
+            {
+                foreach (var record in badRecord)
+                {
+                    errors.Add(new ErrorContainer(currentFileName, string.Join(string.Empty, record.ToArray()), "Bad Record", Language.Get("foutpos8")));
                 }
                 return null;
             }
@@ -218,16 +225,16 @@ namespace OTLWizard.ApplicationData
                 DataRow currentRow = source.Rows[i - 1];
                 foreach (var colValue in currentRow.ItemArray)
                 {
-                    if (!string.IsNullOrEmpty(colValue.ToString())) { found = true; break; } 
+                    if (!string.IsNullOrEmpty(colValue.ToString())) { found = true; break; }
                 }
-                if(!found)
+                if (!found)
                     source.Rows[i - 1].Delete();
             }
             source.AcceptChanges();
         }
 
         private void processCSVData(System.Data.DataTable data)
-        {           
+        {
             // first line is the identifier line for specific OTL data. It is presumed this will not change, but just
             // in case we use the settings file from the other part of the program
             var id = Settings.Get("otlidentifier").ToLower();
@@ -253,7 +260,7 @@ namespace OTLWizard.ApplicationData
             foreach (DataRow line in data.Rows)
             {
                 var isagent = false;
-                if(agentidindex > -1)
+                if (agentidindex > -1)
                 {
                     // we have an agent object, this is special...
                     // it does not have an URI, and has an agentid.identificator
@@ -262,14 +269,15 @@ namespace OTLWizard.ApplicationData
                     uriindex = agentidindex;
                     isagent = true;
                 }
-                if(idindex < 0 | uriindex <0)
+                if (idindex < 0 | uriindex < 0)
                 {
                     // these parameters were not found in the CSV file, invalid file
-                    errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(),"Error", Language.Get("foutpos3")));
+                    errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Error", Language.Get("foutpos3")));
                 }
-                else if(line.ItemArray[idindex].Equals("") | line.ItemArray[uriindex].Equals("")) {
+                else if (line.ItemArray[idindex].Equals("") | line.ItemArray[uriindex].Equals(""))
+                {
                     // assetid or asseturi not filled in
-                    errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Error",Language.Get("foutpos4")));
+                    errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Error", Language.Get("foutpos4")));
                 }
                 else
                 {
@@ -277,9 +285,9 @@ namespace OTLWizard.ApplicationData
                     var relvalue = "";
                     if (relsrcindex > -1 & reltrgtindex > -1)
                     {
-                        relvalue = (string) line.ItemArray[relsrcindex];
+                        relvalue = (string)line.ItemArray[relsrcindex];
                     }
-                    if(relvalue.Equals(""))
+                    if (relvalue.Equals(""))
                     {
                         // entity
                         OTL_Entity entity = new OTL_Entity();
@@ -290,10 +298,9 @@ namespace OTLWizard.ApplicationData
                         if (isagent)
                         {
                             entity.TypeUri = agenturi;
-                            entity.Name = agenturi.Split('/').Last();                           
+                            entity.Name = agenturi.Split('/').Last();
                         }
-                        entity.GenerateDisplayName();
-
+                        
                         // properties
                         for (int i = 0; i < line.ItemArray.Length; i++)
                         {
@@ -304,17 +311,27 @@ namespace OTLWizard.ApplicationData
                                 entity.Properties.Add(key, value);
                             }
                         }
+                        entity.GenerateDisplayName();
+
+                        // calculate WKT to GPS coordinates and save for faster processing.
+                        var maplocationlisting = OTLUtils.GenerateMapLocation(entity);
+                        int iter = 0;
+                        foreach (var loc in maplocationlisting)
+                        {   // for serialization we add same
+                            entity.GlobalWKT.Add(iter.ToString(), loc);
+                            iter++;
+                        }
                         // check if exists
                         if (OTL_Entities.ContainsKey(entity.AssetId))
                         {
                             // check if "extern asset"
-                            if(OTL_Entities[entity.AssetId].Name.Equals(Language.Get("userdefinedasset")))
+                            if (OTL_Entities[entity.AssetId].Name.Equals(Language.Get("userdefinedasset")))
                             {
                                 // it is a double entity but currently an external asset, convert to real asset.
                                 OTL_Entities[entity.AssetId] = entity;
                                 entities.RemoveAll(e => e.AssetId.Equals(entity.AssetId));
                                 entities.Add(entity);
-                                errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(),"Warning", Language.Get("foutpos6")));
+                                errors.Add(new ErrorContainer(currentFileName, data.Rows.IndexOf(line).ToString(), "Warning", Language.Get("foutpos6")));
                             }
                             else
                             {
@@ -326,30 +343,33 @@ namespace OTLWizard.ApplicationData
                             entities.Add(entity);
                             OTL_Entities.Add(entity.AssetId, entity);
                         }
-                    } else
+                    }
+                    else
                     {
                         // relation
                         var temp = new OTL_Relationship();
-                        temp.AssetId = (string) line.ItemArray[idindex];
-                        temp.doelID = (string) line.ItemArray[reltrgtindex];
+                        temp.AssetId = (string)line.ItemArray[idindex];
+                        temp.doelID = (string)line.ItemArray[reltrgtindex];
                         temp.bronID = (string)line.ItemArray[relsrcindex];
-                        temp.relationshipURI = (string) line.ItemArray[uriindex];
+                        temp.relationshipURI = (string)line.ItemArray[uriindex];
                         // some relationship CSV's might not contain isActief column
-                        if(activeindex == -1)
+                        if (activeindex == -1)
                         {
                             temp.Activated = true;
-                        } else
+                        }
+                        else
                         {
                             var actstring = line.ItemArray[activeindex];
-                            if(actstring.Equals(""))
+                            if (actstring.Equals(""))
                             {
                                 temp.Activated = true;
-                            } else
+                            }
+                            else
                             {
                                 temp.Activated = Boolean.Parse((string)actstring);
                             }
                         }
-                        
+
                         // properties
                         for (int i = 0; i < line.ItemArray.Length; i++)
                         {
@@ -361,9 +381,9 @@ namespace OTLWizard.ApplicationData
                             }
                         }
                         // is it directional?
-                        var reldir = subsetImporter.GetOTLRelationshipTypes().Where(x=>x.relationshipURI.ToLower().Equals(temp.relationshipURI.ToLower())).FirstOrDefault();                       
-                        if(reldir != null)
-                            temp.isDirectional = reldir.isDirectional; 
+                        var reldir = subsetImporter.GetOTLRelationshipTypes().Where(x => x.relationshipURI.ToLower().Equals(temp.relationshipURI.ToLower())).FirstOrDefault();
+                        if (reldir != null)
+                            temp.isDirectional = reldir.isDirectional;
                         else
                             temp.isDirectional = false;
                         temp.GenerateDisplayName();
@@ -380,10 +400,10 @@ namespace OTLWizard.ApplicationData
                             OTL_Relationships.Add(temp);
                             OTL_RelationshipsDictionary.Add(temp.AssetId, temp);
                         }
-                    }                 
-                }                
-            }          
-        }                                                                                                                                                                                               
+                    }
+                }
+            }
+        }
 
         //XLS(X)
 
@@ -408,7 +428,7 @@ namespace OTLWizard.ApplicationData
                 excel.Application.UseSystemSeparators = false;
                 workbook = excel.Workbooks.Open(path);
 
-                foreach(Worksheet item in workbook.Worksheets)
+                foreach (Worksheet item in workbook.Worksheets)
                 {
 
                     item.Activate();
@@ -428,9 +448,9 @@ namespace OTLWizard.ApplicationData
             catch
             {
                 //
-            }        
+            }
 
-            foreach(string file in files)
+            foreach (string file in files)
             {
                 ImportCSV(file);
             }
@@ -452,6 +472,13 @@ namespace OTLWizard.ApplicationData
 
         public void SetRelationships(List<OTL_Relationship> relationships)
         {
+            // update the displaynames of the relations according to current settings
+            foreach (OTL_Relationship rel in relationships)
+            {
+                rel.GenerateDisplayName();
+            }
+
+            // now set data to dbs
             OTL_RelationshipsDictionary = new Dictionary<string, OTL_Relationship>();
             OTL_Relationships = relationships;
             foreach (OTL_Relationship rel in relationships)
@@ -463,7 +490,7 @@ namespace OTLWizard.ApplicationData
         public void AddRelationship(OTL_Relationship rel)
         {
             OTL_Relationships.Add(rel);
-            OTL_RelationshipsDictionary.Add(rel.AssetId,rel);
+            OTL_RelationshipsDictionary.Add(rel.AssetId, rel);
         }
 
         public void RemoveRelationship(string relID, bool softremove)
@@ -478,11 +505,12 @@ namespace OTLWizard.ApplicationData
                 rel.Activated = false;
                 rel.GenerateDisplayName();
                 AddRelationship(rel);
-                
-            } else
+
+            }
+            else
             {
                 // that is it, do not re-add the relationship
-            }         
+            }
         }
 
         public void ActivateRelationship(string relID)
@@ -498,9 +526,26 @@ namespace OTLWizard.ApplicationData
 
         public void SetEntities(List<OTL_Entity> ent)
         {
+            // reset displaynames according to latest settings.
+            foreach (OTL_Entity e in ent)
+            {
+                // set displayname
+                e.GenerateDisplayName();
+                // for each entity, calculate WKT string in case of legacy files
+                // first reset the map location
+                e.GlobalWKT = new SerializableDictionary<string, string>();
+                var maplocationlisting = OTLUtils.GenerateMapLocation(e);
+                int iter = 0;
+                foreach (var loc in maplocationlisting)
+                {   // for serialization we add same
+                    e.GlobalWKT.Add(iter.ToString(), loc);
+                    iter++;
+                }
+
+            }
             OTL_Entities = new Dictionary<string, OTL_Entity>();
             entities = ent;
-            foreach(OTL_Entity entity in entities)
+            foreach (OTL_Entity entity in entities)
             {
                 OTL_Entities.Add(entity.AssetId, entity);
             }
@@ -523,5 +568,5 @@ namespace OTLWizard.ApplicationData
             e2.Properties.Add(Settings.Get("otlclassuri"), Language.Get("userdefinedasset"));
             AddEntity(e2);
         }
-    }   
+    }
 }
