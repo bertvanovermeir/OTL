@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            Dataweb.NShape.RoleBasedSecurityManager roleBasedSecurityManager2 = new Dataweb.NShape.RoleBasedSecurityManager();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -65,10 +64,6 @@
             this.manualToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statuslabel = new System.Windows.Forms.Label();
-            this.diagramSetController1 = new Dataweb.NShape.Controllers.DiagramSetController();
-            this.project1 = new Dataweb.NShape.Project(this.components);
-            this.cachedRepository1 = new Dataweb.NShape.Advanced.CachedRepository();
-            this.xmlStore1 = new Dataweb.NShape.XmlStore();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.ListPropertiesRelation = new System.Windows.Forms.DataGridView();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -430,36 +425,6 @@
             this.statuslabel.TabIndex = 3;
             this.statuslabel.Text = "StatusLabel";
             this.statuslabel.Click += new System.EventHandler(this.statuslabel_Click);
-            // 
-            // diagramSetController1
-            // 
-            this.diagramSetController1.ActiveTool = null;
-            this.diagramSetController1.Project = this.project1;
-            // 
-            // project1
-            // 
-            this.project1.Description = null;
-            this.project1.LibrarySearchPaths = ((System.Collections.Generic.IList<string>)(resources.GetObject("project1.LibrarySearchPaths")));
-            this.project1.Name = null;
-            this.project1.Repository = this.cachedRepository1;
-            roleBasedSecurityManager2.CurrentRole = Dataweb.NShape.StandardRole.Administrator;
-            roleBasedSecurityManager2.CurrentRoleName = "Administrator";
-            this.project1.SecurityManager = roleBasedSecurityManager2;
-            // 
-            // cachedRepository1
-            // 
-            this.cachedRepository1.ProjectName = null;
-            this.cachedRepository1.Store = this.xmlStore1;
-            this.cachedRepository1.Version = 0;
-            // 
-            // xmlStore1
-            // 
-            this.xmlStore1.DesignFileName = "";
-            this.xmlStore1.DirectoryName = "";
-            this.xmlStore1.FileExtension = ".xml";
-            this.xmlStore1.ImageLocation = Dataweb.NShape.XmlStore.ImageFileLocation.Directory;
-            this.xmlStore1.ProjectFilePath = ".xml";
-            this.xmlStore1.ProjectName = "";
             // 
             // groupBox3
             // 
@@ -873,10 +838,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Data.Entity.Core.EntityClient.EntityCommand entityCommand1;
-        private Dataweb.NShape.Project project1;
-        private Dataweb.NShape.Controllers.DiagramSetController diagramSetController1;
-        private Dataweb.NShape.Advanced.CachedRepository cachedRepository1;
-        private Dataweb.NShape.XmlStore xmlStore1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox ListRelationsPerEntity;
         private System.Windows.Forms.ListBox ListImportedEntities;
