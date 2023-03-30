@@ -1,10 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using OTLWizard.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.OTLObjecten
 {
@@ -43,7 +39,7 @@ namespace OTLWizard.OTLObjecten
         {
             var bron = OTLUtils.SimplifyBase64Notation(bronID);
             var doel = OTLUtils.SimplifyBase64Notation(doelID);
-            if(Boolean.Parse(Settings.Get("showassetnamewherepossible")))
+            if (Boolean.Parse(Settings.Get("showassetnamewherepossible")))
             {
                 if (!bronName.Equals(""))
                     bron = bronName;
@@ -53,9 +49,10 @@ namespace OTLWizard.OTLObjecten
             var relatieAssetId = OTLUtils.SimplifyBase64Notation(AssetId);
 
             if (Boolean.Parse(Settings.Get("hidereluricosmetic")))
-            {              
+            {
                 relatieAssetId = "";
-            } else
+            }
+            else
             {
                 relatieAssetId = "(" + relatieAssetId + ") ";
             }
@@ -71,7 +68,7 @@ namespace OTLWizard.OTLObjecten
                 this.DisplayName = relatieAssetId + this.relationshipURI.Split('#')[1] + " | " + bron + " <--> " + doel;
             }
             // actief of niet
-            if(Activated)
+            if (Activated)
                 this.DisplayName = this.DisplayName + " (Actief)";
             else
                 this.DisplayName = this.DisplayName + " (Verwijderd)";

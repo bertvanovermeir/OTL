@@ -23,7 +23,7 @@ namespace OTLWizard.ApplicationData
                     HasHeaderRecord = true,
                     Delimiter = ";",
                     SanitizeForInjection = false,
-                    
+
                 };
                 using (var writer = new StreamWriter(path))
                 using (var csv = new CsvWriter(writer, config))
@@ -32,7 +32,8 @@ namespace OTLWizard.ApplicationData
                     csv.WriteRecords(artefacts);
                 }
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }

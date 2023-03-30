@@ -19,7 +19,7 @@ namespace OTLWizard.OTLObjecten
         public string relationshipName;
         public bool isDirectional;
         public bool isAbstract = false;
-        public bool isImplementatieElement = false ;
+        public bool isImplementatieElement = false;
 
         public string DisplayName { get; set; }
 
@@ -43,10 +43,11 @@ namespace OTLWizard.OTLObjecten
             try
             {
                 bronOTLName = bronURI.Split('#')[1];
-            } catch
+            }
+            catch
             {
                 bronOTLName = bronURI;
-            }      
+            }
             try
             {
                 doelOTLName = doelURI.Split('#')[1];
@@ -56,10 +57,11 @@ namespace OTLWizard.OTLObjecten
                 doelOTLName = doelURI;
             }
             relationshipName = relationshipURI.Split('#')[1];
-            if(direction.Equals("Unspecified"))
+            if (direction.Equals("Unspecified"))
             {
                 isDirectional = false;
-            } else
+            }
+            else
             {
                 isDirectional = true;
             }

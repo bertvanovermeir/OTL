@@ -1,13 +1,6 @@
 ﻿using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OTLWizard.FrontEnd
@@ -21,7 +14,7 @@ namespace OTLWizard.FrontEnd
 
         private void button4_Click(object sender, EventArgs e)
         {
-            
+
             OpenFileDialog fdlg = new OpenFileDialog();
             fdlg.Title = Language.Get("selectsubsetfiledlg");
             fdlg.InitialDirectory = @"c:\";

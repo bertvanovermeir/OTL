@@ -3,13 +3,7 @@ using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OTLWizard.FrontEnd
@@ -37,7 +31,7 @@ namespace OTLWizard.FrontEnd
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-               textBoxSubset.Text = fdlg.FileName;
+                textBoxSubset.Text = fdlg.FileName;
                 button2.Enabled = true;
             }
         }
@@ -56,7 +50,7 @@ namespace OTLWizard.FrontEnd
                 fdlg.FilterIndex = 1;
                 fdlg.RestoreDirectory = true;
                 var localPath = "";
-                
+
                 if (fdlg.ShowDialog() == DialogResult.OK)
                 {
                     localPath = fdlg.FileName;
@@ -78,10 +72,10 @@ namespace OTLWizard.FrontEnd
                 }
             }
             else
-            {   
-                    ViewHandler.Show(Language.Get("dependencymissing2"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
-                    setFDODependency();
-                    ViewHandler.Show(Language.Get("restartprocess"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Information);
+            {
+                ViewHandler.Show(Language.Get("dependencymissing2"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                setFDODependency();
+                ViewHandler.Show(Language.Get("restartprocess"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Information);
             }
         }
 

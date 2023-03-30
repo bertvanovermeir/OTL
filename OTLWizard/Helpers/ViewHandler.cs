@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace OTLWizard.OTLObjecten
 {
     public static class ViewHandler
-    {      
+    {
         private static ExportSubsetWindow exportXLSWindow = new ExportSubsetWindow();
         private static LoadingWindow loadingWindow = new LoadingWindow();
         public static HomeWindow homeWindow = new HomeWindow();
@@ -120,9 +120,9 @@ namespace OTLWizard.OTLObjecten
                     relationImportSummaryWindow.ShowDialog();
                     break;
                 case Enums.Views.RelationsMain:
-                    if(optionalArgument != null)
+                    if (optionalArgument != null)
                     {
-                       _ = relationWindow.ImportUserSelectionAsync((Dictionary<string, string[]>)optionalArgument);
+                        _ = relationWindow.ImportUserSelectionAsync((Dictionary<string, string[]>)optionalArgument);
                     }
                     relationWindow.Show();
                     break;

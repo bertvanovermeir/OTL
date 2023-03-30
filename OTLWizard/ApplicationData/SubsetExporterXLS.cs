@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using Microsoft.Office.Interop.Excel;
+﻿using Microsoft.Office.Interop.Excel;
 using OTLWizard.ApplicationData;
 using OTLWizard.Helpers;
+using System;
+using System.Collections.Generic;
 
 namespace OTLWizard.OTLObjecten
 {
@@ -23,7 +21,7 @@ namespace OTLWizard.OTLObjecten
         private int amountExamples;
 
         public SubsetExporterXLS()
-        {}
+        { }
 
         public override bool Export(string path, List<OTL_ArtefactType> oTL_ArtefactTypes, int amountExamples, bool help, bool checklistoptions, bool dummydata, bool wkt, bool deprecated)
         {
@@ -52,7 +50,7 @@ namespace OTLWizard.OTLObjecten
             {
                 DummyDataHandler.initRandom(oTL_ArtefactTypes);
             }
-            if(wkt)
+            if (wkt)
             {
                 temp.AddParameter(new OTL_Parameter(false,
                     "geometry", "geometry",
@@ -66,7 +64,7 @@ namespace OTLWizard.OTLObjecten
                 OTL_Parameter p = temp.GetParameters()[i];
                 // deprecated check
                 var dotnotatie = p.DotNotatie;
-                if(p.Deprecated && deprecated)
+                if (p.Deprecated && deprecated)
                 {
                     dotnotatie = "[DEPRECATED]" + dotnotatie;
                 }
@@ -85,10 +83,10 @@ namespace OTLWizard.OTLObjecten
                 // overwrite if dummydata
                 if (dummydata)
                 {
-                    for(int j = 1; j < amountExamples+1 ; j++)
+                    for (int j = 1; j < amountExamples + 1; j++)
                     {
                         sheet.Cells[start + j, i + 1] = DummyDataHandler.GetDummyValue(p, temp);
-                    }                  
+                    }
                 }
                 // now fill in dropdowns if they are applicable
                 if (p.DataType == Enums.DataType.List && checklistoptions)
@@ -154,12 +152,13 @@ namespace OTLWizard.OTLObjecten
                     DisplayAlerts = false
                 };
                 workbook = excel.Workbooks.Add(Type.Missing);
-            } catch
+            }
+            catch
             {
                 return false;
             }
             // create an empty worksheet for tables, if dropdownlists is true
-            if(checklistoptions)
+            if (checklistoptions)
             {
                 newWorkSheet(workbook, "dropdownvalues");
             }
@@ -204,7 +203,9 @@ namespace OTLWizard.OTLObjecten
                 Worksheet rem = workbook.Worksheets[workbook.Worksheets.Count];
                 // Worksheet rem = workbook.Worksheets["Sheet1"]; (only for english)
                 rem.Delete();
-            } catch {
+            }
+            catch
+            {
                 // could not remove the sheet, this might happen on some computers (fix issue #13)
                 // removing is always a risky operation, that is why try-catch is not a luxury in this case.
             }
@@ -220,7 +221,7 @@ namespace OTLWizard.OTLObjecten
             {
                 workbook.Close();
                 excel.Quit();
-                return false;   
+                return false;
             }
         }
 
@@ -229,15 +230,16 @@ namespace OTLWizard.OTLObjecten
             var xlSheets = workbook.Sheets as Microsoft.Office.Interop.Excel.Sheets;
             var xlNewSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
             // ecel shenanigans
-            if(sheetName.Length > 31)
+            if (sheetName.Length > 31)
             {
-                xlNewSheet.Name = sheetName.Substring(0,30);
+                xlNewSheet.Name = sheetName.Substring(0, 30);
                 Console.WriteLine("Worksheet name exceeds maximum: " + sheetName + ". Will use: " + sheetName.Substring(0, 30));
-            } else
+            }
+            else
             {
                 xlNewSheet.Name = sheetName;
             }
-            
+
             xlNewSheet.Cells.Font.Size = 12;
             return xlNewSheet;
         }

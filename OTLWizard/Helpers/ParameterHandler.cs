@@ -93,7 +93,7 @@ namespace OTLWizard.OTLObjecten
             {
                 var DropdownValues = new List<string> { "-" };
                 // find the correct file
-                if(Keuzelijsten)
+                if (Keuzelijsten)
                 {
                     string filename = DataTypeString.Split('#')[1] + ".ttl";
                     var localPath = System.IO.Path.GetTempPath() + "codelijsten\\";
@@ -124,15 +124,15 @@ namespace OTLWizard.OTLObjecten
                                 sublistText = listText.Split('/')[listText.Split('/').Length - 1];
                                 DropdownValues.Add(sublistText);
                             }
-                            if(item.Contains("https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAdmsStatus/uitgebruik"))
+                            if (item.Contains("https://wegenenverkeer.data.vlaanderen.be/id/concept/KlAdmsStatus/uitgebruik"))
                             {
-                                if(DropdownValues.Contains(sublistText))
+                                if (DropdownValues.Contains(sublistText))
                                     DropdownValues.Remove(sublistText);
                             }
                         }
                         DropdownValues.Sort();
                     }
-                }              
+                }
                 return DropdownValues;
             }
             return null;

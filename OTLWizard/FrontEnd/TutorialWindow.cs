@@ -1,13 +1,7 @@
 ﻿using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OTLWizard.FrontEnd
@@ -16,10 +10,10 @@ namespace OTLWizard.FrontEnd
     {
 
         private Enums.Views currentTutorial;
-        private readonly int[] subsettool = { 1, 2,3,4,5};
+        private readonly int[] subsettool = { 1, 2, 3, 4, 5 };
         private readonly int[] artefacttool = { 1, 2, 3 };
         private readonly int[] relationtool = { 1, 2, 3 };
-        private readonly int[] sdftool = { 1, 2, 3,4 };
+        private readonly int[] sdftool = { 1, 2, 3, 4 };
         private int[] currentPages;
         private int currentPage;
         public TutorialWindow()
@@ -72,7 +66,7 @@ namespace OTLWizard.FrontEnd
         private void buttonNext_Click(object sender, EventArgs e)
         {
             currentPage++;
-            if(currentPage > currentPages.Length-1)
+            if (currentPage > currentPages.Length - 1)
             {
                 currentPage = 0;
                 finishTutorial();
@@ -83,7 +77,7 @@ namespace OTLWizard.FrontEnd
 
         private void setWindowValues(int page)
         {
-            animation.Image = Image.FromFile("Data\\animations\\" + currentTutorial + currentPages[page] +  ".gif");
+            animation.Image = Image.FromFile("Data\\animations\\" + currentTutorial + currentPages[page] + ".gif");
             helpText.Text = Language.Get("tutorialmsg" + currentTutorial + currentPages[page]);
         }
 
@@ -99,11 +93,12 @@ namespace OTLWizard.FrontEnd
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
                 Settings.Update("showtutorial" + currentTutorial, "0");
                 Settings.WriteSettings();
-            } else
+            }
+            else
             {
                 Settings.Update("showtutorial" + currentTutorial, "1");
                 Settings.WriteSettings();

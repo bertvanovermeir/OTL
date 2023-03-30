@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.Helpers
 {
@@ -29,7 +25,7 @@ namespace OTLWizard.Helpers
                         try
                         {
                             string key = item.Split('=')[0].Split('>')[1];
-                            string value = item.Split('=')[1].Replace("<br>","\n");
+                            string value = item.Split('=')[1].Replace("<br>", "\n");
                             languages.Add(key.ToLower(), value);
                         }
                         catch

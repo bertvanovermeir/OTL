@@ -1,9 +1,5 @@
 ﻿using OTLWizard.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.OTLObjecten
 {
@@ -13,7 +9,7 @@ namespace OTLWizard.OTLObjecten
         public string TypeUri { get; set; }
         public string AssetId { get; set; }
         public string DisplayName { get; set; }
-        public SerializableDictionary<string,string> GlobalWKT { get; set; }
+        public SerializableDictionary<string, string> GlobalWKT { get; set; }
         public SerializableDictionary<string, string> Properties { get; set; }
 
 

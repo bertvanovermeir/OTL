@@ -1,12 +1,5 @@
 ﻿using OTLWizard.Helpers;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OTLWizard.FrontEnd
@@ -35,15 +28,16 @@ namespace OTLWizard.FrontEnd
             var lang = Settings.Get("language");
             var types = Settings.Get("types").Split('|');
             // check language
-            if(lang.Equals("nl"))
+            if (lang.Equals("nl"))
             {
                 radioButton1.Checked = true;
-            } else if(lang.Equals("en"))
+            }
+            else if (lang.Equals("en"))
             {
                 radioButton2.Checked = true;
             }
             // check types
-            foreach(string ty in types)
+            foreach (string ty in types)
             {
                 switch (ty)
                 {
@@ -76,7 +70,7 @@ namespace OTLWizard.FrontEnd
         private void buttonOK_Click(object sender, EventArgs e)
         {
             Settings.Update("klpath", textBox1.Text);
-            if(radioButton1.Checked)
+            if (radioButton1.Checked)
             {
                 Settings.Update("language", "nl");
             }
@@ -86,7 +80,7 @@ namespace OTLWizard.FrontEnd
             }
 
             var types = "";
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
 
             }

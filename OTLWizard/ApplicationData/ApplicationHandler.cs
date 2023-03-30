@@ -24,7 +24,7 @@ namespace OTLWizard.OTLObjecten
         private static string currentversion;
 
         public static void Start()
-        {           
+        {
             Settings.Init();
             Language.Init();
             if (!CheckVersion())
@@ -59,7 +59,7 @@ namespace OTLWizard.OTLObjecten
                 foreach (string item in lines)
                 {
                     tempstr = tempstr + "\n" + item;
-                }       
+                }
             }
             catch
             {
@@ -72,7 +72,7 @@ namespace OTLWizard.OTLObjecten
         {
             var downloadpath = System.IO.Path.GetTempPath() + "otlappversie\\";
             // create the folder if it does not exist
-            if(Directory.Exists(downloadpath))
+            if (Directory.Exists(downloadpath))
             {
                 Directory.Delete(downloadpath, true);
                 Directory.CreateDirectory(downloadpath);
@@ -128,10 +128,11 @@ namespace OTLWizard.OTLObjecten
         public static void SetArtefactForClass(OTL_ObjectType o)
         {
             var geom = GetArtefactResultData().Where(w => w.URL == o.uri).Select(q => q).FirstOrDefault();
-            if(geom != null && geom.geometrie.Length > 2)
+            if (geom != null && geom.geometrie.Length > 2)
             {
                 o.geometryRepresentation = geom.geometrie.Trim().Substring(0, geom.geometrie.Length - 1).Split(',');
-            } else
+            }
+            else
             {
                 o.geometryRepresentation = null;
             }
@@ -151,7 +152,7 @@ namespace OTLWizard.OTLObjecten
             }
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
-      
+
         public static string GetOTLVersion()
         {
             var temp = subsetConn.GetOTLVersion();
@@ -355,7 +356,7 @@ namespace OTLWizard.OTLObjecten
         /////////////////////////////////////////////////////////////////////////
 
         public static RealDataImporter realImporter = new RealDataImporter();
-        
+
 
         public static void R_DestroyOnClose()
         {
@@ -379,12 +380,14 @@ namespace OTLWizard.OTLObjecten
                     {
                         await Task.Run(() => { realImporter.Import(path, Enums.ImportType.XLS); });
                     }
-                    else if(path.ToUpper().EndsWith(".SDF")) {
+                    else if (path.ToUpper().EndsWith(".SDF"))
+                    {
                         // check if sdf path exists, prompt the user with a dialog to change it
-                        if(File.Exists(Settings.Get("sdfpath")) && Settings.Get("sdfpath").ToLower().Contains("fdocmd.exe"))
+                        if (File.Exists(Settings.Get("sdfpath")) && Settings.Get("sdfpath").ToLower().Contains("fdocmd.exe"))
                         {
                             await Task.Run(() => { realImporter.Import(path, Enums.ImportType.SDF); });
-                        } else
+                        }
+                        else
                         {
                             ViewHandler.Show(Language.Get("dependencymissing2"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                             setFDODependency();
@@ -396,12 +399,12 @@ namespace OTLWizard.OTLObjecten
                         ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                     }
                 }
-                    catch (Exception e)
+                catch (Exception e)
                 {
                     ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
                 }
-            }           
-            realImporter.CheckAssetCompliance();           
+            }
+            realImporter.CheckAssetCompliance();
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             if (realImporter.GetErrors().Count > 0)
             {
@@ -420,7 +423,7 @@ namespace OTLWizard.OTLObjecten
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                Settings.Update("sdfpath",fdlg.FileName);
+                Settings.Update("sdfpath", fdlg.FileName);
                 Settings.WriteSettings();
             }
         }
@@ -444,14 +447,14 @@ namespace OTLWizard.OTLObjecten
                 XmlSerialization.WriteToXmlFile<List<OTL_Entity>>(tempPath + "E.xml", R_GetImportedEntities().ToList());
                 // possible relationships
                 XmlSerialization.WriteToXmlFile<List<OTL_RelationshipType>>(tempPath + "T.xml", subsetConn.GetOTLRelationshipTypes());
-            // userdata
-            //TODO
-            // create ZIP
-            if (File.Exists(path))
-            {
-                File.Delete(path);
-            }
-            ZipFile.CreateFromDirectory(tempPath, path);
+                // userdata
+                //TODO
+                // create ZIP
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+                ZipFile.CreateFromDirectory(tempPath, path);
             }
             catch
             {
@@ -479,7 +482,7 @@ namespace OTLWizard.OTLObjecten
                         case "R.xml":
                             realImporter.SetRelationships(XmlSerialization.ReadFromXmlFile<List<OTL_Relationship>>(tempPath + "R.xml"));
                             break;
-                        case "E.xml":                            
+                        case "E.xml":
                             realImporter.SetEntities(XmlSerialization.ReadFromXmlFile<List<OTL_Entity>>(tempPath + "E.xml"));
                             break;
                         case "T.xml":
@@ -515,7 +518,7 @@ namespace OTLWizard.OTLObjecten
 
         public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelations(OTL_Entity entity)
         {
-            if(entity != null)
+            if (entity != null)
             {
                 var rels = subsetConn.GetOTLRelationshipTypes();
                 var entities = realImporter.GetEntities();
@@ -596,11 +599,12 @@ namespace OTLWizard.OTLObjecten
                 c.DisplayName = Language.Get("userdefinedrelation");
                 result.Add(c);
                 return result;
-            } else
+            }
+            else
             {
                 return null;
             }
-            
+
         }
 
         public static void R_CreateNewRealRelation(OTL_ConnectingEntityHandle ceh1)
@@ -611,7 +615,7 @@ namespace OTLWizard.OTLObjecten
             var assetidfound = "";
             foreach (var item in currentlist)
             {
-                if(item.bronID.Equals(ceh1.bronId) && item.doelID.Equals(ceh1.doelId) && item.relationshipURI.Equals(ceh1.typeuri))
+                if (item.bronID.Equals(ceh1.bronId) && item.doelID.Equals(ceh1.doelId) && item.relationshipURI.Equals(ceh1.typeuri))
                 {
                     assetidfound = item.AssetId;
                     found = true;
@@ -619,12 +623,13 @@ namespace OTLWizard.OTLObjecten
                 }
             }
 
-            if(found)
+            if (found)
             {
                 // do not create a new relation, as it already exists.
                 R_ActivateRealRelation(assetidfound);
 
-            } else
+            }
+            else
             {
                 var temp = new OTL_Relationship();
                 Guid g = Guid.NewGuid();
@@ -636,13 +641,13 @@ namespace OTLWizard.OTLObjecten
                 temp.relationshipURI = ceh1.typeuri;
                 temp.isDirectional = ceh1.isDirectional;
                 temp.Activated = true;
-                temp.Properties.Add(Settings.Get("otlidentifier"),temp.AssetId);
+                temp.Properties.Add(Settings.Get("otlidentifier"), temp.AssetId);
                 temp.Properties.Add(Settings.Get("otlclassuri"), temp.relationshipURI);
                 temp.Properties.Add(Settings.Get("otlsrcrel"), temp.bronID);
                 temp.Properties.Add(Settings.Get("otltrgtrel"), temp.doelID);
                 temp.GenerateDisplayName();
                 realImporter.AddRelationship(temp);
-            }          
+            }
         }
 
         public static void R_ActivateRealRelation(string relID)
@@ -682,7 +687,7 @@ namespace OTLWizard.OTLObjecten
         public static List<OTL_Relationship> R_GetRealRelations()
         {
             List<OTL_Relationship> temp = new List<OTL_Relationship>();
-            temp = realImporter.GetRelationships().OrderBy(o=>o.DisplayName).ToList();
+            temp = realImporter.GetRelationships().OrderBy(o => o.DisplayName).ToList();
             return temp;
         }
 
@@ -695,7 +700,7 @@ namespace OTLWizard.OTLObjecten
                 // dowload the subset from the website to a temp folder
                 string filename = "otl.db";
                 var localPath = System.IO.Path.GetTempPath() + "otldownload\\";
-                
+
                 // create the folder if it does not exist
                 Directory.CreateDirectory(localPath);
                 // download the TTL file
@@ -717,11 +722,12 @@ namespace OTLWizard.OTLObjecten
                 }
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             }
-            if(success)
+            if (success)
             {
                 await ImportSubset(subsetpath, false);
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -744,7 +750,8 @@ namespace OTLWizard.OTLObjecten
             if (onlyClassNames)
             {
                 xsdClassNames = sdf.GetXSDClasses(path);
-            } else
+            }
+            else
             {
 
             }
@@ -760,20 +767,20 @@ namespace OTLWizard.OTLObjecten
             sdf = new XsdHandler();
             List<OTL_ObjectType> temp = null;
 
-                if (classes == null)
-                {
-                    temp = subsetConn.GetOTLObjectTypes();
-                }
-                else if (classes.Length == 0)
-                {
-                    temp = subsetConn.GetOTLObjectTypes();
+            if (classes == null)
+            {
+                temp = subsetConn.GetOTLObjectTypes();
             }
-                else
-                {
-                    temp = subsetConn.GetOTLObjectTypesFor(classes);
+            else if (classes.Length == 0)
+            {
+                temp = subsetConn.GetOTLObjectTypes();
+            }
+            else
+            {
+                temp = subsetConn.GetOTLObjectTypesFor(classes);
             }
             var ok = sdf.Export(temp, path);
-            if(ok)
+            if (ok)
                 ViewHandler.Show(Language.Get("sdfsuccess"), Language.Get("errorheader"), MessageBoxIcon.Information);
             else
                 ViewHandler.Show(Language.Get("sdffail"), Language.Get("errorheader"), MessageBoxIcon.Error);
@@ -783,11 +790,11 @@ namespace OTLWizard.OTLObjecten
         /////////////////// VWR TOOL FUNCTIONS //////////////////////////////////
         /////////////////////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////
-        
+
 
         public static async void VWR_ImportSubset(string path)
         {
-            await ImportSubset(path, false);         
+            await ImportSubset(path, false);
         }
 
         public static List<OTL_ObjectType> VWR_GetSubset()
@@ -800,7 +807,7 @@ namespace OTLWizard.OTLObjecten
             return subsetConn.GetOTLRelationshipTypes();
         }
 
-        
+
 
     }
 }

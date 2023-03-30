@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OTLWizard.OTLObjecten
+﻿namespace OTLWizard.OTLObjecten
 {
     public class OTL_GeometryEntity
     {
@@ -51,7 +45,7 @@ namespace OTLWizard.OTLObjecten
 
         public void SetColor(string color)
         {
-            this.color=color;
+            this.color = color;
         }
 
         public string GetId()

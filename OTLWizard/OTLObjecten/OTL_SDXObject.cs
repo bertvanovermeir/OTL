@@ -1,9 +1,5 @@
 ﻿using OTLWizard.Helpers;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 using static OTLWizard.OTLObjecten.Enums;
 
@@ -34,7 +30,7 @@ namespace OTLWizard.OTLObjecten
         private List<OTL_SDXAttribute> attributes;
 
         // used for saving XML format for this sole class
-        public OTL_SDXObject(XmlDocument document,OTL_ObjectType o)
+        public OTL_SDXObject(XmlDocument document, OTL_ObjectType o)
         {
             // xml generation
             this.document = document;
@@ -62,18 +58,18 @@ namespace OTLWizard.OTLObjecten
             OTL_SDXAttribute featid = new OTL_SDXAttribute(document, "FeatId", "Default identity property", null, null, Enums.SDFAttributeTypes.FeatId);
             attributes.Add(featid);
             // Geometry if any
-            if(o.geometryRepresentation != null)
+            if (o.geometryRepresentation != null)
             {
                 var geometryTypes = "";
-                foreach (string geom  in o.geometryRepresentation)
+                foreach (string geom in o.geometryRepresentation)
                 {
                     var geomtrimmed = geom.Trim();
                     // choose from point multipoint linestring multilinestring curvestring multicurvestring polygon multipolygon curvepolygon multicurvepolygo
-                    switch(geomtrimmed)
+                    switch (geomtrimmed)
                     {
                         case "punt 3D":
                             geometryTypes += "point multipoint ";
-                        break;
+                            break;
                         case "lijn 3D":
                             geometryTypes += "linestring multilinestring ";
                             break;
@@ -85,9 +81,9 @@ namespace OTLWizard.OTLObjecten
                             break;
                         default:
                             // do nothing
-                        break;
+                            break;
                     }
-                        
+
                 }
                 OTL_SDXAttribute geometry = new OTL_SDXAttribute(document, "Geometry", "Default geometry property", null, null, Enums.SDFAttributeTypes.Geometry, geometryTypes);
                 attributes.Add(geometry);
@@ -98,7 +94,7 @@ namespace OTLWizard.OTLObjecten
                 var tempType = ParameterHandler.GetDataTypeSDF(p.DataTypeString);
                 var dval = "";
                 if (p.DotNotatie.ToLower().Equals(Settings.Get("otlclassuri").ToLower()))
-                    dval = (string) p.DefaultValue;
+                    dval = (string)p.DefaultValue;
                 if (p.DropdownValues != null)
                     AddAttribute(p.DotNotatie, p.Description, dval, p.DropdownValues.ToArray(), tempType);
                 else
@@ -118,7 +114,7 @@ namespace OTLWizard.OTLObjecten
         public void AppendXml(XmlElement appendTo)
         {
             // element and attributes
-            XmlElement element = createXsElement(appendTo,"element");
+            XmlElement element = createXsElement(appendTo, "element");
             element.SetAttribute("name", element_name);
             element.SetAttribute("type", element_type);
             element.SetAttribute("abstract", element_abstract);
@@ -127,14 +123,14 @@ namespace OTLWizard.OTLObjecten
             // key child and below
             XmlElement key = createXsElement(element, "key");
             key.SetAttribute("name", key_name);
-            createXsElement(key, "selector").SetAttribute("xpath",selector_xpath);
+            createXsElement(key, "selector").SetAttribute("xpath", selector_xpath);
             createXsElement(key, "field").SetAttribute("xpath", field_xpath);
 
             // complextype generation for all attributes in class
             XmlElement complex = createXsElement(appendTo, "complexType");
             complex.SetAttribute("name", complextype_name);
             complex.SetAttribute("abstract", complextype_abstract);
-            if(o.geometryRepresentation != null) // in case no geometry was found
+            if (o.geometryRepresentation != null) // in case no geometry was found
                 complex.SetAttribute("geometryName", "http://fdo.osgeo.org/schemas", complextype_fdo_geometryName);
             XmlElement annotation = createXsElement(complex, "annotation");
             XmlElement documentation = createXsElement(annotation, "documentation");
@@ -147,7 +143,7 @@ namespace OTLWizard.OTLObjecten
             XmlElement sequence = createXsElement(extension, "sequence");
 
             // attributes go here
-            foreach(OTL_SDXAttribute attri in attributes)
+            foreach (OTL_SDXAttribute attri in attributes)
             {
                 attri.AppendXml(sequence);
             }

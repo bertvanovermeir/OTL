@@ -13,7 +13,8 @@ namespace OTLWizard.ApplicationData
 
         public List<OTL_ObjectType> oot = new List<OTL_ObjectType>();
 
-        public XsdHandler() {
+        public XsdHandler()
+        {
             document = new XmlDocument();
         }
 
@@ -33,7 +34,8 @@ namespace OTLWizard.ApplicationData
             {
                 document.Save(path);
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
@@ -53,10 +55,10 @@ namespace OTLWizard.ApplicationData
             schema.SetAttribute("xmlns:Schema1", "http://fdo.osgeo.org/schemas/feature/Schema1");
             schema.SetAttribute("elementFormDefault", "qualified");
             schema.SetAttribute("attributeFormDefault", "unqualified");
-            
+
             // annotation and documentation
-            XmlElement annotation = createXsElement(schema,"annotation");
-            XmlElement documentation = createXsElement(annotation,"documentation");
+            XmlElement annotation = createXsElement(schema, "annotation");
+            XmlElement documentation = createXsElement(annotation, "documentation");
             documentation.InnerText = "Default schema";
 
             return schema;

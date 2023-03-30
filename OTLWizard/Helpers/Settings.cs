@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.Helpers
 {
@@ -15,24 +12,26 @@ namespace OTLWizard.Helpers
         public static bool Init()
         {
             values = new Dictionary<string, string>();
-            
+
             var localPath = System.IO.Path.GetTempPath() + "otlsettingsv9\\";
             // create the folder if it does not exist
             Directory.CreateDirectory(localPath);
 
-            if(File.Exists(localPath + "settings.txt"))
+            if (File.Exists(localPath + "settings.txt"))
             {
                 string[] lines = File.ReadAllLines(localPath + "settings.txt", System.Text.Encoding.UTF8);
                 ProcessFileContents(lines);
                 return true;
-            } else if (File.Exists("data\\settings.txt"))
+            }
+            else if (File.Exists("data\\settings.txt"))
             {
                 string[] lines = File.ReadAllLines("data\\settings.txt", System.Text.Encoding.UTF8);
                 ProcessFileContents(lines);
                 // backup overwrite
                 try { File.WriteAllLines(localPath + "settings.txt", values.Select(x => x.Key + "=" + x.Value).ToArray()); } catch { };
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -43,10 +42,11 @@ namespace OTLWizard.Helpers
             try
             {
                 return values[key.ToLower()].ToLower();
-            } catch
+            }
+            catch
             {
                 return "";
-            }           
+            }
         }
 
         public static string GetRaw(string key)
@@ -66,9 +66,10 @@ namespace OTLWizard.Helpers
             if (values.ContainsKey(key.ToLower()))
             {
                 values[key.ToLower()] = value;
-                
+
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -85,11 +86,12 @@ namespace OTLWizard.Helpers
                 // write it
                 File.WriteAllLines(localPath + "settings.txt", values.Select(x => x.Key + "=" + x.Value).ToArray());
                 return true;
-            } catch
+            }
+            catch
             {
                 return false;
             }
-           
+
         }
 
         public static string GetSettingsPath()

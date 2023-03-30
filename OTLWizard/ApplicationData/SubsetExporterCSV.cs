@@ -1,10 +1,6 @@
-﻿using CsvHelper;
-using CsvHelper.Configuration;
-using OTLWizard.Helpers;
+﻿using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System.Collections.Generic;
-using System.Dynamic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 
@@ -13,9 +9,9 @@ namespace OTLWizard.ApplicationData
     public class SubsetExporterCSV : SubsetExporter
     {
         public SubsetExporterCSV()
-        {}
+        { }
 
-        public override bool Export(string path, List<OTL_ArtefactType> oTL_ArtefactTypes, int amountExamples,  bool help, bool dummydata, bool wkt, bool deprecated, bool checklistoptions = false)
+        public override bool Export(string path, List<OTL_ArtefactType> oTL_ArtefactTypes, int amountExamples, bool help, bool dummydata, bool wkt, bool deprecated, bool checklistoptions = false)
         {
             foreach (OTL_ObjectType otlklasse in OTL_ObjectTypes)
             {
@@ -32,11 +28,11 @@ namespace OTLWizard.ApplicationData
                         "De geometrische representatie van het OTL object beschreven in een WKT-string.",
                         "WKT", false));
                 }
-                if(deprecated)
+                if (deprecated)
                 {
-                    foreach(OTL_Parameter o in otlklasse.GetParameters())
+                    foreach (OTL_Parameter o in otlklasse.GetParameters())
                     {
-                        if(o.Deprecated)
+                        if (o.Deprecated)
                         {
                             o.DotNotatie = "[DEPRECATED]" + o.DotNotatie;
                         }
@@ -47,7 +43,7 @@ namespace OTLWizard.ApplicationData
                 if (help)
                     matrix.Add(otlklasse.GetParameters().Select(z => z.Description).ToArray());
                 matrix.Add(dotnotaties);
-                if(dummydata)
+                if (dummydata)
                 {
                     DummyDataHandler.initRandom(oTL_ArtefactTypes);
                     for (int i = 0; i < amountExamples; i++)
@@ -58,7 +54,7 @@ namespace OTLWizard.ApplicationData
                 // write to file
                 var success = WriteCSV(filename, matrix, ';');
                 if (!success)
-                    return false;                   
+                    return false;
             }
             return true;
         }

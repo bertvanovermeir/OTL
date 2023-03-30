@@ -1,17 +1,11 @@
 ﻿using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.Layout.MDS;
-using Microsoft.Msagl.Miscellaneous;
-using Microsoft.Msagl.Prototype.Ranking;
 using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Color = Microsoft.Msagl.Drawing.Color;
 
@@ -59,7 +53,7 @@ namespace OTLWizard.FrontEnd
             comboBox2.SelectedItem = "LightGreen";
             comboBox4.SelectedItem = "Box";
             comboBox3.SelectedItem = "LightSalmon";
-            numericUpDown2.Value = 12;        
+            numericUpDown2.Value = 12;
         }
 
         public void setOTLData()
@@ -86,7 +80,7 @@ namespace OTLWizard.FrontEnd
                     drawRelation(o, true, false);
                 else if (o.isImplementatieElement && drawImplementatieElement)
                     drawRelation(o, false, true);
-                else if(!o.isAbstract && !o.isImplementatieElement)
+                else if (!o.isAbstract && !o.isImplementatieElement)
                     drawRelation(o, false, false);
             }
         }
@@ -159,7 +153,7 @@ namespace OTLWizard.FrontEnd
 
             graph = new Microsoft.Msagl.Drawing.Graph("graph");
             graph.AddNode(Language.Get("laadeenproject"));
-          
+
             //bind the graph to the viewer 
             graph.LayoutAlgorithmSettings = new MdsLayoutSettings();
             graph.LayoutAlgorithmSettings.PackingMethod = Microsoft.Msagl.Core.Layout.PackingMethod.Columns;
@@ -275,7 +269,7 @@ namespace OTLWizard.FrontEnd
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 textBox1.Text = fdlg.FileName;
-                button3.Enabled = true; 
+                button3.Enabled = true;
             }
         }
 
@@ -293,4 +287,4 @@ namespace OTLWizard.FrontEnd
     }
 }
 
-    
+

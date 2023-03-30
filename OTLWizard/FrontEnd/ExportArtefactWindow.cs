@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
+using System;
 using System.Linq;
 using System.Windows.Forms;
-using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
 {
@@ -81,15 +81,17 @@ namespace OTLWizard
         private void buttonExportArtefact_Click(object sender, EventArgs e)
         {
             string[] temp = null;
-            if(checkAllClasses.Checked)
+            if (checkAllClasses.Checked)
             {
                 temp = new string[0];
-            } else
+            }
+            else
             {
-                if(ListAllClasses.SelectedIndices.Count == 0)
+                if (ListAllClasses.SelectedIndices.Count == 0)
                 {
                     // temp will be null, application will halt further execution
-                } else
+                }
+                else
                 {
                     temp = new string[ListAllClasses.SelectedIndices.Count];
                     int i = 0;
@@ -99,16 +101,17 @@ namespace OTLWizard
                         temp[i] = ListAllClasses.Items[ind].ToString();
                         i++;
                     }
-                }               
+                }
             }
-            if(temp != null)
+            if (temp != null)
             {
                 // open the result window and pass the results of the user selection in the optionalArgument parameter
                 ViewHandler.Show(Enums.Views.ArtefactResult, Enums.Views.ArtefactMain, temp.ToList<string>());
-            } else
+            }
+            else
             {
                 ViewHandler.Show(Language.Get("noselection"), Language.Get("errorheader"), MessageBoxIcon.Error);
-            }           
+            }
         }
 
         private void checkAllClasses_CheckedChanged(object sender, EventArgs e)

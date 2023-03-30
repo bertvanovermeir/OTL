@@ -9,8 +9,6 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.ApplicationData
 {
@@ -300,7 +298,7 @@ namespace OTLWizard.ApplicationData
                             entity.TypeUri = agenturi;
                             entity.Name = agenturi.Split('/').Last();
                         }
-                        
+
                         // properties
                         for (int i = 0; i < line.ItemArray.Length; i++)
                         {

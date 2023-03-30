@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace OTLWizard.OTLObjecten
 {
     public class OTL_ArtefactType
-    {   
+    {
         [Name("Naam OTL Object")]
         [DisplayName("Naam OTL Object")]
         public string objectnaam { get; set; }

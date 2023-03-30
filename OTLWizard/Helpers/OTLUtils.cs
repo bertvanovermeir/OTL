@@ -4,9 +4,6 @@ using Programmerare.CrsTransformations.CompositeTransformations;
 using Programmerare.CrsTransformations.Coordinate;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.Helpers
 {
@@ -50,14 +47,15 @@ namespace OTLWizard.Helpers
 
         private static CrsCoordinate TransformCoordinates(double x, double y)
         {
-            CrsCoordinate lambert = CrsCoordinateFactory.LatLon(y,x, epsg3173);
+            CrsCoordinate lambert = CrsCoordinateFactory.LatLon(y, x, epsg3173);
             CrsTransformationResult ResultSweRef = crsTransformationAdapter.Transform(lambert, epsgWgs84);
 
             if (ResultSweRef.IsSuccess)
             {
                 return ResultSweRef.OutputCoordinate;
-                
-            } else
+
+            }
+            else
             {
                 return null;
             }
@@ -70,7 +68,7 @@ namespace OTLWizard.Helpers
             {
 
                 var WKT = ent.Properties["geometry"].ToLower();
-                WKT = WKT.Replace(")", "").Replace("(", "").Replace("z", "").Replace("xy", "").Replace("polygon", "").Replace("linestring", "").Replace("point", "").Replace("multi","").Trim();
+                WKT = WKT.Replace(")", "").Replace("(", "").Replace("z", "").Replace("xy", "").Replace("polygon", "").Replace("linestring", "").Replace("point", "").Replace("multi", "").Trim();
                 var temp = WKT.Split(',');
                 foreach (var item in temp)
                 {
@@ -86,9 +84,11 @@ namespace OTLWizard.Helpers
                             // add to locations
                             locationpoints.Add(ys + " " + xs);
                         }
-                    } catch { //no location added for this asset due to uncatched error
-                              }
-                              
+                    }
+                    catch
+                    { //no location added for this asset due to uncatched error
+                    }
+
                 }
             }
             else

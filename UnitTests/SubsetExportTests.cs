@@ -1,9 +1,9 @@
-﻿using System.IO;
-using Microsoft.Office.Interop.Excel;
-using Xunit;
+﻿using Microsoft.Office.Interop.Excel;
+using OTLWizard.ApplicationData;
 using OTLWizard.OTLObjecten;
 using System.Collections.Generic;
-using OTLWizard.ApplicationData;
+using System.IO;
+using Xunit;
 
 namespace UnitTests
 {
@@ -22,7 +22,7 @@ namespace UnitTests
             var exporter = new SubsetExporterCSV();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             exporter.SetSelectedClassesByUser(null);
-            bool success = exporter.Export(path: "./../../" + path_save_to, null,1, help: false, dummydata: false, wkt: false, deprecated: false);
+            bool success = exporter.Export(path: "./../../" + path_save_to, null, 1, help: false, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             // 3 CSVs will be created check if they exist
@@ -61,7 +61,7 @@ namespace UnitTests
             Assert.True(File.Exists("./../../" + "test_result_help_Netwerkelement.csv"));
             // read lines in CSV and check contents
             var linesCSV = ReadCSV("./../../" + "test_result_help_Rack.csv", 1, ';');
-            Assert.Equal(2,linesCSV.Count);
+            Assert.Equal(2, linesCSV.Count);
             Assert.Equal("Een groep van tekens om een AIM object te identificeren of te benoemen.", linesCSV[0][0]);
             Assert.Equal("Gegevens van de organisatie die de toekenning deed.", linesCSV[0][1]);
             Assert.Equal("De URI van het object volgens https://www.w3.org/2001/XMLSchema#anyURI .", linesCSV[0][2]);
@@ -96,15 +96,15 @@ namespace UnitTests
             var otldbpath = "./../../subset_3_types_netwerk.db";
             var subsetImporter = new SubsetImporter(otldbpath);
             var path_save_to = "test_result.xlsx";
-            
+
             // act
             subsetImporter.Import();
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null,1, help: false, checklistoptions:false, dummydata: false, wkt: false, deprecated: false);
- 
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null, 1, help: false, checklistoptions: false, dummydata: false, wkt: false, deprecated: false);
+
             // assert
-            var excel = new Application {Visible = false, DisplayAlerts = false};
+            var excel = new Application { Visible = false, DisplayAlerts = false };
             var workbook = excel.Workbooks.Open(Directory.GetCurrentDirectory() + "\\" + path_save_to);
             // add worksheet names to a list
             List<string> WSNames = new List<string>();
@@ -135,7 +135,7 @@ namespace UnitTests
             subsetImporter.Import();
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null,1, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null, 1, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             var excel = new Application { Visible = false, DisplayAlerts = false };
@@ -169,7 +169,7 @@ namespace UnitTests
             subsetImporter.Import();
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
-            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null,1, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
+            bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null, 1, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
 
             // assert
             var excel = new Application { Visible = false, DisplayAlerts = false };
@@ -182,8 +182,8 @@ namespace UnitTests
             // check sheet names
             Assert.True(success);
             Assert.Contains("Aansluitmof", WSNames);
-            Worksheet sheet = (Worksheet) workbook.Worksheets["Aansluitmof"];
-            var range = sheet.Range[sheet.Cells[2,4], sheet.Cells[2,4]];;
+            Worksheet sheet = (Worksheet)workbook.Worksheets["Aansluitmof"];
+            var range = sheet.Range[sheet.Cells[2, 4], sheet.Cells[2, 4]]; ;
             var cell = range.Cells;
             Assert.True(cell.Validation.InCellDropdown);
             Assert.Equal("- ;True;False;", cell.Validation.Formula1);

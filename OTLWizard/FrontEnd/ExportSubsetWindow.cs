@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
 {
@@ -78,24 +78,24 @@ namespace OTLWizard
         {
             SaveFileDialog fdlg = new SaveFileDialog();
             fdlg.Title = Language.Get("arexport");
-            fdlg.FileName = "subset_otlver" + ApplicationHandler.GetOTLVersion() + "_export"; 
+            fdlg.FileName = "subset_otlver" + ApplicationHandler.GetOTLVersion() + "_export";
             fdlg.Filter = "Excel files (*.xlsx)|*.xlsx|CSV files (*.csv)|*.csv";
-            fdlg.FilterIndex= 1;
+            fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 string[] temp = null;
-                if(ListAllClasses.Enabled == true)
+                if (ListAllClasses.Enabled == true)
                 {
                     temp = new string[ListAllClasses.SelectedIndices.Count];
                     int i = 0;
-                    foreach(int ind in ListAllClasses.SelectedIndices)
-                    {                      
+                    foreach (int ind in ListAllClasses.SelectedIndices)
+                    {
                         temp[i] = ListAllClasses.Items[ind].ToString();
                         i++;
                     }
                 }
-                if(fdlg.FilterIndex == 1)
+                if (fdlg.FilterIndex == 1)
                 {
                     await ApplicationHandler.ExportXlsSubset(fdlg.FileName, textBoxArtefact.Text, Decimal.ToInt32(numericUpDown1.Value), checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
                 }
@@ -104,7 +104,7 @@ namespace OTLWizard
                     await ApplicationHandler.ExportCSVSubset(fdlg.FileName, textBoxArtefact.Text, Decimal.ToInt32(numericUpDown1.Value), checkAttributes.Checked, !checkKeuzelijsten.Checked, checkVoorbeelddata.Checked, checkWKT.Checked, checkDeprecated.Checked, temp);
                 }
             }
-            
+
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
@@ -119,7 +119,7 @@ namespace OTLWizard
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -134,13 +134,13 @@ namespace OTLWizard
 
         private async void ImportClasses(object sender, EventArgs e)
         {
-            
+
             var deprecated = await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, !checkKeuzelijsten.Checked);
             checkDeprecated.Enabled = deprecated;
             ListAllClasses.Items.Clear();
             foreach (string klasse in ApplicationHandler.GetSubsetClassNames())
             {
-                ListAllClasses.Items.Add(klasse);           
+                ListAllClasses.Items.Add(klasse);
             }
             buttonExportXLS.Enabled = true;
             TextVersion.Text = ApplicationHandler.GetOTLVersion();
@@ -149,12 +149,13 @@ namespace OTLWizard
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkAllClasses.Checked)
+            if (checkAllClasses.Checked)
             {
                 ListAllClasses.Enabled = false;
-            } else
+            }
+            else
             {
-                ListAllClasses.Enabled=true;
+                ListAllClasses.Enabled = true;
             }
         }
 
@@ -180,38 +181,40 @@ namespace OTLWizard
 
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
-            if(checkVoorbeelddata.Checked)
+            if (checkVoorbeelddata.Checked)
             {
                 checkAttributes.Enabled = true;
-                numericUpDown1.Enabled=true;
-            } else
+                numericUpDown1.Enabled = true;
+            }
+            else
             {
                 checkAttributes.Enabled = false;
-                checkAttributes.Checked=false;
+                checkAttributes.Checked = false;
                 numericUpDown1.Enabled = false;
             }
         }
 
         private void label7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void checkWKT_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkWKT.Checked)
+            if (checkWKT.Checked)
             {
                 buttonArtefact.Enabled = true;
                 buttonExportXLS.Enabled = false;
-            
-            } else
+
+            }
+            else
             {
                 buttonArtefact.Enabled = false;
-                if(importDone)
+                if (importDone)
                     buttonExportXLS.Enabled = true;
             }
-                
-              
+
+
         }
 
         private void buttonArtefact_Click(object sender, EventArgs e)

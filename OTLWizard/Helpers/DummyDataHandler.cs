@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.Helpers
 {
@@ -18,7 +16,7 @@ namespace OTLWizard.Helpers
             artefacts = oTL_ArtefactTypes;
             rand = new Random();
         }
-        
+
         /// <summary>
         /// returns a dummy value to inject in CSV or XLS
         /// </summary>
@@ -37,7 +35,7 @@ namespace OTLWizard.Helpers
                 switch (temp)
                 {
                     case "anyuri":
-                        result = (string) p.DefaultValue;
+                        result = (string)p.DefaultValue;
                         break;
                     case "getal":
                         result = (rand.NextDouble() * 10.0d).ToString("F2");
@@ -50,7 +48,7 @@ namespace OTLWizard.Helpers
                         break;
                     case "datetime":
                         result = (rand.Next(2030, 2050).ToString() + "-"
-                            + rand.Next(1, 12).ToString() + "-" 
+                            + rand.Next(1, 12).ToString() + "-"
                             + rand.Next(1, 29).ToString());
                         result = result + ":00:00:00";
                         break;
@@ -130,35 +128,36 @@ namespace OTLWizard.Helpers
             string temp = "";
             var geom = artefacts.Where(w => w.URL == o.uri).Select(q => q).FirstOrDefault();
             // kies poly, line of point
-            
+
 
             if (geom != null && geom.geometrie.Length > 1)
-            {             
-                    string[] keuzelijst = geom.geometrie.Split(',');
-                    foreach(string keuze in keuzelijst)
+            {
+                string[] keuzelijst = geom.geometrie.Split(',');
+                foreach (string keuze in keuzelijst)
+                {
+                    switch (keuze)
                     {
-                        switch (keuze)
-                        {
-                            case "polygoon 3D":
-                                temp += "POLYGON Z ((" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "))|";
-                                break;
-                            case "lijn 3D":
-                                temp += "LINESTRING Z (" + GetCoord() + "," + GetCoord() + ")|";
-                                break;
-                            case "punt 3D":
-                                temp += "POINT Z (" + GetCoord() + ")|";
-                                break;
-                            default:
-                                temp += "";
-                                break;
-                        }
-                    }   
-                    if(temp.EndsWith("|"))
-                        temp = temp.Substring(0, temp.Length - 1);
-            } else
+                        case "polygoon 3D":
+                            temp += "POLYGON Z ((" + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "," + GetCoord() + "))|";
+                            break;
+                        case "lijn 3D":
+                            temp += "LINESTRING Z (" + GetCoord() + "," + GetCoord() + ")|";
+                            break;
+                        case "punt 3D":
+                            temp += "POINT Z (" + GetCoord() + ")|";
+                            break;
+                        default:
+                            temp += "";
+                            break;
+                    }
+                }
+                if (temp.EndsWith("|"))
+                    temp = temp.Substring(0, temp.Length - 1);
+            }
+            else
             {
                 temp = "";
-            }          
+            }
             return temp;
         }
 
@@ -173,7 +172,7 @@ namespace OTLWizard.Helpers
             y = y + rand.NextDouble();
             z = z + rand.NextDouble();
 
-            return (x.ToString("F4") + " " + y.ToString("F4") + " " + z.ToString("F4")).Replace(',','.');
+            return (x.ToString("F4") + " " + y.ToString("F4") + " " + z.ToString("F4")).Replace(',', '.');
         }
     }
 }

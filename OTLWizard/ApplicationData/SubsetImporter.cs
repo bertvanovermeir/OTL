@@ -49,11 +49,11 @@ namespace OTLWizard.OTLObjecten
         public List<OTL_ObjectType> GetOTLObjectTypesFor(string[] classnames)
         {
             List<OTL_ObjectType> result = new List<OTL_ObjectType>();
-            foreach(string classname in classnames)
+            foreach (string classname in classnames)
             {
-                foreach(OTL_ObjectType o in OTL_ObjectTypes)
+                foreach (OTL_ObjectType o in OTL_ObjectTypes)
                 {
-                    if(o.otlName == classname)
+                    if (o.otlName == classname)
                     {
                         result.Add(o);
                     }
@@ -105,11 +105,12 @@ namespace OTLWizard.OTLObjecten
                 while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
                 {
                     // check columns in query to know what to transfer, 
-                    OTL_ObjectType temp = new OTL_ObjectType {
-                        otlName = (string)sqlite_datareader.GetValue(0), 
+                    OTL_ObjectType temp = new OTL_ObjectType
+                    {
+                        otlName = (string)sqlite_datareader.GetValue(0),
                         friendlyName = (string)sqlite_datareader.GetValue(1),
-                        description = (string)sqlite_datareader.GetValue(2), 
-                        uri = (string)sqlite_datareader.GetValue(3), 
+                        description = (string)sqlite_datareader.GetValue(2),
+                        uri = (string)sqlite_datareader.GetValue(3),
                         deprecated = bool.Parse((string)sqlite_datareader.GetValue(4))
                     };
                     OTL_ObjectTypes.Add(temp);

@@ -13,7 +13,7 @@ namespace OTLWizard.OTLObjecten
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ApplicationHandler.Start();        
+            ApplicationHandler.Start();
         }
     }
 }

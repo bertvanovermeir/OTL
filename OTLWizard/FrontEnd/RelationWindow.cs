@@ -2,15 +2,11 @@
 using Microsoft.Msagl.Layout.MDS;
 using OTLWizard.Helpers;
 using OTLWizard.OTLObjecten;
-using Programmerare.CrsTransformations.Coordinate;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -135,13 +131,13 @@ namespace OTLWizard.FrontEnd
             if (optionalArgument.ContainsKey("files") && optionalArgument.ContainsKey("subset"))
             {
                 var result = await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
-                if(result)
+                if (result)
                 {
                     await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);
                     UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
                     updateUserRelations();
                     updateVisuals();
-                }                
+                }
             }
             else
             {
@@ -223,7 +219,7 @@ namespace OTLWizard.FrontEnd
         // disable Autoupdate
         private void button3_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void statuslabel_Click(object sender, EventArgs e)
@@ -245,7 +241,7 @@ namespace OTLWizard.FrontEnd
                         ViewHandler.Show(Enums.Views.RelationsUserDefined, Enums.Views.isNull, item);
                         var ind = ListImportedEntities.SelectedIndex;
                         ListImportedEntities.DataSource = ApplicationHandler.R_GetImportedEntities().ToArray();
-                        if(ind+1 < ListImportedEntities.Items.Count)
+                        if (ind + 1 < ListImportedEntities.Items.Count)
                         {
                             ListImportedEntities.SetSelected(ind + 1, true);
                         }
@@ -295,14 +291,14 @@ namespace OTLWizard.FrontEnd
         {
             updateUserView();
             updateUserRelations();
-            var temp = (OTL_Entity)ListImportedEntities.SelectedItem;          
+            var temp = (OTL_Entity)ListImportedEntities.SelectedItem;
             textBox3.Text = temp.GetPreferredDisplayValue();
-          
-            if(tabControl1.SelectedTab == tabPage2)
+
+            if (tabControl1.SelectedTab == tabPage2)
             {
                 if (showLabels)
                 {
-                    selectedAsset = new OTL_GeometryEntity(temp, Settings.Get("relationviewsourcecolor"), temp.DisplayName, true);                    
+                    selectedAsset = new OTL_GeometryEntity(temp, Settings.Get("relationviewsourcecolor"), temp.DisplayName, true);
                 }
                 else
                 {
@@ -311,7 +307,7 @@ namespace OTLWizard.FrontEnd
                 selectedAsset.setForeground(true);
                 selectedConnector = null;
                 ShowAssetsOnMap();
-            }               
+            }
         }
 
 
@@ -368,7 +364,8 @@ namespace OTLWizard.FrontEnd
                 ListPropertiesTarget.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 ListPropertiesTarget.Update();
                 ListPropertiesTarget.Refresh();
-            } else
+            }
+            else
             {
                 ListPropertiesTarget.DataSource = ApplicationHandler.R_GetEntityForID(otl_handle.doelId).Properties.OrderBy(x => x.Key).ToArray();
                 ListPropertiesTarget.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -383,8 +380,8 @@ namespace OTLWizard.FrontEnd
                         selectedConnector = new OTL_GeometryEntity(tempEnt, Settings.Get("relationviewtargetcolor"), "", false);
                     selectedConnector.setForeground(true);
                     ShowAssetsOnMap();
-                }       
-            }               
+                }
+            }
         }
 
         private void updateUserRelations()
@@ -411,7 +408,7 @@ namespace OTLWizard.FrontEnd
         {
             var validUpdate = true;
 
-            if(ApplicationHandler.R_GetImportedEntities().Count == 0)
+            if (ApplicationHandler.R_GetImportedEntities().Count == 0)
             {
                 validUpdate = false;
             }
@@ -423,25 +420,25 @@ namespace OTLWizard.FrontEnd
                 var drawables = ApplicationHandler.R_GetImportedEntities();
                 var reldrawables = ApplicationHandler.R_GetRealRelationsObjects();
 
-                    if (textBox2.Text != "")
+                if (textBox2.Text != "")
+                {
+                    var zoekterm = textBox3.Text.ToLower();
+                    var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm));
+                    reldrawables = filteredFiles.Where(x => x.Activated == true).ToArray();
+                }
+
+                // only selected without foreign objects
+                foreach (var drawing in drawables)
+                {
+                    foreach (var item in reldrawables)
                     {
-                        var zoekterm = textBox3.Text.ToLower();
-                        var filteredFiles = ApplicationHandler.R_GetRealRelations().Where(x => x.DisplayName.ToLower().Contains(zoekterm));
-                        reldrawables = filteredFiles.Where(x => x.Activated == true).ToArray();
-                    }
-                    
-                        // only selected without foreign objects
-                        foreach (var drawing in drawables)
+                        if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
                         {
-                            foreach (var item in reldrawables)
-                            {
-                                if (item.doelID.Equals(drawing.AssetId) || item.bronID.Equals(drawing.AssetId))
-                                {
-                                    CreateNode(drawing);
-                                    break;
-                                }
-                            }
+                            CreateNode(drawing);
+                            break;
                         }
+                    }
+                }
                 foreach (var reldrawable in reldrawables)
                 {
                     if (reldrawable.Activated)
@@ -615,10 +612,11 @@ namespace OTLWizard.FrontEnd
         //base64 main enabler
         private void hideBase64NotationDAVIEImportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(hideBase64NotationDAVIEImportToolStripMenuItem.Checked)
+            if (hideBase64NotationDAVIEImportToolStripMenuItem.Checked)
             {
                 hideBase64NotationDAVIEImportToolStripMenuItem.Checked = false;
-            } else
+            }
+            else
             {
                 hideBase64NotationDAVIEImportToolStripMenuItem.Checked = true;
             }
@@ -629,10 +627,11 @@ namespace OTLWizard.FrontEnd
 
         private void hideRelationshipURIToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(hideRelationshipURIToolStripMenuItem.Checked)
+            if (hideRelationshipURIToolStripMenuItem.Checked)
             {
                 hideRelationshipURIToolStripMenuItem.Checked = false;
-            } else
+            }
+            else
             {
                 hideRelationshipURIToolStripMenuItem.Checked = true;
             }
@@ -662,7 +661,7 @@ namespace OTLWizard.FrontEnd
 
             if (selectedConnector != null)
             {
-                if(!assetsOnMap.ContainsKey(selectedConnector.GetEntity().AssetId))
+                if (!assetsOnMap.ContainsKey(selectedConnector.GetEntity().AssetId))
                     assetsOnMap.Add(selectedConnector.GetEntity().AssetId, selectedConnector);
             }
 
@@ -671,12 +670,12 @@ namespace OTLWizard.FrontEnd
             {
                 foreach (OTL_Entity back in ListImportedEntities.Items)
                 {
-                    if(!assetsOnMap.ContainsKey(back.AssetId))
+                    if (!assetsOnMap.ContainsKey(back.AssetId))
                         assetsOnMap.Add(back.AssetId, new OTL_GeometryEntity(back, Settings.Get("relationviewbackgroundcolor"), "", false));
                 }
             }
             // maps creator
-            BingMapsGenerator bing = new BingMapsGenerator(chromiumWebBrowser1.Height-20, chromiumWebBrowser1.Width-20);
+            BingMapsGenerator bing = new BingMapsGenerator(chromiumWebBrowser1.Height - 20, chromiumWebBrowser1.Width - 20);
             // init browser
             chromiumWebBrowser1.Load(bing.generateWebPage(assetsOnMap.Values.ToList(), Boolean.Parse(Settings.Get("relationviewstartroads")), Settings.Get("relationviewzoomlevel")));
         }

@@ -1,18 +1,12 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlServerCe;
-using System.Windows.Forms;
-using Microsoft.Win32;
-using OTLWizard.Helpers;
 using System.IO;
+using System.Linq;
 
 namespace OTLWizard.ApplicationData
 {
 
-    
+
     public class SDFImporter
     {
         private string path;
@@ -20,18 +14,19 @@ namespace OTLWizard.ApplicationData
 
         public SDFImporter(string path)
         {
-         this.path = path;
-         
+            this.path = path;
+
         }
 
         public bool checkDependencies()
         {
             application = Settings.Get("sdfpath");
 
-            if(File.Exists(application))
+            if (File.Exists(application))
             {
                 return true;
-            } else
+            }
+            else
             {
 
                 return false;
@@ -62,7 +57,7 @@ namespace OTLWizard.ApplicationData
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.CreateNoWindow= true;
+            startInfo.CreateNoWindow = true;
             startInfo.FileName = application;
             startInfo.Arguments = "list-classes --from-file \"" + path + "\"";
             startInfo.RedirectStandardOutput = true;
@@ -70,9 +65,9 @@ namespace OTLWizard.ApplicationData
             process.StartInfo = startInfo;
             process.Start();
 
-            string output = process.StandardOutput.ReadToEnd().Replace('\r',' ').Trim();
+            string output = process.StandardOutput.ReadToEnd().Replace('\r', ' ').Trim();
             process.WaitForExit();
-            string[] listing  = output.Split('\n');
+            string[] listing = output.Split('\n');
 
             return listing.ToList();
         }

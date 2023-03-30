@@ -63,7 +63,7 @@ namespace OTLWizard.FrontEnd
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 setStatusComponents(true);
-                textBoxSubset.Text = fdlg.FileName;               
+                textBoxSubset.Text = fdlg.FileName;
             }
         }
 
@@ -106,16 +106,16 @@ namespace OTLWizard.FrontEnd
                         i++;
                     }
                 }
-                if(radioButtonSDXModeEdit.Checked)
+                if (radioButtonSDXModeEdit.Checked)
                     ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
-                if(radioButtonSDXModeNew.Checked)
+                if (radioButtonSDXModeNew.Checked)
                     ApplicationHandler.SDX_ExportSDX(fdlg.FileName, temp);
             }
         }
 
         private async void buttonImportAll_Click(object sender, EventArgs e)
         {
-            if(radioButtonSDXModeEdit.Checked)
+            if (radioButtonSDXModeEdit.Checked)
             {
                 ApplicationHandler.SDX_ImportSDX(textBoxSDX.Text, true);
                 ListAllClasses.Items.Clear();
@@ -123,7 +123,8 @@ namespace OTLWizard.FrontEnd
                 {
                     ListAllClasses.Items.Add(klasse);
                 }
-            } else // mode new SDX
+            }
+            else // mode new SDX
             {
                 await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, true);
                 await ApplicationHandler.ImportArtefact(textBoxArtefact.Text);

@@ -35,7 +35,7 @@ namespace OTLWizard.OTLObjecten
 
             // invulling
             int i = 2;
-            foreach(OTL_ArtefactType artefact in artefacten)
+            foreach (OTL_ArtefactType artefact in artefacten)
             {
                 sheet.Cells[i, 1] = artefact.objectnaam;
                 sheet.Cells[i, 2] = artefact.geometrie;
@@ -57,13 +57,14 @@ namespace OTLWizard.OTLObjecten
                 workbook.Close();
                 excel.Quit();
                 return true;
-                
-            } catch
+
+            }
+            catch
             {
                 workbook.Close();
                 excel.Quit();
                 return false;
-            }         
+            }
         }
 
         private Worksheet newWorkSheet(Microsoft.Office.Interop.Excel.Workbook workbook, string sheetName)

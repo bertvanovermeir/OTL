@@ -2,19 +2,13 @@
 using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OTLWizard.FrontEnd
 {
     public partial class RelationImportDataWindow : Form
     {
-        private Dictionary<string,string[]> data = new Dictionary<string, string[]>();
+        private Dictionary<string, string[]> data = new Dictionary<string, string[]>();
         private string sessionDirectory = @"c:\";
 
         public RelationImportDataWindow()
@@ -34,7 +28,7 @@ namespace OTLWizard.FrontEnd
 
         public void ResetInterface()
         {
-            data = new Dictionary<string,string[]>();
+            data = new Dictionary<string, string[]>();
             textBox1.Text = "";
             textBox2.Text = "";
             checkBox1.Checked = false;
@@ -65,11 +59,12 @@ namespace OTLWizard.FrontEnd
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                textBox1.Text = String.Join("\r\n",fdlg.FileNames);
-                if(data.ContainsKey("files"))
+                textBox1.Text = String.Join("\r\n", fdlg.FileNames);
+                if (data.ContainsKey("files"))
                 {
                     data["files"] = fdlg.FileNames;
-                } else
+                }
+                else
                 {
                     data.Add("files", fdlg.FileNames);
                 }
@@ -90,10 +85,11 @@ namespace OTLWizard.FrontEnd
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
                 textBox2.Text = fdlg.FileName;
-                if(data.ContainsKey("subset"))
+                if (data.ContainsKey("subset"))
                 {
                     data["subset"] = new string[] { fdlg.FileName };
-                } else
+                }
+                else
                 {
                     data.Add("subset", new string[] { fdlg.FileName });
                 }
@@ -108,7 +104,7 @@ namespace OTLWizard.FrontEnd
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            if(checkBox1.Checked)
+            if (checkBox1.Checked)
             {
                 textBox2.Enabled = false;
                 if (data.ContainsKey("subset"))
@@ -119,12 +115,13 @@ namespace OTLWizard.FrontEnd
                 {
                     data.Add("subset", new string[] { "download" });
                 }
-            } else
+            }
+            else
             {
                 textBox2.Enabled = true;
-                if(data.ContainsKey("subset"))
+                if (data.ContainsKey("subset"))
                 {
-                    if(data["subset"].Equals("download"))
+                    if (data["subset"].Equals("download"))
                     {
                         data.Remove("subset");
                     }

@@ -1,9 +1,4 @@
 ﻿using OTLWizard.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OTLWizard.OTLObjecten
 {
@@ -30,7 +25,7 @@ namespace OTLWizard.OTLObjecten
         public void GenerateDisplayName(string arrow, string connectorname)
         {
             DisplayName = relationName + arrow + OTLUtils.SimplifyBase64Notation(doelId) + " | " + connectorname;
-            if(!doelName.Equals(""))
+            if (!doelName.Equals(""))
             {
                 DisplayName = relationName + arrow + doelName + " | " + connectorname;
             }

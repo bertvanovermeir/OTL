@@ -28,7 +28,7 @@ namespace OTLWizard.FrontEnd
             List<OTL_ArtefactType> results = ApplicationHandler.GetArtefactResultData();
             List<OTL_ArtefactType> selected = new List<OTL_ArtefactType>();
 
-            if(userSelection.Count > 0)
+            if (userSelection.Count > 0)
             {
                 foreach (string item in userSelection)
                 {
@@ -40,10 +40,11 @@ namespace OTLWizard.FrontEnd
                         }
                     }
                 }
-            } else
+            }
+            else
             {
                 selected = results;
-            }          
+            }
             dataGridView1.DataSource = selected.ToArray();
         }
 
@@ -90,7 +91,7 @@ namespace OTLWizard.FrontEnd
                 {
                     await ApplicationHandler.ExportCSVArtefact(fdlg.FileName, selected);
                 }
-            }                
+            }
         }
 
         private void buttonExit(object sender, EventArgs e)

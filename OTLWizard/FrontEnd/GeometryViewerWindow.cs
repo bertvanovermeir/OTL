@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace OTLWizard.FrontEnd
@@ -14,12 +8,12 @@ namespace OTLWizard.FrontEnd
     {
         public GeometryViewerWindow()
         {
-            InitializeComponent();         
+            InitializeComponent();
         }
 
         private void GeometryViewerWindow_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void Create_Geometry(object sender, PaintEventArgs e)

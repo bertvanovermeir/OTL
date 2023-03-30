@@ -1,8 +1,8 @@
-﻿using System;
+﻿using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
-using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
 
 namespace OTLWizard
 {
@@ -28,9 +28,11 @@ namespace OTLWizard
             button8.Text = Language.Get("home8");
             label1.Text = Language.Get("welcome");
             label4.Text = Language.Get("collab");
-            if (Settings.Get("language").Equals("nl")) {
+            if (Settings.Get("language").Equals("nl"))
+            {
                 radioButton2.Checked = true;
-            } else
+            }
+            else
             {
                 radioButton1.Checked = true;
             }
@@ -62,7 +64,7 @@ namespace OTLWizard
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
@@ -97,7 +99,7 @@ namespace OTLWizard
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -122,7 +124,7 @@ namespace OTLWizard
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButton1.Checked)
+            if (radioButton1.Checked)
             {
                 Settings.Update("language", "en");
                 refreshAfterLangChange();

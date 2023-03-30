@@ -20,7 +20,7 @@ namespace OTLWizard.OTLObjecten
         {
             // iterate over all OTL objects included in the subset
             // it is assumed this is already imported when executing this class (blocked by interface)
-            foreach(string otlClass in otlClasses)
+            foreach (string otlClass in otlClasses)
             {
                 string tempquery = QueryHandler.Get(Enums.Query.Artefact).Replace("[OSLOCLASS]", otlClass);
                 // open the connection:
@@ -43,12 +43,12 @@ namespace OTLWizard.OTLObjecten
                     string URL = (string)sqlite_datareader.GetValue(9);
 
                     // check columns in query to know what to transfer, 
-                    OTL_ArtefactType artefact = new OTL_ArtefactType(objectnaam,geometrie,overerving,meetcriterium,uitzonderingen,overervingsgrens,steekkaarten,overervenvan,viarelatie,URL);
+                    OTL_ArtefactType artefact = new OTL_ArtefactType(objectnaam, geometrie, overerving, meetcriterium, uitzonderingen, overervingsgrens, steekkaarten, overervenvan, viarelatie, URL);
                     OTL_ArtefactTypes.Add(artefact);
                 }
                 sqlite_conn_OTL.Close();
             }
-            
+
             // check if all classes from OTL are available to resolve Artefact
             foreach (OTL_ArtefactType art in OTL_ArtefactTypes)
             {
@@ -60,7 +60,7 @@ namespace OTLWizard.OTLObjecten
 
         public List<OTL_ArtefactType> GetOTLArtefactTypes()
         {
-            if(OTL_ArtefactTypes == null)
+            if (OTL_ArtefactTypes == null)
                 return new List<OTL_ArtefactType>();
             else
                 return OTL_ArtefactTypes;
