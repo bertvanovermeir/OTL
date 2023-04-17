@@ -1,11 +1,11 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class ArtefactExporterCSV : ArtefactExporter
     {

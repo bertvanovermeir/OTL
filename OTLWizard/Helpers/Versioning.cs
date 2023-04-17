@@ -1,4 +1,4 @@
-﻿namespace OTLWizard.OTLObjecten
+﻿namespace OTLWizard.Helpers
 {
     public class Versioning
     {

@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 5.0.0 - BVO 
-<EN>homewindowheader=OTLWizard 5.0.0 - BVO
+<NL>homewindowheader=OTLWizard 5.1.0 - BVO 
+<EN>homewindowheader=OTLWizard 5.1.0 - BVO
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -83,6 +83,8 @@
 <EN>home7=Create and visualise relations from existing CSV/XLS/SDF data
 <NL>home9=bestaande data converteren van SDF naar CSV
 <EN>home9=Convert Existing Data from SDF to CSV
+<NL>home10=bestaande data vergelijken met DAVIE data en opkuisen
+<EN>home10=compare existing data with DAVIE and clean data
 <NL>welcome=Welkom, maak een keuze...
 <EN>welcome=Welcome, please pick an option...
 <NL>changelanguage=Om de taal te wijzigen, verander de "language" tag in het setting.txt bestand. Herstart de applicatie.
@@ -156,8 +158,8 @@
 <EN>aupdy=Autoupdate On
 <NL>aupdn=Automatisch updaten uit
 <EN>aupdn=Autoupdate Off
-<NL>relationwindowheader=RelatieWizard 3.0 - BVO
-<EN>relationwindowheader=RelationWizard 3.0 - BVO
+<NL>relationwindowheader=RelatieWizard 5.1.0 - BVO
+<EN>relationwindowheader=RelationWizard 5.1.0 - BVO
 <NL>st_export= objecten werden geëxporteerd.
 <EN>st_export= elements were exported.
 <NL>suretoclose=Ben je zeker dat je wil afsluiten? Alle niet opgeslagen gegevens gaan verloren.
@@ -265,8 +267,8 @@
 <NL>home8=Een XSD bestand aanmaken om te gebruiken in Autocad Map
 <EN>home8=Creating an XSD file to use in Autocad Map
 
-<EN>sdfwizardheader=SDF Wizard 1.2 - BVO
-<NL>sdfwizardheader=SDF Wizard 1.2 - BVO
+<EN>sdfwizardheader=SDF Wizard 5.1.0 - BVO
+<NL>sdfwizardheader=SDF Wizard 5.1.0 - BVO
 <EN>buttonartefacttext=Import geometry artefact
 <NL>buttonartefacttext=Geometrie artefact importeren
 <EN>buttonsdxtext=Import XSD file
@@ -355,8 +357,8 @@
 <EN>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
 <NL>laadeenproject=Laad een project om te beginnen
 <EN>laadeenproject=Load a project to start
-<NL>subsetviewerheader=Subset Viewer 1.1 - BVO
-<EN>subsetviewerheader=Subset Viewer 1.1 - BVO
+<NL>subsetviewerheader=Subset Viewer 5.1.0 - BVO
+<EN>subsetviewerheader=Subset Viewer 5.1.0 - BVO
 <NL>dependencymissing=FDO Toolbox command executable ontbreekt. De SDF Database kon niet worden geladen. Installeer de Toolbox opnieuw.
 <EN>dependencymissing=FDO Toolbox command executable is missing. The SDF Database could not be loaded. Install the Toolbox again.
 <NL>dependencymissing2=FDO Toolbox, noodzakelijk voor SDF files te importeren, is niet gevonden op de computer. In het volgende dialoogvenster kan je zelf het pad aanduiden naar "fdocmd.exe". Meestal bevindt deze file zich in "C:\Program Files\FDO Toolbox" 
@@ -385,3 +387,31 @@
 <EN>convertok=Conversion finished!
 <NL>convertokheader=Succes
 <EN>convertokheader=Succes
+<NL>maploading=Bezig met laden van assets op de kaart
+<EN>maploading=Loading assets on map
+<NL>comparesummaryheader=Vergelijkingsrapport
+<EN>comparesummaryheader=Comparison Report
+<NL>compareheader=Data Vergelijken
+<EN>compareheader=Compare Data
+<NL>changedattribute=Attribuut is aangepast
+<EN>changedattribute=Attribute has been changed
+<NL>addedattribute=Attribuut is toegevoegd
+<EN>addedattribute=Attribute has been added
+<NL>removedentity=Onderdeel verwijderd
+<EN>removedentity=Entity removed
+<NL>addedentity=Nieuw onderdeel toegevoegd
+<EN>addedentity=New entity added
+<NL>removedrelation=Relatiestatus ongewijzigd en verwijderd
+<EN>removedrelation=Relationstatus unedited and removed
+<NL>addedrelationforstatus=Relatiestatus gewijzigd, relatie toegevoegd
+<EN>addedrelationforstatus=Relationstatus edited, relation added
+<NL>addedrelation=Nieuwe relatie toegevoegd
+<EN>addedrelation=New relation added
+<NL>noemptycolumns=Lege kolommen weglaten bij export
+<EN>noemptycolumns=Remove empty columns when exporting
+<NL>comparedescription=Met deze tool kan je (een combinatie van) CSV, XLS(X) en SDF bestanden met elkaar vergelijken en de "difference" exporteren. Zo vermijd je overschrijven van belangijke data die je niet hebt aangepast in DAVIE. Assets en relaties worden ondersteund.
+<EN>comparedescription=This tool allows to export a "difference" between CSV, XLS(X) and SDF files. This way you avoid changing unedited things in the DAVIE database by accident. Assets and relations are accepted files.
+<NL>featid=Feature Id tonen bij export (alleen bij SDF)
+<EN>featid=Show Feature Id at export (only SDF)
+<NL>waitforuser=Wachten op data...
+<EN>waitforuser=Waiting fo data...

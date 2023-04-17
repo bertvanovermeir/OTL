@@ -2,7 +2,7 @@
 using System.Data.SQLite;
 using System.Linq;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public class ArtefactImporter
     {

@@ -1,5 +1,5 @@
-﻿using OTLWizard.ApplicationData;
-using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
+using OTLWizard.Helpers;
 using System.Linq;
 using Xunit;
 

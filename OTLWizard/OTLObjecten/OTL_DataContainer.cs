@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public class OTL_DataContainer
     {

@@ -1,7 +1,9 @@
-﻿using OTLWizard.Helpers;
+﻿using CsvHelper.Configuration.Attributes;
+using OTLWizard.Helpers;
 using System;
+using System.Collections.Generic;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public class OTL_Entity
     {
@@ -15,8 +17,13 @@ namespace OTLWizard.OTLObjecten
 
         public OTL_Entity()
         {
-            Properties = new SerializableDictionary<string, string>();
+            Properties = new SerializableDictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
             GlobalWKT = new SerializableDictionary<string, string>();
+        }
+
+        public SerializableDictionary<string, string> GetProperties()
+        {
+            return Properties;             
         }
 
         public void GenerateDisplayName()
@@ -39,5 +46,6 @@ namespace OTLWizard.OTLObjecten
         {
             return DisplayName.Split('|')[0].Trim();
         }
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using Programmerare.CrsTransformations;
 using Programmerare.CrsTransformations.CompositeTransformations;
 using Programmerare.CrsTransformations.Coordinate;
@@ -64,10 +64,9 @@ namespace OTLWizard.Helpers
         public static List<string> GenerateMapLocation(OTL_Entity ent)
         {
             List<string> locationpoints = new List<string>();
-            if (ent.Properties.ContainsKey("geometry"))
+            if (ent.GetProperties().ContainsKey("geometry"))
             {
-
-                var WKT = ent.Properties["geometry"].ToLower();
+                var WKT = ent.GetProperties()["geometry"].ToLower();
                 WKT = WKT.Replace(")", "").Replace("(", "").Replace("z", "").Replace("xy", "").Replace("polygon", "").Replace("linestring", "").Replace("point", "").Replace("multi", "").Trim();
                 var temp = WKT.Split(',');
                 foreach (var item in temp)

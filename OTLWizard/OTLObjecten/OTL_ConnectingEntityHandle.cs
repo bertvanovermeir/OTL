@@ -1,6 +1,6 @@
 ﻿using OTLWizard.Helpers;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public class OTL_ConnectingEntityHandle
     {

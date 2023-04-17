@@ -2,7 +2,7 @@
 using OTLWizard.Helpers;
 using System;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public class OTL_Relationship
     {
@@ -23,7 +23,7 @@ namespace OTLWizard.OTLObjecten
         [Ignore]
         public string DisplayName { get; set; }
         [Name("isActief")]
-        public bool Activated { get; set; }
+        public bool isActive { get; set; }
 
         [Ignore]
         public SerializableDictionary<string, string> Properties { get; set; }
@@ -68,7 +68,7 @@ namespace OTLWizard.OTLObjecten
                 this.DisplayName = relatieAssetId + this.relationshipURI.Split('#')[1] + " | " + bron + " <--> " + doel;
             }
             // actief of niet
-            if (Activated)
+            if (isActive)
                 this.DisplayName = this.DisplayName + " (Actief)";
             else
                 this.DisplayName = this.DisplayName + " (Verwijderd)";

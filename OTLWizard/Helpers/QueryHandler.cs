@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
 
     public static class QueryHandler

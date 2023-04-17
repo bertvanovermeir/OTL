@@ -1,8 +1,8 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public abstract class SubsetExporter
     {

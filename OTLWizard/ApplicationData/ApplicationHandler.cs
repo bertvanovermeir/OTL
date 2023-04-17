@@ -1,5 +1,7 @@
 ﻿using OTLWizard.ApplicationData;
 using OTLWizard.Helpers;
+using OTLWizard.Helpers;
+using OTLWizard.OTLObjecten;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +12,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Belangrijkste klasse die de werking van het programma illustreert. 
@@ -357,6 +359,43 @@ namespace OTLWizard.OTLObjecten
 
         public static RealDataImporter realImporter = new RealDataImporter();
 
+        public static void R_SetAllGeometryEntitiesBackground(bool ignoreSourceAsset)
+        {
+            realImporter.SetAllGeometryEntitiesBackground(!ignoreSourceAsset);
+        }
+
+        public static void R_SetGeometyEntityStatusBackground(string AssetId)
+        {
+            var temp = realImporter.GetGeometryEntityByAssetId(AssetId);
+            if(temp != null)
+                realImporter.GetGeometryEntityByAssetId(AssetId).SetAsBackGroundAsset();
+        }
+
+        public static void R_SetGeometyEntityStatusSource(string AssetId)
+        {
+            var temp = realImporter.GetGeometryEntityByAssetId(AssetId);
+            if(temp != null)
+                realImporter.GetGeometryEntityByAssetId(AssetId).SetAsSourceAsset();
+        }
+
+        public static void R_SetGeometryEntityAsReferencePoint(string AssetId)
+        {
+            var temp = realImporter.GetGeometryEntityByAssetId(AssetId);
+            if (temp != null)
+                realImporter.GetGeometryEntityByAssetId(AssetId).SetAsMapReferencePoint();
+        }
+
+        public static void R_SetGeometyEntityStatusTarget(string AssetId)
+        {
+            var temp = realImporter.GetGeometryEntityByAssetId(AssetId);
+            if( temp != null)
+                realImporter.GetGeometryEntityByAssetId(AssetId).SetAsTargetAsset();
+        }
+
+        public static List<OTL_GeometryEntity> R_GetGeometryEntities()
+        {
+            return realImporter.GetGeometryEntities();
+        }
 
         public static void R_DestroyOnClose()
         {
@@ -405,12 +444,33 @@ namespace OTLWizard.OTLObjecten
                 }
             }
             realImporter.CheckAssetCompliance();
+
+            // finalize import by calculating geometry vectors for Bing maps
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("maploading"));
+            realImporter.initGeometryAssetsForBingMaps();
+
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             if (realImporter.GetErrors().Count > 0)
             {
                 ViewHandler.Show(Enums.Views.RelationImportSummary, Enums.Views.isNull, realImporter.GetErrors().ToArray());
                 realImporter.ResetErrors();
             }
+        }
+
+        public static async Task GenerateMapAssetVectors(int mapsizeWidth, int mapsizeHeight, List<OTL_GeometryEntity> geoEntities, CefSharp.WinForms.ChromiumWebBrowser chr, bool showLoadingScreen)
+        {
+            if(showLoadingScreen)
+                ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("maploading"));
+            BingMapsGenerator bing = new BingMapsGenerator(mapsizeHeight, mapsizeWidth);
+            await Task.Run(() =>
+            {
+                bing.generateMainWebPage(geoEntities, Boolean.Parse(Settings.Get("relationviewstartroads")), Settings.Get("relationviewzoomlevel"));
+
+                chr.Load(bing.getHtmlFilePath());
+            });
+            if(showLoadingScreen)
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
         }
 
         private static void setFDODependency()
@@ -465,42 +525,42 @@ namespace OTLWizard.OTLObjecten
 
         public static void R_LoadRelationState(string fileName)
         {
-            try
-            {
-                ZipArchive zip = ZipFile.OpenRead(fileName);
-                var tempPath = Path.GetTempPath();
-                var randomdirname = Guid.NewGuid().ToString();
-                tempPath = tempPath + randomdirname + "\\";
-                Directory.CreateDirectory(tempPath);
-                realImporter = new RealDataImporter();
-
-                foreach (ZipArchiveEntry entry in zip.Entries)
+                try
                 {
-                    entry.ExtractToFile(tempPath + entry.FullName);
-                    switch (entry.FullName)
+                    ZipArchive zip = ZipFile.OpenRead(fileName);
+                    var tempPath = Path.GetTempPath();
+                    var randomdirname = Guid.NewGuid().ToString();
+                    tempPath = tempPath + randomdirname + "\\";
+                    Directory.CreateDirectory(tempPath);
+                    realImporter = new RealDataImporter();
+
+                    foreach (ZipArchiveEntry entry in zip.Entries)
                     {
-                        case "R.xml":
-                            realImporter.SetRelationships(XmlSerialization.ReadFromXmlFile<List<OTL_Relationship>>(tempPath + "R.xml"));
-                            break;
-                        case "E.xml":
-                            realImporter.SetEntities(XmlSerialization.ReadFromXmlFile<List<OTL_Entity>>(tempPath + "E.xml"));
-                            break;
-                        case "T.xml":
-                            subsetConn = new SubsetImporter();
-                            subsetConn.SetOTLRelationshipTypes(XmlSerialization.ReadFromXmlFile<List<OTL_RelationshipType>>(tempPath + "T.xml"));
-                            break;
-                        default:
-                            throw new Exception("This is not a valid savestate file.");
+                        entry.ExtractToFile(tempPath + entry.FullName);
+                        switch (entry.FullName)
+                        {
+                            case "R.xml":
+                                realImporter.SetRelationships(XmlSerialization.ReadFromXmlFile<List<OTL_Relationship>>(tempPath + "R.xml"));
+                                break;
+                            case "E.xml":
+                                realImporter.SetEntities(XmlSerialization.ReadFromXmlFile<List<OTL_Entity>>(tempPath + "E.xml"));
+                                break;
+                            case "T.xml":
+                                subsetConn = new SubsetImporter();
+                                subsetConn.SetOTLRelationshipTypes(XmlSerialization.ReadFromXmlFile<List<OTL_RelationshipType>>(tempPath + "T.xml"));
+                                break;
+                            default:
+                                throw new Exception("This is not a valid savestate file.");
+                        }
                     }
+
+                    realImporter.initGeometryAssetsForBingMaps();
                 }
-
-            }
-            catch (Exception e)
-            {
-                ViewHandler.Show("loadstateerror" + e.ToString(), "loadstateerrorheader", MessageBoxIcon.Error);
-            }
+                catch (Exception e)
+                {
+                    ViewHandler.Show("loadstateerror" + e.ToString(), "loadstateerrorheader", MessageBoxIcon.Error);
+                }
         }
-
 
 
         public static void R_ExportRealRelationData(string path)
@@ -514,6 +574,11 @@ namespace OTLWizard.OTLObjecten
                 ViewHandler.Show(Language.Get("exportcsverror"), Language.Get("error"), System.Windows.Forms.MessageBoxIcon.Error);
 
             }
+        }
+
+        public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelationsFor(OTL_Entity source, OTL_Entity target)
+        {
+            return R_GetPossibleRelations(source).Where(p => p.doelId.Equals(target.AssetId)).ToList();
         }
 
         public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelations(OTL_Entity entity)
@@ -539,14 +604,14 @@ namespace OTLWizard.OTLObjecten
                             {
                                 // normal creation direction
                                 if (entity.AssetId.Equals(item.bronID) && connector.AssetId.Equals(item.doelID)
-                                    && item.relationshipURI.Equals(rel.relationshipURI) && item.Activated != false)
+                                    && item.relationshipURI.Equals(rel.relationshipURI) && item.isActive != false)
                                 {
                                     relnotfound = false;
                                     break;
                                 }
                                 // opposite direction if directional is false (both directions count in that case)
                                 else if (entity.AssetId.Equals(item.doelID) && connector.AssetId.Equals(item.bronID)
-                                    && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false && item.Activated != false)
+                                    && item.relationshipURI.Equals(rel.relationshipURI) && item.isDirectional == false && item.isActive != false)
                                 {
                                     relnotfound = false;
                                     break;
@@ -566,12 +631,12 @@ namespace OTLWizard.OTLObjecten
                             ceh.relationName = rel.relationshipName;
                             ceh.bronId = entity.AssetId;
                             ceh.doelId = connector.AssetId;
-                            if (connector.Properties.ContainsKey("naam"))
-                                ceh.doelName = connector.Properties["naam"];
+                            if (connector.GetProperties().ContainsKey("naam"))
+                                ceh.doelName = connector.GetProperties()["naam"];
                             else
                                 ceh.doelName = "";
-                            if (entity.Properties.ContainsKey("naam"))
-                                ceh.bronName = entity.Properties["naam"];
+                            if (entity.GetProperties().ContainsKey("naam"))
+                                ceh.bronName = entity.GetProperties()["naam"];
                             else
                                 ceh.bronName = "";
                             ceh.typeuri = rel.relationshipURI;
@@ -640,7 +705,7 @@ namespace OTLWizard.OTLObjecten
                 temp.bronID = ceh1.bronId;
                 temp.relationshipURI = ceh1.typeuri;
                 temp.isDirectional = ceh1.isDirectional;
-                temp.Activated = true;
+                temp.isActive = true;
                 temp.Properties.Add(Settings.Get("otlidentifier"), temp.AssetId);
                 temp.Properties.Add(Settings.Get("otlclassuri"), temp.relationshipURI);
                 temp.Properties.Add(Settings.Get("otlsrcrel"), temp.bronID);
@@ -807,7 +872,109 @@ namespace OTLWizard.OTLObjecten
             return subsetConn.GetOTLRelationshipTypes();
         }
 
+        /////////////////// COMPARE TOOL FUNCTIONS ///////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////
+        private static RealDataImporter originalData = new RealDataImporter();
+        private static RealDataImporter newData = new RealDataImporter();
+        private static RealDataComparer comparer = new RealDataComparer();
+
+        public async static Task<bool> C_CompareData()
+        {
+            comparer.ResetComparer();
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("comparedataloading"));
+            comparer.SetBaseData(originalData.GetEntities(),originalData.GetRelationships());
+            comparer.SetNewData(newData.GetEntities(),newData.GetRelationships());
+            await Task.Run(() => { comparer.CompareDataSets(); });
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            return true;
+        }
+
+        public static void C_ResetCompare()
+        {
+        originalData = new RealDataImporter();
+        newData = new RealDataImporter();
+        comparer = new RealDataComparer();
+    }
+
+        public static string C_GetStatusImport()
+        {
+            return "Resultaat na controle - behouden elementen: " + comparer.GetEntities().Count + " assets en " + comparer.GetRelationships().Count + " relaties  |  Controle op basis van: " + comparer.GetReport().Count + " wijzigingen.";
+        }
+
+        public static List<OTL_CommentContainer> C_GetDataCompareResults()
+        {
+            return comparer.GetReport();
+        }
+
+        public static void C_ExportData(string path, bool emptyColumns, bool featid)
+        {
+            path = path.Replace(".csv", "");
+            path = path.Replace(".CSV", "");
+            
+            RealDataExporter.Export(path + "_entities.csv", comparer.GetEntities(), emptyColumns, featid);
+            RealDataExporter.Export(path + "_relations.csv", comparer.GetRelationships());
+
+        }
 
 
+        public async static Task<bool> C_ImportData(string[] paths, bool isOriginalData)
+        {
+            RealDataImporter temp = null;
+            if(isOriginalData)
+                temp = originalData;
+            else
+                temp = newData;
+
+
+            // set subset relation object
+            temp.SetRelationTypeData(new SubsetImporter());
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("csvrealimport"));
+            foreach (var path in paths)
+            {
+                try
+                {
+                    if (path.ToUpper().EndsWith(".CSV"))
+                    {
+                        await Task.Run(() => { temp.Import(path, Enums.ImportType.CSV); });
+                    }
+                    else if (path.ToUpper().EndsWith(".XLS") || path.ToUpper().EndsWith(".XLSX"))
+                    {
+                        await Task.Run(() => { temp.Import(path, Enums.ImportType.XLS); });
+                    }
+                    else if (path.ToUpper().EndsWith(".SDF"))
+                    {
+                        // check if sdf path exists, prompt the user with a dialog to change it
+                        if (File.Exists(Settings.Get("sdfpath")) && Settings.Get("sdfpath").ToLower().Contains("fdocmd.exe"))
+                        {
+                            await Task.Run(() => { temp.Import(path, Enums.ImportType.SDF); });
+                        }
+                        else
+                        {
+                            ViewHandler.Show(Language.Get("dependencymissing2"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                            setFDODependency();
+                            ViewHandler.Show(Language.Get("restartprocess"), Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Information);
+                        }
+                    }
+                    else
+                    {
+                        ViewHandler.Show(Language.Get("fileimporterror") + path, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewHandler.Show(Language.Get("fileimporterror") + path + "\n\rError: " + e.Message, Language.Get("errorheader"), System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            }
+
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+
+            if (realImporter.GetErrors().Count > 0)
+            {
+                ViewHandler.Show(Enums.Views.RelationImportSummary, Enums.Views.isNull, temp.GetErrors().ToArray());
+                temp.ResetErrors();
+            }
+            return true;
+        }
     }
 }

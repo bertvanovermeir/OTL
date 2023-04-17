@@ -1,6 +1,6 @@
 ﻿using Microsoft.Office.Interop.Excel;
-using OTLWizard.ApplicationData;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
+using OTLWizard.Helpers;
 using System.Collections.Generic;
 using System.IO;
 using Xunit;

@@ -2,7 +2,7 @@
 using CsvHelper.Configuration;
 using Microsoft.Office.Interop.Excel;
 using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,12 +10,13 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class RealDataImporter
     {
         private List<OTL_Entity> entities;
         private Dictionary<string, OTL_Entity> OTL_Entities;
+        private Dictionary<string, OTL_GeometryEntity> OTL_GeometryEntities;
 
         private List<OTL_Relationship> OTL_Relationships;
         private Dictionary<string, OTL_Relationship> OTL_RelationshipsDictionary;
@@ -27,9 +28,42 @@ namespace OTLWizard.ApplicationData
         {
             entities = new List<OTL_Entity>();
             OTL_Entities = new Dictionary<string, OTL_Entity>();
+            OTL_GeometryEntities = new Dictionary<string, OTL_GeometryEntity>();
             OTL_Relationships = new List<OTL_Relationship>();
             OTL_RelationshipsDictionary = new Dictionary<string, OTL_Relationship>();
             errors = new List<ErrorContainer>();
+        }
+
+        public OTL_GeometryEntity GetGeometryEntityByAssetId(string AssetId)
+        {
+            if (OTL_GeometryEntities.ContainsKey(AssetId))
+                return OTL_GeometryEntities[AssetId];
+            else
+                return null;
+        }
+
+        public List<OTL_GeometryEntity> GetGeometryEntities()
+        {
+            return OTL_GeometryEntities.Values.ToList();
+        }
+
+        public void SetAllGeometryEntitiesBackground(bool resetSourceTargetState)
+        {
+            if(resetSourceTargetState)
+            {
+                foreach (OTL_GeometryEntity geo in OTL_GeometryEntities.Values)
+                {
+                    if(!geo.IsBackgroundAsset())
+                    geo.SetAsBackGroundAsset();
+                }
+            } else
+            {
+                foreach (OTL_GeometryEntity geo in OTL_GeometryEntities.Values)
+                {
+                    if(!geo.IsSourceAsset() && !geo.IsBackgroundAsset())
+                        geo.SetAsBackGroundAsset();
+                }
+            }           
         }
 
         public void SetRelationTypeData(SubsetImporter s)
@@ -101,28 +135,15 @@ namespace OTLWizard.ApplicationData
         {
             List<string> files = new List<string>();
             // convert SDF to CSV
-            SDFImporter sdf = new SDFImporter(path);
-            if (sdf.checkDependencies())
+            if (SDFHandler.checkDependencies())
             {
-                List<string> classnames = sdf.loadClasses();
-
-                var localPath = System.IO.Path.GetTempPath() + "otlsdftempconversion\\";
-                Directory.CreateDirectory(localPath);
-                foreach (string classname in classnames)
-                {
-                    string contents = sdf.loadDataForClass(classname);
-                    contents = contents.Replace('_', '.');
-                    string filename = classname + ".csv";
-                    File.WriteAllText(localPath + filename, contents);
-                    files.Add(localPath + filename);
-                }
+                files = SDFHandler.GenerateCSVExportFiles(path);
 
                 // import the converted data from CSV
                 foreach (string file in files)
                 {
                     ImportCSV(file);
                 }
-                Directory.Delete(localPath, true);
             }
             else
             {
@@ -178,6 +199,22 @@ namespace OTLWizard.ApplicationData
             else
             {
                 errors.Add(new ErrorContainer(currentFileName, "/", "Error", Language.Get("foutpos1")));
+            }
+        }
+
+        public void initGeometryAssetsForBingMaps()
+        {
+            int count = 0;
+            foreach (OTL_Entity entity in entities)
+            {
+                var temp = new OTL_GeometryEntity(entity);
+                temp.SetAsBackGroundAsset();
+                temp.SetSerialNumber(count);
+                temp.generateLocationPointers();
+                temp.generateGeometryPointers();
+                count++;
+                if(temp.GetBingLocationString() != null)
+                    OTL_GeometryEntities.Add(entity.AssetId,temp );
             }
         }
 
@@ -302,11 +339,11 @@ namespace OTLWizard.ApplicationData
                         // properties
                         for (int i = 0; i < line.ItemArray.Length; i++)
                         {
-                            var key = data.Columns[i].ColumnName.ToLower();
+                            var key = data.Columns[i].ColumnName;
                             var value = (string)line.ItemArray[i];
                             if (!value.Equals(""))
                             {
-                                entity.Properties.Add(key, value);
+                                entity.GetProperties().Add(key, value);
                             }
                         }
                         entity.GenerateDisplayName();
@@ -353,18 +390,18 @@ namespace OTLWizard.ApplicationData
                         // some relationship CSV's might not contain isActief column
                         if (activeindex == -1)
                         {
-                            temp.Activated = true;
+                            temp.isActive = true;
                         }
                         else
                         {
                             var actstring = line.ItemArray[activeindex];
                             if (actstring.Equals(""))
                             {
-                                temp.Activated = true;
+                                temp.isActive = true;
                             }
                             else
                             {
-                                temp.Activated = Boolean.Parse((string)actstring);
+                                temp.isActive = Boolean.Parse((string)actstring);
                             }
                         }
 
@@ -500,7 +537,7 @@ namespace OTLWizard.ApplicationData
 
             if (softremove)
             {
-                rel.Activated = false;
+                rel.isActive = false;
                 rel.GenerateDisplayName();
                 AddRelationship(rel);
 
@@ -517,7 +554,7 @@ namespace OTLWizard.ApplicationData
             // remove anyway to clean the list objects
             OTL_Relationships.Remove(OTL_Relationships.Where(x => x.AssetId.Equals(relID)).FirstOrDefault());
             OTL_RelationshipsDictionary.Remove(relID);
-            rel.Activated = true;
+            rel.isActive = true;
             rel.GenerateDisplayName();
             AddRelationship(rel);
         }
@@ -562,8 +599,8 @@ namespace OTLWizard.ApplicationData
             e2.Name = Language.Get("userdefinedasset");
             e2.TypeUri = "";
             e2.GenerateDisplayName();
-            e2.Properties.Add(Settings.Get("otlidentifier"), doelID);
-            e2.Properties.Add(Settings.Get("otlclassuri"), Language.Get("userdefinedasset"));
+            e2.GetProperties().Add(Settings.Get("otlidentifier"), doelID);
+            e2.GetProperties().Add(Settings.Get("otlclassuri"), Language.Get("userdefinedasset"));
             AddEntity(e2);
         }
     }

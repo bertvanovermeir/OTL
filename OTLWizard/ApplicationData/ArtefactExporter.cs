@@ -1,7 +1,7 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System.Collections.Generic;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public abstract class ArtefactExporter
     {

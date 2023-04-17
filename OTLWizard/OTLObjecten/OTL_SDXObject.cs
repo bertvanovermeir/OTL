@@ -1,9 +1,9 @@
 ﻿using OTLWizard.Helpers;
 using System.Collections.Generic;
 using System.Xml;
-using static OTLWizard.OTLObjecten.Enums;
+using static OTLWizard.Helpers.Enums;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public class OTL_SDXObject
     {

@@ -1,6 +1,6 @@
-﻿using OTLWizard.ApplicationData;
+﻿using OTLWizard.Helpers;
 using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -39,8 +39,8 @@ namespace OTLWizard.FrontEnd
         private void button2_Click(object sender, EventArgs e)
         {
             // convert SDF to CSV
-            SDFImporter sdf = new SDFImporter(textBoxSubset.Text);
-            if (sdf.checkDependencies())
+            String path = textBoxSubset.Text;
+            if (SDFHandler.checkDependencies())
             {
                 // set folder
                 SaveFileDialog fdlg = new SaveFileDialog();
@@ -55,15 +55,10 @@ namespace OTLWizard.FrontEnd
                 {
                     localPath = fdlg.FileName;
                     localPath = localPath.ToLower().Replace(".csv", "");
+                    
                     // convert
-                    List<string> classnames = sdf.loadClasses();
-                    foreach (string classname in classnames)
-                    {
-                        string contents = sdf.loadDataForClass(classname);
-                        contents = contents.Replace('_', '.');
-                        string filename = "_" + classname + ".csv";
-                        File.WriteAllText(localPath + filename, contents);
-                    }
+                    SDFHandler.GenerateCSVExportFiles(path, localPath);
+
                     ViewHandler.Show(Language.Get("convertok"), Language.Get("convertokheader"), System.Windows.Forms.MessageBoxIcon.Information);
                 }
                 else
@@ -81,7 +76,7 @@ namespace OTLWizard.FrontEnd
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.Home, Enums.Views.SubsetMain, null);
+            ViewHandler.Show(Enums.Views.Home, Enums.Views.DataConversion, null);
         }
 
         private static void setFDODependency()

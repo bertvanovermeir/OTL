@@ -1,10 +1,10 @@
 ﻿using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class SubsetExporterCSV : SubsetExporter
     {

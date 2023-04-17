@@ -1,11 +1,11 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     public class XsdHandler
     {

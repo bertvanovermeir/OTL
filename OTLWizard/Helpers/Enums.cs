@@ -1,4 +1,4 @@
-﻿namespace OTLWizard.OTLObjecten
+﻿namespace OTLWizard.Helpers
 {
     public class Enums
     {
@@ -37,6 +37,8 @@
             SubsetViewerImport,
             GeometryViewer,
             DataConversion,
+            DataComparisonSummary,
+            DataComparison,
             isNull
         }
 

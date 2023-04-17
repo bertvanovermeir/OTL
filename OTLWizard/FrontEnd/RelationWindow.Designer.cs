@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RelationWindow));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +40,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showAssetNameWherePossibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideBase64NotationDAVIEImportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.hideRelationshipURIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gISToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,7 +89,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.chromiumWebBrowser1 = new CefSharp.WinForms.ChromiumWebBrowser();
             this.label1 = new System.Windows.Forms.Label();
-            this.showAssetNameWherePossibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ListPropertiesRelation)).BeginInit();
@@ -198,12 +197,21 @@
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
+            // showAssetNameWherePossibleToolStripMenuItem
+            // 
+            this.showAssetNameWherePossibleToolStripMenuItem.Checked = true;
+            this.showAssetNameWherePossibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showAssetNameWherePossibleToolStripMenuItem.Name = "showAssetNameWherePossibleToolStripMenuItem";
+            this.showAssetNameWherePossibleToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
+            this.showAssetNameWherePossibleToolStripMenuItem.Text = "Show asset name where possible";
+            this.showAssetNameWherePossibleToolStripMenuItem.Click += new System.EventHandler(this.showAssetNameWherePossibleToolStripMenuItem_Click);
+            // 
             // hideBase64NotationDAVIEImportToolStripMenuItem
             // 
             this.hideBase64NotationDAVIEImportToolStripMenuItem.Checked = true;
             this.hideBase64NotationDAVIEImportToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.hideBase64NotationDAVIEImportToolStripMenuItem.Name = "hideBase64NotationDAVIEImportToolStripMenuItem";
-            this.hideBase64NotationDAVIEImportToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.hideBase64NotationDAVIEImportToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.hideBase64NotationDAVIEImportToolStripMenuItem.Text = "Hide base64 Notation";
             this.hideBase64NotationDAVIEImportToolStripMenuItem.Click += new System.EventHandler(this.hideBase64NotationDAVIEImportToolStripMenuItem_Click);
             // 
@@ -212,7 +220,7 @@
             this.hideRelationshipURIToolStripMenuItem.Checked = true;
             this.hideRelationshipURIToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.hideRelationshipURIToolStripMenuItem.Name = "hideRelationshipURIToolStripMenuItem";
-            this.hideRelationshipURIToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.hideRelationshipURIToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.hideRelationshipURIToolStripMenuItem.Text = "Hide Relationship ID";
             this.hideRelationshipURIToolStripMenuItem.Click += new System.EventHandler(this.hideRelationshipURIToolStripMenuItem_Click);
             // 
@@ -225,7 +233,7 @@
             this.zoomLevelToolStripMenuItem,
             this.assetColorToolStripMenuItem});
             this.gISToolStripMenuItem.Name = "gISToolStripMenuItem";
-            this.gISToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.gISToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.gISToolStripMenuItem.Text = "GIS Viewer...";
             this.gISToolStripMenuItem.Click += new System.EventHandler(this.gISToolStripMenuItem_Click);
             // 
@@ -234,7 +242,7 @@
             this.showAllAssetsToolStripMenuItem.Checked = true;
             this.showAllAssetsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.showAllAssetsToolStripMenuItem.Name = "showAllAssetsToolStripMenuItem";
-            this.showAllAssetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showAllAssetsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.showAllAssetsToolStripMenuItem.Text = "Show all assets";
             this.showAllAssetsToolStripMenuItem.Click += new System.EventHandler(this.showAllAssetsToolStripMenuItem_Click);
             // 
@@ -243,7 +251,7 @@
             this.doNotShowLabelsToolStripMenuItem.Checked = true;
             this.doNotShowLabelsToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.doNotShowLabelsToolStripMenuItem.Name = "doNotShowLabelsToolStripMenuItem";
-            this.doNotShowLabelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.doNotShowLabelsToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.doNotShowLabelsToolStripMenuItem.Text = "Show labels";
             this.doNotShowLabelsToolStripMenuItem.Click += new System.EventHandler(this.doNotShowLabelsToolStripMenuItem_Click);
             // 
@@ -253,7 +261,7 @@
             this.roadsViewToolStripMenuItem,
             this.aerialPhotgraphyViewToolStripMenuItem});
             this.startGISViewerInToolStripMenuItem.Name = "startGISViewerInToolStripMenuItem";
-            this.startGISViewerInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.startGISViewerInToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.startGISViewerInToolStripMenuItem.Text = "Open GIS view as...";
             // 
             // roadsViewToolStripMenuItem
@@ -277,12 +285,13 @@
             this.zoomLevelToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.levelToolStripMenuItem});
             this.zoomLevelToolStripMenuItem.Name = "zoomLevelToolStripMenuItem";
-            this.zoomLevelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomLevelToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.zoomLevelToolStripMenuItem.Text = "Zoom Level";
             this.zoomLevelToolStripMenuItem.Click += new System.EventHandler(this.zoomLevelToolStripMenuItem_Click);
             // 
             // levelToolStripMenuItem
             // 
+            this.levelToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.levelToolStripMenuItem.Name = "levelToolStripMenuItem";
             this.levelToolStripMenuItem.Size = new System.Drawing.Size(180, 23);
             this.levelToolStripMenuItem.Text = "level";
@@ -297,7 +306,7 @@
             this.targetcolorAssetsToolStripMenuItem,
             this.backgroundAssetsToolStripMenuItem});
             this.assetColorToolStripMenuItem.Name = "assetColorToolStripMenuItem";
-            this.assetColorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.assetColorToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.assetColorToolStripMenuItem.Text = "Asset Color";
             // 
             // sourceAssetToolStripMenuItem
@@ -305,7 +314,7 @@
             this.sourceAssetToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sourcecolorToolStripMenuItem});
             this.sourceAssetToolStripMenuItem.Name = "sourceAssetToolStripMenuItem";
-            this.sourceAssetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sourceAssetToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.sourceAssetToolStripMenuItem.Text = "Source Asset";
             // 
             // sourcecolorToolStripMenuItem
@@ -332,7 +341,7 @@
             this.targetcolorAssetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.targetcolorToolStripMenuItem});
             this.targetcolorAssetsToolStripMenuItem.Name = "targetcolorAssetsToolStripMenuItem";
-            this.targetcolorAssetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.targetcolorAssetsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.targetcolorAssetsToolStripMenuItem.Text = "Target Assets";
             // 
             // targetcolorToolStripMenuItem
@@ -358,7 +367,7 @@
             this.backgroundAssetsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.bckgrndcolorToolStripMenuItem});
             this.backgroundAssetsToolStripMenuItem.Name = "backgroundAssetsToolStripMenuItem";
-            this.backgroundAssetsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.backgroundAssetsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.backgroundAssetsToolStripMenuItem.Text = "Background Assets";
             // 
             // bckgrndcolorToolStripMenuItem
@@ -382,12 +391,12 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(243, 6);
             // 
             // otherSettingsToolStripMenuItem
             // 
             this.otherSettingsToolStripMenuItem.Name = "otherSettingsToolStripMenuItem";
-            this.otherSettingsToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.otherSettingsToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
             this.otherSettingsToolStripMenuItem.Text = "Other Settings...";
             this.otherSettingsToolStripMenuItem.Click += new System.EventHandler(this.otherSettingsToolStripMenuItem_Click);
             // 
@@ -428,17 +437,15 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox3.Controls.Add(this.ListPropertiesRelation);
             this.groupBox3.Controls.Add(this.textBox3);
             this.groupBox3.Controls.Add(this.button4);
             this.groupBox3.Controls.Add(this.button2);
             this.groupBox3.Controls.Add(this.ListCreatedRelations);
-            this.groupBox3.Location = new System.Drawing.Point(3, 3);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(170, 478);
+            this.groupBox3.Size = new System.Drawing.Size(243, 486);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "OTLRelationResults";
@@ -453,20 +460,20 @@
             this.ListPropertiesRelation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.ListPropertiesRelation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesRelation.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle2;
-            this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 292);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle1;
+            this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 300);
             this.ListPropertiesRelation.Name = "ListPropertiesRelation";
             this.ListPropertiesRelation.ReadOnly = true;
             this.ListPropertiesRelation.RowHeadersVisible = false;
             this.ListPropertiesRelation.ShowEditingIcon = false;
-            this.ListPropertiesRelation.Size = new System.Drawing.Size(157, 111);
+            this.ListPropertiesRelation.Size = new System.Drawing.Size(230, 111);
             this.ListPropertiesRelation.TabIndex = 5;
             this.ListPropertiesRelation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);
             // 
@@ -476,7 +483,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(5, 19);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(157, 20);
+            this.textBox3.Size = new System.Drawing.Size(230, 20);
             this.textBox3.TabIndex = 4;
             this.textBox3.Tag = "";
             this.textBox3.Text = "search...";
@@ -487,9 +494,9 @@
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(6, 409);
+            this.button4.Location = new System.Drawing.Point(6, 417);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(157, 23);
+            this.button4.Size = new System.Drawing.Size(230, 23);
             this.button4.TabIndex = 3;
             this.button4.Text = "<< SoftRemove";
             this.button4.UseVisualStyleBackColor = true;
@@ -499,9 +506,9 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(6, 444);
+            this.button2.Location = new System.Drawing.Point(6, 452);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(157, 23);
+            this.button2.Size = new System.Drawing.Size(230, 23);
             this.button2.TabIndex = 2;
             this.button2.Text = "<< HardRemove";
             this.button2.UseVisualStyleBackColor = true;
@@ -517,22 +524,21 @@
             this.ListCreatedRelations.Location = new System.Drawing.Point(4, 45);
             this.ListCreatedRelations.Name = "ListCreatedRelations";
             this.ListCreatedRelations.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ListCreatedRelations.Size = new System.Drawing.Size(158, 238);
+            this.ListCreatedRelations.Size = new System.Drawing.Size(231, 238);
             this.ListCreatedRelations.TabIndex = 2;
+            this.ListCreatedRelations.Click += new System.EventHandler(this.userClickedComponent);
             this.ListCreatedRelations.SelectedIndexChanged += new System.EventHandler(this.ListCreatedRelations_SelectedIndexChanged);
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.ListPropertiesTarget);
             this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.ListRelationsPerEntity);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(227, 478);
+            this.groupBox2.Size = new System.Drawing.Size(228, 486);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "OTLConnectingClassPane";
@@ -545,11 +551,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListPropertiesTarget.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesTarget.ColumnHeadersVisible = false;
-            this.ListPropertiesTarget.Location = new System.Drawing.Point(3, 292);
+            this.ListPropertiesTarget.Location = new System.Drawing.Point(3, 300);
             this.ListPropertiesTarget.Name = "ListPropertiesTarget";
             this.ListPropertiesTarget.ReadOnly = true;
             this.ListPropertiesTarget.RowHeadersVisible = false;
-            this.ListPropertiesTarget.Size = new System.Drawing.Size(217, 140);
+            this.ListPropertiesTarget.Size = new System.Drawing.Size(218, 140);
             this.ListPropertiesTarget.TabIndex = 3;
             this.ListPropertiesTarget.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ListPropertiesTarget_CellContentClick);
             // 
@@ -559,7 +565,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(6, 20);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(214, 20);
+            this.textBox2.Size = new System.Drawing.Size(215, 20);
             this.textBox2.TabIndex = 3;
             this.textBox2.Tag = "";
             this.textBox2.Text = "search...";
@@ -570,9 +576,9 @@
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(7, 444);
+            this.button1.Location = new System.Drawing.Point(7, 452);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(214, 23);
+            this.button1.Size = new System.Drawing.Size(215, 23);
             this.button1.TabIndex = 1;
             this.button1.Text = "AddRelation >>";
             this.button1.UseVisualStyleBackColor = true;
@@ -588,21 +594,20 @@
             this.ListRelationsPerEntity.Location = new System.Drawing.Point(6, 45);
             this.ListRelationsPerEntity.Name = "ListRelationsPerEntity";
             this.ListRelationsPerEntity.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.ListRelationsPerEntity.Size = new System.Drawing.Size(215, 238);
+            this.ListRelationsPerEntity.Size = new System.Drawing.Size(216, 238);
             this.ListRelationsPerEntity.TabIndex = 0;
+            this.ListRelationsPerEntity.Click += new System.EventHandler(this.userClickedComponent);
             this.ListRelationsPerEntity.SelectedIndexChanged += new System.EventHandler(this.ListRelationsPerEntity_SelectedIndexChanged);
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.ListPropertiesPerEntity);
             this.groupBox1.Controls.Add(this.ListImportedEntities);
-            this.groupBox1.Location = new System.Drawing.Point(0, 3);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(230, 478);
+            this.groupBox1.Size = new System.Drawing.Size(248, 486);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "OTLBaseClassPane";
@@ -613,7 +618,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(7, 20);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(217, 20);
+            this.textBox1.Size = new System.Drawing.Size(235, 20);
             this.textBox1.TabIndex = 2;
             this.textBox1.Tag = "";
             this.textBox1.Text = "search...";
@@ -628,11 +633,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListPropertiesPerEntity.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.ListPropertiesPerEntity.ColumnHeadersVisible = false;
-            this.ListPropertiesPerEntity.Location = new System.Drawing.Point(7, 292);
+            this.ListPropertiesPerEntity.Location = new System.Drawing.Point(7, 300);
             this.ListPropertiesPerEntity.Name = "ListPropertiesPerEntity";
             this.ListPropertiesPerEntity.ReadOnly = true;
             this.ListPropertiesPerEntity.RowHeadersVisible = false;
-            this.ListPropertiesPerEntity.Size = new System.Drawing.Size(217, 180);
+            this.ListPropertiesPerEntity.Size = new System.Drawing.Size(235, 180);
             this.ListPropertiesPerEntity.TabIndex = 1;
             this.ListPropertiesPerEntity.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -645,8 +650,9 @@
             this.ListImportedEntities.HorizontalScrollbar = true;
             this.ListImportedEntities.Location = new System.Drawing.Point(6, 45);
             this.ListImportedEntities.Name = "ListImportedEntities";
-            this.ListImportedEntities.Size = new System.Drawing.Size(218, 238);
+            this.ListImportedEntities.Size = new System.Drawing.Size(236, 238);
             this.ListImportedEntities.TabIndex = 0;
+            this.ListImportedEntities.Click += new System.EventHandler(this.userClickedComponent);
             this.ListImportedEntities.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // entityCommand1
@@ -670,12 +676,14 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
+            this.splitContainer1.Panel1MinSize = 150;
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Panel2MinSize = 400;
             this.splitContainer1.Size = new System.Drawing.Size(1013, 488);
-            this.splitContainer1.SplitterDistance = 235;
+            this.splitContainer1.SplitterDistance = 250;
             this.splitContainer1.TabIndex = 5;
             // 
             // splitContainer2
@@ -688,12 +696,14 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.Controls.Add(this.groupBox2);
+            this.splitContainer2.Panel1MinSize = 100;
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(774, 488);
-            this.splitContainer2.SplitterDistance = 235;
+            this.splitContainer2.Panel2MinSize = 100;
+            this.splitContainer2.Size = new System.Drawing.Size(759, 488);
+            this.splitContainer2.SplitterDistance = 230;
             this.splitContainer2.TabIndex = 0;
             // 
             // splitContainer3
@@ -706,12 +716,14 @@
             // splitContainer3.Panel1
             // 
             this.splitContainer3.Panel1.Controls.Add(this.groupBox3);
+            this.splitContainer3.Panel1MinSize = 200;
             // 
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tabControl1);
-            this.splitContainer3.Size = new System.Drawing.Size(535, 488);
-            this.splitContainer3.SplitterDistance = 178;
+            this.splitContainer3.Panel2MinSize = 200;
+            this.splitContainer3.Size = new System.Drawing.Size(525, 488);
+            this.splitContainer3.SplitterDistance = 245;
             this.splitContainer3.TabIndex = 0;
             // 
             // tabControl1
@@ -722,7 +734,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(351, 486);
+            this.tabControl1.Size = new System.Drawing.Size(274, 486);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -730,7 +742,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(343, 460);
+            this.tabPage1.Size = new System.Drawing.Size(266, 460);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -743,7 +755,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(343, 460);
+            this.tabPage2.Size = new System.Drawing.Size(266, 460);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -751,13 +763,12 @@
             // chromiumWebBrowser1
             // 
             this.chromiumWebBrowser1.ActivateBrowserOnCreation = false;
-            this.chromiumWebBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.chromiumWebBrowser1.Location = new System.Drawing.Point(4, 7);
+            this.chromiumWebBrowser1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chromiumWebBrowser1.Location = new System.Drawing.Point(3, 3);
             this.chromiumWebBrowser1.Name = "chromiumWebBrowser1";
-            this.chromiumWebBrowser1.Size = new System.Drawing.Size(333, 447);
+            this.chromiumWebBrowser1.Size = new System.Drawing.Size(260, 454);
             this.chromiumWebBrowser1.TabIndex = 0;
+            this.chromiumWebBrowser1.ConsoleMessage += new System.EventHandler<CefSharp.ConsoleMessageEventArgs>(this.onBrowserMessage);
             // 
             // label1
             // 
@@ -767,15 +778,6 @@
             this.label1.Size = new System.Drawing.Size(163, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Deze asset heeft geen geometrie";
-            // 
-            // showAssetNameWherePossibleToolStripMenuItem
-            // 
-            this.showAssetNameWherePossibleToolStripMenuItem.Checked = true;
-            this.showAssetNameWherePossibleToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.showAssetNameWherePossibleToolStripMenuItem.Name = "showAssetNameWherePossibleToolStripMenuItem";
-            this.showAssetNameWherePossibleToolStripMenuItem.Size = new System.Drawing.Size(246, 22);
-            this.showAssetNameWherePossibleToolStripMenuItem.Text = "Show asset name where possible";
-            this.showAssetNameWherePossibleToolStripMenuItem.Click += new System.EventHandler(this.showAssetNameWherePossibleToolStripMenuItem_Click);
             // 
             // RelationWindow
             // 

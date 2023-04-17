@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using static OTLWizard.OTLObjecten.Enums;
+using static OTLWizard.Helpers.Enums;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// convenience classes to help parse some parameter values

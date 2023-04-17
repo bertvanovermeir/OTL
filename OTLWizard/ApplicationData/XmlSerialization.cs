@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Xml.Serialization;
 
-namespace OTLWizard.ApplicationData
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Functions for performing common XML Serialization operations.

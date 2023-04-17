@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     /// <summary>
     /// Deze klasse start de applicatie op

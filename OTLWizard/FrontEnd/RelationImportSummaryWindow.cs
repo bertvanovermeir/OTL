@@ -1,5 +1,5 @@
 ﻿using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System;
 using System.Windows.Forms;
 
@@ -7,14 +7,17 @@ namespace OTLWizard.FrontEnd
 {
     public partial class RelationImportSummaryWindow : Form
     {
-        public RelationImportSummaryWindow()
+        private string usecase;
+
+        public RelationImportSummaryWindow(string usecase)
         {
+            this.usecase = usecase;
             InitializeComponent();
         }
 
         private void RelationImportSummaryWindow_Load(object sender, EventArgs e)
         {
-            this.Text = Language.Get("importsummaryheader");
+            this.Text = Language.Get(usecase);
         }
 
         public void SetDataSource(object source)
@@ -26,7 +29,12 @@ namespace OTLWizard.FrontEnd
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ViewHandler.Show(Enums.Views.isNull, Enums.Views.RelationImportSummary, null);
+            if(usecase.Equals("importsummaryheader"))
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.RelationImportSummary, null);
+            else if(usecase.Equals("comparesummaryheader"))
+            {
+                ViewHandler.Show(Enums.Views.isNull, Enums.Views.RelationImportSummary, null);
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

@@ -1,17 +1,20 @@
-﻿Nieuwigheden versie 5.0.0
+﻿Nieuwigheden versie 5.1.0
 -------------------------
-
-- Assets in de relatietool kunnen nu worden weergegeven op de kaart en in birds eye 3D wanneer beschikbaar (bij gebruik van de geometry-WKT kolom). Internetverbinding vereist.
-- Assets worden nu gesorteerd op AssetId of op naam, wanneer deze beschikbaar is voor het asset.
-- Assets, zowel actieve als op de achtergrond, zijn aanklikbaar op de kaart en tonen beperkte info om te helpen bij aanmaken relaties.
-- Weegavefouten met base64 notatie zijn nu echt opgelost
-- Het inladen van assets is geoptimaliseerd. Daar merkt u waarschijnlijk weinig tot niets van :)
-- SDF Autocad Map bestanden kunnen nu in een aparte module naar CSV worden geëxporteerd.
+nieuw:
+- diff tool: Verschillende bestanden/formaten kunnen nu met elkaar vergeleken worden, enkel de verschillen worden geëxporteerd (CSV) voor de aanlevering.
+- relatie tool: relaties kunnen nu ook gelegd worden op de kaart door deze aan te klikken (experimenteel)
+- relatie tool: het tonen van assets op de kaart werkt nu sneller en efficienter, ook in geval van een tragere internetverbinding
+- relatie tool: visualisatieproblemen waarbij kolommen (bijna) niet tonen zijn nu hopelijk overal opgelost
+- algemene bugfixes
 
 Opmerkingen: 
 - als u wil gebruik maken van de nieuwe functie om assets weer te geven op een kaart, vergeet dan zeker niet de instellingen naar jouw hand te zetten onder 'opties' > 'GIS viewer' in de relatietool.
-- je kan nog geen relaties leggen door te klikken op de kaart, deze functionaliteit wordt opgenomen in een verdere versie. De kaart dient enkel ter raadpleging.
 - tonen assets foutief, dan is de WKT representatie (geometry kolom) hoogst waarschijnlijk foutief opgesteld. Het programma voert een conversie uit van Lambert72 naar GPS coordinaten.
+
+Gepland:
+- relaties tonen in de juiste kleur (zoals op de website)
+- attributen tonen bij de subsetweergave, niet enkel de klassenamen
+- SDF CSV export formaat aanpassen naar ; ipv ,
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
 U wordt nu omgeleid naar de downloadpagina.

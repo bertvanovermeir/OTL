@@ -1,5 +1,5 @@
 ﻿using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System;
 using System.Linq;
 using System.Windows.Forms;

@@ -203,9 +203,16 @@
     <Compile Include="ApplicationData\ArtefactExporterCSV.cs" />
     <Compile Include="ApplicationData\ArtefactImporter.cs" />
     <Compile Include="ApplicationData\ArtefactExporterXLS.cs" />
+    <Compile Include="ApplicationData\RealDataComparer.cs" />
     <Compile Include="ApplicationData\RealDataExporter.cs" />
     <Compile Include="ApplicationData\RealDataImporter.cs" />
-    <Compile Include="ApplicationData\SDFImporter.cs" />
+    <Compile Include="FrontEnd\DataComparisonWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrontEnd\DataComparisonWindow.Designer.cs">
+      <DependentUpon>DataComparisonWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\SDFHandler.cs" />
     <Compile Include="ApplicationData\SubsetExporter.cs" />
     <Compile Include="ApplicationData\SubsetExporterCSV.cs" />
     <Compile Include="ApplicationData\XmlSerialization.cs" />
@@ -320,6 +327,7 @@
     </Compile>
     <Compile Include="Helpers\SerializableDictionary.cs" />
     <Compile Include="OTLObjecten\OTL_ArtefactType.cs" />
+    <Compile Include="OTLObjecten\OTL_CommentContainer.cs" />
     <Compile Include="OTLObjecten\OTL_ConnectingEntityHandle.cs" />
     <Compile Include="OTLObjecten\OTL_DataContainer.cs" />
     <Compile Include="OTLObjecten\OTL_Entity.cs" />
@@ -344,6 +352,9 @@
     <None Include="Resources\DescriptiveBestIbis-size_restricted.gif" />
     <EmbeddedResource Include="FrontEnd\ArtefactResultWindow.resx">
       <DependentUpon>ArtefactResultWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrontEnd\DataComparisonWindow.resx">
+      <DependentUpon>DataComparisonWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrontEnd\DataConversionWindow.resx">
       <DependentUpon>DataConversionWindow.cs</DependentUpon>

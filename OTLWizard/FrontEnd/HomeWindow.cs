@@ -1,5 +1,5 @@
 ﻿using OTLWizard.Helpers;
-using OTLWizard.OTLObjecten;
+using OTLWizard.Helpers;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -26,6 +26,7 @@ namespace OTLWizard
             button6.Text = Language.Get("home6");
             button7.Text = Language.Get("home7");
             button8.Text = Language.Get("home8");
+            button9.Text = Language.Get("home10");
             label1.Text = Language.Get("welcome");
             label4.Text = Language.Get("collab");
             if (Settings.Get("language").Equals("nl"))
@@ -167,6 +168,11 @@ namespace OTLWizard
         private void button5_Click_1(object sender, EventArgs e)
         {
             ViewHandler.Show(Enums.Views.DataConversion, Enums.Views.Home, null);
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            ViewHandler.Show(Enums.Views.DataComparison, Enums.Views.Home, null);
         }
     }
 }

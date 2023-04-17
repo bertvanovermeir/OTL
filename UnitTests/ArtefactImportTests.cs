@@ -1,4 +1,4 @@
-﻿using OTLWizard.OTLObjecten;
+﻿using OTLWizard.Helpers;
 using System.Linq;
 using Xunit;
 

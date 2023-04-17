@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace OTLWizard.OTLObjecten
+namespace OTLWizard.Helpers
 {
     public static class ViewHandler
     {
@@ -16,12 +16,14 @@ namespace OTLWizard.OTLObjecten
         private static RelationWindow relationWindow = new RelationWindow();
         private static RelationImportDataWindow relationImportDataWindow = new RelationImportDataWindow();
         private static RelationUserDefinedWindow relationUserDefinedWindow = new RelationUserDefinedWindow();
-        private static RelationImportSummaryWindow relationImportSummaryWindow = new RelationImportSummaryWindow();
+        private static RelationImportSummaryWindow relationImportSummaryWindow = new RelationImportSummaryWindow("importsummaryheader");
+        private static RelationImportSummaryWindow dataComparisonSummaryWindow = new RelationImportSummaryWindow("comparesummaryheader");
         private static SDXWindow sdxWindow = new SDXWindow();
         private static TutorialWindow tutorialWindow = new TutorialWindow();
         private static SubsetViewerWindow subsetViewerWindow = new SubsetViewerWindow();
         private static GeometryViewerWindow geometryViewerWindow = new GeometryViewerWindow();
         private static DataConversionWindow dataConversionWindow = new DataConversionWindow();
+        private static DataComparisonWindow dataComparisonWindow = new DataComparisonWindow();
 
         public static void Show(string message, string header, MessageBoxIcon icon)
         {
@@ -67,6 +69,9 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.RelationImportSummary:
                     relationImportSummaryWindow.Hide();
                     break;
+                case Enums.Views.DataComparisonSummary:
+                    dataComparisonSummaryWindow.Hide();
+                    break;
                 case Enums.Views.SDFMain:
                     sdxWindow.Hide();
                     break;
@@ -78,6 +83,9 @@ namespace OTLWizard.OTLObjecten
                     break;
                 case Enums.Views.DataConversion:
                     dataConversionWindow.Hide();
+                    break;
+                case Enums.Views.DataComparison:
+                    dataComparisonWindow.Hide();
                     break;
                 default:
                     break;
@@ -119,6 +127,10 @@ namespace OTLWizard.OTLObjecten
                     relationImportSummaryWindow.SetDataSource(optionalArgument);
                     relationImportSummaryWindow.ShowDialog();
                     break;
+                case Enums.Views.DataComparisonSummary:
+                    dataComparisonSummaryWindow.SetDataSource(optionalArgument);
+                    dataComparisonSummaryWindow.ShowDialog();
+                    break;
                 case Enums.Views.RelationsMain:
                     if (optionalArgument != null)
                     {
@@ -148,6 +160,10 @@ namespace OTLWizard.OTLObjecten
                 case Enums.Views.DataConversion:
                     dataConversionWindow = new DataConversionWindow();
                     dataConversionWindow.Show();
+                    break;
+                case Enums.Views.DataComparison:
+                    dataComparisonWindow = new DataComparisonWindow();
+                    dataComparisonWindow.Show();
                     break;
                 default:
                     break;
