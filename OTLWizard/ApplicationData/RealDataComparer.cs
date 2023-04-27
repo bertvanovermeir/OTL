@@ -144,7 +144,7 @@ namespace OTLWizard.ApplicationData
             // relations
             foreach(OTL_Relationship newRelation in newRelationships.Values)
             {
-                var baseRelation = baseRelationships.Where(n => n.Value.Equals(newRelation.AssetId)).FirstOrDefault().Value;
+                var baseRelation = baseRelationships.Where(n => n.Value.AssetId.Equals(newRelation.AssetId)).FirstOrDefault().Value;
                 if(baseRelation != null)
                 {
                     // check if status has changed isActive
