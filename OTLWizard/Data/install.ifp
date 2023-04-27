@@ -75,6 +75,18 @@ Execdlls = 0
 [Languages]
 7
 [Files/Dirs]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\app.manifest
+3 KB
+manifest
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.dll
+52 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.pdb
+151.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.xml
+102.8 KB
+xml
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.dll
 40.5 KB
 dll
@@ -396,18 +408,6 @@ log
 C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\OTLWizard.exe.config
 2.7 KB
 config
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\app.manifest
-3 KB
-manifest
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.dll
-52 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.pdb
-151.5 KB
-pdb
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.xml
-102.8 KB
-xml
 [Licence_Begin]
 1048
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}
