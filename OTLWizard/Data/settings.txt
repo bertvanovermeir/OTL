@@ -14,6 +14,7 @@ relationretention=false
 otlactiverel=isActief
 firstrun=0
 otlpath=https://wegenenverkeer.data.vlaanderen.be/doc/implementatiemodel/master/html/OTL.db
+artpath=https://wegenenverkeer.data.vlaanderen.be/doc/implementatiemodel/master/html/GeometrieArtefact-GA_2.7.0.zip
 hidereluricosmetic=true
 hidebase64cosmetic=true
 agenturi=http://purl.org/dc/terms/Agent

@@ -756,13 +756,59 @@ namespace OTLWizard.Helpers
             return temp;
         }
 
+        public static async Task<bool> ImportArtefactFromDownload()
+        {
+            bool ok = true;
+            // download the subset from the website to a temp folder
+            string filename = "geo.zip";
+            var localPath = System.IO.Path.GetTempPath() + "otlgeodownload\\";
+            var completePath = localPath + filename;
+            string databasePathSingle = "";
+
+            // create the folder if it does not exist
+            Directory.CreateDirectory(localPath);
+            Directory.CreateDirectory(localPath + "extract\\");
+            // download the TTL file
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("geodownload"));
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    client.DownloadFile(Settings.GetRaw("geopath"), localPath + filename);
+                    ok = true;
+                }
+                ZipFile.ExtractToDirectory(completePath, localPath + "extract\\");
+                string[] databasePath = Directory.GetFiles(localPath + "extract\\", "*.db", SearchOption.AllDirectories);
+                if (databasePath == null)
+                    ok = false;
+                else
+                    databasePathSingle = databasePath[0];
+            }
+            catch
+            {
+                ok = false;
+                ViewHandler.Show(Language.Get("otldownloadfail"), Language.Get("errorheader"), MessageBoxIcon.Error);
+            }
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            if (ok)
+            {
+                await ImportArtefact(databasePathSingle);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public static async Task<bool> R_ImportSubsetAsync(string[] vs)
         {
             string subsetpath = vs[0];
             bool success = true;
             if (subsetpath.Equals("download"))
             {
-                // dowload the subset from the website to a temp folder
+                // download the subset from the website to a temp folder
                 string filename = "otl.db";
                 var localPath = System.IO.Path.GetTempPath() + "otldownload\\";
 
@@ -889,7 +935,7 @@ namespace OTLWizard.Helpers
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
             return true;
         }
-
+        
         public static void C_ResetCompare()
         {
         originalData = new RealDataImporter();
@@ -912,7 +958,7 @@ namespace OTLWizard.Helpers
             path = path.Replace(".csv", "");
             path = path.Replace(".CSV", "");
             
-            RealDataExporter.Export(path + "_entities.csv", comparer.GetEntities(), emptyColumns, featid);
+            RealDataExporter.ExportCSV(path + "_entities.csv", comparer.GetEntities(), emptyColumns, featid);
             RealDataExporter.Export(path + "_relations.csv", comparer.GetRelationships());
 
         }
@@ -969,7 +1015,7 @@ namespace OTLWizard.Helpers
 
             ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
 
-            if (realImporter.GetErrors().Count > 0)
+            if (temp.GetErrors().Count > 0)
             {
                 ViewHandler.Show(Enums.Views.RelationImportSummary, Enums.Views.isNull, temp.GetErrors().ToArray());
                 temp.ResetErrors();

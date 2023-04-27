@@ -96,6 +96,7 @@ namespace OTLWizard.FrontEnd
 
         private async void buttonControleUitvoeren_Click(object sender, EventArgs e)
         {
+            ApplicationHandler.C_ResetCompare();
             await ApplicationHandler.C_ImportData(data["filesoriginal"], true);
             await ApplicationHandler.C_ImportData(data["filesnew"], false);
             var result = await ApplicationHandler.C_CompareData();

@@ -83,8 +83,8 @@
 <EN>home7=Create and visualise relations from existing CSV/XLS/SDF data
 <NL>home9=bestaande data converteren van SDF naar CSV
 <EN>home9=Convert Existing Data from SDF to CSV
-<NL>home10=bestaande data vergelijken met DAVIE data en opkuisen
-<EN>home10=compare existing data with DAVIE and clean data
+<NL>home10=Ongewijzigde data filteren uit een dataset
+<EN>home10=Compare existing data with DAVIE and clean data
 <NL>welcome=Welkom, maak een keuze...
 <EN>welcome=Welcome, please pick an option...
 <NL>changelanguage=Om de taal te wijzigen, verander de "language" tag in het setting.txt bestand. Herstart de applicatie.
@@ -190,7 +190,7 @@
 <EN>foutpos3=AssetId or TypeUri could not be retrieved in header info.
 <NL>foutpos4=AssetId of TypeUri zijn niet ingevuld.
 <EN>foutpos4=AssetId or TypeUri are empty.
-<NL>foutpos5=AssetId is reeds geimporteerd.
+<NL>foutpos5=Dit AssetId komt meerdere malen voor.
 <EN>foutpos5=AssetId already imported.
 <NL>foutpos6=Assetinformatie toegekend aan bestaande Asset.
 <EN>foutpos6=Assetinformation added to existing Asset.

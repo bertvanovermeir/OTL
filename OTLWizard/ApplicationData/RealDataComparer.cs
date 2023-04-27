@@ -182,6 +182,7 @@ namespace OTLWizard.ApplicationData
 
         public List<OTL_CommentContainer> GetReport()
         {
+            Dictionary<string, OTL_CommentContainer> temp = new Dictionary<string, OTL_CommentContainer>();
             return comments;
         }
     }

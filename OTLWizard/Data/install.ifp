@@ -3,7 +3,7 @@
 ProjectFileVersion = 1.1
 [General]
 Program name = OTL Wizard
-Program version = 4.6.0
+Program version = 5.1.0
 Windows 2000 = 0
 Windows XP = 0
 Windows Server 2003 = 0
@@ -55,7 +55,7 @@ Time = 2
 PlaySound = 0
 Allow = 0
 [Build]
-File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v4.6.0_installer.exe
+File = C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\Data\OTLWizard_v5.1.0_installer.exe
 SetupIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 UninstallIconPath = C:\Program Files (x86)\solicus\InstallForge\icons\modern.ico
 CompressionMethod = 0
@@ -75,198 +75,339 @@ Execdlls = 0
 [Languages]
 7
 [Files/Dirs]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\CsvHelper.dll
-180 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\CsvHelper.xml
-372.5 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.dll
-2 MB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.GeneralShapes.dll
-50 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.GeneralShapes.pdb
-73.5 KB
-pdb
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.pdb
-2.6 MB
-pdb
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.WinFormsUI.dll
-1 MB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.WinFormsUI.pdb
-689.5 KB
-pdb
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.WinFormsUI.xml
-180.6 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Dataweb.NShape.xml
-1.6 MB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\EntityFramework.dll
-4.8 MB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\EntityFramework.SqlServer.dll
-577.9 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\EntityFramework.SqlServer.xml
-159.4 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\EntityFramework.xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\EntityFramework.xml
 3.6 MB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Buffers.dll
 20.4 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
-17.8 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Buffers.xml
+3.4 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Bcl.HashCode.dll
-21.9 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.dll
+16.4 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Bcl.HashCode.xml
-1.7 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.CSharp.dll
-46.7 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.dll
-1.5 MB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.Drawing.dll
-146 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.Drawing.xml
-140.3 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.GraphViewerGdi.dll
-151 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.GraphViewerGdi.xml
-56.2 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Microsoft.Msagl.xml
-936.3 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe
-1.9 MB
-exe
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.exe.config
-1.9 KB
-config
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\OTLWizard.pdb
-487.5 KB
-pdb
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Drawing.dll
-9 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Drawing.xml
-6.5 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Geometry.dll
-10 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Panelak.Geometry.xml
-13.1 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Licensing.dll
-796 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Shared.WPF.dll
-12.6 MB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Syncfusion.Shared.WPF.xml
-2.8 MB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Buffers.dll
-27.3 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Buffers.xml
-3.1 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SQLite.dll
-384.3 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SQLite.EF6.dll
-196.8 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SQLite.Linq.dll
-196.8 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SQLite.xml
-1.1 MB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Data.SqlServerCe.dll
-459.2 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Drawing.Common.dll
-50 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Memory.dll
-145.1 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Memory.xml
-13.6 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Numerics.Vectors.dll
-113.2 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Numerics.Vectors.xml
-179.2 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-23 KB
-dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Runtime.CompilerServices.Unsafe.xml
 13.8 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+20.4 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+17.8 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Bcl.HashCode.dll
+21.9 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Bcl.HashCode.xml
+1.7 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\ProjNET.dll
+112.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\ProjNET.xml
+246.3 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Threading.Tasks.Extensions.dll
 32.2 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Threading.Tasks.Extensions.xml
 9.9 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.abstractions.dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Drawing.Common.dll
+50 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.abstractions.dll
 21.4 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.abstractions.xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.abstractions.xml
 52 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.assert.dll
-71.4 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Numerics.Vectors.dll
+113.1 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.assert.xml
-93.6 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Numerics.Vectors.xml
+179.2 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.core.dll
-53.9 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.CSharp.dll
+46.7 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.core.xml
-65.3 KB
-xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.execution.desktop.dll
-243.4 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Data.SqlServerCe.dll
+459.2 KB
 dll
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\xunit.execution.desktop.xml
-234 KB
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\setup
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\DawnCache
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\GPUCache
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\amd64
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Data
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\locales
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\x64
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\x86
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\cs
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\de
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\es
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\fr
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\it
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\ja
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\ko
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\pl
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\pt-BR
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\ru
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\tr
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\zh-Hans
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\zh-Hant
+N/A
+[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\debug.log
+196.3 KB
+log
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\OTLWizard.exe
+6.9 MB
+exe
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\OTLWizard.pdb
+577.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\OTLWizard.exe.config
+2.7 KB
+config
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\app.manifest
+3 KB
+manifest
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.dll
+52 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.pdb
+151.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.WinForms.xml
+102.8 KB
 xml
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\amd64\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\Data\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\setup\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x64\
-N/A
-[Folder]
-C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\Debug\x86\
-N/A
-[Folder]
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.dll
+40.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.pdb
+191.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.xml
+106.8 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.dll
+1.1 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.pdb
+3 MB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.xml
+2.1 MB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.Runtime.xml
+533.3 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.Runtime.dll
+1.3 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.Core.Runtime.pdb
+10.6 MB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.BrowserSubprocess.exe
+7 KB
+exe
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.BrowserSubprocess.pdb
+19.5 KB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.BrowserSubprocess.Core.dll
+919 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CefSharp.BrowserSubprocess.Core.pdb
+9.6 MB
+pdb
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\README.txt
+5.7 KB
+txt
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\libcef.dll
+158.2 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\v8_context_snapshot.bin
+446.6 KB
+bin
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\resources.pak
+7.4 MB
+pak
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\snapshot_blob.bin
+150.5 KB
+bin
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\chrome_elf.dll
+1.1 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\chrome_100_percent.pak
+597.5 KB
+pak
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\chrome_200_percent.pak
+893.8 KB
+pak
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\libEGL.dll
+362.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\libGLESv2.dll
+6.3 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\vulkan-1.dll
+773 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\vk_swiftshader_icd.json
+106 Byte
+json
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\vk_swiftshader.dll
+4.3 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\icudtl.dat
+10.1 MB
+dat
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\d3dcompiler_47.dll
+3.9 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\LICENSE.txt
+1.6 KB
+txt
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Msagl.GraphViewerGdi.dll
+174.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Msagl.GraphViewerGdi.xml
+56.1 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Msagl.Drawing.dll
+174.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Msagl.Drawing.xml
+140.1 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Msagl.dll
+1.8 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Microsoft.Msagl.xml
+907.2 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Resources.Extensions.dll
+60.1 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Resources.Extensions.xml
+26.9 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.assert.dll
+100.1 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.core.dll
+64.1 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.execution.desktop.dll
+256.6 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.execution.desktop.xml
+234.7 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.assert.xml
+113.3 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\xunit.core.xml
+66 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Memory.dll
+138.9 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Memory.xml
+13.6 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\DotSpatial.Projections.dll
+1.5 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\DotSpatial.Projections.xml
+257.3 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CsvHelper.dll
+180 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\CsvHelper.xml
+372.5 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Programmerare.CrsTransformations.Adapter.ProjNet.dll
+4.7 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Programmerare.CrsTransformations.Adapter.DotSpatial.dll
+13.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Programmerare.CrsTransformations.Core.dll
+99.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Data.SQLite.Linq.dll
+196.8 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Data.SQLite.EF6.dll
+196.8 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Data.SQLite.dll
+384.3 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\System.Data.SQLite.xml
+1.1 MB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\FSharp.Core.dll
+2.9 MB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\FSharp.Core.xml
+898.7 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\Programmerare.CrsTransformations.Constants.dll
+579.5 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\EntityFramework.SqlServer.dll
+577.9 KB
+dll
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\EntityFramework.SqlServer.xml
+159.4 KB
+xml
+C:\Users\BertVanOvermeir\source\repos\OTL\OTLWizard\bin\x86\Debug\EntityFramework.dll
+4.8 MB
+dll
 [Licence_Begin]
 1048
 {\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}}

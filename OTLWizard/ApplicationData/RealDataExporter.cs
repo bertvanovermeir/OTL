@@ -37,7 +37,12 @@ namespace OTLWizard.Helpers
             }
         }
 
-        public static bool Export(string path, List<OTL_Entity> entities, bool emptyColumns, bool featid)
+        public static bool ExportSDF()
+        {
+            return false;
+        }
+
+        public static bool ExportCSV(string path, List<OTL_Entity> entities, bool emptyColumns, bool featid)
         {
             // first divide records into classes otherwise header is wrong
             var typeuris = new List<string>();
@@ -104,7 +109,11 @@ namespace OTLWizard.Helpers
                         {
                             foreach (var key in keysSorted)
                             {
-                                csv.WriteField(key);
+                                // workaround Geometry Hoofdletter
+                                var hoofding = key;
+                                if (key.Equals("Geometry"))
+                                    hoofding = "geometry";
+                                csv.WriteField(hoofding);
                             }
 
                             hasHeaderBeenWritten = true;
