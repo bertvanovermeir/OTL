@@ -8,10 +8,10 @@ Bugfixes diff tool:
 - meermaals files vergelijken binnen dezelfde sessie accumuleert de resultaten niet meer.
 - Statuslabel resized niet mee met het venster.
 - Geometry kolom komt nu bij export in een kleine letter voor OTL Conformiteit.
-- Relaties worden nu wel juist vergeleken.
+- Relaties worden nu wel juist vergeleken (met dank aan Arthur).
 
 Toevoegingen diff tool:
-- export naar SDF voor compatibiliteit als workaround voor CSV bug in DAVIE
+- export naar SDF voor compatibiliteit als workaround voor DAVIE
 
 Opmerkingen: 
 - als u wil gebruik maken van de nieuwe functie om assets weer te geven op een kaart, vergeet dan zeker niet de instellingen naar jouw hand te zetten onder 'opties' > 'GIS viewer' in de relatietool.
