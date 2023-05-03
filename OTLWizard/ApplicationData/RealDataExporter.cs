@@ -37,9 +37,43 @@ namespace OTLWizard.Helpers
             }
         }
 
-        public static bool ExportSDF()
+        public static bool ExportSDF(string savepath, List<OTL_Entity> entities, string newpath)
         {
-            return false;
+            if (!File.Exists(newpath))
+                return false;
+            if (!newpath.ToLower().EndsWith(".sdf"))
+                return false;
+
+            // start process of sdf saving
+            var tempLocation = System.IO.Path.GetTempPath() + "otldavieworkaround\\";
+            if(Directory.Exists(tempLocation))
+                Directory.Delete(tempLocation, true);
+            Directory.CreateDirectory(tempLocation);
+            // get schema name
+            var schemaName = SDFHandler.GetSchemaName(newpath);
+            schemaName = schemaName.TrimEnd('\r','\n');
+            // dump schema to file
+            SDFHandler.DumpSchemaFromFile(schemaName, newpath, tempLocation + "schema.xml");
+            // replace xs:decimal with xs:string
+            var text = File.ReadAllText(tempLocation + "schema.xml");
+            text = text.Replace("xs:decimal", "xs:string");
+            File.WriteAllText(tempLocation + "schema.xml", text);
+            // create new sdf file
+            SDFHandler.CreateNewFile(savepath, tempLocation + "schema.xml");
+            // Get all classes in file
+            var classes = SDFHandler.GetClasses(newpath);
+            // get assetids for entities
+            List<string> assetIds = new List<string>();
+            foreach(var entity in entities)
+            {
+                assetIds.Add(entity.AssetId);
+            }
+            // copy filter per class to new file
+            foreach(var cla in classes)
+            {
+                SDFHandler.CopyClass(newpath, savepath, cla, assetIds.ToArray(), schemaName, schemaName);
+            }
+            return true;
         }
 
         public static bool ExportCSV(string path, List<OTL_Entity> entities, bool emptyColumns, bool featid)

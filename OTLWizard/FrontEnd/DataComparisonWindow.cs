@@ -114,19 +114,19 @@ namespace OTLWizard.FrontEnd
             SaveFileDialog fdlg = new SaveFileDialog();
             fdlg.Title = Language.Get("arexport");
             fdlg.FileName = "cleanedOTLdata";
-            fdlg.Filter = "CSV files (*.csv)|*.csv";
+            fdlg.Filter = "CSV files (*.csv)|*.csv|SDF files (*.sdf)|*.sdf";
             fdlg.FilterIndex = 1;
             fdlg.RestoreDirectory = true;
             if (fdlg.ShowDialog() == DialogResult.OK)
             {
-                ApplicationHandler.C_ExportData(fdlg.FileName, legeKolommen, featid);
+                _ = ApplicationHandler.C_ExportData(fdlg.FileName, legeKolommen, featid, textboxNieuweBestanden.Text);
                 labelStatus.Text = "Bestanden geëxporteerd...";
             }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            ViewHandler.Show("CTRL + A en CTRL + C, CTRL + V om te kopieren naar een rekenblad.", "Info", MessageBoxIcon.None);
         }
 
         private void checkBoxLegeKolommen_CheckedChanged(object sender, EventArgs e)
@@ -137,6 +137,11 @@ namespace OTLWizard.FrontEnd
         private void checkBoxFeatid_CheckedChanged(object sender, EventArgs e)
         {
             featid = !checkBoxFeatid.Checked;
+        }
+
+        private void textBoxOrigineleBestanden_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

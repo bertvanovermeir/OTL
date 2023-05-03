@@ -103,6 +103,7 @@
             this.textBoxOrigineleBestanden.Name = "textBoxOrigineleBestanden";
             this.textBoxOrigineleBestanden.Size = new System.Drawing.Size(641, 20);
             this.textBoxOrigineleBestanden.TabIndex = 32;
+            this.textBoxOrigineleBestanden.TextChanged += new System.EventHandler(this.textBoxOrigineleBestanden_TextChanged);
             // 
             // buttonOrigineleBestanden
             // 
@@ -141,6 +142,7 @@
             this.dataGridView1.ShowEditingIcon = false;
             this.dataGridView1.Size = new System.Drawing.Size(1098, 457);
             this.dataGridView1.TabIndex = 38;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // checkBoxLegeKolommen

@@ -953,16 +953,50 @@ namespace OTLWizard.Helpers
             return comparer.GetReport();
         }
 
-        public static void C_ExportData(string path, bool emptyColumns, bool featid)
+        public static async Task C_ExportData(string path, bool emptyColumns, bool featid, string adaptedFilePath)
         {
-            path = path.Replace(".csv", "");
-            path = path.Replace(".CSV", "");
+            var status = true;
+            var status2 = true;
+
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("exportfilecompare"));
+
+            if (path.ToLower().EndsWith(".csv"))
+            {
+                if(adaptedFilePath.ToLower().Contains(".sdf"))
+                    ViewHandler.Show(Language.Get("warnsdfcsv"),"Warning",MessageBoxIcon.Warning);
+
+                path = path.Replace(".csv", "");
+                path = path.Replace(".CSV", "");
+                status = RealDataExporter.ExportCSV(path + "_entities.csv", comparer.GetEntities(), emptyColumns, featid);
+                status2 = RealDataExporter.Export(path + "_relations.csv", comparer.GetRelationships());
+            }
+            else if(path.ToLower().EndsWith(".sdf"))
+            {
+                path = path.Replace(".sdf", "");
+                path = path.Replace(".SDF", "");
+                // filepaths might contain multiple files.
+                // however original file path is not used for now
+                var adaptedPaths = adaptedFilePath.Split(';');
+                foreach(var adaptedPath in adaptedPaths)
+                {
+                    if (adaptedPath.ToLower().EndsWith(".sdf"))
+                        adaptedFilePath = adaptedPath;
+                }
+                await Task.Run(() => { status = RealDataExporter.ExportSDF(path + "_entities.sdf", comparer.GetEntities(), adaptedFilePath); });               
+                status2 = RealDataExporter.Export(path + "_relations.csv", comparer.GetRelationships());
+            } else
+            {
+                ViewHandler.Show("Please specify file extension!", "Error", MessageBoxIcon.Error);
+            }
+
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+
+            if (!status || !status2)
+            {
+                ViewHandler.Show(Language.Get("errorsavefilesdf"), "Error", MessageBoxIcon.Error);
+            }
             
-            RealDataExporter.ExportCSV(path + "_entities.csv", comparer.GetEntities(), emptyColumns, featid);
-            RealDataExporter.Export(path + "_relations.csv", comparer.GetRelationships());
-
         }
-
 
         public async static Task<bool> C_ImportData(string[] paths, bool isOriginalData)
         {
