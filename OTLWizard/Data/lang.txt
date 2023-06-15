@@ -37,8 +37,8 @@
 <EN>exportartefactwindowheader=Artefact Manager
 <NL>exportsubsetwindowheader=Subsetbeheer
 <EN>exportsubsetwindowheader=Subset Manager
-<NL>homewindowheader=OTLWizard 5.1.1 - BVO 
-<EN>homewindowheader=OTLWizard 5.1.1 - BVO
+<NL>homewindowheader=OTLWizard 5.1.2 - BVO 
+<EN>homewindowheader=OTLWizard 5.1.2 - BVO
 <NL>loadingwindowheader=Bezig...
 <EN>loadingwindowheader=Loading...
 
@@ -158,8 +158,8 @@
 <EN>aupdy=Autoupdate On
 <NL>aupdn=Automatisch updaten uit
 <EN>aupdn=Autoupdate Off
-<NL>relationwindowheader=RelatieWizard 5.1.0 - BVO
-<EN>relationwindowheader=RelationWizard 5.1.0 - BVO
+<NL>relationwindowheader=RelatieWizard 5.1.2 - BVO
+<EN>relationwindowheader=RelationWizard 5.1.2 - BVO
 <NL>st_export= objecten werden geëxporteerd.
 <EN>st_export= elements were exported.
 <NL>suretoclose=Ben je zeker dat je wil afsluiten? Alle niet opgeslagen gegevens gaan verloren.
@@ -267,8 +267,8 @@
 <NL>home8=Een XSD bestand aanmaken om te gebruiken in Autocad Map
 <EN>home8=Creating an XSD file to use in Autocad Map
 
-<EN>sdfwizardheader=SDF Wizard 5.1.0 - BVO
-<NL>sdfwizardheader=SDF Wizard 5.1.0 - BVO
+<EN>sdfwizardheader=SDF Wizard 5.1.2 - BVO
+<NL>sdfwizardheader=SDF Wizard 5.1.2 - BVO
 <EN>buttonartefacttext=Import geometry artefact
 <NL>buttonartefacttext=Geometrie artefact importeren
 <EN>buttonsdxtext=Import XSD file
@@ -357,8 +357,8 @@
 <EN>tooltiplink4=https://github.com/bertvanovermeir/OTL/issues
 <NL>laadeenproject=Laad een project om te beginnen
 <EN>laadeenproject=Load a project to start
-<NL>subsetviewerheader=Subset Viewer 5.1.0 - BVO
-<EN>subsetviewerheader=Subset Viewer 5.1.0 - BVO
+<NL>subsetviewerheader=Subset Viewer 5.1.2 - BVO
+<EN>subsetviewerheader=Subset Viewer 5.1.2 - BVO
 <NL>dependencymissing=FDO Toolbox command executable ontbreekt. De SDF Database kon niet worden geladen. Installeer de Toolbox opnieuw.
 <EN>dependencymissing=FDO Toolbox command executable is missing. The SDF Database could not be loaded. Install the Toolbox again.
 <NL>dependencymissing2=FDO Toolbox, noodzakelijk voor SDF files te importeren, is niet gevonden op de computer. In het volgende dialoogvenster kan je zelf het pad aanduiden naar "fdocmd.exe". Meestal bevindt deze file zich in "C:\Program Files\FDO Toolbox" 
