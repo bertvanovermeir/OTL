@@ -67,7 +67,8 @@
             Parameters,
             Relations,
             Artefact,
-            Version
+            Version,
+            RelationsDistinctUris
         }
     }
 }

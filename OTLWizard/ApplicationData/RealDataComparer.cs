@@ -119,7 +119,26 @@ namespace OTLWizard.ApplicationData
                             });
                         }
                     }
-                    if(areAttributesChanged)
+                    // fix if a non null value is set to an empty attribute value in the new file (Credit to Arthur)
+                    foreach (var oldAttribute in baseEntity.GetProperties())
+                    {
+                        var isItNullInNewAttributes = newEntity.GetProperties().Where(p => p.Key.Equals(oldAttribute.Key)).FirstOrDefault().Value;
+                        if(isItNullInNewAttributes==null)
+                        {
+                            areAttributesChanged=true;
+                            comments.Add(new OTL_CommentContainer
+                            {
+                                AssetId = baseEntity.AssetId,
+                                Comment = Language.Get("changedattribute"),
+                                Type = "entity",
+                                IsAttribute = true,
+                                AttributeName = oldAttribute.Key,
+                                originalAttributeValue = oldAttribute.Value,
+                                newAttributeValue = ""
+                            }); ;
+                        }
+                    }
+                    if (areAttributesChanged)
                     {
                         acceptedEntityList.Add((string)baseEntity.AssetId,(OTL_Entity)baseEntity);
                     } else

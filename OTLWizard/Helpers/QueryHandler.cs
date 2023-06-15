@@ -34,6 +34,9 @@ namespace OTLWizard.Helpers
                     case Enums.Query.Version:
                         strQuery = lines[4];
                         break;
+                    case Enums.Query.RelationsDistinctUris:
+                        strQuery = lines[5];
+                        break;
                 }
             }
             return strQuery;

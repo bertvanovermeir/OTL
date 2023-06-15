@@ -159,6 +159,32 @@ namespace OTLWizard.Helpers
                 }
                 sqlite_datareader.Close();
             }
+
+            // RELATION ATTRIBUTES
+            using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
+            {
+                foreach (OTL_RelationshipType RelType in OTL_RelationTypes)
+                {
+                    string tempquery = QueryHandler.Get(Enums.Query.Parameters).Replace("[OSLOCLASS]", RelType.relationshipURI);
+                    sqlite_cmd.CommandText = tempquery;
+                    var sqlite_datareader = sqlite_cmd.ExecuteReader();
+                    // The SQLiteDataReader allows us to run through each row per loop
+                    while (sqlite_datareader.Read()) // Read() returns true if there is still a result line to read
+                    {
+                        // check columns in query to know what to transfer, 
+                        OTL_Parameter p = new OTL_Parameter(Keuzelijsten, (string)sqlite_datareader.GetValue(0), (string)sqlite_datareader.GetValue(3),
+                            (string)sqlite_datareader.GetValue(1), (string)sqlite_datareader.GetValue(2), bool.Parse((string)sqlite_datareader.GetValue(4)));
+                        // override default value of the parameter if name is typeURI, this will autofill this parameter field upon export
+                        if (p.FriendlyName.Contains("typeURI"))
+                        {
+                            p.DefaultValue = RelType.relationshipURI;
+                        }
+                        RelType.properties.Add(p);
+                    }
+                    sqlite_datareader.Close();
+                }
+            }
+
             // VERSION NUMBER
             using (var sqlite_cmd = new SQLiteCommand(SqliteConnection))
             {

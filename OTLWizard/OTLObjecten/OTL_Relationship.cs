@@ -24,7 +24,6 @@ namespace OTLWizard.Helpers
         public string DisplayName { get; set; }
         [Name("isActief")]
         public bool isActive { get; set; }
-
         [Ignore]
         public SerializableDictionary<string, string> Properties { get; set; }
 

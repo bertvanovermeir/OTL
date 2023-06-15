@@ -336,7 +336,7 @@ namespace OTLWizard.Helpers
                             entity.Name = agenturi.Split('/').Last();
                         }
 
-                        // properties
+                        // properties, if they are empty. Ignore them
                         for (int i = 0; i < line.ItemArray.Length; i++)
                         {
                             var key = data.Columns[i].ColumnName;

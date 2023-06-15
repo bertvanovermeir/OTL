@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace OTLWizard.Helpers
 {
@@ -20,12 +21,14 @@ namespace OTLWizard.Helpers
         public bool isDirectional;
         public bool isAbstract = false;
         public bool isImplementatieElement = false;
+        public List<OTL_Parameter> properties;
 
         public string DisplayName { get; set; }
 
         public OTL_RelationshipType()
         {
             // for serialization instances
+            properties = new List<OTL_Parameter>();
         }
 
         /// <summary>
@@ -37,6 +40,8 @@ namespace OTLWizard.Helpers
         /// <param name="direction"></param>
         public OTL_RelationshipType(string bronURI, string doelURI, string relationshipURI, string direction)
         {
+            properties = new List<OTL_Parameter>();
+
             this.bronURI = bronURI;
             this.doelURI = doelURI;
             this.relationshipURI = relationshipURI;
