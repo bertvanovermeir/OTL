@@ -113,7 +113,7 @@ namespace OTLWizard.Helpers
 
         public static async Task ImportArtefact(string subsetPath, string artefactPath)
         {
-            await ImportSubset(subsetPath, false);
+            await ImportSubset(subsetPath, false,false,true);
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("gaimport"));
             artefactConn = new ArtefactImporter(artefactPath);
             try
@@ -168,13 +168,13 @@ namespace OTLWizard.Helpers
         /// </summary>
         /// <param name="dbPath"></param>
         /// <param name="klPath"></param>
-        public static async Task<bool> ImportSubset(string dbPath, bool showdeprecationmsg, bool keuzelijsten = false)
+        public static async Task<bool> ImportSubset(string dbPath, bool showdeprecationmsg, bool iRelations, bool iAssets, bool keuzelijsten = false)
         {
             ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("otlimport"));
             subsetConn = new SubsetImporter(dbPath, keuzelijsten);
             try
             {
-                await Task.Run(() => { subsetConn.Import(); });
+                await Task.Run(() => { subsetConn.Import(iRelations, iAssets); });
             }
             catch
             {
@@ -578,10 +578,10 @@ namespace OTLWizard.Helpers
 
         public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelationsFor(OTL_Entity source, OTL_Entity target)
         {
-            return R_GetPossibleRelations(source).Where(p => p.doelId.Equals(target.AssetId)).ToList();
+            return R_QueryPossibleRelations(source).Where(p => p.doelId.Equals(target.AssetId)).ToList();
         }
 
-        public static List<OTL_ConnectingEntityHandle> R_GetPossibleRelations(OTL_Entity entity)
+        public static List<OTL_ConnectingEntityHandle> R_QueryPossibleRelations(OTL_Entity entity)
         {
             if (entity != null)
             {
@@ -802,7 +802,32 @@ namespace OTLWizard.Helpers
             }
         }
 
-        public static async Task<bool> R_ImportSubsetAsync(string[] vs)
+        public static async Task<bool> R_InitRelationsFromSubset()
+        {
+            ViewHandler.Show(Enums.Views.Loading, Enums.Views.isNull, Language.Get("otlrelationcalculate"));
+            // make entities unique
+            var entities = realImporter.GetEntities();
+            var dictionary_entities = new Dictionary<string,OTL_Entity>();
+            foreach(var entity in entities)
+            {
+                if(!dictionary_entities.ContainsKey(entity.TypeUri))
+                    dictionary_entities.Add(entity.TypeUri, entity);
+            }
+            await ImportSelectiveRelations(dictionary_entities.Values.ToList());
+            ViewHandler.Show(Enums.Views.isNull, Enums.Views.Loading, null);
+            return true;
+        }
+
+        public static async Task<bool> ImportSelectiveRelations(List<OTL_Entity> entities)
+        {
+            foreach (OTL_Entity ent in entities)
+                await Task.Run(() => {
+                    subsetConn.ImportSelectiveRelationSet(ent);
+                });
+            return true;
+        }
+
+        public static async Task<bool> R_DownloadAndInitSubset(string[] vs)
         {
             string subsetpath = vs[0];
             bool success = true;
@@ -835,7 +860,7 @@ namespace OTLWizard.Helpers
             }
             if (success)
             {
-                await ImportSubset(subsetpath, false);
+                await ImportSubset(subsetpath, false, false, false); // do nothing with subset data, just import empty container, will fill at runtime when clicking objects
                 return true;
             }
             else
@@ -905,7 +930,7 @@ namespace OTLWizard.Helpers
 
         public static async void VWR_ImportSubset(string path)
         {
-            await ImportSubset(path, false);
+            await ImportSubset(path, false, true, true);
         }
 
         public static List<OTL_ObjectType> VWR_GetSubset()

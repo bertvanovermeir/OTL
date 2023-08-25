@@ -68,7 +68,8 @@
             Relations,
             Artefact,
             Version,
-            RelationsDistinctUris
+            RelationsDistinctUris,
+            RelationSpecific
         }
     }
 }

@@ -18,7 +18,7 @@ namespace UnitTests
             var path_save_to = "test_result.csv";
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
             var exporter = new SubsetExporterCSV();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             exporter.SetSelectedClassesByUser(null);
@@ -47,7 +47,7 @@ namespace UnitTests
             var path_save_to = "test_result_help.csv";
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
             var exporter = new SubsetExporterCSV();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             exporter.SetSelectedClassesByUser(new[] { "Rack", "Netwerkpoort", "Netwerkelement" });
@@ -98,7 +98,7 @@ namespace UnitTests
             var path_save_to = "test_result.xlsx";
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null, 1, help: false, checklistoptions: false, dummydata: false, wkt: false, deprecated: false);
@@ -132,7 +132,7 @@ namespace UnitTests
             var path_save_to = "test_result.xlsx";
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null, 1, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);
@@ -166,7 +166,7 @@ namespace UnitTests
             var path_save_to = "test_result.xlsx";
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
             var exporter = new SubsetExporterXLS();
             exporter.SetOTLSubset(subsetImporter.GetOTLObjectTypes());
             bool success = exporter.Export(path: Directory.GetCurrentDirectory() + "\\" + path_save_to, null, 1, help: false, checklistoptions: true, dummydata: false, wkt: false, deprecated: false);

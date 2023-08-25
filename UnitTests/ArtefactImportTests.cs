@@ -17,7 +17,7 @@ namespace UnitTests
             var artefactImporter = new ArtefactImporter(dbpath);
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
             artefactImporter.Import(subsetImporter.GetOTLObjectTypes().Select(x => x.otlName));
 
             // assert

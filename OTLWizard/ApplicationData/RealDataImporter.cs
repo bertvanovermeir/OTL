@@ -408,7 +408,8 @@ namespace OTLWizard.Helpers
                         // properties
                         for (int i = 0; i < line.ItemArray.Length; i++)
                         {
-                            var key = data.Columns[i].ColumnName.ToLower();
+                            //var key = data.Columns[i].ColumnName.ToLower();
+                            var key = data.Columns[i].ColumnName;
                             var value = (string)line.ItemArray[i];
                             if (!value.Equals(""))
                             {

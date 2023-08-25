@@ -1,4 +1,5 @@
 ﻿using OTLWizard.Helpers;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -173,7 +174,15 @@ namespace OTLWizard.Helpers
                 foreach (string classname in classnames)
                 {
                     string contents = SDFHandler.loadDataForClass(classname, path);
+                    string[] contentArray = contents.Split(new String[] { "\r\n" }, 2, StringSplitOptions.RemoveEmptyEntries);
+                    if(contentArray.Length > 1)
+                {
+                    string header = contentArray[0].Replace('_', '.');
+                    contents = header + "\r\n" + contentArray[1];
+                } else
+                {
                     contents = contents.Replace('_', '.');
+                }                   
                     string filename = classname + ".csv";
                     File.WriteAllText(localPath + filename, contents);
                     files.Add(localPath + filename);
@@ -185,16 +194,16 @@ namespace OTLWizard.Helpers
         {
             List<string> files = new List<string>();
             // convert SDF to CSV
-            List<string> classnames = SDFHandler.GetClasses(path);
+            List<string> classnames = GetClasses(path);
 
             var localPath = saveTo;
-            if (Directory.Exists(localPath))
-                Directory.Delete(localPath, true);
-            Directory.CreateDirectory(localPath);
             foreach (string classname in classnames)
             {
-                string contents = SDFHandler.loadDataForClass(classname, path);
+                string contents = loadDataForClass(classname, path);
                 contents = contents.Replace('_', '.');
+                contents = contents.Replace("Geometry","geometry");
+                contents = contents.Replace("XYZ", "Z");
+                
                 string filename = classname + ".csv";
                 File.WriteAllText(localPath + filename, contents);
                 files.Add(localPath + filename);

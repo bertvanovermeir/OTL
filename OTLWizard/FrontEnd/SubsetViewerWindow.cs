@@ -1,7 +1,6 @@
 ﻿using Microsoft.Msagl.Drawing;
 using Microsoft.Msagl.Layout.MDS;
 using OTLWizard.Helpers;
-using OTLWizard.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,8 +18,9 @@ namespace OTLWizard.FrontEnd
         List<OTL_ObjectType> objects = new List<OTL_ObjectType>();
         List<OTL_RelationshipType> relationshipTypes = new List<OTL_RelationshipType>();
 
-        bool drawAbstract = true;
-        bool drawImplementatieElement = true;
+        bool drawAbstract = false;
+        bool drawImplementatieElement = false;
+        bool drawAttributes = true;
         Color colorAbstractRelation = Microsoft.Msagl.Drawing.Color.Pink;
         Color colorImplementatieElementRelation = Microsoft.Msagl.Drawing.Color.Gray;
         int relationFontSize = 10;
@@ -44,6 +44,7 @@ namespace OTLWizard.FrontEnd
         {
             checkBox1.Checked = drawAbstract;
             checkBox2.Checked = drawImplementatieElement;
+            checkBox3.Checked = drawAttributes;
             comboBox7.SelectedItem = "Pink";
             comboBox8.SelectedItem = "Gray";
             numericUpDown1.Value = 10;
@@ -168,10 +169,32 @@ namespace OTLWizard.FrontEnd
 
         private void drawOTLClass(OTL_ObjectType otl)
         {
-
-
+            string parameterText = "";
+            foreach(OTL_Parameter parameter in otl.GetParameters())
+            {
+                if (!parameter.DotNotatie.StartsWith("asset") && 
+                    !parameter.DotNotatie.StartsWith("typeURI") && 
+                    !parameter.DotNotatie.StartsWith("isActief") &&
+                    !parameter.DotNotatie.StartsWith("standaardBestek") &&
+                    !parameter.DotNotatie.StartsWith("bestekPost") &&
+                    !parameter.DotNotatie.StartsWith("notitie") &&
+                    !parameter.DotNotatie.StartsWith("toestand") &&
+                    !parameter.DotNotatie.StartsWith("datumOpri") &&
+                    !parameter.DotNotatie.StartsWith("theoretischeLevens"))
+                {
+                    var temp = parameter.DotNotatie;
+                    if(temp.Contains("."))
+                        temp = temp.Split('.')[0];
+                    if(!parameterText.Contains(temp))
+                        parameterText = parameterText + temp + "\n";
+                }
+            }
             var node = graph.AddNode(otl.uri);
-            node.LabelText = otl.otlName;
+            if(checkBox3.Checked)
+                node.LabelText = otl.otlName + "\n\n" + parameterText;
+            else
+                node.LabelText = otl.otlName;
+            
             node.Label.FontSize = defaultFontSize;
             setGraphicalRepresentation(node, defaultNodeColor, defaultNodeShape);
         }
@@ -241,6 +264,7 @@ namespace OTLWizard.FrontEnd
 
             drawAbstract = checkBox1.Checked;
             drawImplementatieElement = checkBox2.Checked;
+            drawAttributes  = checkBox3.Checked;
             colorAbstractRelation = (Color)colors.Where(c => c.Name.Equals(comboBox7.SelectedItem)).FirstOrDefault().GetValue(null);
             colorImplementatieElementRelation = (Color)colors.Where(c => c.Name.Equals(comboBox8.SelectedItem)).FirstOrDefault().GetValue(null);
             relationFontSize = Decimal.ToInt32(numericUpDown1.Value);
@@ -284,7 +308,15 @@ namespace OTLWizard.FrontEnd
         {
 
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
-
-

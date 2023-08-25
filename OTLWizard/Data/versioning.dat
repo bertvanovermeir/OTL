@@ -1,9 +1,12 @@
-﻿Hotfix versie 5.1.2
+﻿versie 5.1.2
 -------------------------
 
-Een probleem waarbij lege attribuutwaarden niet werden geëxporteerd in de compare tool indien ze in het originele bestand wél, 
-en in het nieuwe bestand niet bestaan, wordt met deze hotfix opgelost. Indien u gebruikt maakt van de compare tool,
-wordt aangeraden om deze hotfix te installeren.
+- bugfix comparetool bij lege attribuutwaarden die oorspronkelijk niet leeg waren
+- bugfix omzetting punten en underscores in de comparetool
+- optimalisatie/bugfix relatietool, inladen subset duurt nu maar enkele seconden ipv enkele minuten!
+- attributen toevoegen aan relaties is nu mogelijk in de visuele weergave subset.
+
+Update is aan te raden als u graag minder tijd verliest met wachten op inladen. :-)
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
 U wordt nu omgeleid naar de downloadpagina.

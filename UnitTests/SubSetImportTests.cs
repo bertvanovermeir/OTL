@@ -15,7 +15,7 @@ namespace UnitTests
             var subsetImporter = new SubsetImporter(dbpath);
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
 
             // assert
             var objectTypes = subsetImporter.GetOTLObjectTypes();
@@ -35,7 +35,7 @@ namespace UnitTests
             var subsetImporter = new SubsetImporter(dbpath, true);
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
 
             // assert
             var objectTypes = subsetImporter.GetOTLObjectTypes();
@@ -58,7 +58,7 @@ namespace UnitTests
             var subsetImporter = new SubsetImporter(dbpath, true);
 
             // act
-            subsetImporter.Import();
+            subsetImporter.Import(true, true);
 
             // assert
             var objectTypes = subsetImporter.GetOTLObjectTypes();

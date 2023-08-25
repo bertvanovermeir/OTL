@@ -135,7 +135,7 @@ namespace OTLWizard
         private async void ImportClasses(object sender, EventArgs e)
         {
 
-            var deprecated = await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, !checkKeuzelijsten.Checked);
+            var deprecated = await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, false, true, !checkKeuzelijsten.Checked);
             checkDeprecated.Enabled = deprecated;
             ListAllClasses.Items.Clear();
             foreach (string klasse in ApplicationHandler.GetSubsetClassNames())

@@ -14,20 +14,73 @@ namespace OTLWizard.Helpers
 
         public static bool Export(string path, List<OTL_Relationship> relations)
         {
+            // dictionary containing parameter name and values (per column - empty when not a value for this relationship)
+            var matrix = new Dictionary<string, List<string>>();
+            var uniqueParameterNames = new Dictionary<string, string>();
+
+            // first get all possible parameter Names
+            foreach(OTL_Relationship rel in relations)
+            {
+                foreach(string name in rel.Properties.Keys)
+                {
+                    if(!uniqueParameterNames.ContainsKey(name))
+                        uniqueParameterNames.Add(name, name);
+                }
+            }
+            // add header to matrix
+            var header = new List<string>();
+            foreach(string name in uniqueParameterNames.Keys)
+            {
+                matrix.Add(name, new List<string>());
+            }        
+
+            // fill the matrix add empty value if it does not exist for the relationship
+            foreach(OTL_Relationship rel in relations)
+            {
+                var parameters = rel.Properties;
+                foreach(string headerName in matrix.Keys)
+                {
+                    if(parameters.ContainsKey(headerName))
+                    {
+                        matrix[headerName].Add(parameters[headerName]);
+                    } else
+                    {
+                        matrix[headerName].Add("");
+                    }
+                }
+            }
+            // matrix is created, now transform it for export
+            var realMatrix = new List<string[]>();
+            var matrixHeader = new string[matrix.Count];
+            var count = 0;
+            foreach(string headerData  in matrix.Keys)
+            {
+                matrixHeader[count] = headerData;
+                count++;
+            }
+            realMatrix.Add(matrixHeader);
+            // get info for all relationships per column and header
+            var rowLength = matrix.First().Value.Count;
+            for (int i = 0; i < rowLength; i++)
+            {
+                var row = new List<string>();
+                foreach (KeyValuePair<string, List<string>> column in matrix)
+                {
+                    var valueList = column.Value.ToArray();
+                    var valueSingle = valueList[i];
+                    row.Add(valueSingle);
+                }
+                realMatrix.Add((row.ToArray()));
+            }
+            
             try
             {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                using (var w = new StreamWriter(path))
                 {
-                    HasHeaderRecord = true,
-                    Delimiter = ";",
-                    SanitizeForInjection = false,
-
-                };
-                using (var writer = new StreamWriter(path))
-                using (var csv = new CsvWriter(writer, config))
-                {
-
-                    csv.WriteRecords(relations);
+                    foreach (string[] row in realMatrix)
+                    {
+                        w.WriteLine(string.Join(";", row));
+                    }
                 }
                 return true;
             }

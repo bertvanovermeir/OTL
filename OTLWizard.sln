@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTLWizard", "OTLWizard\OTLW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{F7753530-33AD-454E-B0B6-7B0DFBB7BC43}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OTLWizardConsole", "OTLWizardConsole\OTLWizardConsole.csproj", "{FFCA95BA-4A1C-404D-883A-B8D83B642E34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,14 @@ Global
 		{F7753530-33AD-454E-B0B6-7B0DFBB7BC43}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F7753530-33AD-454E-B0B6-7B0DFBB7BC43}.Release|x86.ActiveCfg = Release|Any CPU
 		{F7753530-33AD-454E-B0B6-7B0DFBB7BC43}.Release|x86.Build.0 = Release|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Debug|x86.Build.0 = Debug|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Release|x86.ActiveCfg = Release|Any CPU
+		{FFCA95BA-4A1C-404D-883A-B8D83B642E34}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

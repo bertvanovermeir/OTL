@@ -126,7 +126,7 @@ namespace OTLWizard.FrontEnd
             }
             else // mode new SDX
             {
-                await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, true);
+                await ApplicationHandler.ImportSubset(textBoxSubset.Text, true, true, true, true);
                 await ApplicationHandler.ImportArtefact(textBoxArtefact.Text);
                 ListAllClasses.Items.Clear();
                 foreach (string klasse in ApplicationHandler.GetSubsetClassNames())

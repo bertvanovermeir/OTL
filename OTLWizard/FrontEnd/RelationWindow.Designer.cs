@@ -470,9 +470,7 @@
             this.ListPropertiesRelation.DefaultCellStyle = dataGridViewCellStyle1;
             this.ListPropertiesRelation.Location = new System.Drawing.Point(5, 300);
             this.ListPropertiesRelation.Name = "ListPropertiesRelation";
-            this.ListPropertiesRelation.ReadOnly = true;
             this.ListPropertiesRelation.RowHeadersVisible = false;
-            this.ListPropertiesRelation.ShowEditingIcon = false;
             this.ListPropertiesRelation.Size = new System.Drawing.Size(230, 111);
             this.ListPropertiesRelation.TabIndex = 5;
             this.ListPropertiesRelation.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick_1);

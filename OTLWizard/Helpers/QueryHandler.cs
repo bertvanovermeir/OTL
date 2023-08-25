@@ -37,6 +37,9 @@ namespace OTLWizard.Helpers
                     case Enums.Query.RelationsDistinctUris:
                         strQuery = lines[5];
                         break;
+                    case Enums.Query.RelationSpecific:
+                        strQuery = lines[6];
+                        break;
                 }
             }
             return strQuery;

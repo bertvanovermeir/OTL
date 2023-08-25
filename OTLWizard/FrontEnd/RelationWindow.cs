@@ -128,15 +128,16 @@ namespace OTLWizard.FrontEnd
         {
             if (optionalArgument.ContainsKey("files") && optionalArgument.ContainsKey("subset"))
             {
-                var result = await ApplicationHandler.R_ImportSubsetAsync(optionalArgument["subset"]);
-                if (result)
-                {
-                    await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);
+                // download OTL, or register path from subset and init subset object
+                await ApplicationHandler.R_DownloadAndInitSubset(optionalArgument["subset"]);
+                // import files
+                await ApplicationHandler.R_ImportRealRelationDataAsync(optionalArgument["files"]);
                     UI_UpdateImportedEntities(ApplicationHandler.R_GetImportedEntities().ToArray());
                     updateUserRelations();
                     updateVisuals();
                     ShowAssetsOnMap(true);
-                }
+                // calculate asset relation data for all imported entities
+                await ApplicationHandler.R_InitRelationsFromSubset();
             }
             else
             {
@@ -325,7 +326,7 @@ namespace OTLWizard.FrontEnd
             // update available relations          
             ListRelationsPerEntity.DisplayMember = "DisplayName";
             ListRelationsPerEntity.ValueMember = "DisplayName";
-            var items = ApplicationHandler.R_GetPossibleRelations(source);
+            var items = ApplicationHandler.R_QueryPossibleRelations(source);
             ListRelationsPerEntity.DataSource = items;
             if (items.Count == 1)
             {
@@ -343,6 +344,7 @@ namespace OTLWizard.FrontEnd
             source.Properties.OrderBy(x => x.Key).ToList();
             ListPropertiesRelation.DataSource = source.Properties.OrderBy(x => x.Key).ToArray();
             ListPropertiesRelation.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            ListPropertiesRelation.EditMode = DataGridViewEditMode.EditOnEnter;
             ListPropertiesRelation.Update();
             ListPropertiesRelation.Refresh();
         }
@@ -511,12 +513,12 @@ namespace OTLWizard.FrontEnd
                 if (textBox2.Text != "")
                 {
                     var zoekterm = textBox2.Text.ToLower();
-                    var filteredFiles = ApplicationHandler.R_GetPossibleRelations(source).Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
+                    var filteredFiles = ApplicationHandler.R_QueryPossibleRelations(source).Where(x => x.DisplayName.ToLower().Contains(zoekterm)).ToArray();
                     ListRelationsPerEntity.DataSource = filteredFiles;
                 }
                 else
                 {
-                    ListRelationsPerEntity.DataSource = ApplicationHandler.R_GetPossibleRelations(source);
+                    ListRelationsPerEntity.DataSource = ApplicationHandler.R_QueryPossibleRelations(source);
                 }
             }
         }

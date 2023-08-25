@@ -1,5 +1,4 @@
 ﻿using OTLWizard.Helpers;
-using OTLWizard.Helpers;
 using System;
 using System.Data;
 using System.Linq;
@@ -53,22 +52,28 @@ namespace OTLWizard.FrontEnd
                 h.doelId = textBox2.Text;
                 h.relationName = comboBox1.Text;
                 var temp = ApplicationHandler.R_GetAllRelationshipTypes().Where(x => x.relationshipName == h.relationName).Select(x => x).FirstOrDefault();
-                h.isDirectional = temp.isDirectional;
-                h.DisplayName = temp.DisplayName; //?? not sure if necessary
-                h.typeuri = temp.relationshipURI;
-                ApplicationHandler.R_CreateNewRealRelation(h);
-
-                // creates a new asset
-                var temp2 = ApplicationHandler.R_GetImportedEntities().Where(i => i.AssetId == textBox2.Text).FirstOrDefault();
-                if (temp2 == null)
+                if(temp != null)
                 {
-                    // create user asset
-                    ApplicationHandler.R_CreateUserAsset(h.doelId);
+                    h.isDirectional = temp.isDirectional;
+                    h.DisplayName = temp.DisplayName; //?? not sure if necessary
+                    h.typeuri = temp.relationshipURI;
+                    ApplicationHandler.R_CreateNewRealRelation(h);
+
+                    // creates a new asset
+                    var temp2 = ApplicationHandler.R_GetImportedEntities().Where(i => i.AssetId == textBox2.Text).FirstOrDefault();
+                    if (temp2 == null)
+                    {
+                        // create user asset
+                        ApplicationHandler.R_CreateUserAsset(h.doelId);
+                    }
+                    // reset
+                    comboBox1.Items.Clear();
+                    textBox2.Text = "";
+                    // return to main
+                } else
+                {
+                    ViewHandler.Show("Fout bij aanmaken relatie, relatietype ongekend", "Dit moet ik nog eens oplossen...", MessageBoxIcon.Error);
                 }
-                // reset
-                comboBox1.Items.Clear();
-                textBox2.Text = "";
-                // return to main
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.RelationsUserDefined, null);
             }
         }

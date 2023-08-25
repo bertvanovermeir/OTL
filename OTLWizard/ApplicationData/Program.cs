@@ -11,9 +11,10 @@ namespace OTLWizard.Helpers
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            ApplicationHandler.Start();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                ApplicationHandler.Start();
+
         }
     }
 }
