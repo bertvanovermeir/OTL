@@ -72,7 +72,22 @@ namespace OTLWizard.FrontEnd
                     // return to main
                 } else
                 {
-                    ViewHandler.Show("Fout bij aanmaken relatie, relatietype ongekend", "Dit moet ik nog eens oplossen...", MessageBoxIcon.Error);
+                    h.isDirectional = true;
+                    h.DisplayName = "<onbekend>"; //?? not sure if necessary
+                    h.typeuri = "https://wegenenverkeer.data.vlaanderen.be/ns/onderdeel#" + comboBox1.Text;
+                    ApplicationHandler.R_CreateNewRealRelation(h);
+
+                    // creates a new asset
+                    var temp2 = ApplicationHandler.R_GetImportedEntities().Where(i => i.AssetId == textBox2.Text).FirstOrDefault();
+                    if (temp2 == null)
+                    {
+                        // create user asset
+                        ApplicationHandler.R_CreateUserAsset(h.doelId);
+                    }
+                    // reset
+                    comboBox1.Items.Clear();
+                    textBox2.Text = "";
+                    // return to main
                 }
                 ViewHandler.Show(Enums.Views.isNull, Enums.Views.RelationsUserDefined, null);
             }

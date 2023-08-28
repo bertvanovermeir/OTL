@@ -1,12 +1,7 @@
-﻿versie 5.1.2
+﻿versie 5.1.3
 -------------------------
 
-- bugfix comparetool bij lege attribuutwaarden die oorspronkelijk niet leeg waren
-- bugfix omzetting punten en underscores in de comparetool
-- optimalisatie/bugfix relatietool, inladen subset duurt nu maar enkele seconden ipv enkele minuten!
-- attributen toevoegen aan relaties is nu mogelijk in de visuele weergave subset.
-
-Update is aan te raden als u graag minder tijd verliest met wachten op inladen. :-)
+- Hotfix: bepaalde manuele relaties konden niet meer worden aangemaakt.
 
 Bezoek https://github.com/bertvanovermeir/OTL om de laatste versie te downloaden.
 U wordt nu omgeleid naar de downloadpagina.
