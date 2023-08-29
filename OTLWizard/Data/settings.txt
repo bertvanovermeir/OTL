@@ -5,9 +5,9 @@ KlPath=https://raw.githubusercontent.com/Informatievlaanderen/OSLOthema-wegenenv
 ## Language used in interface (NL/EN)
 Language=NL
 types=onderdeel|implementatieelement|levenscyclus|installatie|agent
-otlidentifier=assetid.identificator
-otlidentifieragent=agentid.identificator
-otlclassuri=typeuri
+otlidentifier=assetId.identificator
+otlidentifieragent=agentId.identificator
+otlclassuri=typeURI
 otlsrcrel=bronAssetId.identificator
 otltrgtrel=doelAssetId.identificator
 relationretention=false

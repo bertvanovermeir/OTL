@@ -13,7 +13,7 @@ namespace OTLWizard.Helpers
         {
             values = new Dictionary<string, string>();
 
-            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv9\\";
+            var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6.0\\";
             // create the folder if it does not exist
             Directory.CreateDirectory(localPath);
 
@@ -80,7 +80,7 @@ namespace OTLWizard.Helpers
             try
             {
                 // save to file
-                var localPath = System.IO.Path.GetTempPath() + "otlsettingsv9\\";
+                var localPath = System.IO.Path.GetTempPath() + "otlsettingsv6.0\\";
                 // create the folder if it does not exist
                 Directory.CreateDirectory(localPath);
                 // write it
@@ -96,7 +96,7 @@ namespace OTLWizard.Helpers
 
         public static string GetSettingsPath()
         {
-            return System.IO.Path.GetTempPath() + "otlsettingsv9\\" + "settings.txt";
+            return System.IO.Path.GetTempPath() + "otlsettingsv6.0\\" + "settings.txt";
         }
 
         private static void ProcessFileContents(string[] lines)

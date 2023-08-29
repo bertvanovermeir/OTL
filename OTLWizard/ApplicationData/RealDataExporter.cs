@@ -149,7 +149,7 @@ namespace OTLWizard.Helpers
                 var tempEntities = entities.Where(e => e.TypeUri.Equals(typeuri)).ToList();
                 var tempPath = path.ToLower().Replace(".csv", "") + typeuri.Split('#')[1] + ".csv";
 
-                // also define the maximum amount of attributes per typeui by using a dictionary
+                // also define the maximum amount of attributes per typeuri by using a dictionary
                 var attributes = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
                 foreach (var entity in tempEntities)
                 {
